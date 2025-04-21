@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Restricciones Narrativas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .category {
+            margin: 20px 0;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        #traits-display {
+            background-color: #fff3cd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .generator-section {
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .checkbox-group {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generador de Restricciones Narrativas</h1>
+
+    <div class="generator-section">
+        <h3>Generador Automático</h3>
+        <div class="checkbox-group">
+            <label><input type="checkbox" class="auto-category" value="linguistic" checked> Lingüísticas</label>
+            <label><input type="checkbox" class="auto-category" value="style" checked> Estilos</label>
+            <label><input type="checkbox" class="auto-category" value="traits" checked> Rasgos</label>
+            <label><input type="checkbox" class="auto-category" value="games" checked> Juegos</label>
+            <label><input type="checkbox" class="auto-category" value="poetry" checked> Poesía</label>
+        </div>
+        <button onclick="autoGenerate()">Generar Aleatorio</button>
+    </div>
+
+    <div class="category">
+        <h3>RESTRICCIONES LINGÜÍSTICAS</h3>
+        <select id="linguistic">
+            <option value="">Seleccionar...</option>
+            <option>Lipograma sin A</option>
+            <option>Lipograma sin E</option>
+            <option>Lipograma sin U</option>
+            <option>Sílaba encadenada</option>
+        </select>
+    </div>
+
+    <div class="category">
+        <h3>ESTILOS</h3>
+        <select id="style">
+            <option value="">Seleccionar...</option>
+            <option>Drama</option>
+            <option>Thriller</option>
+            <option>Edgar Allan Poe</option>
+            <option>Realismo mágico</option>
+        </select>
+    </div>
+
+    <div class="category">
+        <h3>RASGOS DE NARRADOR/PERSONAJE</h3>
+        <select id="traits">
+            <option value="">Seleccionar...</option>
+            <option>Impreciso</option>
+            <option>Pasivo-agresivo</option>
+            <option>Optimista patológico</option>
+            <option>Memoria selectiva</option>
+        </select>
+    </div>
+
+    <div class="category">
+        <h3>JUEGOS NARRATIVOS</h3>
+        <select id="games">
+            <option value="">Seleccionar...</option>
+            <option>Rebobinado (del final al principio)</option>
+            <option>Elige tu propia aventura</option>
+            <option>Narrativa no lineal</option>
+        </select>
+    </div>
+
+    <div class="category">
+        <h3>POESÍA</h3>
+        <select id="poetry">
+            <option value="">Seleccionar...</option>
+            <option>Soneto</option>
+            <option>Haiku</option>
+            <option>Verso libre</option>
+            <option>Limerick</option>
+        </select>
+    </div>
+
+    <div id="traits-display">
+        <h3>Tienes que escribir un texto con estos rasgos:</h3>
+        <div id="selected-traits"></div>
+    </div>
+
+    <script>
+        // Actualizar la lista de rasgos seleccionados
+        function updateSelectedTraits() {
+            const traits = [];
+            const categories = ['linguistic', 'style', 'traits', 'games', 'poetry'];
+            
+            categories.forEach(category => {
+                const select = document.getElementById(category);
+                if(select.value) {
+                    traits.push(select.value);
+                }
+            });
+            
+            document.getElementById('selected-traits').innerHTML = traits.join(', ');
+        }
+
+        // Configurar event listeners para todos los selects
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', updateSelectedTraits);
+        });
+
+        // Generador automático
+        function autoGenerate() {
+            const categories = {
+                linguistic: document.querySelector('.auto-category[value="linguistic"]').checked,
+                style: document.querySelector('.auto-category[value="style"]').checked,
+                traits: document.querySelector('.auto-category[value="traits"]').checked,
+                games: document.querySelector('.auto-category[value="games"]').checked,
+                poetry: document.querySelector('.auto-category[value="poetry"]').checked
+            };
+
+            Object.entries(categories).forEach(([category, enabled]) => {
+                if(enabled) {
+                    const select = document.getElementById(category);
+                    const options = select.querySelectorAll('option:not([value=""])');
+                    if(options.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * options.length);
+                        select.selectedIndex = randomIndex + 1; // +1 para saltar la opción vacía
+                    }
+                }
+            });
+            
+            updateSelectedTraits();
+        }
+
+        // Inicializar mostrando los rasgos seleccionados
+        updateSelectedTraits();
+    </script>
+</body>
+</html>

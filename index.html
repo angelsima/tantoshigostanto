@@ -66,6 +66,44 @@
             margin: 15px 0 5px 0;
             letter-spacing: 1px;
         }
+                 .nav-container {
+       left: 0;
+    right: 0;
+    background: white;
+    z-index: 1000;
+    border-bottom: 1px solid #eee;
+}  
+.nav-menu {
+    margin: 20 auto;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: all 0.3s;
+    font-size: 1.1em;
+}   
+.nav-link:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+}
+
+.nav-link.activo {
+    background: #2c3e50;
+    color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+/* Ajustar contenido principal para el menú fijo */
+.contenedor {
+    margin-top: 100px; /* Espacio para el menú fijo */
+}
+
+    
     </style>
 </head>
 <body>
@@ -73,7 +111,14 @@
         <h1>📚 Banco de Estilos y Restricciones</h1>
         <a href="generador.html" class="nav-button">Ir al Generador →</a>
     </div>
-
+ <div class="nav-container">
+    <nav class="nav-menu">
+        <a href="laboratorio.html" class="nav-link">🧪 Crear</a>
+        <a href="publicos.html" class="nav-link">🔍 Explorar</a>
+        <a href="tradicional.html" class="nav-link">🧠 Conservar</a>
+        <a href="about.html" class="nav-link">❓ About</a>
+    </nav>
+</div>  
     <div class="category-section">
         <h2>🎚️ RESTRICCIONES LINGÜÍSTICAS</h2>
         
@@ -119,5 +164,19 @@
     <div style="text-align: center; margin: 40px 0;">
         <a href="generador.html" class="nav-button">🚀 Comenzar a Generar</a>
     </div>
+  <script>
+      
+      // Marcar página activa en el nav
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.classList.remove('activo');
+        const linkPage = link.getAttribute('href');
+        if(currentPage === linkPage) {
+            link.classList.add('activo');
+        }
+    });
+      </script>
 </body>
 </html>

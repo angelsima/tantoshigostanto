@@ -201,7 +201,7 @@ button:nth-last-child(1):hover {
         // Actualizar la lista de rasgos seleccionados
         function updateSelectedTraits() {
             const traits = [];
-            const categories = ['linguistic', 'style', 'traits', 'games', 'poetry'];
+            const categories = ['linguistic', 'style', 'proportion', 'traits', 'games', 'poetry'];
             
             categories.forEach(category => {
                 const select = document.getElementById(category);
@@ -222,6 +222,7 @@ button:nth-last-child(1):hover {
 function autoGenerate() {
     const categories = {
         linguistic: document.querySelector('.auto-category[value="linguistic"]').checked,
+        proportion: document.querySelector('.auto-category[value="proportion"]').checked,
         style: document.querySelector('.auto-category[value="style"]').checked,
         traits: document.querySelector('.auto-category[value="traits"]').checked,
         games: document.querySelector('.auto-category[value="games"]').checked,

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador Móvil</title>
+    <title>Enciclopedia Narrativa</title>
     <style>
         :root {
             --color-primario: #2A2F4F;
@@ -11,199 +11,175 @@
             --fondo: #FDE2F3;
         }
 
-        * {
-            box-sizing: border-box;
-            touch-action: manipulation;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--fondo);
-            height: 100dvh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .contenedor-principal {
-            flex: 1;
-            padding: 16px;
-            overflow-y: auto;
-            padding-bottom: 80px;
-        }
-
-        /* Barra de navegación inferior */
-        .nav-bottom {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
+        .nav-enciclopedia {
+            position: sticky;
+            top: 0;
             background: white;
+            z-index: 1000;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            border-radius: 20px 20px 0 0;
+            gap: 1rem;
+            overflow-x: auto;
         }
 
         .nav-item {
-            padding: 12px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: #f5f5f5;
+            white-space: nowrap;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s;
         }
 
         .nav-item.activo {
-            color: var(--color-secundario);
-            border-bottom: 3px solid var(--color-secundario);
-        }
-
-        /* Tarjetas de categorías */
-        .categoria-card {
-            background: white;
-            margin: 10px 0;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-
-        .select-movil {
-            width: 100%;
-            padding: 14px;
-            margin: 8px 0;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            font-size: 16px;
-            appearance: none;
-            background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 14px center/16px;
-        }
-
-        /* Panel de configuración */
-        .config-panel {
-            display: none;
-            padding: 16px;
-        }
-
-        .config-panel.activo {
-            display: block;
-        }
-
-        .añadir-opcion {
-            display: grid;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .btn {
             background: var(--color-secundario);
             color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .opcion-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px;
-            background: #fff;
-            margin: 8px 0;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        .seccion {
+            padding: 2rem 1rem;
+            border-bottom: 2px solid #eee;
         }
 
-        .eliminar-btn {
-            color: #ff6b6b;
-            padding: 8px;
-            margin-left: 12px;
-            cursor: pointer;
+        .glosario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .termino {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .termino:hover {
+            transform: translateY(-3px);
+        }
+
+        .badge-estilo {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--color-secundario);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .ejemplo-literario {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid var(--color-secundario);
+            background: #f8f9fa;
+            font-style: italic;
+            color: #666;
         }
 
         @media (min-width: 768px) {
             body {
-                max-width: 400px;
-                margin: 0 auto;
-                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                padding-left: 300px;
+            }
+
+            .nav-enciclopedia {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 280px;
+                height: 100vh;
+                flex-direction: column;
+                overflow-y: auto;
             }
         }
     </style>
 </head>
 <body>
-    <div class="contenedor-principal">
-        <!-- Panel Generador -->
-        <div id="generador" class="config-panel activo">
-            <div class="categoria-card">
-                <select class="select-movil">
-                    <option>Estilo Literario</option>
-                    <!-- Opciones dinámicas -->
-                </select>
-            </div>
-            <!-- Más categorías... -->
-        </div>
+    <nav class="nav-enciclopedia">
+        <div class="nav-item activo" data-seccion="restricciones">Restricciones Lingüísticas</div>
+        <div class="nav-item" data-seccion="estilos">Estilos Narrativos</div>
+        <div class="nav-item" data-seccion="western">Glosario Western</div>
+        <div class="nav-item" data-seccion="poesia">Técnicas Poéticas</div>
+    </nav>
 
-        <!-- Panel Configuración -->
-        <div id="configuracion" class="config-panel">
-            <div class="añadir-opcion">
-                <input type="text" placeholder="Nueva restricción">
-                <button class="btn">➕ Añadir</button>
+    <section class="seccion" id="restricciones">
+        <h2>Restricciones Lingüísticas</h2>
+        <div class="glosario">
+            <div class="termino">
+                <div class="badge-estilo">Lipograma</div>
+                <h3>Sin la letra A</h3>
+                <p>Ejercicio de escritura donde se prohibe el uso de la vocal más común...</p>
+                <div class="ejemplo-literario">
+                    "El perseguido corrió sin descanso, buscando escondite seguro entre los muros viejos..."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="seccion" id="western">
+        <h2>Lexicón Western</h2>
+        <div class="glosario">
+            <div class="termino">
+                <div class="badge-estilo">Recurso visual</div>
+                <h3>Primer plano de ojos entrecerrados</h3>
+                <p>Técnica cinematográfica adaptada a narrativa: "Sus ojos, reducidos a dos rendijas bajo el ala del sombrero..."</p>
             </div>
             
-            <div class="opcion-item">
-                <span>Lipograma sin A</span>
-                <span class="eliminar-btn">Eliminar</span>
+            <div class="termino">
+                <div class="badge-estilo">Objeto simbólico</div>
+                <h3>Zarzaparrilla</h3>
+                <p>Bebida típica usada como elemento caracterizador: "El amargo sabor de la zarzaparrilla se mezcló con el polvo del camino..."</p>
             </div>
-            <!-- Más opciones... -->
         </div>
-    </div>
-
-    <div class="nav-bottom">
-        <div class="nav-item activo" onclick="mostrarSeccion('generador')">🎲 Generar</div>
-        <div class="nav-item" onclick="mostrarSeccion('configuracion')">⚙️ Configurar</div>
-    </div>
+    </section>
 
     <script>
-        // Lógica básica de navegación
-        function mostrarSeccion(seccionId) {
-            document.querySelectorAll('.config-panel').forEach(panel => {
-                panel.classList.remove('activo');
+        // Scrollspy y navegación
+        const sections = document.querySelectorAll('.seccion');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        function updateActiveSection() {
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if(rect.top <= 100 && rect.bottom >= 100) {
+                    navItems.forEach(item => item.classList.remove('activo'));
+                    navItems[index].classList.add('activo');
+                }
             });
-            document.getElementById(seccionId).classList.add('activo');
-            
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('activo');
-            });
-            event.target.classList.add('activo');
         }
 
-        // Swipe detection
-        let touchStartX = 0;
-        document.body.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, false);
+        // Navegación suave
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetId = item.dataset.seccion;
+                document.getElementById(targetId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
 
-        document.body.addEventListener('touchend', e => {
-            const touchEndX = e.changedTouches[0].screenX;
-            const deltaX = touchEndX - touchStartX;
-            
-            if(Math.abs(deltaX) > 50) {
-                if(deltaX > 0) mostrarSeccion('generador');
-                else mostrarSeccion('configuracion');
-            }
-        }, false);
+        // Actualizar al hacer scroll
+        window.addEventListener('scroll', updateActiveSection);
+        updateActiveSection(); // Inicializar
+
+        // Efecto de paralaje para los términos
+        document.querySelectorAll('.termino').forEach(termino => {
+            termino.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 15;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 15;
+                termino.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+
+            termino.addEventListener('mouseleave', () => {
+                termino.style.transform = 'none';
+            });
+        });
     </script>
 </body>
 </html>

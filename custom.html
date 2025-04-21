@@ -2,180 +2,208 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Generador Narrativo Personalizable</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador Móvil</title>
     <style>
         :root {
-            --color-primario: #2c3e50;
-            --color-secundario: #7f8c8d;
-            --color-destacado: #3498db;
+            --color-primario: #2A2F4F;
+            --color-secundario: #917FB3;
+            --fondo: #FDE2F3;
+        }
+
+        * {
+            box-sizing: border-box;
+            touch-action: manipulation;
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-            padding: 20px;
-            background: #f9f9f9;
+            padding: 0;
+            background: var(--fondo);
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .configurador {
-            position: fixed;
-            right: -300px;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: white;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            padding: 20px;
+        .contenedor-principal {
+            flex: 1;
+            padding: 16px;
             overflow-y: auto;
+            padding-bottom: 80px;
         }
 
-        .configurador.abierto {
-            right: 0;
-        }
-
-        .categoria {
-            background: white;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .boton-flotante {
+        /* Barra de navegación inferior */
+        .nav-bottom {
             position: fixed;
-            right: 20px;
-            top: 20px;
-            background: var(--color-destacado);
-            color: white;
-            padding: 15px;
-            border-radius: 50%;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .nav-item {
+            padding: 12px;
             cursor: pointer;
-            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .nav-item.activo {
+            color: var(--color-secundario);
+            border-bottom: 3px solid var(--color-secundario);
+        }
+
+        /* Tarjetas de categorías */
+        .categoria-card {
+            background: white;
+            margin: 10px 0;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .select-movil {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            appearance: none;
+            background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 14px center/16px;
+        }
+
+        /* Panel de configuración */
+        .config-panel {
+            display: none;
+            padding: 16px;
+        }
+
+        .config-panel.activo {
+            display: block;
         }
 
         .añadir-opcion {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            display: grid;
+            gap: 12px;
+            margin: 20px 0;
         }
 
-        .opcion-usuario {
-            background: #e8f4fc;
-            border-left: 3px solid var(--color-destacado);
-            padding: 5px 10px;
-            margin: 5px 0;
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .opcion-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 14px;
+            background: #fff;
+            margin: 8px 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        .eliminar-opcion {
-            color: #e74c3c;
+        .eliminar-btn {
+            color: #ff6b6b;
+            padding: 8px;
+            margin-left: 12px;
             cursor: pointer;
-            margin-left: 10px;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                max-width: 400px;
+                margin: 0 auto;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="boton-flotante" onclick="toggleConfigurador()">⚙️</div>
-
-    <div class="configurador">
-        <h2>Personalización</h2>
-        
-        <!-- Panel de control de categorías -->
-        <div class="categoria-config">
-            <h3>Categorías activas</h3>
-            <div id="categorias-lista"></div>
+    <div class="contenedor-principal">
+        <!-- Panel Generador -->
+        <div id="generador" class="config-panel activo">
+            <div class="categoria-card">
+                <select class="select-movil">
+                    <option>Estilo Literario</option>
+                    <!-- Opciones dinámicas -->
+                </select>
+            </div>
+            <!-- Más categorías... -->
         </div>
 
-        <!-- Editor de opciones por categoría -->
-        <div class="editor-opciones">
-            <h3>Añadir nuevas opciones</h3>
-            <select id="categoria-seleccionada">
-                <option value="linguistic">Lingüísticas</option>
-                <option value="style">Estilos</option>
-                <option value="traits">Rasgos</option>
-                <option value="games">Juegos</option>
-                <option value="poetry">Poesía</option>
-            </select>
+        <!-- Panel Configuración -->
+        <div id="configuracion" class="config-panel">
             <div class="añadir-opcion">
-                <input type="text" id="nueva-opcion" placeholder="Nueva opción">
-                <button onclick="añadirOpcion()">➕</button>
+                <input type="text" placeholder="Nueva restricción">
+                <button class="btn">➕ Añadir</button>
             </div>
+            
+            <div class="opcion-item">
+                <span>Lipograma sin A</span>
+                <span class="eliminar-btn">Eliminar</span>
+            </div>
+            <!-- Más opciones... -->
         </div>
     </div>
 
-    <div id="generador-container"></div>
+    <div class="nav-bottom">
+        <div class="nav-item activo" onclick="mostrarSeccion('generador')">🎲 Generar</div>
+        <div class="nav-item" onclick="mostrarSeccion('configuracion')">⚙️ Configurar</div>
+    </div>
 
     <script>
-        // Banco de opciones inicial
-        let opciones = {
-            linguistic: ['Lipograma sin A', 'Sílaba encadenada'],
-            style: ['Drama', 'Thriller'],
-            traits: ['Impreciso', 'Pasivo-agresivo'],
-            games: ['Rebobinado'],
-            poetry: ['Haiku', 'Soneto']
-        };
-
-        // Cargar configuración desde localStorage
-        function cargarConfiguracion() {
-            const saved = localStorage.getItem('narrativa-opciones');
-            if(saved) opciones = JSON.parse(saved);
-            actualizarGenerador();
-        }
-
-        // Guardar configuración en localStorage
-        function guardarConfiguracion() {
-            localStorage.setItem('narrativa-opciones', JSON.stringify(opciones));
-        }
-
-        // Actualizar interfaz del generador
-        function actualizarGenerador() {
-            const container = document.getElementById('generador-container');
-            container.innerHTML = Object.entries(opciones).map(([id, ops]) => `
-                <div class="categoria" data-categoria="${id}">
-                    <h3>${id.toUpperCase()}</h3>
-                    <select>
-                        <option value="">Seleccionar...</option>
-                        ${ops.map(op => `
-                            <option value="${op}">
-                                ${op} 
-                                <span class="eliminar-opcion" onclick="eliminarOpcion('${id}', '${op}')">✖</span>
-                            </option>
-                        `).join('')}
-                    </select>
-                </div>
-            `).join('');
-        }
-
-        // Añadir nueva opción
-        function añadirOpcion() {
-            const categoria = document.getElementById('categoria-seleccionada').value;
-            const nueva = document.getElementById('nueva-opcion').value.trim();
+        // Lógica básica de navegación
+        function mostrarSeccion(seccionId) {
+            document.querySelectorAll('.config-panel').forEach(panel => {
+                panel.classList.remove('activo');
+            });
+            document.getElementById(seccionId).classList.add('activo');
             
-            if(nueva && !opciones[categoria].includes(nueva)) {
-                opciones[categoria].push(nueva);
-                guardarConfiguracion();
-                actualizarGenerador();
-                document.getElementById('nueva-opcion').value = '';
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('activo');
+            });
+            event.target.classList.add('activo');
+        }
+
+        // Swipe detection
+        let touchStartX = 0;
+        document.body.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.body.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const deltaX = touchEndX - touchStartX;
+            
+            if(Math.abs(deltaX) > 50) {
+                if(deltaX > 0) mostrarSeccion('generador');
+                else mostrarSeccion('configuracion');
             }
-        }
-
-        // Eliminar opción
-        function eliminarOpcion(categoria, opcion) {
-            opciones[categoria] = opciones[categoria].filter(op => op !== opcion);
-            guardarConfiguracion();
-            actualizarGenerador();
-        }
-
-        // Toggle configurador
-        function toggleConfigurador() {
-            document.querySelector('.configurador').classList.toggle('abierto');
-        }
-
-        // Inicializar
-        cargarConfiguracion();
+        }, false);
     </script>
 </body>
 </html>

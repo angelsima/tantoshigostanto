@@ -50,7 +50,10 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
-        }
+             margin-right: 10px;
+    transition: all 0.3s ease;
+}
+    
 
         button:hover {
             background-color: #0056b3;
@@ -81,25 +84,20 @@ option:disabled {
     background-color: #f0f0f0;
     font-style: italic;
 }
+        button:nth-last-child(1) {
+    background-color: #dc3545;
+}
+
+button:nth-last-child(1):hover {
+    background-color: #c82333;
+}
     </style>
 </head>
 <body>
      <a href="index.html" class="back-button">← Volver a Explicaciones</a>
     <h1>Generador de Restricciones Narrativas</h1>
 
-    <div class="generator-section">
-        <h3>Generador Automático</h3>
-        <div class="checkbox-group">
-            <label><input type="checkbox" class="auto-category" value="linguistic" checked> Juegos Lingüísticos</label>
-            <label><input type="checkbox" class="auto-category" value="style" checked> Estilos</label>
-            <label><input type="checkbox" class="auto-category" value="traits" checked> Rasgos</label>
-            <label><input type="checkbox" class="auto-category" value="games" checked> Estructura Narrativa</label>
-            <label><input type="checkbox" class="auto-category" value="poetry" checked> Poesía</label>
-        </div>
-        <button onclick="autoGenerate()">Generar Aleatorio</button>
-    </div>
-
-    <div class="category">
+       <div class="category">
         <h3>RESTRICCIONES LINGÜÍSTICAS</h3>
         <select id="linguistic">
             <option value="">Seleccionar...</option>
@@ -186,7 +184,18 @@ option:disabled {
         <h3>Tienes que escribir un texto con estos rasgos:</h3>
         <div id="selected-traits"></div>
     </div>
-
+ <div class="generator-section">
+        <h3>Generador Automático</h3>
+        <div class="checkbox-group">
+            <label><input type="checkbox" class="auto-category" value="linguistic" checked> Juegos Lingüísticos</label>
+            <label><input type="checkbox" class="auto-category" value="style" checked> Estilos</label>
+            <label><input type="checkbox" class="auto-category" value="traits" checked> Rasgos</label>
+            <label><input type="checkbox" class="auto-category" value="games" checked> Estructura Narrativa</label>
+            <label><input type="checkbox" class="auto-category" value="poetry" checked> Poesía</label>
+        </div>
+        <button onclick="autoGenerate()">Generar Aleatorio</button>
+        <button onclick="resetSelections()">Limpiar Selección</button>
+    </div>
     <script>
         // Actualizar la lista de rasgos seleccionados
         function updateSelectedTraits() {
@@ -208,30 +217,47 @@ option:disabled {
             select.addEventListener('change', updateSelectedTraits);
         });
 
-        // Generador automático
-        function autoGenerate() {
-            const categories = {
-                linguistic: document.querySelector('.auto-category[value="linguistic"]').checked,
-                style: document.querySelector('.auto-category[value="style"]').checked,
-                traits: document.querySelector('.auto-category[value="traits"]').checked,
-                games: document.querySelector('.auto-category[value="games"]').checked,
-                poetry: document.querySelector('.auto-category[value="poetry"]').checked
-            };
+  // Función modificada para auto-generar
+function autoGenerate() {
+    const categories = {
+        linguistic: document.querySelector('.auto-category[value="linguistic"]').checked,
+        style: document.querySelector('.auto-category[value="style"]').checked,
+        traits: document.querySelector('.auto-category[value="traits"]').checked,
+        games: document.querySelector('.auto-category[value="games"]').checked,
+        poetry: document.querySelector('.auto-category[value="poetry"]').checked
+    };
 
-            Object.entries(categories).forEach(([category, enabled]) => {
-                if(enabled) {
-                    const select = document.getElementById(category);
-                    const options = select.querySelectorAll('option:not([value=""])');
-                    if(options.length > 0) {
-                        const randomIndex = Math.floor(Math.random() * options.length);
-                        select.selectedIndex = randomIndex + 1; // +1 para saltar la opción vacía
-                    }
-                }
-            });
-            
-            updateSelectedTraits();
+    // Resetear todas las selecciones primero
+    Object.keys(categories).forEach(category => {
+        const select = document.getElementById(category);
+        if(!categories[category]) {
+            select.selectedIndex = 0; // Resetear categorías no seleccionadas
         }
+    });
 
+    // Generar solo para categorías seleccionadas
+    Object.entries(categories).forEach(([category, enabled]) => {
+        if(enabled) {
+            const select = document.getElementById(category);
+            const options = select.querySelectorAll('option:not([value=""])');
+            if(options.length > 0) {
+                const randomIndex = Math.floor(Math.random() * options.length);
+                select.selectedIndex = randomIndex + 1;
+            }
+        }
+    });
+    
+    updateSelectedTraits();
+}
+
+// Función para limpiar todas las selecciones
+function resetSelections() {
+    const selects = document.querySelectorAll('select');
+    selects.forEach(select => {
+        select.selectedIndex = 0;
+    });
+    updateSelectedTraits();
+}
         // Inicializar mostrando los rasgos seleccionados
         updateSelectedTraits();
     </script>

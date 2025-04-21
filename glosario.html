@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador Móvil</title>
+    <style>
+        :root {
+            --color-primario: #2A2F4F;
+            --color-secundario: #917FB3;
+            --fondo: #FDE2F3;
+        }
+
+        * {
+            box-sizing: border-box;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--fondo);
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contenedor-principal {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            padding-bottom: 80px;
+        }
+
+        /* Barra de navegación inferior */
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .nav-item {
+            padding: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-item.activo {
+            color: var(--color-secundario);
+            border-bottom: 3px solid var(--color-secundario);
+        }
+
+        /* Tarjetas de categorías */
+        .categoria-card {
+            background: white;
+            margin: 10px 0;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .select-movil {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            appearance: none;
+            background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 14px center/16px;
+        }
+
+        /* Panel de configuración */
+        .config-panel {
+            display: none;
+            padding: 16px;
+        }
+
+        .config-panel.activo {
+            display: block;
+        }
+
+        .añadir-opcion {
+            display: grid;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .opcion-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            background: #fff;
+            margin: 8px 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .eliminar-btn {
+            color: #ff6b6b;
+            padding: 8px;
+            margin-left: 12px;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                max-width: 400px;
+                margin: 0 auto;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <!-- Panel Generador -->
+        <div id="generador" class="config-panel activo">
+            <div class="categoria-card">
+                <select class="select-movil">
+                    <option>Estilo Literario</option>
+                    <!-- Opciones dinámicas -->
+                </select>
+            </div>
+            <!-- Más categorías... -->
+        </div>
+
+        <!-- Panel Configuración -->
+        <div id="configuracion" class="config-panel">
+            <div class="añadir-opcion">
+                <input type="text" placeholder="Nueva restricción">
+                <button class="btn">➕ Añadir</button>
+            </div>
+            
+            <div class="opcion-item">
+                <span>Lipograma sin A</span>
+                <span class="eliminar-btn">Eliminar</span>
+            </div>
+            <!-- Más opciones... -->
+        </div>
+    </div>
+
+    <div class="nav-bottom">
+        <div class="nav-item activo" onclick="mostrarSeccion('generador')">🎲 Generar</div>
+        <div class="nav-item" onclick="mostrarSeccion('configuracion')">⚙️ Configurar</div>
+    </div>
+
+    <script>
+        // Lógica básica de navegación
+        function mostrarSeccion(seccionId) {
+            document.querySelectorAll('.config-panel').forEach(panel => {
+                panel.classList.remove('activo');
+            });
+            document.getElementById(seccionId).classList.add('activo');
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('activo');
+            });
+            event.target.classList.add('activo');
+        }
+
+        // Swipe detection
+        let touchStartX = 0;
+        document.body.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.body.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const deltaX = touchEndX - touchStartX;
+            
+            if(Math.abs(deltaX) > 50) {
+                if(deltaX > 0) mostrarSeccion('generador');
+                else mostrarSeccion('configuracion');
+            }
+        }, false);
+    </script>
+</body>
+</html>

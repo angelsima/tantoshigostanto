@@ -113,13 +113,10 @@ button:nth-last-child(1):hover {
             <option>Sílaba encadenada</option>
             <option>Solo sintagmas nominales</option>
             <option>Solo infinitivos</option>
-            <optgroup label="Personales">
+            <optgroup label="Fonéticas">
             <option>Aspersor malaguita/sevillita</option>
             <option>Jadeo Canario</option>
-            <option>Whatsapp Telégrafo</option>
-            </optgroup>
-        <option disabled>──────────────────</option>
-        <option disabled>Próximamente: restricciones numéricas</option>
+            </optgroup>           
         </select>
     </div>
     
@@ -134,18 +131,6 @@ button:nth-last-child(1):hover {
     </div>
     
     <div class="category">
-        <h3>ESTILOS</h3>
-        <select id="style">
-            <option value="">Seleccionar...</option>
-            <option>Edgar Allan Poe</option>
-            <option>Microrrelato</option>
-            <option>Realismo mágico</option>
-            <option>Telenovela</option>
-            <option>Thriller policíaco</option>   
-        </select>
-    </div>
-
-    <div class="category">
         <h3>RASGOS DE NARRADOR/PERSONAJE</h3>
         <select id="traits">
             <option value="">Seleccionar...</option>
@@ -159,11 +144,27 @@ button:nth-last-child(1):hover {
             <option>Optimista patológico</option>
             <option>Trendy</option>
             <option>Verborrea</option>
+            <option>Whatsapp Telégrafo</option>
         </select>
     </div>
 
     <div class="category">
-        <h3>JUEGOS NARRATIVOS</h3>
+        <h3>ESTILOS</h3>
+        <select id="style">
+            <option value="">Seleccionar...</option>
+            <optgroup label="Autores/Corrientes">
+            <option>Edgar Allan Poe</option>
+            <option>Realismo mágico</option>    
+            </optgroup>
+            <optgroup label="Estilo">
+            <option>Bricomanía</option>
+            <option>Telenovela</option>
+            <option>Thriller policíaco</option>   
+        </select>
+    </div>
+    
+    <div class="category">
+        <h3>ESTRUCTURA NARRATIVA</h3>
         <select id="games">
             <option value="">Seleccionar...</option>
             <option>Rebobinado (del final al principio)</option>
@@ -171,13 +172,17 @@ button:nth-last-child(1):hover {
     </div>
 
     <div class="category">
-        <h3>POESÍA</h3>
+        <h3>FORMATO</h3>
         <select id="poetry">
             <option value="">Seleccionar...</option>
+            <option>Microrrelato</option>
+              <option>Aforismo</option>
+            <optgroup label="Poesía">
             <option>Soneto</option>
             <option>Haiku</option>
             <option>Verso libre</option>
             <option>Limerick</option>
+            </optgroup>
         </select>
     </div>
 

@@ -70,6 +70,17 @@
             text-decoration: none;
             z-index: 1000;
         }
+        optgroup {
+    font-style: normal;
+    font-weight: bold;
+    color: #555;
+}
+
+option:disabled {
+    color: #999;
+    background-color: #f0f0f0;
+    font-style: italic;
+}
     </style>
 </head>
 <body>
@@ -79,10 +90,10 @@
     <div class="generator-section">
         <h3>Generador Automático</h3>
         <div class="checkbox-group">
-            <label><input type="checkbox" class="auto-category" value="linguistic" checked> Lingüísticas</label>
+            <label><input type="checkbox" class="auto-category" value="linguistic" checked> Juegos Lingüísticos</label>
             <label><input type="checkbox" class="auto-category" value="style" checked> Estilos</label>
             <label><input type="checkbox" class="auto-category" value="traits" checked> Rasgos</label>
-            <label><input type="checkbox" class="auto-category" value="games" checked> Juegos</label>
+            <label><input type="checkbox" class="auto-category" value="games" checked> Estructura Narrativa</label>
             <label><input type="checkbox" class="auto-category" value="poetry" checked> Poesía</label>
         </div>
         <button onclick="autoGenerate()">Generar Aleatorio</button>
@@ -92,18 +103,24 @@
         <h3>RESTRICCIONES LINGÜÍSTICAS</h3>
         <select id="linguistic">
             <option value="">Seleccionar...</option>
-            <option>Aspersor malaguita/sevillita</option>
-            <option>Jadeo Canario</option>
+           <optgroup label="Lipogramas">
             <option>Lipograma sin A</option>
             <option>Lipograma sin E</option>
             <option>Lipograma sin I</option>
             <option>Lipograma sin O</option>
             <option>Lipograma sin U</option>
+            </optgroup>
             <option>Onomatopeyas</option>
             <option>Sílaba encadenada</option>
             <option>Solo sintagmas nominales</option>
             <option>Solo infinitivos</option>
+            <optgroup label="Personales">
+            <option>Aspersor malaguita/sevillita</option>
+            <option>Jadeo Canario</option>
             <option>Whatsapp Telégrafo</option>
+            </optgroup>
+        <option disabled>──────────────────</option>
+        <option disabled>Próximamente: restricciones numéricas</option>
         </select>
     </div>
     

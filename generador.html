@@ -4,59 +4,45 @@
     <meta charset="UTF-8">
     <title>Generador de Restricciones Narrativas</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-
-        .category {
-            margin: 20px 0;
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+           .contenedor-generador {
+            background: white;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 3px;
+            box-shadow: var(--sombra-suave);
         }
 
         select {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
+            padding: 12px;
+            margin: 10px 0;
+            border: var(--borde-fino);
+            border-radius: 4px;
+            background: white;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1em;
         }
 
         #traits-display {
-            background-color: #fff3cd;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            text-align: center;
+            margin: 30px 0;
+            background: #f8f9fa;
+            border-left: 4px solid var(--color-enlace);
         }
 
-        .generator-section {
-            background-color: #d4edda;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .checkbox-group {
-            margin: 10px 0;
+        @media (max-width: 768px) {
+            .contenedor-principal {
+                padding: 20px 15px;
+            }
+            
+            .titulo-principal {
+                font-size: 2em;
+            }
+            
+            .boton-navegacion {
+                display: block;
+                margin: 10px 0;
+            }
         }
          .back-button {
             position: fixed;

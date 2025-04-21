@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador Narrativo Personalizable</title>
+    <style>
+        :root {
+            --color-primario: #2c3e50;
+            --color-secundario: #7f8c8d;
+            --color-destacado: #3498db;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        .configurador {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .configurador.abierto {
+            right: 0;
+        }
+
+        .categoria {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .boton-flotante {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background: var(--color-destacado);
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .añadir-opcion {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .opcion-usuario {
+            background: #e8f4fc;
+            border-left: 3px solid var(--color-destacado);
+            padding: 5px 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .eliminar-opcion {
+            color: #e74c3c;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="boton-flotante" onclick="toggleConfigurador()">⚙️</div>
+
+    <div class="configurador">
+        <h2>Personalización</h2>
+        
+        <!-- Panel de control de categorías -->
+        <div class="categoria-config">
+            <h3>Categorías activas</h3>
+            <div id="categorias-lista"></div>
+        </div>
+
+        <!-- Editor de opciones por categoría -->
+        <div class="editor-opciones">
+            <h3>Añadir nuevas opciones</h3>
+            <select id="categoria-seleccionada">
+                <option value="linguistic">Lingüísticas</option>
+                <option value="style">Estilos</option>
+                <option value="traits">Rasgos</option>
+                <option value="games">Juegos</option>
+                <option value="poetry">Poesía</option>
+            </select>
+            <div class="añadir-opcion">
+                <input type="text" id="nueva-opcion" placeholder="Nueva opción">
+                <button onclick="añadirOpcion()">➕</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="generador-container"></div>
+
+    <script>
+        // Banco de opciones inicial
+        let opciones = {
+            linguistic: ['Lipograma sin A', 'Sílaba encadenada'],
+            style: ['Drama', 'Thriller'],
+            traits: ['Impreciso', 'Pasivo-agresivo'],
+            games: ['Rebobinado'],
+            poetry: ['Haiku', 'Soneto']
+        };
+
+        // Cargar configuración desde localStorage
+        function cargarConfiguracion() {
+            const saved = localStorage.getItem('narrativa-opciones');
+            if(saved) opciones = JSON.parse(saved);
+            actualizarGenerador();
+        }
+
+        // Guardar configuración en localStorage
+        function guardarConfiguracion() {
+            localStorage.setItem('narrativa-opciones', JSON.stringify(opciones));
+        }
+
+        // Actualizar interfaz del generador
+        function actualizarGenerador() {
+            const container = document.getElementById('generador-container');
+            container.innerHTML = Object.entries(opciones).map(([id, ops]) => `
+                <div class="categoria" data-categoria="${id}">
+                    <h3>${id.toUpperCase()}</h3>
+                    <select>
+                        <option value="">Seleccionar...</option>
+                        ${ops.map(op => `
+                            <option value="${op}">
+                                ${op} 
+                                <span class="eliminar-opcion" onclick="eliminarOpcion('${id}', '${op}')">✖</span>
+                            </option>
+                        `).join('')}
+                    </select>
+                </div>
+            `).join('');
+        }
+
+        // Añadir nueva opción
+        function añadirOpcion() {
+            const categoria = document.getElementById('categoria-seleccionada').value;
+            const nueva = document.getElementById('nueva-opcion').value.trim();
+            
+            if(nueva && !opciones[categoria].includes(nueva)) {
+                opciones[categoria].push(nueva);
+                guardarConfiguracion();
+                actualizarGenerador();
+                document.getElementById('nueva-opcion').value = '';
+            }
+        }
+
+        // Eliminar opción
+        function eliminarOpcion(categoria, opcion) {
+            opciones[categoria] = opciones[categoria].filter(op => op !== opcion);
+            guardarConfiguracion();
+            actualizarGenerador();
+        }
+
+        // Toggle configurador
+        function toggleConfigurador() {
+            document.querySelector('.configurador').classList.toggle('abierto');
+        }
+
+        // Inicializar
+        cargarConfiguracion();
+    </script>
+</body>
+</html>

@@ -26,10 +26,15 @@
         <h2>🎚️ JUGOS LINGÜÍSTICOS</h2>
         
         <div class="subcategory">Quitar cosas</div>
-        <div class="option-card">
-            <h3>Lipograma</h3>  
-            <p>Texto en el que no se utiliza una letra (o más, según la valentía y tiempo libre). Por ejemplo: lipograma sin a, sin e, sin i, sin p t k, sin letras impares del abecedario... <a href="juegos-linguisticos/lipograma.html">Más sobre Lipogramas</a> </p>
-        </div>
+       <div class="option-card">
+  <h3 class="accordion">Lipograma</h3>
+  <div class="panel">
+    <p>
+      Texto en el que no se utiliza una letra (o más, según la valentía y tiempo libre)…
+      <a href="juegos-linguisticos/lipograma.html">Más sobre Lipogramas</a>
+    </p>
+  </div>
+</div>
                
         <div class="subcategory">Estructuras</div>
         <div class="option-card">
@@ -63,5 +68,24 @@
     });
    
           </script>
+    <script>
+  // coger todos los disparadores
+  const acc = document.querySelectorAll('.accordion');
+
+  acc.forEach(header => {
+    header.addEventListener('click', () => {
+      // 1) cerrar todos los paneles abiertos
+      document.querySelectorAll('.panel').forEach(p => {
+        if (p !== header.nextElementSibling) {
+          p.style.display = 'none';
+        }
+      });
+
+      // 2) alternar el panel junto al header clicado
+      const panel = header.nextElementSibling;
+      panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+    });
+  });
+</script>
 </body>
 </html>

@@ -123,10 +123,17 @@ button:nth-last-child(1):hover {
             <option>Jadeo canario /h/</option>
             </optgroup>           
         </select>
-    </div>
-    
-    <div class="category">
-        <h3>CADENCIAS/PROPORCIONES</h3>
+            <h3>FIGURAS RETÓRICAS</h3>
+        <select id="proportion">
+            <option value="">Seleccionar...</option>
+                <optgroup label="Fonéticas">
+            </optgroup>
+                <optgroup label="Gramáticas">
+            </optgroup>
+                <optgroup label="Semánticas">
+            </optgroup>
+            </select>
+            <h3>CADENCIAS/PROPORCIONES</h3>
         <select id="proportion">
             <option value="">Seleccionar...</option>
             <option>Número Áureo</option>
@@ -135,25 +142,27 @@ button:nth-last-child(1):hover {
         </select>
     </div>
     
-    <div class="category">
-        <h3>RASGOS DE NARRADOR/PERSONAJE</h3>
-        <select id="traits">
+      <div class="category">
+        <h3>FORMATO</h3>
+        <select id="poetry">
             <option value="">Seleccionar...</option>
-            <option>Criptobro</option>
-            <option>Descompuesto</option>
-            <option>Impreciso</option>
-            <option>Manifiesto</option>
-            <option>Numerófilo</option>
-            <option>Pasivo-agresivo</option>
-            <option>Perfeccionista</option>
-            <option>Optimista patológico</option>
-            <option>Trendy</option>
-            <option>Verborrea</option>
-            <option>Whatsapp Telégrafo</option>
+            <option>Microrrelato</option>
+              <option>Aforismo</option>
+            <optgroup label="Poesía">
+            <option>Soneto</option>
+            <option>Haiku</option>
+            <option>Verso libre</option>
+            <option>Limerick</option>
+            </optgroup>
         </select>
+        <h3>ESTRUCTURA NARRATIVA</h3>
+        <select id="games">
+            <option value="">Seleccionar...</option>
+            <option>Rebobinado (del final al principio)</option>
+            </select>
     </div>
-
-    <div class="category">
+    
+      <div class="category">
         <h3>ESTILOS</h3>
         <select id="style">
             <option value="">Seleccionar...</option>
@@ -179,31 +188,23 @@ button:nth-last-child(1):hover {
             <option>Thriller policíaco</option>
             <option>Western</option>
         </select>
-    </div>
-    
-    <div class="category">
-        <h3>ESTRUCTURA NARRATIVA</h3>
-        <select id="games">
+            <h3>RASGOS DE NARRADOR/PERSONAJE</h3>
+        <select id="traits">
             <option value="">Seleccionar...</option>
-            <option>Rebobinado (del final al principio)</option>
-            </select>
-    </div>
-
-    <div class="category">
-        <h3>FORMATO</h3>
-        <select id="poetry">
-            <option value="">Seleccionar...</option>
-            <option>Microrrelato</option>
-              <option>Aforismo</option>
-            <optgroup label="Poesía">
-            <option>Soneto</option>
-            <option>Haiku</option>
-            <option>Verso libre</option>
-            <option>Limerick</option>
-            </optgroup>
+            <option>Criptobro</option>
+            <option>Descompuesto</option>
+            <option>Impreciso</option>
+            <option>Manifiesto</option>
+            <option>Numerófilo</option>
+            <option>Pasivo-agresivo</option>
+            <option>Perfeccionista</option>
+            <option>Optimista patológico</option>
+            <option>Trendy</option>
+            <option>Verborrea</option>
+            <option>Whatsapp Telégrafo</option>
         </select>
     </div>
-
+  
     <div id="traits-display">
         <h3>Tienes que escribir un texto con estos rasgos:</h3>
         <div id="selected-traits"></div>

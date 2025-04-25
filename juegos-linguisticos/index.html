@@ -168,13 +168,7 @@
     const currentPage = window.location.pathname.split('/').pop();
     const navLinks = document.querySelectorAll('.nav-link');
     
-    navLinks.forEach(link => {
-        link.classList.remove('activo');
-        const linkPage = link.getAttribute('href');
-        if(currentPage === linkPage) {
-            link.classList.add('activo');
-        }
-    });
+   
        document.querySelectorAll('.accordion').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const panel = btn.nextElementSibling;

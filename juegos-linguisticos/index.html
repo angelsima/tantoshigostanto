@@ -107,11 +107,7 @@
     margin-top: 100px; /* Espacio para el menú fijo */
 }
 
-    <style>
-  .accordion { cursor: pointer; }
-  .panel { display: none; padding: 0 15px; }
-</style>
-    </style>
+      </style>
 </head>
 <body>
     <div class="header">
@@ -138,7 +134,7 @@
             <p>Texto en el que no se utiliza una letra (o más, según la valentía y tiempo libre). Por ejemplo: lipograma sin a, sin e, sin i, sin p t k, sin letras impares del abecedario...</p>
         </div>
          <div class="option-card">
-  <div class="accordion"><h3>Lipogram</h3></div>
+  <h3>Lipogram</h3>
   <div class="panel">
     <p>Texto completo o breve…</p>
     <a href="juegos-linguisticos/lipograma.html" class="nav-button">Leer más →</a>
@@ -167,14 +163,14 @@
       // Marcar página activa en el nav
     const currentPage = window.location.pathname.split('/').pop();
     const navLinks = document.querySelectorAll('.nav-link');
-    
-   
-       document.querySelectorAll('.accordion').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const panel = btn.nextElementSibling;
-      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+     navLinks.forEach(link => {
+        link.classList.remove('activo');
+        const linkPage = link.getAttribute('href');
+        if(currentPage === linkPage) {
+            link.classList.add('activo');
+        }
     });
-  });
-      </script>
+   
+          </script>
 </body>
 </html>

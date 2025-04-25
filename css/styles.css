@@ -10,7 +10,7 @@ body {
 
 .header {
   background-color: #fafa25;
-  color: black;
+  color: white;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
@@ -18,7 +18,9 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
+.h1 {
+  text-color: #000000;
+  }
 h2 {
   text-align: center;
 }

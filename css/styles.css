@@ -114,3 +114,13 @@ h2 {
 .contenedor {
   margin-top: 100px; /* Espacio para el menú fijo */
 }
+/* que solo se vea el h3 al cargar */
+.option-card .panel {
+  display: none;
+  padding-top: 10px;        /* separador opcional */
+}
+
+/* cursor para indicar que es clicable */
+.accordion {
+  cursor: pointer;
+}

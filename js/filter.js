@@ -3,13 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionCards = document.querySelectorAll('.option-card');
     const buttonsContainer = document.querySelector('.subcategory-buttons');
 
-    // Botón "Mostrar todos"
-    const showAllButton = document.createElement('button');
-    showAllButton.textContent = 'Mostrar todos';
-    showAllButton.className = 'subcategory-button active';
-    showAllButton.dataset.category = 'all';
-    buttonsContainer.prepend(showAllButton);
-
+  
     // Función de filtrado
     const filterCards = (category) => {
         optionCards.forEach(card => {

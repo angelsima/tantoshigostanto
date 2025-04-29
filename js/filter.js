@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.subcategory-button');
     const optionCards = document.querySelectorAll('.option-card');
@@ -56,28 +57,4 @@ buttonsContainer.append(showAllButton);
     // 6. Inicialización
     filterCards('all');
     sortCardsAlphabetically(); // Ordenar al cargar
-});
-
-/ Añade estas funciones al final
-const autoGenerate = () => {
-    // Tu código existente del generador
-};
-
-const resetSelections = () => {
-    document.querySelectorAll('#generator-container select').forEach(select => {
-        select.selectedIndex = 0;
-    });
-    document.getElementById('selected-traits').innerHTML = '';
-};
-
-// Inicialización del generador
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#generator-container select').forEach(select => {
-        select.addEventListener('change', () => {
-            const traits = Array.from(document.querySelectorAll('#generator-container select'))
-                             .filter(s => s.value)
-                             .map(s => s.value);
-            document.getElementById('selected-traits').textContent = traits.join(', ');
-        });
-    });
 });

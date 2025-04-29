@@ -167,3 +167,22 @@ h2 {
   width: 100%;
   text-align: center;
 }
+/* Añade estos estilos */
+.subcategory-button.active {
+    background: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
+}
+
+.option-card {
+    transition: opacity 0.3s ease;
+}
+
+.option-card:not([data-category]) {
+    display: block !important; /* Para tarjetas sin categoría específica */
+}
+
+.option-card.hidden {
+    display: none;
+    opacity: 0;
+}

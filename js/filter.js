@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Añadir botón "Mostrar todos"
     const showAllButton = document.createElement('button');
     showAllButton.textContent = 'Mostrar todos';
-    showAllButton.className = 'subcategory-button active';
-    showAllButton.dataset.category = 'all';
-    buttonsContainer.prepend(showAllButton);
+    showAllButton.className = 'subcategory-button show-all active';
+showAllButton.dataset.category = 'all';
+buttonsContainer.append(showAllButton);
 
     // 2. Función de ordenamiento modificada
     const sortCardsAlphabetically = () => {

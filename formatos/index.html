@@ -24,17 +24,13 @@
 </div>  
     <div class="category-section">
         <h2>Formatos</h2>
+         <div class="subcategory-buttons">
+        <button class="subcategory-button" data-category="poesia">Poesía</button>
+        <button class="subcategory-button" data-category="otros">Otros</button>
+       
+    </div>
         
-        <div class="subcategory">Poesía</div>
-       <div class="option-card">
-  <h3 class="accordion">Soneto</h3>
-  <div class="panel">
-    <p>
-     [Descripción]
-    </p>
-  </div>
-</div>
-         <div class="option-card">
+         <div class="option-card" data-category="poesia">
   <h3 class="accordion">Haiku</h3>
   <div class="panel">
     <p>
@@ -42,7 +38,7 @@
     </p>
   </div>
 </div>
-         <div class="option-card">
+         <div class="option-card" data-category="poesia">
   <h3 class="accordion">Soneto</h3>
   <div class="panel">
     <p>
@@ -50,7 +46,7 @@
     </p>
   </div>
 </div>
- <div class="option-card">
+<div class="option-card" data-category="poesia">
   <h3 class="accordion">Verso Libre</h3>
   <div class="panel">
     <p>
@@ -58,8 +54,7 @@
     </p>
   </div>
 </div>
-     <div class="subcategory">Otros</div>
-           <div class="option-card">
+    <div class="option-card" data-category="otros">
   <h3 class="accordion">Aforismo</h3>
   <div class="panel">
     <p>
@@ -67,7 +62,7 @@
     </p>
   </div>
 </div>
-        <div class="option-card">
+      <div class="option-card" data-category="otros">
   <h3 class="accordion">Microrrelato</h3>
   <div class="panel">
     <p>
@@ -105,5 +100,6 @@
     });
   });
           </script>
+            <script src="../js/filter.js"></script>
 </body>
 </html>

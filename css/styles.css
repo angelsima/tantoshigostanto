@@ -84,10 +84,13 @@ h2 {
 }
 
 .nav-menu {
-  margin: 20 auto;
+  margin: 0 auto; /* Corregimos el valor (20 auto estaba mal escrito) */
   display: flex;
-  justify-content: space-around;
+  justify-content: center; /* Cambiamos de space-around a center */
   padding: 15px 20px;
+  max-width: 900px; /* Opcional: para contener el ancho del menú */
+  flex-wrap: wrap; /* Para responsive si hay muchos elementos */
+  gap: 15px; /* Espacio entre elementos */
 }
 
 .nav-link {

@@ -1,60 +1,49 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    const filterButtons = document.querySelectorAll('.subcategory-button');
+    const filterButtons = document.querySelectorAll('.subcategory-button:not(.show-all)');
     const optionCards = document.querySelectorAll('.option-card');
     const buttonsContainer = document.querySelector('.subcategory-buttons');
 
-    // 1. Añadir botón "Mostrar todos"
+    // Botón "Mostrar todos"
     const showAllButton = document.createElement('button');
     showAllButton.textContent = 'Mostrar todos';
     showAllButton.className = 'subcategory-button show-all active';
-showAllButton.dataset.category = 'all';
-buttonsContainer.append(showAllButton);
+    showAllButton.dataset.category = 'all';
+    buttonsContainer.append(showAllButton);
 
-    // 2. Función de ordenamiento modificada
-    const sortCardsAlphabetically = () => {
+    // Función de ordenamiento
+    const sortCards = () => {
         const container = document.querySelector('.category-section');
-        const cards = Array.from(document.querySelectorAll('.option-card:not(.hidden)'));
+        const visibleCards = Array.from(container.querySelectorAll('.option-card:not(.hidden)'));
         
-        cards.sort((a, b) => {
-            const titleA = a.querySelector('.accordion').textContent.toLowerCase().trim();
-            const titleB = b.querySelector('.accordion').textContent.toLowerCase().trim();
+        visibleCards.sort((a, b) => {
+            const titleA = a.querySelector('.accordion').textContent.toLowerCase();
+            const titleB = b.querySelector('.accordion').textContent.toLowerCase();
             return titleA.localeCompare(titleB);
         });
 
-        cards.forEach(card => container.appendChild(card));
+        visibleCards.forEach(card => container.appendChild(card));
     };
 
-    // 3. Función de filtrado actualizada
+    // Filtrado
     const filterCards = (category) => {
         optionCards.forEach(card => {
             card.classList.toggle('hidden', !(category === 'all' || card.dataset.category === category));
         });
-        sortCardsAlphabetically(); // Ordenar después de filtrar
+        sortCards();
     };
 
-    // 4. Eventos corregidos
+    // Eventos
     buttonsContainer.addEventListener('click', (e) => {
         if (!e.target.matches('.subcategory-button')) return;
-
+        
         const button = e.target;
         const category = button.dataset.category;
-
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        showAllButton.classList.remove('active');
-        button.classList.add('active');
         
+        document.querySelectorAll('.subcategory-button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
         filterCards(category);
     });
 
-    // 5. Evento para "Mostrar todos"
-    showAllButton.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        showAllButton.classList.add('active');
-        filterCards('all');
-    });
-
-    // 6. Inicialización
+    // Inicialización
     filterCards('all');
-    sortCardsAlphabetically(); // Ordenar al cargar
 });

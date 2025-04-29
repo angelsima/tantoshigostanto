@@ -141,7 +141,7 @@ h2 {
 /* styles.css */
 .subcategory-buttons {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin: 20px 0;
   flex-wrap: wrap;
   justify-content: center;
@@ -172,7 +172,24 @@ h2 {
     color: white;
     border-color: #2c3e50;
 }
-
+.subcategory-button.show-all {
+    position: relative;
+    margin-left: 28px; /* Espacio para la barra */
+}
+.subcategory-button.show-all::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%; /* 60% de la altura del botón */
+    width: 1px;
+    background-color: #ccc;
+    transition: all 0.3s ease;
+}
+.subcategory-button.show-all:hover::before {
+    background-color: #999;
+}
 .subcategory-expl {
   margin: 15px 0;
   font-style: italic;

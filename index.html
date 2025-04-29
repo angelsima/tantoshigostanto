@@ -69,17 +69,20 @@
     </div>
   <script>
       
-      // Marcar página activa en el nav
-    const currentPage = window.location.pathname.split('/').pop();
-    const navLinks = document.querySelectorAll('.nav-link');
+      
+      // Añade este script
+document.addEventListener('DOMContentLoaded', () => {
+    const navSelect = document.querySelector('.nav-select');
     
-    navLinks.forEach(link => {
-        link.classList.remove('activo');
-        const linkPage = link.getAttribute('href');
-        if(currentPage === linkPage) {
-            link.classList.add('activo');
-        }
+    // Actualizar valor seleccionado
+    const currentPage = window.location.pathname;
+    navSelect.value = currentPage;
+    
+    // Navegación al seleccionar opción
+    navSelect.addEventListener('change', () => {
+        window.location.href = navSelect.value;
     });
+});
       </script>
 </body>
 </html>

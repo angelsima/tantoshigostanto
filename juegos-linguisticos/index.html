@@ -11,17 +11,30 @@
         <h1>Glosario de Estilos, Juegos y Recursos</h1>
         <a href="/tantoshigostanto/generador.html" class="nav-button">Ir al Selector →</a>
     </div>
- <div class="nav-container">
+  <div class="nav-container">
     <nav class="nav-menu">
-        <a href="/tantoshigostanto/juegos-linguisticos/index.html" class="nav-link">Juegos lingüísticos</a>
-        <a href="/tantoshigostanto/figuras-ret/index.html" class="nav-link">Figuras retóricas</a>
-        <a href="/tantoshigostanto/proporciones/index.html" class="nav-link">Cadencias/Proporciones</a>
-        <a href="/tantoshigostanto/formatos/index.html" class="nav-link">Formatos</a>
-        <a href="/tantoshigostanto/juegos-narrativos/index.html" class="nav-link">Juegos Narrativos</a>
-        <a href="/tantoshigostanto/estilos/index.html" class="nav-link">Estilos</a>
-        <a href="/tantoshigostanto/personajes/index.html" class="nav-link">Rasgos de personaje/narrador</a>
+        <a href="/tantoshigostanto/index.html" class="nav-link">Inicio</a>
+        <a href="/tantoshigostanto/generador.html" class="nav-link">Selector</a>
+            <!-- Línea vertical -->
+            <div class="nav-divider"></div>
+               <div class="nav-select-group">
+            <div class="custom-dropdown">
+                <button class="nav-link dropdown-toggle">
+                    Categorías<span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="/tantoshigostanto/juegos-linguisticos/index.html" class="dropdown-item">Juegos lingüísticos</a>
+                    <a href="/tantoshigostanto/figuras-ret/index.html" class="dropdown-item">Figuras retóricas</a>
+                    <a href="/tantoshigostanto/proporciones/index.html" class="dropdown-item">Cadencias/Proporciones</a>
+                    <a href="/tantoshigostanto/formatos/index.html" class="dropdown-item">Formatos</a>
+                    <a href="/tantoshigostanto/juegos-narrativos/index.html" class="dropdown-item">Juegos Narrativos</a>
+                    <a href="/tantoshigostanto/estilos/index.html" class="dropdown-item">Estilos</a>
+                    <a href="/tantoshigostanto/personajes/index.html" class="dropdown-item">Rasgos de personaje</a>
+                </div>
+            </div>
+               </div>
     </nav>
-</div>  
+ </div>
     <div class="category-section">
         <h2>🎚️ JUGOS LINGÜÍSTICOS</h2>
         
@@ -74,21 +87,6 @@
         </div>
     </div>
 
-    
-  <script>
-      
-      // Marcar página activa en el nav
-    const currentPage = window.location.pathname.split('/').pop();
-    const navLinks = document.querySelectorAll('.nav-link');
-     navLinks.forEach(link => {
-        link.classList.remove('activo');
-        const linkPage = link.getAttribute('href');
-        if(currentPage === linkPage) {
-            link.classList.add('activo');
-        }
-    });
-   
-          </script>
     <script>
   // coger todos los disparadores
   const acc = document.querySelectorAll('.accordion');
@@ -109,5 +107,6 @@
   });
 </script>
         <script src="../js/filter.js"></script>
+    <script src="../js/nav-menu.js"></script>
 </body>
 </html>

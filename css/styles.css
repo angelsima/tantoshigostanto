@@ -124,7 +124,7 @@ h2 {
 .accordion {
   cursor: pointer;
 }
-
+/----/
 /* Estilos CSS */
 .glossary-grid {
   display: grid;
@@ -147,6 +147,7 @@ h2 {
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
+/* Clases para tarjetas seleccionadas */
 .option-card.selected {
   border-color: #7c3aed;
   background: #f5f3ff;
@@ -154,14 +155,18 @@ h2 {
 
 .selection-panel {
   position: sticky;
-  top: 70px; /* Ajusta según altura de tu nav */
+  top: 120px; /* Ajusta según la altura de tu header + nav */
   background: white;
   padding: 1rem 2rem;
   box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
   z-index: 10;
-  margin-bottom: 1rem;
+  margin: 0 2rem 1rem;
 }
 
+.selection-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 #selected-message {
   font-size: 1.1rem;
   color: #4a5568;
@@ -172,11 +177,12 @@ h2 {
   background: #7c3aed;
   color: white;
   border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: opacity 0.3s;
+  margin-top: 0.5rem;
 }
+
 
 #action-button.hidden {
   display: none;

@@ -37,13 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filterCards(category);
     });
 
-    // Evento para "Mostrar todos"
-    showAllButton.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        showAllButton.classList.add('active');
-        filterCards('all');
-    });
-
+ 
     // Filtrado inicial
     filterCards('all');
 });

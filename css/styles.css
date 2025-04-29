@@ -97,8 +97,7 @@ h2 {
   border-radius: 20px;
   transition: all 0.3s;
   font-size: 1.1em;
-  text-align: center;
-}
+  }
 
 .nav-link:hover {
   background: #f8f9fa;

@@ -1,3 +1,4 @@
+
 /* styles.css */
 
 body {
@@ -123,71 +124,4 @@ h2 {
 /* cursor para indicar que es clicable */
 .accordion {
   cursor: pointer;
-}
-/----/
-/* Estilos CSS */
-.glossary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
-}
-
-.option-card {
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: white;
-}
-
-.option-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
-
-/* Clases para tarjetas seleccionadas */
-.option-card.selected {
-  border-color: #7c3aed;
-  background: #f5f3ff;
-}
-
-.selection-panel {
-  position: sticky;
-  top: 120px; /* Ajusta según la altura de tu header + nav */
-  background: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-  z-index: 10;
-  margin: 0 2rem 1rem;
-}
-
-.selection-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-#selected-message {
-  font-size: 1.1rem;
-  color: #4a5568;
-  margin: 0;
-}
-
-#action-button {
-  background: #7c3aed;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 0.5rem;
-}
-
-
-#action-button.hidden {
-  display: none;
-}
-
-#action-button:hover {
-  opacity: 0.9;
 }

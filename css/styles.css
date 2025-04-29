@@ -1,4 +1,4 @@
-/* styles.css */
+r/* styles.css */
 
 body {
   font-family: Arial, sans-serif;
@@ -85,7 +85,8 @@ h2 {
 .nav-menu {
   margin: 20 auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  text-align: center;
   padding: 15px 20px;
 }
 
@@ -97,6 +98,7 @@ h2 {
   border-radius: 20px;
   transition: all 0.3s;
   font-size: 1.1em;
+  text-align: center;
 }
 
 .nav-link:hover {

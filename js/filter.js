@@ -1,38 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.subcategory-button');
     const optionCards = document.querySelectorAll('.option-card');
+    const buttonsContainer = document.querySelector('.subcategory-buttons');
 
-    // Mostrar todas las tarjetas al inicio
-    optionCards.forEach(card => card.style.display = 'block');
+    // Botón "Mostrar todos"
+    const showAllButton = document.createElement('button');
+    showAllButton.textContent = 'Mostrar todos';
+    showAllButton.className = 'subcategory-button active';
+    showAllButton.dataset.category = 'all';
+    buttonsContainer.prepend(showAllButton);
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const category = button.dataset.category;
-            
-            // Resetear botones
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Si el botón ya estaba activo, mostrar todo
-            if(button.classList.contains('active')) {
-                optionCards.forEach(card => card.style.display = 'block');
-                button.classList.remove('active');
+    // Función de filtrado
+    const filterCards = (category) => {
+        optionCards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.classList.remove('hidden');
             } else {
-                // Filtrar
-                button.classList.add('active');
-                optionCards.forEach(card => {
-                    card.style.display = card.dataset.category === category ? 'block' : 'none';
-                });
+                card.classList.add('hidden');
             }
         });
+    };
+
+    // Eventos para todos los botones
+    buttonsContainer.addEventListener('click', (e) => {
+        if (!e.target.matches('.subcategory-button')) return;
+
+        const button = e.target;
+        const category = button.dataset.category;
+
+        // Remover activo de todos
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        showAllButton.classList.remove('active');
+
+        // Aplicar estado
+        button.classList.add('active');
+        filterCards(category);
     });
 
-    // Botón "Mostrar todos" (opcional)
-    const showAll = document.createElement('button');
-    showAll.textContent = 'Mostrar todos';
-    showAll.className = 'subcategory-button';
-    showAll.addEventListener('click', () => {
+    // Evento para "Mostrar todos"
+    showAllButton.addEventListener('click', () => {
         filterButtons.forEach(btn => btn.classList.remove('active'));
-        optionCards.forEach(card => card.style.display = 'block');
+        showAllButton.classList.add('active');
+        filterCards('all');
     });
-    document.querySelector('.subcategory-buttons').prepend(showAll);
+
+    // Filtrado inicial
+    filterCards('all');
 });

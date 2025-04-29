@@ -3,53 +3,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionCards = document.querySelectorAll('.option-card');
     const buttonsContainer = document.querySelector('.subcategory-buttons');
 
-  
-    // Función de filtrado
-    const filterCards = (category) => {
-        optionCards.forEach(card => {
-            if (category === 'all' || card.dataset.category === category) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-            }
+    // 1. Añadir botón "Mostrar todos"
+    const showAllButton = document.createElement('button');
+    showAllButton.textContent = 'Mostrar todos';
+    showAllButton.className = 'subcategory-button active';
+    showAllButton.dataset.category = 'all';
+    buttonsContainer.prepend(showAllButton);
+
+    // 2. Función de ordenamiento modificada
+    const sortCardsAlphabetically = () => {
+        const container = document.querySelector('.category-section');
+        const cards = Array.from(document.querySelectorAll('.option-card:not(.hidden)'));
+        
+        cards.sort((a, b) => {
+            const titleA = a.querySelector('.accordion').textContent.toLowerCase().trim();
+            const titleB = b.querySelector('.accordion').textContent.toLowerCase().trim();
+            return titleA.localeCompare(titleB);
         });
+
+        cards.forEach(card => container.appendChild(card));
     };
 
-    // Eventos para todos los botones
+    // 3. Función de filtrado actualizada
+    const filterCards = (category) => {
+        optionCards.forEach(card => {
+            card.classList.toggle('hidden', !(category === 'all' || card.dataset.category === category));
+        });
+        sortCardsAlphabetically(); // Ordenar después de filtrar
+    };
+
+    // 4. Eventos corregidos
     buttonsContainer.addEventListener('click', (e) => {
         if (!e.target.matches('.subcategory-button')) return;
 
         const button = e.target;
         const category = button.dataset.category;
 
-        // Remover activo de todos
         filterButtons.forEach(btn => btn.classList.remove('active'));
         showAllButton.classList.remove('active');
-
-        // Aplicar estado
         button.classList.add('active');
+        
         filterCards(category);
     });
 
- 
-    // Filtrado inicial
+    // 5. Evento para "Mostrar todos"
+    showAllButton.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        showAllButton.classList.add('active');
+        filterCards('all');
+    });
+
+    // 6. Inicialización
     filterCards('all');
-    
-    function sortCardsAlphabetically() {
-    const container = document.querySelector('.category-section');
-    const cards = Array.from(document.querySelectorAll('.option-card'));
-
-        // Ordenar las tarjetas por su título
-    cards.sort((a, b) => {
-        const titleA = a.querySelector('.accordion').textContent.toLowerCase().trim();
-        const titleB = b.querySelector('.accordion').textContent.toLowerCase().trim();
-        return titleA.localeCompare(titleB);
-    });
-
-    // Reinsertar las tarjetas ordenadas
-    cards.forEach(card => {
-        container.appendChild(card);
-    });
-}
-
+    sortCardsAlphabetically(); // Ordenar al cargar
 });

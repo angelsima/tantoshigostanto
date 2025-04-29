@@ -22,12 +22,6 @@
         <a href="/tantoshigostanto/personajes/index.html" class="nav-link">Rasgos de personaje/narrador</a>
     </nav>
 </div>  
-    <div class="selection-panel">
-  <div class="selection-content">
-    <p id="selected-message">Selecciona un estilo para ver opciones</p>
-    <button id="action-button" class="hidden">¡Aplicar este estilo!</button>
-  </div>
-</div>
     <div class="category-section">
         <h2>🎚️ JUGOS LINGÜÍSTICOS</h2>
         
@@ -91,20 +85,23 @@
    
           </script>
     <script>
-// Acordeón (evita propagación del evento)
-document.querySelectorAll('.accordion').forEach(header => {
-  header.addEventListener('click', (e) => {
-    e.stopPropagation(); // ¡Clave! Detiene la propagación al .option-card
-    
-    document.querySelectorAll('.panel').forEach(p => {
-      if (p !== header.nextElementSibling) p.style.display = 'none';
+  // coger todos los disparadores
+  const acc = document.querySelectorAll('.accordion');
+
+  acc.forEach(header => {
+    header.addEventListener('click', () => {
+      // 1) cerrar todos los paneles abiertos
+      document.querySelectorAll('.panel').forEach(p => {
+        if (p !== header.nextElementSibling) {
+          p.style.display = 'none';
+        }
+      });
+
+      // 2) alternar el panel junto al header clicado
+      const panel = header.nextElementSibling;
+      panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
     });
-    
-    const panel = header.nextElementSibling;
-    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
   });
-});
 </script>
-    <script src="js/clic-card.js" defer></script>
 </body>
 </html>

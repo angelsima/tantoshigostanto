@@ -38,6 +38,10 @@ h2 {
   margin: 10px 0;
   border-left: 4px solid #fafa25;
   background-color: #f8f9fa;
+  display: none; /* Ocultar por defecto */
+}
+.option-card[data-category] {
+    display: block; /* Mostrar solo si tiene categoría */
 }
 
 .nav-button {
@@ -158,6 +162,9 @@ h2 {
 
 .subcategory-button:active {
   transform: translateY(0);
+   background: #2c3e50;
+    color: white;
+    border-color: #2c3e50;
 }
 
 .subcategory-expl {

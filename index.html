@@ -84,17 +84,28 @@
   <script>
       
       
-      // Añade este script
+     // Actualiza el script de navegación activa
 document.addEventListener('DOMContentLoaded', () => {
-    const navSelect = document.querySelector('.nav-select');
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
     
-    // Actualizar valor seleccionado
-    const currentPage = window.location.pathname;
-    navSelect.value = currentPage;
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if(currentPage === linkPage) {
+            link.classList.add('activo');
+            if(link.classList.contains('dropdown-item')) {
+                link.closest('.custom-dropdown').querySelector('.dropdown-toggle').classList.add('activo');
+            }
+        }
+    });
     
-    // Navegación al seleccionar opción
-    navSelect.addEventListener('change', () => {
-        window.location.href = navSelect.value;
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+        if(!e.target.closest('.custom-dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        }
     });
 });
       </script>

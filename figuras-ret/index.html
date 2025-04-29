@@ -26,8 +26,12 @@
     <div class="category-section">
         <h2>FIGURAS RETÓRICAS</h2>
         
-       <div class="subcategory">Fonéticos</div>
-       <div class="option-card">
+       <div class="subcategory-buttons">
+        <button class="subcategory-button" data-category="fonet">Fonéticas</button>
+        <button class="subcategory-button" data-category="gram">Gramaticales</button>
+        <button class="subcategory-button" data-category="seman">Semánticas</button>
+    </div>
+       <div class="option-card" data-category="fonet">
   <h3 class="accordion">1</h3>
   <div class="panel">
     <p>
@@ -35,8 +39,7 @@
     </p>
   </div>
 </div>
-        <div class="subcategory">Gramaticales</div>
-       <div class="option-card">
+       <div class="option-card" data-category="gram">
   <h3 class="accordion">1</h3>
   <div class="panel">
     <p>
@@ -44,8 +47,7 @@
     </p>
   </div>
 </div>
-        <div class="subcategory">Semánticas</div>
-       <div class="option-card">
+        <div class="option-card" data-category="seman">
   <h3 class="accordion">1</h3>
   <div class="panel">
     <p>
@@ -86,5 +88,6 @@
     });
   });
           </script>
+      <script src="../js/filter.js"></script>
 </body>
 </html>

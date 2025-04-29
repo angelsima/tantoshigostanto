@@ -38,10 +38,16 @@ h2 {
   margin: 10px 0;
   border-left: 4px solid #fafa25;
   background-color: #f8f9fa;
-  display: none; /* Ocultar por defecto */
+   display: block !important; /* Fuerza visibilidad */
+    opacity: 1;
+    transition: all 0.3s ease;/
 }
 .option-card[data-category] {
     display: block; /* Mostrar solo si tiene categoría */
+}
+.option-card.hidden {
+    display: none !important;
+    opacity: 0;
 }
 
 .nav-button {

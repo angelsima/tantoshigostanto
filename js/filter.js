@@ -1,38 +1,38 @@
-// En tu archivo JavaScript (ej: filter.js)
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.subcategory-button');
     const optionCards = document.querySelectorAll('.option-card');
 
-    // Filtrado inicial: mostrar todas
+    // Mostrar todas las tarjetas al inicio
     optionCards.forEach(card => card.style.display = 'block');
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             const category = button.dataset.category;
             
-            // Remover activo de todos los botones
+            // Resetear botones
             filterButtons.forEach(btn => btn.classList.remove('active'));
             
-            // Toggle estado activo
-            const isActive = button.classList.contains('active');
-            button.classList.toggle('active', !isActive);
-
-            // Filtrar tarjetas
-            optionCards.forEach(card => {
-                if(category === 'all' || !button.classList.contains('active')) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 
-                        card.dataset.category === category ? 'block' : 'none';
-                }
-            });
+            // Si el botón ya estaba activo, mostrar todo
+            if(button.classList.contains('active')) {
+                optionCards.forEach(card => card.style.display = 'block');
+                button.classList.remove('active');
+            } else {
+                // Filtrar
+                button.classList.add('active');
+                optionCards.forEach(card => {
+                    card.style.display = card.dataset.category === category ? 'block' : 'none';
+                });
+            }
         });
     });
 
-    // Opcional: Botón "Mostrar todos"
-    const showAllButton = document.createElement('button');
-    showAllButton.textContent = 'Mostrar todos';
-    showAllButton.className = 'subcategory-button';
-    showAllButton.dataset.category = 'all';
-    document.querySelector('.subcategory-buttons').prepend(showAllButton);
+    // Botón "Mostrar todos" (opcional)
+    const showAll = document.createElement('button');
+    showAll.textContent = 'Mostrar todos';
+    showAll.className = 'subcategory-button';
+    showAll.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        optionCards.forEach(card => card.style.display = 'block');
+    });
+    document.querySelector('.subcategory-buttons').prepend(showAll);
 });

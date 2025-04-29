@@ -6,11 +6,11 @@ body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #000000;
+  background-color: 	#FCF8F1;
 }
 
 .header {
-  background-color: #fafa25;
+  background-color: #2C2A29;
    padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
@@ -19,7 +19,7 @@ body {
   align-items: center;
 }
 .header h1 {
-  color: #000000;
+  color: #3B3A36;
   }
 h2 {
   text-align: center;
@@ -104,7 +104,7 @@ h2 {
 }
 
 .dropdown-item:hover {
-    background: #f5f5f5;
+    background: #7A5C3B;
 }
 
 .nav-divider {
@@ -137,7 +137,7 @@ h2 {
     }
 }
 .nav-button {
-  background-color: #28a745;
+  background-color: #7A5C3B;
   color: white;
   padding: 12px 25px;
   border-radius: 25px;
@@ -147,7 +147,7 @@ h2 {
 }
 
 .nav-button2 {
-  background-color: #28a745;
+  background-color: #7A5C3B;
   color: white;
   padding: 12px 25px;
   border-radius: 50px;
@@ -191,7 +191,7 @@ h2 {
 
 .nav-link {
   text-decoration: none;
-  color: #2c3e50;
+  color: #C84B31;
   font-weight: 500;
   padding: 10px 15px;
   border-radius: 20px;

@@ -34,4 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
  
     // Filtrado inicial
     filterCards('all');
+    
+    function sortCardsAlphabetically() {
+    const container = document.querySelector('.category-section');
+    const cards = Array.from(document.querySelectorAll('.option-card'));
+
+        // Ordenar las tarjetas por su título
+    cards.sort((a, b) => {
+        const titleA = a.querySelector('.accordion').textContent.toLowerCase().trim();
+        const titleB = b.querySelector('.accordion').textContent.toLowerCase().trim();
+        return titleA.localeCompare(titleB);
+    });
+
+    // Reinsertar las tarjetas ordenadas
+    cards.forEach(card => {
+        container.appendChild(card);
+    });
+}
+
 });

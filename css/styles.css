@@ -85,7 +85,7 @@ h2 {
 .nav-menu {
   margin: 20 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
     padding: 15px 20px;
 }
 

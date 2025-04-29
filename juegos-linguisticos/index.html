@@ -25,7 +25,13 @@
     <div class="category-section">
         <h2>🎚️ JUGOS LINGÜÍSTICOS</h2>
         
-        <div class="subcategory">Quitar cosas</div>
+        <div class="subcategory-buttons">
+        <button class="subcategory-button" data-category="quitar">Quitar cosas</button>
+        <button class="subcategory-button" data-category="morfo">Juegos morfo-sintácticos</button>
+        <button class="subcategory-button" data-category="foneticos">Efectos fonéticos</button>
+    </div>
+        
+       <div class="option-card" data-category="quitar">
        <div class="option-card">
   <h3 class="accordion">Lipograma</h3>
   <div class="panel">
@@ -35,8 +41,8 @@
     </p>
   </div>
 </div>
-               
-        <div class="subcategory">Juegos morfo-sintácticos</div>
+       </div>         
+         <div class="option-card" data-category="morfo">
         <div class="option-card">
              <h3 class="accordion">Sílaba encadenada</h3>
             <div class="panel"><p>Cada palabra termina con la sílaba que inicia la siguiente: "Casa-sapo-pozo..."</p></div>
@@ -57,7 +63,8 @@
              <h3 class="accordion">Glíglico (jitanjáforas)</h3>
             <div class="panel"><p>[Descripción]</p></div>
         </div>
-        <div class="subcategory">Efectos fonéticos</div>
+         </div>
+      <div class="option-card" data-category="foneticos">
         <div class="subcategory-expl">Textos para leer en voz alta y hacerlos sonar</div>
         <div class="option-card">
              <h3 class="accordion">Aspirador malaguita/sevillita /ts/</h3>
@@ -103,5 +110,6 @@
     });
   });
 </script>
+        <script src="js/filter.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-r/* styles.css */
+
+/* styles.css */
 
 body {
   font-family: Arial, sans-serif;
@@ -86,7 +87,7 @@ h2 {
   margin: 20 auto;
   display: flex;
   justify-content: space-around;
-    padding: 15px 20px;
+  padding: 15px 20px;
 }
 
 .nav-link {
@@ -97,7 +98,7 @@ h2 {
   border-radius: 20px;
   transition: all 0.3s;
   font-size: 1.1em;
-  }
+}
 
 .nav-link:hover {
   background: #f8f9fa;

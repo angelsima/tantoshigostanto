@@ -25,9 +25,12 @@
 </div>  
     <div class="category-section">
         <h2>ESTILOS</h2>
-        
-         <div class="subcategory">Estilos</div>
-       <div class="option-card">
+         <div class="subcategory-buttons">
+        <button class="subcategory-button" data-category="estilos">Estilos</button>
+        <button class="subcategory-button" data-category="autores">Autores</button>
+        <button class="subcategory-button" data-category="corrientes">Corrientes</button>
+    </div>
+         <div class="option-card" data-category="estilos">
   <h3 class="accordion">Anime</h3>
   <div class="panel">
     <p>
@@ -36,7 +39,7 @@
     </p>
   </div>
 </div>
-              <div class="option-card">
+              <div class="option-card" data-category="estilos">
   <h3 class="accordion">Bricomanía</h3>
   <div class="panel">
     <p>
@@ -45,7 +48,7 @@
     </p>
   </div>
 </div>
-        <div class="option-card">
+        <div class="option-card" data-category="estilos">
   <h3 class="accordion">Catequesis</h3>
   <div class="panel">
     <p>
@@ -54,7 +57,7 @@
     </p>
   </div>
 </div>
-        <div class="option-card">
+         <div class="option-card" data-category="estilos">
   <h3 class="accordion">Cine bélico</h3>
   <div class="panel">
     <p>
@@ -63,7 +66,7 @@
     </p>
   </div>
 </div>
-        <div class="option-card">
+         <div class="option-card" data-category="estilos">
   <h3 class="accordion">Cine negro</h3>
   <div class="panel">
     <p>
@@ -72,7 +75,7 @@
     </p>
   </div>
 </div>
-             <div class="option-card">
+              <div class="option-card" data-category="estilos">
   <h3 class="accordion">Cine quinqui</h3>
   <div class="panel">
     <p>
@@ -81,7 +84,7 @@
     </p>
   </div>
 </div>
-        <div class="option-card">
+         <div class="option-card" data-category="estilos">
   <h3 class="accordion">Cine Serie B</h3>
   <div class="panel">
     <p>
@@ -90,7 +93,7 @@
     </p>
   </div>
 </div>
-              <div class="option-card">
+               <div class="option-card" data-category="estilos">
   <h3 class="accordion">Cine terror</h3>
   <div class="panel">
     <p>
@@ -99,7 +102,7 @@
     </p>
   </div>
 </div>
-        <div class="option-card">
+         <div class="option-card" data-category="estilos">
   <h3 class="accordion">Comedia romántica</h3>
   <div class="panel">
     <p>
@@ -108,7 +111,7 @@
     </p>
   </div>
 </div>         
-          <div class="option-card">
+           <div class="option-card" data-category="estilos">
   <h3 class="accordion">Documental de animales</h3>
   <div class="panel">
     <p>
@@ -117,7 +120,7 @@
     </p>
   </div>
 </div>
-          <div class="option-card">
+          <div class="option-card" data-category="estilos">
   <h3 class="accordion">Fantasía</h3>
   <div class="panel">
     <p>
@@ -126,7 +129,7 @@
     </p>
   </div>
 </div>
-          <div class="option-card">
+          <div class="option-card" data-category="estilos">
   <h3 class="accordion">Infantil</h3>
   <div class="panel">
     <p>
@@ -136,7 +139,7 @@
   </div>
 </div>
      
-          <div class="option-card">
+          <div class="option-card" data-category="estilos">
   <h3 class="accordion">Medieval</h3>
   <div class="panel">
     <p>
@@ -145,7 +148,7 @@
     </p>
   </div>
 </div>
-             <div class="option-card">
+             <div class="option-card" data-category="estilos">
   <h3 class="accordion">Telenovela</h3>
   <div class="panel">
     <p>
@@ -154,7 +157,7 @@
     </p>
   </div>
 </div>
-                    <div class="option-card">
+           <div class="option-card" data-category="estilos">
   <h3 class="accordion">Thriller policíaco</h3>
   <div class="panel">
     <p>
@@ -163,7 +166,7 @@
     </p>
   </div>
 </div>
-            <div class="option-card">
+             <div class="option-card" data-category="estilos">
   <h3 class="accordion">Western</h3>
   <div class="panel">
     <p>
@@ -172,16 +175,15 @@
     </p>
   </div>
 </div>    
-        <div class="subcategory">Autores</div>
-        <div class="option-card">
+        
+        <div class="option-card" data-category="autores">
              <h3 class="accordion">Edgar Alan Poe</h3>
             <div class="panel"><p>
       [Descripción Edgar Alan Poe]
       <a href="juegos-linguisticos/lipograma.html">Más sobre ...</a>
     </p></div>
         </div>
-        <div class="subcategory">Corrientes</div>
-                <div class="option-card">
+                <div class="option-card" data-category="corrientes">
              <h3 class="accordion">Realismo mágico</h3>
             <div class="panel"><p>[Descripción Realismo mágico]</p></div>
         </div>
@@ -218,6 +220,6 @@
     });
   });
           </script>
-    <script src="js/accordion.js"></script>
+     <script src="../js/filter.js"></script>
 </body>
 </html>

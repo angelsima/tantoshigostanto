@@ -1,106 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Generador de Restricciones Narrativas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f0f0f0;
-            text-align: center;
-        }
-
-        .category {
-            margin: 20px 0;
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
-
-        #traits-display {
-            background-color: #fff3cd;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .generator-section {
-            background-color: #d4edda;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-             margin-right: 10px;
-    transition: all 0.3s ease;
-}
-    
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .checkbox-group {
-            margin: 10px 0;
-        }
-         .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #6c757d;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            z-index: 1000;
-        }
-        optgroup {
-    font-style: normal;
-    font-weight: bold;
-    color: #555;
-}
-
-option:disabled {
-    color: #999;
-    background-color: #f0f0f0;
-    font-style: italic;
-}
-        button:nth-last-child(1) {
-    background-color: #dc3545;
-}
-
-button:nth-last-child(1):hover {
-    background-color: #c82333;
-}
-          .checkbox-group label {
-        display: block;
-        margin-bottom: 4px; /* opcional, para espaciado */
-    }
-    </style>
+    <title>Glosario de Estilos y Juegos</title>
+ <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-     <a href="index.html" class="back-button">← Volver a Explicaciones</a>
-    <h1>Generador de Restricciones Narrativas</h1>
+    <div class="header">
+        <h1>Glosario de Estilos, Juegos y Recursos</h1>
+        <a href="generador.html" class="nav-button">Ir al Selector →</a>
+    </div>
+ <div class="nav-container">
+    <nav class="nav-menu">
+        <a href="/tantoshigostanto/index.html" class="nav-link">Inicio</a>
+        <a href="/tantoshigostanto/generador.html" class="nav-link">Selector</a>
+            <!-- Línea vertical -->
+            <div class="nav-divider"></div>
+               <div class="nav-select-group">
+            <div class="custom-dropdown">
+                <button class="nav-link dropdown-toggle">
+                    Categorías<span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="/tantoshigostanto/juegos-linguisticos/index.html" class="dropdown-item">Juegos lingüísticos</a>
+                    <a href="/tantoshigostanto/figuras-ret/index.html" class="dropdown-item">Figuras retóricas</a>
+                    <a href="/tantoshigostanto/proporciones/index.html" class="dropdown-item">Cadencias/Proporciones</a>
+                    <a href="/tantoshigostanto/formatos/index.html" class="dropdown-item">Formatos</a>
+                    <a href="/tantoshigostanto/juegos-narrativos/index.html" class="dropdown-item">Juegos Narrativos</a>
+                    <a href="/tantoshigostanto/estilos/index.html" class="dropdown-item">Estilos</a>
+                    <a href="/tantoshigostanto/personajes/index.html" class="dropdown-item">Rasgos de personaje</a>
+                </div>
+            </div>
+               </div>
+    </nav>
+ </div>
+    <div class="category-section">
+        <div id="generator-container">
+        <h2>🔧 Selector de Restricciones Narrativas</h2>
+         <h1>Generador de Restricciones Narrativas</h1>
 
        <div class="category">
         <h3>JUEGOS LINGÜÍSTICOS</h3>
@@ -222,9 +159,51 @@ button:nth-last-child(1):hover {
         <button onclick="autoGenerate()">Generar Aleatorio</button>
         <button onclick="resetSelections()">Limpiar Selección</button>
     
+        <!-- Mismo código del generador.html aquí -->
+        <div class="generator-category">
+            <h3>JUEGOS LINGÜÍSTICOS</h3>
+            <select id="linguistic">...</select>
+            
+            <!-- Repite para todas las secciones del generador -->
+        </div>
+
+        <div id="traits-display">...</div>
+        
+        <div class="generator-controls">
+            <button onclick="autoGenerate()">Lanzar Dados 🎲</button>
+            <button onclick="resetSelections()">Borrar Todo 🗑️</button>
+        </div>
     </div>
-    <script>
-        // Actualizar la lista de rasgos seleccionados
+    </div>
+    
+  <script>
+      
+      
+     // Actualiza el script de navegación activa
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if(currentPage === linkPage) {
+            link.classList.add('activo');
+            if(link.classList.contains('dropdown-item')) {
+                link.closest('.custom-dropdown').querySelector('.dropdown-toggle').classList.add('activo');
+            }
+        }
+    });
+    
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+        if(!e.target.closest('.custom-dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        }
+    });
+});
+      // Actualizar la lista de rasgos seleccionados
         function updateSelectedTraits() {
             const traits = [];
             const categories = ['linguistic', 'style', 'proportion', 'traits', 'games', 'poetry'];
@@ -289,6 +268,6 @@ function resetSelections() {
  
         // Inicializar mostrando los rasgos seleccionados
         updateSelectedTraits();
-    </script>
+      </script>
 </body>
 </html>

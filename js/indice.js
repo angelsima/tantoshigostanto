@@ -1,44 +1,27 @@
-// indice.js actualizado
 document.addEventListener('DOMContentLoaded', () => {
-    // Toggle categorías
-    document.querySelectorAll('.category-toggle').forEach(toggle => {
-        const category = toggle.closest('.index-category');
+    // Inicializar categorías
+    document.querySelectorAll('.index-category').forEach(category => {
+        const toggle = category.querySelector('.category-toggle');
         const items = category.querySelector('.index-items');
         
-        // Estado inicial
+        // Estado inicial basado en la clase 'collapsed'
         if(category.classList.contains('collapsed')) {
             items.style.display = 'none';
             toggle.innerHTML = toggle.innerHTML.replace('▼', '▲');
         }
-
-        toggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            const wasCollapsed = items.style.display === 'none';
-            
-            items.style.display = wasCollapsed ? 'block' : 'none';
-            toggle.innerHTML = wasCollapsed ? 
-                toggle.innerHTML.replace('▲', '▼') : 
-                toggle.innerHTML.replace('▼', '▲');
-        });
     });
 
-    // Manejo de contenido
-    document.querySelectorAll('.index-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = item.getAttribute('href');
+    // Toggle categorías
+    document.querySelectorAll('.category-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            const category = e.target.closest('.index-category');
+            const items = category.querySelector('.index-items');
+            const isCollapsed = items.style.display === 'none';
             
-            // Ocultar todo el contenido
-            document.querySelectorAll('.content-card').forEach(card => {
-                card.style.display = 'none';
-            });
-            
-            // Mostrar contenido seleccionado
-            const targetContent = document.querySelector(targetId);
-            if(targetContent) {
-                targetContent.style.display = 'block';
-                targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            items.style.display = isCollapsed ? 'block' : 'none';
+            toggle.innerHTML = isCollapsed ? 
+                toggle.innerHTML.replace('▲', '▼') : 
+                toggle.innerHTML.replace('▼', '▲');
         });
     });
 });

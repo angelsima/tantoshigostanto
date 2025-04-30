@@ -336,22 +336,21 @@ h2 {
 /* Estilos principales */
 .layout-container {
     display: flex;
-    min-height: 100vh;
+    gap: 30px;
+    margin-top: 20px;
 }
 
 .side-index {
-    width: 33%;
-    min-width: 300px;
-    background: #f8f9fa;
-    border-right: 1px solid #eee;
-    padding: 20px;
+   flex: 0 0 33%;
+    position: sticky;
+    top: 120px;
+    height: calc(100vh - 140px);
     overflow-y: auto;
 }
 
 .content-area {
-    flex: 1;
-    padding: 30px;
-    background: white;
+   flex: 1;
+    padding-right: 30px;
 }
 
 /* Categorías del índice */
@@ -411,10 +410,8 @@ h2 {
     }
     
     .side-index {
-        width: 100%;
         height: auto;
-        border-right: none;
-        border-bottom: 1px solid #eee;
+        position: static;
     }
     
     .content-area {

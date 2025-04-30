@@ -410,8 +410,10 @@ h2 {
     }
     
     .side-index {
+        width: 100%;
         height: auto;
-        position: static;
+        border-right: none;
+        border-bottom: 1px solid #eee;
     }
     
     .content-area {

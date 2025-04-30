@@ -5,9 +5,29 @@
     "category": "Juegos lingüísticos"
   },
   {
+    "id": "lipograma-e",
+    "title": "Lipograma en E",
+    "category": "Juegos lingüísticos"
+  },
+  {
+    "id": "lipograma-i",
+    "title": "Lipograma en I",
+    "category": "Juegos lingüísticos"
+  },
+  {
+    "id": "lipograma-o",
+    "title": "Lipograma en O",
+    "category": "Juegos lingüísticos"
+  },
+  {
+    "id": "lipograma-u",
+    "title": "Lipograma en U",
+    "category": "Juegos lingüísticos"
+  },
+  {
     "id": "soneto",
     "title": "Soneto",
     "category": "Formatos",
     "sub-category": "Poesía"
-  }
-]
+  },
+  ]

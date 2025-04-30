@@ -25,3 +25,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Manejo de ítems
+document.querySelectorAll('.index-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href');
+        
+        // Remover clase active de todas las tarjetas
+        document.querySelectorAll('.content-card').forEach(card => {
+            card.classList.remove('active');
+        });
+        
+        // Activar tarjeta objetivo
+        const targetCard = document.querySelector(targetId);
+        if(targetCard) {
+            targetCard.classList.add('active');
+            
+            // Forzar repintado para la animación
+            void targetCard.offsetWidth;
+            
+            // Scroll solo en móvil
+            if(window.innerWidth < 768) {
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    });
+});
+
+// Cargar contenido basado en el hash de la URL
+function loadInitialContent() {
+    const hash = window.location.hash;
+    if(hash) {
+        const targetCard = document.querySelector(hash);
+        if(targetCard) targetCard.classList.add('active');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadInitialContent);
+window.addEventListener('hashchange', loadInitialContent);

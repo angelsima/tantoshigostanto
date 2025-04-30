@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const res = await fetch('posts.json');
+    const res = await fetch('../posts.json');
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const posts = await res.json();
 
@@ -34,16 +34,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // Crear tarjeta de contenido
       const card = document.createElement('div');
-      card.id = post.id;
+      card.id = .id;
       card.className = 'content-card';
       if (i === 0) card.classList.add('active'); // mostrar la primera por defecto
 
       // Añadir título y HTML interno
       const h2 = document.createElement('h2');
-      h2.textContent = post.title;
+      h2.textContent = .title;
       const wrapper = document.createElement('div');
       wrapper.className = 'card-content';
-      wrapper.innerHTML = post.html;
+      wrapper.innerHTML = .html;
 
       card.appendChild(h2);
       card.appendChild(wrapper);
@@ -54,6 +54,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.documentElement.style.scrollBehavior = 'smooth';
 
   } catch (err) {
-    console.error('Error cargando posts:', err);
+    console.error('Error cargando s:', err);
   }
 });

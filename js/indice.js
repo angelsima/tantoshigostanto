@@ -38,3 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// Modifica el evento click de los ítems
+item.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const pageUrl = item.getAttribute('data-page'); // Ej: data-page="lipograma.html"
+    
+    try {
+        const response = await fetch(pageUrl);
+        const content = await response.text();
+        
+        document.querySelector('.content-area').innerHTML = content;
+    } catch (error) {
+        console.error('Error loading content:', error);
+    }
+});

@@ -65,27 +65,49 @@ function loadInitialContent() {
 document.addEventListener('DOMContentLoaded', loadInitialContent);
 window.addEventListener('hashchange', loadInitialContent);
 
-// Función para mostrar contenido aleatorio
-function showRandomContent() {
-    const items = document.querySelectorAll('.index-item:not(.random-item)');
-    if(items.length === 0) return;
-    
-    const randomIndex = Math.floor(Math.random() * items.length);
-    const randomItem = items[randomIndex];
-    
-    // Simular click en el item aleatorio
-    randomItem.click();
-    
-    // Destacar temporalmente
-    randomItem.style.backgroundColor = '#f5f3ff';
-    setTimeout(() => {
-        randomItem.style.backgroundColor = '';
-    }, 1000);
-      }
+/ Función para mostrar tarjeta aleatoria
+function showRandomCard() {
+    const cards = Array.from(document.querySelectorAll('.content-card'));
+    if(cards.length === 0) return;
 
-// Añadir evento al botón
-document.querySelector('.random-item').addEventListener('click', (e) => {
+    // Ocultar todas las tarjetas
+    cards.forEach(card => card.classList.remove('active'));
+
+    // Seleccionar una aleatoria
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    const randomCard = cards[randomIndex];
+    
+    // Mostrar la tarjeta
+    randomCard.classList.add('active', 'random-highlight');
+    
+    // Actualizar URL
+    window.history.replaceState(null, null, randomCard.id);
+    
+    // Eliminar clase de destaque después de la animación
+    setTimeout(() => {
+        randomCard.classList.remove('random-highlight');
+    }, 1000);
+    
+    // Scroll a la tarjeta en móvil
+    if(window.innerWidth < 768) {
+        randomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Event listener para el botón
+document.querySelector('.random-card-trigger').addEventListener('click', (e) => {
     e.preventDefault();
-    showRandomContent();
+    showRandomCard();
 });
 
+// Al cargar la página
+function loadInitialContent() {
+    const hash = window.location.hash;
+    if(hash) {
+        const targetCard = document.querySelector(hash);
+        if(targetCard) targetCard.classList.add('active');
+    } else {
+        // Mostrar tarjeta aleatoria al entrar sin hash
+        showRandomCard();
+    }
+}

@@ -25,7 +25,9 @@ body {
 h2 {
   text-align: center;
 }
-
+.p {
+  text-aling: justify;
+}
 .category-section {
   background: white;
   padding: 25px;

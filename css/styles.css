@@ -114,7 +114,12 @@ h2 {
     background: #ddd;
     margin: 0 15px;
 }
-
+.poem {
+  font-family: serif;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin: 1em 0;
+}
 /* Mostrar menú al activar */
 .custom-dropdown:hover .dropdown-menu {
     display: block;

@@ -4,4 +4,10 @@
     "title": "Lipograma en A",
     "category": "Juegos lingüísticos"
   }
+  {
+    "id": "soneto",
+    "title": "Soneto",
+    "category": "Formatos"
+    "sub-category": "Poesía"
+  }
 ]

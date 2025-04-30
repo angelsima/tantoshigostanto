@@ -363,6 +363,17 @@ h2 {
     justify-content: space-between;
     align-items: center;
 }
+.sub-category-toggle {
+    width: 100%;
+    padding: 12px;
+    background: none;
+    border: none;
+    text-align: left;
+        cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .index-items {
     padding-left: 15px;

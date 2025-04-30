@@ -38,11 +38,12 @@ function renderIndex(posts) {
     // Agrupar por categorías
     const categories = {};
     posts.forEach(post => {
-        if(!categories[post.category]) {
-            categories[post.category] = [];
-        }
-        categories[post.category].push(post);
-    });
+      const cat = post.category;
+    const sub = post['sub-category'] || 'General';
+    categories[cat] = categories[cat] || {};
+    categories[cat][sub] = categories[cat][sub] || [];
+    categories[cat][sub].push(post);
+  });
 
     // Renderizar índice
     let html = `
@@ -53,19 +54,19 @@ function renderIndex(posts) {
         </div>
     `;
 
-    Object.entries(categories).forEach(([category, posts]) => {
-        html += `
-        <div class="index-category collapsed">
-            <button class="category-toggle">${category} ▼</button>
-            <div class="index-items">
-                ${posts.map(post => `
-                    <a href="#${post.id}" class="index-item" data-post="${post.id}">
-                        ${post.title}
-                    </a>
-                `).join('')}
-            </div>
-        </div>`;
-    });
+      for (const [cat, subs] of Object.entries(categories)) {
+    html += `<div class="index-category collapsed">
+               <button class="category-toggle">${cat} ▼</button>
+               <div class="index-items">`;
+    for (const [sub, arr] of Object.entries(subs)) {
+      html += `<div class="sub-category">
+                 <strong>${sub}</strong>
+                 ${arr.map(p=>`<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`).join('')}
+               </div>`;
+    }
+    html += `  </div>
+             </div>`;
+  }
 
     indexContainer.innerHTML = html;
 

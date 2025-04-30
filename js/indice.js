@@ -64,3 +64,28 @@ function loadInitialContent() {
 
 document.addEventListener('DOMContentLoaded', loadInitialContent);
 window.addEventListener('hashchange', loadInitialContent);
+
+// Función para mostrar contenido aleatorio
+function showRandomContent() {
+    const items = document.querySelectorAll('.index-item:not(.random-item)');
+    if(items.length === 0) return;
+    
+    const randomIndex = Math.floor(Math.random() * items.length);
+    const randomItem = items[randomIndex];
+    
+    // Simular click en el item aleatorio
+    randomItem.click();
+    
+    // Destacar temporalmente
+    randomItem.style.backgroundColor = '#f5f3ff';
+    setTimeout(() => {
+        randomItem.style.backgroundColor = '';
+    }, 1000);
+      }
+
+// Añadir evento al botón
+document.querySelector('.random-item').addEventListener('click', (e) => {
+    e.preventDefault();
+    showRandomContent();
+});
+

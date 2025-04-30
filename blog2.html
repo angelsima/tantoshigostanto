@@ -1,20 +1,17 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Tantoshigostanto</title>
- <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="/favicon.png" type="image/png" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Tantoshigostanto</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="header">
-        <h1>Tantos higos tanto</h1>
+        <h1>Tantoshigostanto</h1>
         <a href="generador.html" class="nav-button">Ir al Selector →</a>
     </div>
- <div class="nav-container">
+    
+    <div class="nav-container">
     <nav class="nav-menu">
         <a href="/tantoshigostanto/index.html" class="nav-link">Inicio</a>
         <a href="/tantoshigostanto/blog.html" class="nav-link">Blog</a>
@@ -28,69 +25,20 @@
        </div>
     <div class="layout-container">
     <!-- Índice lateral -->
-    <aside class="side-index">
-        <div class="index-category">
-   <button class="random-card-trigger">
-        🎲 Texto Aleatorio
-    </button>
-</div>
-        <div class="index-category collapsed">
-            <button class="category-toggle">Juegos Lingüísticos ▼</button>
-            <div class="index-items">
-                <a href="#lipograma-a" class="index-item">Lipograma sin a</a>
-              <a href="#lipograma-e" class="index-item">Lipograma sin e</a>
-              <a href="#lipograma-i" class="index-item">Lipograma sin i</a>
-              <a href="#lipograma-o" class="index-item">Lipograma sin o</a>
-              <a href="#lipograma-u" class="index-item">Lipograma sin u</a>
-              
-                <a href="#silaba-encadenada" class="index-item">Sílaba encadenada</a>
-         </div>
-        </div>
-         <div class="index-category collapsed">
-            <button class="category-toggle">Estilos ▼</button>
-              <div class="index-items" style="display: none;">
-                  <a href="#soneto" class="index-item">Soneto</a>
-            <a href="#haiku" class="index-item">Haiku</a>
-        </div>
-    </div>
-         <div class="index-category collapsed">
-            <button class="category-toggle">Rasgos de Personaje ▼</button>
-             <div class="index-items" style="display: none;">
-                   </div>
-    </div>
-        <div class="index-category collapsed">
-            <button class="category-toggle">Figuras Retóricas ▼</button>
-         <div class="index-items" style="display: none;">
-                   </div>
-    </div>
-        <div class="index-category collapsed">
-            <button class="category-toggle">Cadencias/Proporciones ▼</button>
-         <div class="index-items" style="display: none;">
-                   </div>
-    </div>
-        <div class="index-category collapsed">
-             <button class="category-toggle">Formatos ▼</button>
-     <div class="index-items" style="display: none;">
-                   </div>
-    </div>
-        <div class="index-category collapsed">
-            <button class="category-toggle">Juegos Narrativos ▼</button>
-     <div class="index-items" style="display: none;">
-            </div>
-        </div>
+       <nav class="side-index">
         
-       
-                <!-- Más items -->
-    </aside>      
+    </nav>      
 
     <!-- Contenido principal -->
     <main class="content-area">
-        <div id="posts-container"></div>
-       
-    </main>
+        <div class="welcome-message">
+                <h2>Bienvenido al blog</h2>
+                <p>Selecciona un texto del índice o haz clic en "Texto Aleatorio"</p>
+            </div>
+        </main>
     </div>
     
 
-        <script src="js/indice2.js"></script>
+      <script src="js/blog.js"></script>
 </body>
 </html>

@@ -1,185 +1,72 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enciclopedia Narrativa</title>
-    <style>
-        :root {
-            --color-primario: #2A2F4F;
-            --color-secundario: #917FB3;
-            --fondo: #FDE2F3;
-        }
-
-        .nav-enciclopedia {
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 1000;
-            padding: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-        }
-
-        .nav-item {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            background: #f5f5f5;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .nav-item.activo {
-            background: var(--color-secundario);
-            color: white;
-        }
-
-        .seccion {
-            padding: 2rem 1rem;
-            border-bottom: 2px solid #eee;
-        }
-
-        .glosario {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .termino {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .termino:hover {
-            transform: translateY(-3px);
-        }
-
-        .badge-estilo {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--color-secundario);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8em;
-        }
-
-        .ejemplo-literario {
-            margin: 1rem 0;
-            padding: 1rem;
-            border-left: 3px solid var(--color-secundario);
-            background: #f8f9fa;
-            font-style: italic;
-            color: #666;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                padding-left: 300px;
-            }
-
-            .nav-enciclopedia {
-                position: fixed;
-                left: 0;
-                top: 0;
-                width: 280px;
-                height: 100vh;
-                flex-direction: column;
-                overflow-y: auto;
-            }
-        }
-    </style>
+    <title>Glosario de Estilos y Juegos</title>
+ <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="/favicon.png" type="image/png" />
 </head>
 <body>
-    <nav class="nav-enciclopedia">
-        <div class="nav-item activo" data-seccion="restricciones">Restricciones Lingüísticas</div>
-        <div class="nav-item" data-seccion="estilos">Estilos Narrativos</div>
-        <div class="nav-item" data-seccion="western">Glosario Western</div>
-        <div class="nav-item" data-seccion="poesia">Técnicas Poéticas</div>
-    </nav>
-
-    <section class="seccion" id="restricciones">
-        <h2>Restricciones Lingüísticas</h2>
-        <div class="glosario">
-            <div class="termino">
-                <div class="badge-estilo">Lipograma</div>
-                <h3>Sin la letra A</h3>
-                <p>Ejercicio de escritura donde se prohibe el uso de la vocal más común...</p>
-                <div class="ejemplo-literario">
-                    "El perseguido corrió sin descanso, buscando escondite seguro entre los muros viejos..."
+    <div class="header">
+        <h1>Glosario de Estilos, Juegos y Recursos</h1>
+        <a href="generador.html" class="nav-button">Ir al Selector →</a>
+    </div>
+ <div class="nav-container">
+    <nav class="nav-menu">
+        <a href="/tantoshigostanto/index.html" class="nav-link">Inicio</a>
+        <a href="/tantoshigostanto/generador.html" class="nav-link">Selector</a>
+            <!-- Línea vertical -->
+            <div class="nav-divider"></div>
+               <div class="nav-select-group">
+            <div class="custom-dropdown">
+                <button class="nav-link dropdown-toggle">
+                    Categorías<span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="/tantoshigostanto/juegos-linguisticos/index.html" class="dropdown-item">Juegos lingüísticos</a>
+                    <a href="/tantoshigostanto/figuras-ret/index.html" class="dropdown-item">Figuras retóricas</a>
+                    <a href="/tantoshigostanto/proporciones/index.html" class="dropdown-item">Cadencias/Proporciones</a>
+                    <a href="/tantoshigostanto/formatos/index.html" class="dropdown-item">Formatos</a>
+                    <a href="/tantoshigostanto/juegos-narrativos/index.html" class="dropdown-item">Juegos Narrativos</a>
+                    <a href="/tantoshigostanto/estilos/index.html" class="dropdown-item">Estilos</a>
+                    <a href="/tantoshigostanto/personajes/index.html" class="dropdown-item">Rasgos de personaje</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="seccion" id="western">
-        <h2>Lexicón Western</h2>
-        <div class="glosario">
-            <div class="termino">
-                <div class="badge-estilo">Recurso visual</div>
-                <h3>Primer plano de ojos entrecerrados</h3>
-                <p>Técnica cinematográfica adaptada a narrativa: "Sus ojos, reducidos a dos rendijas bajo el ala del sombrero..."</p>
-            </div>
-            
-            <div class="termino">
-                <div class="badge-estilo">Objeto simbólico</div>
-                <h3>Zarzaparrilla</h3>
-                <p>Bebida típica usada como elemento caracterizador: "El amargo sabor de la zarzaparrilla se mezcló con el polvo del camino..."</p>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Scrollspy y navegación
-        const sections = document.querySelectorAll('.seccion');
-        const navItems = document.querySelectorAll('.nav-item');
-
-        function updateActiveSection() {
-            sections.forEach((section, index) => {
-                const rect = section.getBoundingClientRect();
-                if(rect.top <= 100 && rect.bottom >= 100) {
-                    navItems.forEach(item => item.classList.remove('activo'));
-                    navItems[index].classList.add('activo');
-                }
+               </div>
+    </nav>
+ </div>
+    <div class="category-section">
+        <h2>h2</h2>
+        <p>p</p>
+       
+  <script>
+      
+      
+     // Actualiza el script de navegación activa
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if(currentPage === linkPage) {
+            link.classList.add('activo');
+            if(link.classList.contains('dropdown-item')) {
+                link.closest('.custom-dropdown').querySelector('.dropdown-toggle').classList.add('activo');
+            }
+        }
+    });
+    
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+        if(!e.target.closest('.custom-dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
             });
         }
-
-        // Navegación suave
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const targetId = item.dataset.seccion;
-                document.getElementById(targetId).scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            });
-        });
-
-        // Actualizar al hacer scroll
-        window.addEventListener('scroll', updateActiveSection);
-        updateActiveSection(); // Inicializar
-
-        // Efecto de paralaje para los términos
-        document.querySelectorAll('.termino').forEach(termino => {
-            termino.addEventListener('mousemove', (e) => {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 15;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 15;
-                termino.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            });
-
-            termino.addEventListener('mouseleave', () => {
-                termino.style.transform = 'none';
-            });
-        });
-    </script>
+    });
+});
+      </script>
 </body>
 </html>

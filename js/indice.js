@@ -1,9 +1,9 @@
-// Interactividad
 document.addEventListener('DOMContentLoaded', () => {
     // Toggle categorías
     document.querySelectorAll('.category-toggle').forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const category = toggle.parentElement;
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const category = e.target.closest('.index-category');
             const items = category.querySelector('.index-items');
             
             category.classList.toggle('collapsed');
@@ -14,25 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Navegación entre items
+    // Manejo de ítems
     document.querySelectorAll('.index-item').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // Remover activo de todos
-            document.querySelectorAll('.index-item').forEach(i => i.classList.remove('active'));
-            document.querySelectorAll('.content-card').forEach(c => c.classList.remove('active'));
-            
-            // Activar elemento seleccionado
             const targetId = item.getAttribute('href');
-            item.classList.add('active');
-            document.querySelector(targetId).classList.add('active');
             
-            // Scroll suave en móvil
-            if(window.innerWidth < 768) {
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
+            // Ocultar todas las tarjetas
+            document.querySelectorAll('.content-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Mostrar tarjeta objetivo
+            const targetCard = document.querySelector(targetId);
+            if(targetCard) {
+                targetCard.classList.add('active');
+                
+                // Scroll suave en móvil
+                if(window.innerWidth < 768) {
+                    targetCard.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     });

@@ -41,7 +41,7 @@ h2 {
   background-color: #f8f9fa;
    display: block !important; /* Fuerza visibilidad */
     opacity: 1;
-    transition: all 0.3s ease;/
+    transition: all 0.3s ease;
 }
 .option-card[data-category] {
     display: block; /* Mostrar solo si tiene categoría */
@@ -124,6 +124,7 @@ h2 {
 @media (max-width: 768px) {
    body {
         padding: 10px; /* Reducir padding general */
+     background-color: #f0f0f0;
     }
    .header {
         flex-direction: column;
@@ -162,6 +163,9 @@ h2 {
         z-index: 1;
         padding-bottom: 15px;
         border-bottom: 2px solid #eee;
+      margin-bottom: 15px;
+      background: #f8f9fa; /* Añadir o asegurar que está presente */
+      border-radius: 8px; /* Opcional */
     }
    .index-category {
         margin-bottom: 10px;
@@ -170,6 +174,8 @@ h2 {
     .content-area {
        padding: 20px 15px; /* Añadir padding lateral */
         order: 2; /* Forzar orden debajo del índice */
+       background: white; /* Añadir esta línea */
+  border-radius: 8px; /* Opcional para bordes redondeados */
     }
   .content-card {
         position: relative;
@@ -403,11 +409,15 @@ h2 {
     top: 120px;
     height: calc(100vh - 140px);
     overflow-y: auto;
+  background: #f8f9fa; /* Añadir o asegurar que está presente */
+  border-radius: 8px; /* Opcional */
 }
 
 .content-area {
    flex: 1;
     padding-right: 30px;
+  background: white; /* Añadir esta línea */
+  border-radius: 8px; /* Opcional para bordes redondeados */
 }
 
 /* Categorías del índice */

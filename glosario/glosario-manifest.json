@@ -1,14 +1,14 @@
 [
   {
-    "id": "animacion",
-    "term": "Animación",
-    "category": "Técnicas",
-    "shortDef": "Secuencia de imágenes para simular movimiento."
+    "id": "lipograma",
+    "term": "Lipograma",
+    "category": "Juegos Lingüísticos",
+    "shortDef": "Escribir sin utilizar una letra (o más, según la valentía y tiempo)"
   },
   {
-    "id": "tipografia",
-    "term": "Tipografía",
-    "category": "Diseño",
-    "shortDef": "Selección y disposición de tipos de letra."
+    "id": "onomatopeya",
+    "term": "Onomatopeya",
+    "category": "Juegos Lingüísticos",
+    "shortDef": "Si necesitas una explicación... Waa Waa Waaa Waaaa"
   }
 ]

@@ -499,6 +499,7 @@ body {
     }
   .content-area p {
   text-align: justify;
+    padding: 20px;
 }
   .content-card {
         position: relative;

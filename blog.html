@@ -1,0 +1,127 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Glosario de Estilos y Juegos</title>
+ <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="/favicon.png" type="image/png" />
+</head>
+<body>
+    <div class="header">
+        <h1>Glosario de Estilos, Juegos y Recursos</h1>
+        <a href="generador.html" class="nav-button">Ir al Selector →</a>
+    </div>
+ <div class="nav-container">
+    <nav class="nav-menu">
+        <a href="/tantoshigostanto/index.html" class="nav-link">Inicio</a>
+        <a href="/tantoshigostanto/blog.html" class="nav-link">Blog</a>
+      <!-- Línea vertical -->
+            <div class="nav-divider"></div>
+          <a href="/tantoshigostanto/glosario.html" class="nav-link">Glosario</a>
+    
+        <a href="/tantoshigostanto/generador.html" class="nav-link">Selector</a>
+            
+        </nav>
+       </div>
+    <div class="layout-container">
+    <!-- Índice lateral -->
+    <nav class="side-index">
+        <div class="index-category collapsed">
+            <button class="category-toggle">Juegos Lingüísticos ▲</button>
+            <div class="index-items">
+                <a href="#lipograma-a" class="index-item">Lipograma sin a</a>
+              <a href="#lipograma-e" class="index-item">Lipograma sin e</a>
+              <a href="#lipograma-i" class="index-item">Lipograma sin i</a>
+              <a href="#lipograma-o" class="index-item">Lipograma sin o</a>
+              <a href="#lipograma-u" class="index-item">Lipograma sin u</a>
+              
+                <a href="#silaba-encadenada" class="index-item">Sílaba encadenada</a>
+         </div>
+        </div>
+         <div class="index-category collapsed">
+            <button class="category-toggle">Estilos ▲</button>
+              <div class="index-items" style="display: none;">
+                  <a href="#soneto" class="index-item">Soneto</a>
+            <a href="#haiku" class="index-item">Haiku</a>
+        </div>
+    </div>
+         <div class="index-category collapsed">
+            <button class="category-toggle">Rasgos de Personaje ▲</button>
+             <div class="index-items" style="display: none;">
+                   </div>
+    </div>
+        <div class="index-category collapsed">
+            <button class="category-toggle">Figuras Retóricas ▲</button>
+         <div class="index-items" style="display: none;">
+                   </div>
+    </div>
+        <div class="index-category collapsed">
+            <button class="category-toggle">Cadencias/Proporciones ▲</button>
+         <div class="index-items" style="display: none;">
+                   </div>
+    </div>
+        <div class="index-category collapsed">
+             <button class="category-toggle">Formatos ▲</button>
+     <div class="index-items" style="display: none;">
+                   </div>
+    </div>
+        <div class="index-category collapsed">
+            <button class="category-toggle">Juegos Narrativos ▲</button>
+     <div class="index-items" style="display: none;">
+            </div>
+        </div>
+        
+       
+                <!-- Más items -->
+    </nav>      
+
+    <!-- Contenido principal -->
+    <main class="content-area">
+        <div id="lipograma-a" class="content-card">
+             <h2>Lipograma sin a</h2>
+             <div class="card-content">
+        <p>El sol volvió y los mirlos y gorriones pío que te pío. Vejez, esclerósis. Sin presión, con lentitud, se puso en pie y huyó del cemento y los muros. En el exterior, recorrió el vergel por el seto y entró en el trozo de huerto. Sobre sus hombros, su objetivo: un espécimen crecido repleto de higos. Comer, quiso comer un fruto, por lo que estiró los dedos. Pero un insecto inyectó veneno en su índice. Mujer inteligente es, pues cogió suelo terroso y buscó líquido elemento con el que humedecerlo. Se untó el dedo y en un momento se sintió mejor. Entonces, regresó de expedición queriendo un nuevo higo.</p>
+                  <a href="../glosario.html#lipograma" class="full-detail-link">Más →</a>
+        </div>
+        </div>
+        <div id="silaba-encadenada" class="content-card">
+           <h2>Sílaba encadenada</h2>
+        <p>Cada palabra termina con la sílaba inicial de la siguiente...</p>
+        </div>
+    </main>
+    </div>
+    
+
+  <script>
+      
+      
+     // Actualiza el script de navegación activa
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if(currentPage === linkPage) {
+            link.classList.add('activo');
+            if(link.classList.contains('dropdown-item')) {
+                link.closest('.custom-dropdown').querySelector('.dropdown-toggle').classList.add('activo');
+            }
+        }
+    });
+    
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+        if(!e.target.closest('.custom-dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        }
+    });
+});
+      </script>
+        <script src="js/indice.js"></script>
+</body>
+</html>

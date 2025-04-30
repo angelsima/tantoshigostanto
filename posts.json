@@ -1,0 +1,13 @@
+[
+  {
+    "id": "lipograma-a",
+    "title": "Lipograma sin a",
+    "html": "<p>El sol volvió …</p><a href='../glosario.html#lipograma' class='full-detail-link'>Más →</a>"
+  },
+  {
+    "id": "silaba-encadenada",
+    "title": "Sílaba encadenada",
+    "html": "<p>Cada palabra termina …</p>"
+  }
+  // … más objetos
+]

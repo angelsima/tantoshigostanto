@@ -52,62 +52,44 @@ document.querySelectorAll('.index-item').forEach(item => {
         }
     });
 });
+ // Random card
+    document.querySelector('.random-card-trigger').addEventListener('click', (e) => {
+        e.preventDefault();
+        showRandomCard();
+    });
 
-// Cargar contenido basado en el hash de la URL
-function loadInitialContent() {
-    const hash = window.location.hash;
-    if(hash) {
-        const targetCard = document.querySelector(hash);
-        if(targetCard) targetCard.classList.add('active');
-    }
-}
-
-document.addEventListener('DOMContentLoaded', loadInitialContent);
-window.addEventListener('hashchange', loadInitialContent);
-
-/ Función para mostrar tarjeta aleatoria
+ // Cargar contenido inicial
+    const loadInitialContent = () => {
+        const hash = window.location.hash;
+        if(hash) {
+            const targetCard = document.querySelector(hash);
+            if(targetCard) targetCard.classList.add('active');
+        } else {
+            showRandomCard();
+        }
+    };
+    
+    loadInitialContent();
+    window.addEventListener('hashchange', loadInitialContent);
+});
+// showRandomCard 
 function showRandomCard() {
     const cards = Array.from(document.querySelectorAll('.content-card'));
     if(cards.length === 0) return;
 
-    // Ocultar todas las tarjetas
     cards.forEach(card => card.classList.remove('active'));
-
-    // Seleccionar una aleatoria
+    
     const randomIndex = Math.floor(Math.random() * cards.length);
     const randomCard = cards[randomIndex];
     
-    // Mostrar la tarjeta
     randomCard.classList.add('active', 'random-highlight');
+    window.history.replaceState(null, null, `#${randomCard.id}`);
     
-    // Actualizar URL
-    window.history.replaceState(null, null, randomCard.id);
-    
-    // Eliminar clase de destaque después de la animación
     setTimeout(() => {
         randomCard.classList.remove('random-highlight');
     }, 1000);
     
-    // Scroll a la tarjeta en móvil
     if(window.innerWidth < 768) {
         randomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-
-// Event listener para el botón
-document.querySelector('.random-card-trigger').addEventListener('click', (e) => {
-    e.preventDefault();
-    showRandomCard();
-});
-
-// Al cargar la página
-function loadInitialContent() {
-    const hash = window.location.hash;
-    if(hash) {
-        const targetCard = document.querySelector(hash);
-        if(targetCard) targetCard.classList.add('active');
-    } else {
-        // Mostrar tarjeta aleatoria al entrar sin hash
-        showRandomCard();
     }
 }

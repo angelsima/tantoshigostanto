@@ -390,17 +390,16 @@ h2 {
 }
 
 /* Tarjetas de contenido */
+/* Mostrar solo la tarjeta activa */
 .content-card {
     display: none;
-    padding: 25px;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .content-card.active {
     display: block;
-    animation: fadeIn 0.3s ease;
+    opacity: 1;
 }
 
 /* Responsive */

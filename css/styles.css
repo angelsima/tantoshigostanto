@@ -120,86 +120,7 @@ h2 {
     display: block;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-   body {
-        padding: 10px; /* Reducir padding general */
-     background-color: #f0f0f0;
-    }
-   .header {
-        flex-direction: column;
-        padding: 15px;
-    }
-    
-    .nav-button {
-        width: 100%;
-        text-align: center;
-        margin-top: 15px;
-    }
-    .nav-select-group {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    
-    .nav-divider {
-        display: none;
-    }
-    
-    .dropdown-menu {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-    }
-   .layout-container {
-       margin-top: 10px;
-        flex-direction: column;
-        gap: 0; /* Eliminar espacio entre índice y contenido */
-    }
-    
-    .side-index {
-        height: auto; /* Ya está bien */
-        position: relative; /* Quitar sticky */
-        top: auto;
-        z-index: 1;
-        padding-bottom: 15px;
-        border-bottom: 2px solid #eee;
-      margin-bottom: 15px;
-      background: #f8f9fa; /* Añadir o asegurar que está presente */
-      border-radius: 8px; /* Opcional */
-    }
-   .index-category {
-        margin-bottom: 10px;
-    }
-    
-    .content-area {
-       padding: 20px 15px; /* Añadir padding lateral */
-        order: 2; /* Forzar orden debajo del índice */
-       background: white; /* Añadir esta línea */
-  border-radius: 8px; /* Opcional para bordes redondeados */
-    }
-  .content-card {
-        position: relative;
-        z-index: 2; /* Asegurar visibilidad */
-        margin-top: 20px;
-    box-shadow: none;
-        border-radius: 0;
-        padding: 15px;
-    }
-    }
-  .category-toggle {
-        padding: 10px;
-        font-size: 0.95em;
-    }
-    
-    .index-item {
-        padding: 8px;
-    }
- /* Forzar visibilidad al hacer scroll */
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 120px;
-    }
-}
+
 .nav-button {
   background-color: #28a745;
   color: white;
@@ -473,4 +394,84 @@ h2 {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+/* Mobile */
+@media (max-width: 768px) {
+   body {
+        padding: 10px; /* Reducir padding general */
+     background-color: #f0f0f0;
+    }
+   .header {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .nav-button {
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .nav-select-group {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .nav-divider {
+        display: none;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+   .layout-container {
+       margin-top: 10px;
+        flex-direction: column;
+        gap: 0; /* Eliminar espacio entre índice y contenido */
+    }
+    
+    .side-index {
+        height: auto; /* Ya está bien */
+        position: relative; /* Quitar sticky */
+        top: auto;
+        z-index: 1;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #eee;
+      margin-bottom: 15px;
+      background: #f8f9fa; /* Añadir o asegurar que está presente */
+      border-radius: 8px; /* Opcional */
+    }
+   .index-category {
+        margin-bottom: 10px;
+    }
+    
+    .content-area {
+       padding: 20px 15px; /* Añadir padding lateral */
+        order: 2; /* Forzar orden debajo del índice */
+       background: white; /* Añadir esta línea */
+  border-radius: 8px; /* Opcional para bordes redondeados */
+    }
+  .content-card {
+        position: relative;
+        z-index: 2; /* Asegurar visibilidad */
+        margin-top: 20px;
+    box-shadow: none;
+        border-radius: 0;
+        padding: 15px;
+    }
+    }
+  .category-toggle {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+    
+    .index-item {
+        padding: 8px;
+    }
+ /* Forzar visibilidad al hacer scroll */
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 120px;
+    }
 }

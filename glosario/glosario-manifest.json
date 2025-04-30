@@ -3,12 +3,40 @@
     "id": "lipograma",
     "term": "Lipograma",
     "category": "Juegos Lingüísticos",
-    "shortDef": "Escribir sin utilizar una letra (o más, según la valentía y tiempo)"
-  },
+    },
+  {
+    "id": "aspersor",
+    "term": "Aspersor malaguita",
+    "category": "Juegos Lingüísticos",
+    },
+  {
+    "id": "jadeo-can",
+    "term": "Jadeo canario",
+    "category": "Juegos Lingüísticos",
+    },
+  {
+    "id": "gliglico",
+    "term": "Glíglico (jitanjáforas)",
+    "category": "Juegos Lingüísticos",
+    },
+  {
+    "id": "silaba-encadenada",
+    "term": "Sílaba encadenada",
+    "category": "Juegos Lingüísticos",
+    },
+  {
+    "id": "solo-inf",
+    "term": "Solo infinitivos",
+    "category": "Juegos Lingüísticos",
+    },
+  {
+    "id": "solo-sintg-nom",
+    "term": "Solo sintagmas nominales",
+    "category": "Juegos Lingüísticos",
+    },
   {
     "id": "onomatopeya",
     "term": "Onomatopeya",
     "category": "Juegos Lingüísticos",
-    "shortDef": "Si necesitas una explicación... Waa Waa Waaa Waaaa"
-  }
+     }
 ]

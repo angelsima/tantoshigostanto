@@ -332,3 +332,97 @@ h2 {
     margin: 2rem 0;
     border-radius: 8px;
 }
+
+/* Estilos principales */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-index {
+    width: 33%;
+    min-width: 300px;
+    background: #f8f9fa;
+    border-right: 1px solid #eee;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.content-area {
+    flex: 1;
+    padding: 30px;
+    background: white;
+}
+
+/* Categorías del índice */
+.index-category {
+    margin-bottom: 15px;
+}
+
+.category-toggle {
+    width: 100%;
+    padding: 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.index-items {
+    padding-left: 15px;
+}
+
+.index-item {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #2c3e50;
+    transition: all 0.3s;
+    border-radius: 5px;
+}
+
+.index-item:hover,
+.index-item.active {
+    background: #e9ecef;
+}
+
+/* Tarjetas de contenido */
+.content-card {
+    display: none;
+    padding: 25px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.content-card.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .layout-container {
+        flex-direction: column;
+    }
+    
+    .side-index {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .content-area {
+        padding: 20px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "animacion",
+    "term": "Animación",
+    "category": "Técnicas",
+    "shortDef": "Secuencia de imágenes para simular movimiento."
+  },
+  {
+    "id": "tipografia",
+    "term": "Tipografía",
+    "category": "Diseño",
+    "shortDef": "Selección y disposición de tipos de letra."
+  }
+]

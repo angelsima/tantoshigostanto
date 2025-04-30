@@ -129,7 +129,7 @@ body {
     top: 120px;
     height: calc(100vh - 140px);
     overflow-y: auto;
-  background: #f8f9fa; /* Añadir o asegurar que está presente */
+  background: #96EDE2; /* Añadir o asegurar que está presente */
   border-radius: 8px; /* Opcional */
 }
 

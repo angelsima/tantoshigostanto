@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Cargar contenido inicial
     const hash = window.location.hash.replace('#', '');
-    if(hash && posts.find(p => p.id === hash)) {
+    if (hash && posts.find(p => p.id === hash)) {
         loadPostContent(hash);
-    } else if(posts.length > 0) {
+    } else if (posts.length > 0) {
         loadRandomPost(posts);
     }
 
@@ -29,7 +29,7 @@ async function loadPosts() {
 
 function renderIndex(posts) {
     const indexContainer = document.querySelector('.side-index');
-    if(!indexContainer) return;
+    if (!indexContainer) return;
 
     // Agrupar por categorías, distinguiendo posts con y sin sub-categoría
     const categories = {};
@@ -63,16 +63,18 @@ function renderIndex(posts) {
                     <button class="category-toggle">${cat} ▼</button>
                     <div class="index-items">`;
 
-        // Primero, los posts sin sub-categoría
+        // Posts sin sub-categoría
         group.withoutSub.forEach(p => {
             html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
         });
 
-        // Luego, solo si existen, los grupos de sub-categoría
+        // Grupos de sub-categoría plegables
         for (const [sub, arr] of Object.entries(group.withSub)) {
-            html += `<div class="sub-category">
-                        <strong>${sub}</strong>
-                        ${arr.map(p => `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`).join('')}
+            html += `<div class="sub-category collapsed">
+                        <button class="sub-toggle">${sub} ▼</button>
+                        <div class="sub-items">`;
+            html += arr.map(p => `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`).join('');
+            html += `   </div>
                      </div>`;
         }
 
@@ -82,20 +84,29 @@ function renderIndex(posts) {
 
     indexContainer.innerHTML = html;
 
-    // Añadir eventos de colapso
+    // Eventos de colapso categoría
     document.querySelectorAll('.category-toggle').forEach(toggle => {
         toggle.addEventListener('click', (e) => {
             const category = e.target.closest('.index-category');
             const items = category.querySelector('.index-items');
             const isCollapsed = items.style.display === 'none';
             items.style.display = isCollapsed ? 'block' : 'none';
-            e.target.innerHTML = isCollapsed ?
-                e.target.textContent.replace('▲', '▼') :
-                e.target.textContent.replace('▼', '▲');
+            e.target.textContent = isCollapsed ? e.target.textContent.replace('▼', '▲') : e.target.textContent.replace('▲', '▼');
         });
     });
 
-    // Añadir eventos de carga de post
+    // Eventos de colapso sub-categoría
+    document.querySelectorAll('.sub-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            const subCat = e.target.closest('.sub-category');
+            const items = subCat.querySelector('.sub-items');
+            const isCollapsed = items.style.display === 'none';
+            items.style.display = isCollapsed ? 'block' : 'none';
+            e.target.textContent = isCollapsed ? e.target.textContent.replace('▼', '▲') : e.target.textContent.replace('▲', '▼');
+        });
+    });
+
+    // Eventos de carga de post
     document.querySelectorAll('.index-item').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
@@ -127,7 +138,7 @@ async function loadPostContent(postId) {
 }
 
 function loadRandomPost(posts) {
-    if(posts.length === 0) return;
+    if (posts.length === 0) return;
     
     const randomIndex = Math.floor(Math.random() * posts.length);
     const randomPost = posts[randomIndex];

@@ -22,12 +22,7 @@ body {
 .header h1 {
   color: #000000;
   }
-h2 {
-  text-align: center;
-}
-.p {
-  text-aling: justify;
-}
+
 .category-section {
   background: white;
   padding: 25px;
@@ -502,6 +497,9 @@ h2 {
        background: white; /* Añadir esta línea */
   border-radius: 8px; /* Opcional para bordes redondeados */
     }
+  .content-area p {
+  text-align: justify;
+}
   .content-card {
         position: relative;
         z-index: 2; /* Asegurar visibilidad */

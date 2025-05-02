@@ -400,6 +400,12 @@ body {
     color: #6c757d;
     font-size: 0.9em;
 }
+.grid-container-2 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
 /* Estilos para el nuevo layout */
 .grid-container {
     display: grid;

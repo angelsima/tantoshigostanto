@@ -415,6 +415,9 @@ button:hover {
 .mobile-index-handle {
     display: none;
 }
+.mobile-controls {
+    display: none;
+}
 /* Mobile */
 @media (max-width: 768px) {
    body {
@@ -447,10 +450,41 @@ button:hover {
   .grid-container {
     grid-template-columns: 1fr;
    }
-  .side-index:not(.mobile-index) {
+.side-index.desktop-index {
         display: none;
     }
+  .mobile-controls {
+        display: block;
+        margin-bottom: 20px;
+    }
+   .mobile-index-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 15px;
+    } 
+  .mobile-categories {
+        grid-column: span 2;
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+    }
     
+    .mobile-random,
+    .mobile-latest {
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #2c3e50;
+        color: white;
+        cursor: pointer;
+    }
+    
+    .post-content {
+        margin-top: 20px;
+    }
     .mobile-index-handle {
         display: block;
         position: fixed;

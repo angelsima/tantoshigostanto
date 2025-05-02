@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', async () => {
     // Cargar y ordenar posts
     const posts = await loadPosts();
@@ -31,7 +32,7 @@ async function loadPosts() {
 }
 
 function renderIndex(posts) {
-  const indexContainer = document.querySelector('.side-index');
+    const indexContainer = document.querySelector('.side-index');
     if (!indexContainer) return;
 
     // Agrupar por categorías, distinguiendo posts con y sin sub-categoría
@@ -86,51 +87,10 @@ function renderIndex(posts) {
     });
      
       indexContainer.innerHTML = html;
-    
 // Inicializar categorías y subcategorías como colapsadas
 document.querySelectorAll('.index-items, .sub-items').forEach(items => {
     items.style.display = 'none';
 });
-
-  // Clonar el índice para móvil
-    const mobileIndex = document.querySelector('.mobile-index');
-    if(mobileIndex) {
-        mobileIndex.innerHTML = indexContainer.innerHTML;
-    }
-
-   // Actualizar controles móviles
-    const mobileCategories = document.querySelector('.mobile-categories');
-    if(mobileCategories) {
-        // Limpiar opciones existentes
-        mobileCategories.innerHTML = '<option value="">Categorías</option>';
-        
-        // Agregar categorías al select móvil
-        Object.keys(categories).sort().forEach(cat => {
-            const option = document.createElement('option');
-            option.value = cat;
-            option.textContent = cat;
-            mobileCategories.appendChild(option);
-        });
-    }
-
-    // Eventos para controles móviles
-    document.querySelector('.mobile-random')?.addEventListener('click', () => {
-        loadRandomPost(posts);
-    });
-    
-    document.querySelector('.mobile-latest')?.addEventListener('click', () => {
-        showLatestPosts(posts);
-    });
-    
-    document.querySelector('.mobile-categories')?.addEventListener('change', (e) => {
-        const category = e.target.value;
-        if(category) {
-            const categoryPosts = posts.filter(p => p.category === category);
-            showCategoryPosts(categoryPosts);
-        }
-    });
-}
-    
     // Eventos de colapso categoría
     document.querySelectorAll('.category-toggle').forEach(toggle => {
         toggle.addEventListener('click', (e) => {
@@ -160,39 +120,6 @@ document.querySelectorAll('.index-items, .sub-items').forEach(items => {
             const postId = item.dataset.post;
             loadPostContent(postId);
             window.location.hash = postId;
-            // Cerrar índice en móvil
-       const móvil = document.querySelector('.mobile-index-container');
-if (window.innerWidth <= 768 && móvil) {
-  móvil.classList.remove('active');
-        }
-        });
-    });
-}
-// Nueva función para mostrar posts de categoría
-function showCategoryPosts(posts) {
-    const html = `
-        <div class="category-posts">
-            <h3>${posts[0]?.category || 'Categoría'}</h3>
-            <ul>
-                ${posts.map(post => `
-                    <li>
-                        <a href="#${post.id}" class="mobile-post-item" data-post="${post.id}">
-                            ${post.title}
-                        </a>
-                    </li>
-                `).join('')}
-            </ul>
-        </div>
-    `;
-    
-    document.querySelector('.post-content').innerHTML = html;
-    
-    document.querySelectorAll('.mobile-post-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const postId = item.dataset.post;
-            loadPostContent(postId);
-            window.location.hash = postId;
         });
     });
 }
@@ -203,14 +130,14 @@ async function loadPostContent(postId) {
         const response = await fetch(`posts/${postId}.html`);
         const content = await response.text();
         
-        document.querySelector('.post-content').innerHTML = `
-            <article class="blog-post">
+        document.querySelector('.content-area').innerHTML = `
+            <article class="blog-post" id="${postId}">
                 ${content}
             </article>
         `;
     } catch (error) {
         console.error("Error cargando post:", error);
-        document.querySelector('.post-content').innerHTML = `
+        document.querySelector('.content-area').innerHTML = `
             <div class="error-message">
                 No se pudo cargar el post solicitado
             </div>
@@ -226,10 +153,6 @@ function loadRandomPost(posts) {
     
     loadPostContent(randomPost.id);
     window.location.hash = randomPost.id;
-    // Cerrar índice en móvil
-    if(window.innerWidth <= 768) {
-        document.querySelector('.mobile-index-container').classList.remove('active');
-    }
 }
 
 // Nueva función para mostrar últimos textos
@@ -250,11 +173,7 @@ function showLatestPosts(posts) {
         </div>
     `;
     
-     document.querySelector('.post-content').innerHTML = html;
-    // Cerrar índice en móvil
-    if(window.innerWidth <= 768) {
-        document.querySelector('.mobile-index-container').classList.remove('active');
-    }
+    document.querySelector('.content-area').innerHTML = html;
     
     // Añadir eventos a los enlaces
     document.querySelectorAll('.latest-post-item').forEach(item => {
@@ -270,20 +189,18 @@ function showLatestPosts(posts) {
 async function loadLatestPost(posts) {
     if(posts.length > 0) {
         const latestPost = posts[0];
-        const postContent = document.querySelector('.post-content');
-    await loadPostContent(latestPost.id);
+        await loadPostContent(latestPost.id);
         
         // Añadir título especial
-         const postContent = document.querySelector('.post-content');
-        postContent.innerHTML = `
+        document.querySelector('.content-area').innerHTML = `
             <div class="latest-post-header">
                 <h2>Último texto publicado</h2>
                 <div class="post-meta">
                     <time datetime="${latestPost.date}">${new Date(latestPost.date).toLocaleDateString()}</time>
                 </div>
             </div>
-             ${postContent.innerHTML}
-                  `;
+            ${document.querySelector('.content-area').innerHTML}
+        `;
       
     }
 }

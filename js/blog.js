@@ -31,7 +31,7 @@ async function loadPosts() {
 }
 
 function renderIndex(posts) {
-    const indexContainer = document.querySelector('.side-index.desktop-index');
+  const indexContainer = document.querySelector('.side-index');
     if (!indexContainer) return;
 
     // Agrupar por categorías, distinguiendo posts con y sin sub-categoría
@@ -209,7 +209,7 @@ async function loadPostContent(postId) {
         `;
     } catch (error) {
         console.error("Error cargando post:", error);
-        document.querySelector('.content-area').innerHTML = `
+        document.querySelector('.post-content').innerHTML = `
             <div class="error-message">
                 No se pudo cargar el post solicitado
             </div>
@@ -249,7 +249,7 @@ function showLatestPosts(posts) {
         </div>
     `;
     
-    document.querySelector('.content-area').innerHTML = html;
+     document.querySelector('.post-content').innerHTML = html;
     // Cerrar índice en móvil
     if(window.innerWidth <= 768) {
         document.querySelector('.mobile-index-container').classList.remove('active');
@@ -272,7 +272,8 @@ async function loadLatestPost(posts) {
         await loadPostContent(latestPost.id);
         
         // Añadir título especial
-        document.querySelector('.content-area').innerHTML = `
+         const postContent = document.querySelector('.post-content');
+        postContent.innerHTML = `
             <div class="latest-post-header">
                 <h2>Último texto publicado</h2>
                 <div class="post-meta">

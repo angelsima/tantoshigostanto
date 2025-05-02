@@ -359,3 +359,80 @@ body {
     color: #6c757d;
     font-size: 0.9em;
 }
+/* Estilos para el nuevo layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.grid-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    gap: 5px;
+}
+
+select {
+    flex-grow: 1;
+    padding: 8px;
+}
+
+#selection-header {
+    padding: 20px;
+    background: #fff;
+    border-bottom: 2px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#selected-traits {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.selected-item {
+    background: #e3f2fd;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.selected-item .category {
+    font-weight: bold;
+    color: #1976d2;
+}
+
+button {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #f0f0f0;
+}
+
+#clear-all {
+    margin-left: auto;
+    font-size: 1.2em;
+}

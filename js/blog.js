@@ -146,3 +146,14 @@ function loadRandomPost(posts) {
     loadPostContent(randomPost.id);
     window.location.hash = randomPost.id;
 }
+// Al iniciar
+const posts = await loadPosts();
+const latestPost = getLatestPost(posts); 
+
+// Función de ayuda
+function getLatestPost(posts) {
+    return posts.reduce((latest, post) => {
+        const postDate = new Date(post.sort_date);
+        return postDate > new Date(latest.sort_date) ? post : latest;
+    }, posts[0]);
+}

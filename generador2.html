@@ -166,10 +166,13 @@
                     <select id="retoric">
                        <option value="">Seleccionar...</option>
                 <optgroup label="Fonéticas">
+                    <option>1</option>
             </optgroup>
                 <optgroup label="Gramáticas">
+                    <option>1</option>
             </optgroup>
                 <optgroup label="Semánticas">
+                    <option>1</option>
             </optgroup>
                     </select>
                     <div class="buttons">
@@ -259,6 +262,17 @@
             select.addEventListener('change', updateSelectedTraits);
         });
         updateSelectedTraits();
+        document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if (currentPage === linkPage) {
+            link.classList.add('activo');
+        }
+    });
+});
     </script>
 </body>
 </html>

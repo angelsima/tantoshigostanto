@@ -85,31 +85,7 @@ function renderIndex(posts) {
         html += `</div></div>`;
     });
      
-    for (const [cat, group] of Object.entries(categories)) {
-        html += `<div class="index-category collapsed">
-                    <button class="category-toggle">${cat} ▼</button>
-                    <div class="index-items">`;
-
-        // Posts sin sub-categoría
-        group.withoutSub.forEach(p => {
-            html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
-        });
-
-        // Grupos de sub-categoría plegables
-        for (const [sub, arr] of Object.entries(group.withSub)) {
-            html += `<div class="sub-category collapsed">
-                        <button class="sub-toggle">${sub} ▼</button>
-                        <div class="sub-items">`;
-            html += arr.map(p => `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`).join('');
-            html += `   </div>
-                     </div>`;
-        }
-
-        html += `   </div>
-                  </div>`;
-    }
-
-    indexContainer.innerHTML = html;
+      indexContainer.innerHTML = html;
 
     // Eventos de colapso categoría
     document.querySelectorAll('.category-toggle').forEach(toggle => {

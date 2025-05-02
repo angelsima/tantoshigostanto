@@ -342,3 +342,20 @@ body {
     color: #6c757d;
     font-size: 0.9em;
 }
+.latest-post-header {
+    background: #f5f3ff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #7c3aed;
+}
+
+.latest-post-header h2 {
+    color: #2c3e50;
+    margin: 0 0 0.5rem 0;
+}
+
+.latest-post-header .post-meta {
+    color: #6c757d;
+    font-size: 0.9em;
+}

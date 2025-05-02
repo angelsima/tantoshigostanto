@@ -1,22 +1,25 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Cargar lista de posts
+    // Cargar y ordenar posts
     const posts = await loadPosts();
-    renderIndex(posts);
-    
+ const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // Renderizar índice
+    renderIndex(sortedPosts);
     // Cargar contenido inicial
     const hash = window.location.hash.replace('#', '');
-    if (hash && posts.find(p => p.id === hash)) {
+    if (hash && sortedPosts.find(p => p.id === hash)) {
         loadPostContent(hash);
-    } else if (posts.length > 0) {
-        loadRandomPost(posts);
+    } else {
+        loadLatestPost(sortedPosts);
     }
-
-    // Evento para botón aleatorio
+    // Event listeners
     document.querySelector('.random-post-trigger')?.addEventListener('click', () => {
-        loadRandomPost(posts);
+        loadRandomPost(sortedPosts);
+    });
+    
+    document.querySelector('.latest-posts-trigger')?.addEventListener('click', () => {
+        showLatestPosts(sortedPosts);
     });
 });
-
 async function loadPosts() {
     try {
         const response = await fetch('posts/posts-manifest.json');
@@ -50,12 +53,12 @@ function renderIndex(posts) {
     });
 
     // Renderizar índice
-    let html = `
-        <div class="index-category">
-            <button class="random-post-trigger">
-                🎲 Texto Aleatorio
-            </button>
+     let html = `
+        <div class="index-controls">
+            <button class="latest-posts-trigger">📅 Últimos textos</button>
+            <button class="random-post-trigger">🎲 Texto aleatorio</button>
         </div>
+        <h3 class="categories-title">Categorías</h3>
     `;
 
     for (const [cat, group] of Object.entries(categories)) {
@@ -147,16 +150,40 @@ function loadRandomPost(posts) {
     window.location.hash = randomPost.id;
 }
 
-async function loadLatestPost() {
-    const response = await fetch('posts/posts-manifest.json');
-    const posts = await response.json();
+// Nueva función para mostrar últimos textos
+function showLatestPosts(posts) {
+    const latest = posts.slice(0, 10);
+    const html = `
+        <div class="latest-posts">
+            <h2>Últimos 10 textos</h2>
+            <ul>
+                ${latest.map(post => `
+                    <li>
+                        <a href="#${post.id}" class="latest-post-item" data-post="${post.id}">
+                            ${post.title} <span class="post-date">(${new Date(post.date).toLocaleDateString()})</span>
+                        </a>
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `;
     
-    // Ordenar por fecha (nuevo a viejo)
-    const sortedPosts = posts.sort((a, b) => 
-        new Date(b.date) - new Date(a.date)
-    );
+    document.querySelector('.content-area').innerHTML = html;
     
-    if(sortedPosts.length > 0) {
-        await loadPostContent(sortedPosts[0].id);
+    // Añadir eventos a los enlaces
+    document.querySelectorAll('.latest-post-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadPostContent(item.dataset.post);
+            window.location.hash = item.dataset.post;
+        });
+    });
+}
+
+// Modificar loadLatestPost
+async function loadLatestPost(posts) {
+    if(posts.length > 0) {
+        await loadPostContent(posts[0].id);
+        window.location.hash = posts[0].id;
     }
 }

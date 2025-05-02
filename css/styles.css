@@ -159,7 +159,9 @@ body {
   background: #EEFCFA; /* Añadir o asegurar que está presente */
   border-radius: 8px; /* Opcional */
 }
-
+.index-items, .sub-items {
+    display: none;
+}
 .content-area {
    flex: 1;
     padding-right: 30px;

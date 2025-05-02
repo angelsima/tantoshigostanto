@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Selector de Restricciones Narrativas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>Tantos higos tanto</h1>
+        </div>
+        <div class="nav-container">
+            <nav class="nav-menu">
+                <a href="/tantoshigostanto/blog2.html" class="nav-link">Textos</a>
+                <div class="nav-divider"></div>
+                <a href="/tantoshigostanto/glosario2.html" class="nav-link">Glosario</a>
+                <a href="/tantoshigostanto/generador.html" class="nav-link">Selector</a>
+                <div class="nav-divider"></div>
+                <a href="/tantoshigostanto/index.html" class="nav-link">?</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="generator-container">
+        <div id="selection-header">
+            <h2>Estilos o normas seleccionadas:</h2>
+            <div id="selected-traits"></div>
+            <button id="clear-all" title="Limpiar selección">🗑️</button>
+        </div>
+
+        <div class="grid-container">
+            <!-- Columna 1 -->
+            <div class="grid-item">
+                <h3>JUEGOS LINGÜÍSTICOS</h3>
+                <div class="controls">
+                    <select id="linguistic">
+                        <!-- Opciones mantenidas -->
+                    </select>
+                    <div class="buttons">
+                        <button class="random-btn">🎲</button>
+                        <button class="clear-btn">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <h3>CADENCIAS/PROPORCIONES</h3>
+                <div class="controls">
+                    <select id="proportion">
+                        <!-- Opciones mantenidas -->
+                    </select>
+                    <div class="buttons">
+                        <button class="random-btn">🎲</button>
+                        <button class="clear-btn">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna 2 -->
+            <div class="grid-item">
+                <h3>FORMATO</h3>
+                <div class="controls">
+                    <select id="poetry">
+                        <!-- Opciones mantenidas -->
+                    </select>
+                    <div class="buttons">
+                        <button class="random-btn">🎲</button>
+                        <button class="clear-btn">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <h3>ESTILOS</h3>
+                <div class="controls">
+                    <select id="style">
+                        <!-- Opciones mantenidas + estructura narrativa -->
+                    </select>
+                    <div class="buttons">
+                        <button class="random-btn">🎲</button>
+                        <button class="clear-btn">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna 3 -->
+            <div class="grid-item">
+                <h3>RASGOS DE NARRADOR</h3>
+                <div class="controls">
+                    <select id="traits">
+                        <!-- Opciones mantenidas -->
+                    </select>
+                    <div class="buttons">
+                        <button class="random-btn">🎲</button>
+                        <button class="clear-btn">🗑️</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <h3>ESTRUCTURA NARRATIVA</h3>
+                <div class="controls">
+                    <select id="structure">
+                        <!-- Opciones de estructura -->
+                    </select>
+                    <div class="buttons">
+                        <button class="random-btn">🎲</button>
+                        <button class="clear-btn">🗑️</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función actualizada para mostrar selecciones
+        function updateSelectedTraits() {
+            const selections = {};
+            const categories = ['linguistic', 'proportion', 'poetry', 'style', 'traits', 'structure'];
+            
+            categories.forEach(category => {
+                const select = document.getElementById(category);
+                if(select.value) {
+                    selections[category] = select.value;
+                }
+            });
+
+            let displayHTML = '';
+            Object.entries(selections).forEach(([cat, value]) => {
+                displayHTML += `<div class="selected-item">
+                    <span class="category">${cat.toUpperCase()}:</span>
+                    <span class="value">${value}</span>
+                </div>`;
+            });
+
+            document.getElementById('selected-traits').innerHTML = displayHTML || 'Ninguna selección';
+        }
+
+        // Función para selección aleatoria
+        function randomSelection(selectId) {
+            const select = document.getElementById(selectId);
+            const options = select.querySelectorAll('option:not([value=""])');
+            if(options.length > 0) {
+                const randomIndex = Math.floor(Math.random() * options.length);
+                select.selectedIndex = randomIndex + 1;
+                updateSelectedTraits();
+            }
+        }
+
+        // Función para limpiar selección
+        function clearSelection(selectId) {
+            const select = document.getElementById(selectId);
+            select.selectedIndex = 0;
+            updateSelectedTraits();
+        }
+
+        // Event listeners
+        document.querySelectorAll('.random-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const selectId = e.target.closest('.grid-item').querySelector('select').id;
+                randomSelection(selectId);
+            });
+        });
+
+        document.querySelectorAll('.clear-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const selectId = e.target.closest('.grid-item').querySelector('select').id;
+                clearSelection(selectId);
+            });
+        });
+
+        document.getElementById('clear-all').addEventListener('click', () => {
+            document.querySelectorAll('select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+            updateSelectedTraits();
+        });
+
+        // Inicialización
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', updateSelectedTraits);
+        });
+        updateSelectedTraits();
+    </script>
+</body>
+</html>

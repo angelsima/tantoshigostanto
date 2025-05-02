@@ -90,6 +90,34 @@ function renderIndex(posts) {
 document.querySelectorAll('.index-items, .sub-items').forEach(items => {
     items.style.display = 'none';
 });
+
+  // Clonar el índice para móvil
+    const mobileIndex = document.querySelector('.mobile-index');
+    if(mobileIndex) {
+        mobileIndex.innerHTML = indexContainer.innerHTML;
+    }
+
+    // Eventos para móvil
+    const mobileToggle = document.getElementById('mobile-index-toggle');
+    const mobileContainer = document.querySelector('.mobile-index-container');
+    
+    if(mobileToggle && mobileContainer) {
+        mobileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileContainer.classList.toggle('active');
+        });
+
+        // Cerrar al hacer click fuera
+        document.addEventListener('click', () => {
+            mobileContainer.classList.remove('active');
+        });
+
+        // Evitar cierre al interactuar con el índice
+        mobileContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+    
     // Eventos de colapso categoría
     document.querySelectorAll('.category-toggle').forEach(toggle => {
         toggle.addEventListener('click', (e) => {

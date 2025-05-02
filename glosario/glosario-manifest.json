@@ -38,5 +38,10 @@
     "id": "onomatopeya",
     "term": "Onomatopeya",
     "category": "Juegos Lingüísticos"
+     },
+  {
+    "id": "llados",
+    "term": "Llados",
+    "category": "Personaje-Narrador"
      }
 ]

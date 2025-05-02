@@ -183,7 +183,20 @@ function showLatestPosts(posts) {
 // Modificar loadLatestPost
 async function loadLatestPost(posts) {
     if(posts.length > 0) {
-        await loadPostContent(posts[0].id);
-        window.location.hash = posts[0].id;
+        const latestPost = posts[0];
+        await loadPostContent(latestPost.id);
+        
+        // Añadir título especial
+        document.querySelector('.content-area').innerHTML = `
+            <div class="latest-post-header">
+                <h2>Último texto publicado</h2>
+                <div class="post-meta">
+                    <time datetime="${latestPost.date}">${new Date(latestPost.date).toLocaleDateString()}</time>
+                </div>
+            </div>
+            ${document.querySelector('.content-area').innerHTML}
+        `;
+        
+        window.location.hash = latestPost.id;
     }
 }

@@ -120,21 +120,17 @@ function renderIndex(posts) {
     });
 }
 
+
 async function loadPostContent(postId) {
     try {
         const response = await fetch(`posts/${postId}.html`);
         const content = await response.text();
         
-        const postContainer = document.createElement('article');
-        postContainer.className = 'blog-post';
-        postContainer.id = postId;
-        postContainer.innerHTML = content;
-        
-        // Eliminar el header especial si existe
-        const existingHeader = document.querySelector('.latest-post-header');
-        if(existingHeader) existingHeader.remove();
-        
-        document.querySelector('.content-area').appendChild(postContainer);
+        document.querySelector('.content-area').innerHTML = `
+            <article class="blog-post" id="${postId}">
+                ${content}
+            </article>
+        `;
     } catch (error) {
         console.error("Error cargando post:", error);
         document.querySelector('.content-area').innerHTML = `

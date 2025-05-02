@@ -51,7 +51,8 @@ function renderIndex(posts) {
             categories[cat].withoutSub.push(post);
         }
     });
-
+ // Ordenar categorías alfabéticamente
+    const sortedCategories = Object.entries(categories).sort(([a], [b]) => a.localeCompare(b));
     // Renderizar índice
      let html = `
         <div class="index-controls">
@@ -60,7 +61,30 @@ function renderIndex(posts) {
         </div>
         <h3 class="categories-title">Categorías</h3>
     `;
+ sortedCategories.forEach(([cat, group]) => {
+        html += `<div class="index-category collapsed">
+                    <button class="category-toggle">${cat} ▼</button>
+                    <div class="index-items">`;
+// Ordenar posts sin subcategoría
+        const sortedWithoutSub = group.withoutSub.sort((a, b) => a.title.localeCompare(b.title));
+        sortedWithoutSub.forEach(p => {
+            html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
+        });
 
+        // Ordenar y mostrar subcategorías
+        const sortedSubCategories = Object.entries(group.withSub).sort(([a], [b]) => a.localeCompare(b));
+        sortedSubCategories.forEach(([sub, arr]) => {
+            const sortedSubPosts = arr.sort((a, b) => a.title.localeCompare(b.title));
+            html += `<div class="sub-category collapsed">
+                        <button class="sub-toggle">${sub} ▼</button>
+                        <div class="sub-items">`;
+            html += sortedSubPosts.map(p => `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`).join('');
+            html += `</div></div>`;
+        });
+
+        html += `</div></div>`;
+    });
+     
     for (const [cat, group] of Object.entries(categories)) {
         html += `<div class="index-category collapsed">
                     <button class="category-toggle">${cat} ▼</button>

@@ -26,17 +26,25 @@ function renderIndex(terms) {
   terms.forEach(t => {
     (byCat[t.category] ||= []).push(t);
   });
+  
   let html = '';
-  for (const [cat, arr] of Object.entries(byCat)) {
+  // Ordenar categorías alfabéticamente
+  const sortedCategories = Object.keys(byCat).sort((a, b) => a.localeCompare(b));
+  
+  for (const cat of sortedCategories) {
+    // Ordenar términos alfabéticamente dentro de cada categoría
+    const sortedTerms = byCat[cat].sort((a, b) => a.term.localeCompare(b.term));
+    
     html += `<div class="index-category collapsed">
                <button class="category-toggle">${cat} ▼</button>
                <div class="index-items">
-                 ${arr.map(t=>`<a href="#${t.id}" class="index-item" data-id="${t.id}">
+                 ${sortedTerms.map(t=>`<a href="#${t.id}" class="index-item" data-id="${t.id}">
                                  ${t.term}
                                </a>`).join('')}
                </div>
              </div>`;
   }
+  
   idx.innerHTML = html;
   document.querySelectorAll('.category-toggle').forEach(btn=>{
     btn.addEventListener('click', e=>{
@@ -56,7 +64,6 @@ function renderIndex(terms) {
     });
   });
 }
-
 async function loadTerm(id) {
   const term = (await loadTerms()).find(t=>t.id===id);
   const main = document.querySelector('.content-area');

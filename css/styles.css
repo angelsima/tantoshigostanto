@@ -1,3 +1,4 @@
+
 /* styles.css */
 
 body {
@@ -250,11 +251,6 @@ body {
         padding: 12px 15px;
         border-radius: 0;
     }
-  .nav-menu {
-    flex-wrap: wrap;       /* que puedan saltar a línea siguiente si faltan px */
-    gap: 8px;              /* menos espacio entre enlaces */
-    padding: 10px;         /* menos padding interior */
-  }
     .nav-button {
         width: 100%;
         text-align: center;
@@ -264,10 +260,7 @@ body {
         flex-wrap: wrap;
         gap: 15px;
     }
-    .nav-link {
-    flex: 1 1 auto;        /* que puedan encoger para entrar */
-    white-space: nowrap;    /* evitar que un enlace se divida en dos líneas */
-  }
+    
     .nav-divider {
         display: none;
     }
@@ -434,7 +427,7 @@ body {
 /* Estilos para el nuevo layout */
 .grid-container {
     display: grid;
-     grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px;
 }

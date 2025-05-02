@@ -161,8 +161,9 @@ document.querySelectorAll('.index-items, .sub-items').forEach(items => {
             loadPostContent(postId);
             window.location.hash = postId;
             // Cerrar índice en móvil
-        if(window.innerWidth <= 768) {
-            document.querySelector('.mobile-index-container').classList.remove('active');
+       const móvil = document.querySelector('.mobile-index-container');
+if (window.innerWidth <= 768 && móvil) {
+  móvil.classList.remove('active');
         }
         });
     });

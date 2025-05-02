@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const terms = await loadTerms();
   renderIndex(terms);
-  // Si hay hash, carga ese término; si no, muestra el primero
+ // Mostrar mensaje inicial
+  const main = document.querySelector('.content-area');
+  main.innerHTML = '<article><p>Selecciona un término del índice para ver su contenido.</p></article>';
+
+  // Si hay hash, carga ese término
   const hash = window.location.hash.replace('#','');
   if(hash && terms.find(t=>t.id===hash)) {
     loadTerm(hash);
-  } else if(terms.length) {
-    loadTerm(terms[0].id);
   }
 });
 

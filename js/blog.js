@@ -270,7 +270,8 @@ function showLatestPosts(posts) {
 async function loadLatestPost(posts) {
     if(posts.length > 0) {
         const latestPost = posts[0];
-        await loadPostContent(latestPost.id);
+        const postContent = document.querySelector('.post-content');
+    await loadPostContent(latestPost.id);
         
         // Añadir título especial
          const postContent = document.querySelector('.post-content');
@@ -281,8 +282,8 @@ async function loadLatestPost(posts) {
                     <time datetime="${latestPost.date}">${new Date(latestPost.date).toLocaleDateString()}</time>
                 </div>
             </div>
-            ${document.querySelector('.post-content').innerHTML}
-        `;
+             ${postContent.innerHTML}
+                  `;
       
     }
 }

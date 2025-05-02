@@ -29,23 +29,24 @@
     <div class="page-subtitle">
         <p>Aquí encontrarás siempre la misma escena, siempre de forma distinta: Variaciones de [abuela vs (higo + avispa)]</p>
     </div>
-    <div class="mobile-index-handle">
-    <button id="mobile-index-toggle">☰ Índice</button>
-    <div class="mobile-index-container">
-        <nav class="side-index mobile-index"></nav>
-    </div>
-</div>
-    <div class="layout-container">
+      <div class="layout-container">
     <!-- Índice lateral -->
        <nav class="side-index desktop-index">
-       
-    </nav>      
+           </nav>      
 
     <!-- Contenido principal -->
     <main class="content-area">
-        <div class="welcome-message">
-                <h2>Bienvenido al blog</h2>
-                <p>Selecciona un texto del índice o haz clic en "Texto Aleatorio"</p>
+        <div class="mobile-controls">
+                <div class="mobile-index-header">
+                    <button class="mobile-random">🎲 Aleatorio</button>
+                    <button class="mobile-latest">📅 Recientes</button>
+                    <select class="mobile-categories">
+                        <option value="">Categorías</option>
+                    </select>
+                </div>
+            </div>
+          <!-- Contenido del post -->
+            <div class="post-content">
             </div>
         </main>
     </div>

@@ -185,7 +185,7 @@
         // Función actualizada para mostrar selecciones
         function updateSelectedTraits() {
             const selections = {};
-            const categories = ['linguistic', 'proportion', 'poetry', 'style', 'traits', 'structure'];
+            const categories = ['linguistic', 'style', 'traits', 'poetry', 'proportion', 'retoric'];
             
             categories.forEach(category => {
                 const select = document.getElementById(category);
@@ -196,8 +196,17 @@
 
             let displayHTML = '';
             Object.entries(selections).forEach(([cat, value]) => {
-                displayHTML += `<div class="selected-item">
-                    <span class="category">${cat.toUpperCase()}:</span>
+                // Nombres legibles para las categorías
+                const categoryNames = {
+                    linguistic: 'JUEGOS LINGÜÍSTICOS',
+                    style: 'ESTILOS',
+                    traits: 'RASGOS NARRADOR',
+                    poetry: 'FORMATO',
+                    proportion: 'CADENCIAS/PROPORCIONES',
+                    retoric: 'FIGURAS RETÓRICAS'
+                };
+               displayHTML += `<div class="selected-item">
+                    <span class="category">${categoryNames[cat]}:</span>
                     <span class="value">${value}</span>
                 </div>`;
             });

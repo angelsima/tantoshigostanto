@@ -275,3 +275,70 @@ body {
         scroll-padding-top: 120px;
     }
 }
+/* Controles del índice */
+.index-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.index-controls button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #7c3aed;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.index-controls button:hover {
+    background: #6b2cd6;
+    transform: translateY(-2px);
+}
+
+.categories-title {
+    color: #2c3e50;
+    padding: 15px 0 10px;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 15px;
+}
+
+/* Últimos posts */
+.latest-posts {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.latest-posts ul {
+    list-style: none;
+    padding: 0;
+}
+
+.latest-posts li {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.latest-posts li:hover {
+    background: #f8f9fa;
+}
+
+.latest-post-item {
+    color: #2c3e50;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-date {
+    color: #6c757d;
+    font-size: 0.9em;
+}

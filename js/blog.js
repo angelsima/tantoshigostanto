@@ -86,7 +86,10 @@ function renderIndex(posts) {
     });
      
       indexContainer.innerHTML = html;
-
+// Inicializar categorías y subcategorías como colapsadas
+document.querySelectorAll('.index-items, .sub-items').forEach(items => {
+    items.style.display = 'none';
+});
     // Eventos de colapso categoría
     document.querySelectorAll('.category-toggle').forEach(toggle => {
         toggle.addEventListener('click', (e) => {

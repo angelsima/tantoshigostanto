@@ -147,6 +147,10 @@ document.querySelectorAll('.index-items, .sub-items').forEach(items => {
             const postId = item.dataset.post;
             loadPostContent(postId);
             window.location.hash = postId;
+            // Cerrar índice en móvil
+        if(window.innerWidth <= 768) {
+            document.querySelector('.mobile-index-container').classList.remove('active');
+        }
         });
     });
 }

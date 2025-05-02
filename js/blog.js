@@ -184,6 +184,10 @@ function loadRandomPost(posts) {
     
     loadPostContent(randomPost.id);
     window.location.hash = randomPost.id;
+    // Cerrar índice en móvil
+    if(window.innerWidth <= 768) {
+        document.querySelector('.mobile-index-container').classList.remove('active');
+    }
 }
 
 // Nueva función para mostrar últimos textos
@@ -205,6 +209,10 @@ function showLatestPosts(posts) {
     `;
     
     document.querySelector('.content-area').innerHTML = html;
+    // Cerrar índice en móvil
+    if(window.innerWidth <= 768) {
+        document.querySelector('.mobile-index-container').classList.remove('active');
+    }
     
     // Añadir eventos a los enlaces
     document.querySelectorAll('.latest-post-item').forEach(item => {

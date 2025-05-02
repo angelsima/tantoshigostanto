@@ -197,8 +197,7 @@ async function loadLatestPost(posts) {
             </div>
             ${document.querySelector('.content-area').innerHTML}
         `;
-        
-        window.location.hash = latestPost.id;
+      
     }
 }
 document.addEventListener('DOMContentLoaded', () => {

@@ -184,7 +184,7 @@ function showCategoryPosts(posts) {
         </div>
     `;
     
-    document.querySelector('.post-content').innerHTML = html;
+    document.querySelector('.content-area').innerHTML = html;
     
     document.querySelectorAll('.mobile-post-item').forEach(item => {
         item.addEventListener('click', (e) => {
@@ -202,14 +202,14 @@ async function loadPostContent(postId) {
         const response = await fetch(`posts/${postId}.html`);
         const content = await response.text();
         
-        document.querySelector('.post-content').innerHTML = `
+        document.querySelector('.content-area').innerHTML = `
             <article class="blog-post">
                 ${content}
             </article>
         `;
     } catch (error) {
         console.error("Error cargando post:", error);
-        document.querySelector('.post-content').innerHTML = `
+        document.querySelector('.content-area').innerHTML = `
             <div class="error-message">
                 No se pudo cargar el post solicitado
             </div>
@@ -249,7 +249,7 @@ function showLatestPosts(posts) {
         </div>
     `;
     
-     document.querySelector('.post-content').innerHTML = html;
+     document.querySelector('.content-area').innerHTML = html;
     // Cerrar índice en móvil
     if(window.innerWidth <= 768) {
         document.querySelector('.mobile-index-container').classList.remove('active');
@@ -272,7 +272,7 @@ async function loadLatestPost(posts) {
         await loadPostContent(latestPost.id);
         
         // Añadir título especial
-         const postContent = document.querySelector('.post-content');
+         const postContent = document.querySelector('.content-area');
         postContent.innerHTML = `
             <div class="latest-post-header">
                 <h2>Último texto publicado</h2>

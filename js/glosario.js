@@ -48,6 +48,12 @@ function renderIndex(terms) {
   }
   
   idx.innerHTML = html;
+
+  // Inicializar categorías y subcategorías como colapsadas
+document.querySelectorAll('.index-items, .sub-items').forEach(items => {
+    items.style.display = 'none';
+});
+  
   document.querySelectorAll('.category-toggle').forEach(btn=>{
     btn.addEventListener('click', e=>{
       const cat = e.target.closest('.index-category');

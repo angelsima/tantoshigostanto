@@ -146,14 +146,17 @@ function loadRandomPost(posts) {
     loadPostContent(randomPost.id);
     window.location.hash = randomPost.id;
 }
-// Al iniciar
-const posts = await loadPosts();
-const latestPost = getLatestPost(posts); 
 
-// Función de ayuda
-function getLatestPost(posts) {
-    return posts.reduce((latest, post) => {
-        const postDate = new Date(post.sort_date);
-        return postDate > new Date(latest.sort_date) ? post : latest;
-    }, posts[0]);
+async function loadLatestPost() {
+    const response = await fetch('posts/posts-manifest.json');
+    const posts = await response.json();
+    
+    // Ordenar por fecha (nuevo a viejo)
+    const sortedPosts = posts.sort((a, b) => 
+        new Date(b.date) - new Date(a.date)
+    );
+    
+    if(sortedPosts.length > 0) {
+        await loadPostContent(sortedPosts[0].id);
+    }
 }

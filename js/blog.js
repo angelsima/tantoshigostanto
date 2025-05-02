@@ -31,7 +31,7 @@ async function loadPosts() {
 }
 
 function renderIndex(posts) {
-    const indexContainer = document.querySelector('.side-index');
+    const indexContainer = document.querySelector('.side-index.desktop-index');
     if (!indexContainer) return;
 
     // Agrupar por categorías, distinguiendo posts con y sin sub-categoría
@@ -86,6 +86,7 @@ function renderIndex(posts) {
     });
      
       indexContainer.innerHTML = html;
+    
 // Inicializar categorías y subcategorías como colapsadas
 document.querySelectorAll('.index-items, .sub-items').forEach(items => {
     items.style.display = 'none';
@@ -97,26 +98,38 @@ document.querySelectorAll('.index-items, .sub-items').forEach(items => {
         mobileIndex.innerHTML = indexContainer.innerHTML;
     }
 
-    // Eventos para móvil
-    const mobileToggle = document.getElementById('mobile-index-toggle');
-    const mobileContainer = document.querySelector('.mobile-index-container');
-    
-    if(mobileToggle && mobileContainer) {
-        mobileToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileContainer.classList.toggle('active');
-        });
-
-        // Cerrar al hacer click fuera
-        document.addEventListener('click', () => {
-            mobileContainer.classList.remove('active');
-        });
-
-        // Evitar cierre al interactuar con el índice
-        mobileContainer.addEventListener('click', (e) => {
-            e.stopPropagation();
+   // Actualizar controles móviles
+    const mobileCategories = document.querySelector('.mobile-categories');
+    if(mobileCategories) {
+        // Limpiar opciones existentes
+        mobileCategories.innerHTML = '<option value="">Categorías</option>';
+        
+        // Agregar categorías al select móvil
+        Object.keys(categories).sort().forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat;
+            option.textContent = cat;
+            mobileCategories.appendChild(option);
         });
     }
+
+    // Eventos para controles móviles
+    document.querySelector('.mobile-random')?.addEventListener('click', () => {
+        loadRandomPost(posts);
+    });
+    
+    document.querySelector('.mobile-latest')?.addEventListener('click', () => {
+        showLatestPosts(posts);
+    });
+    
+    document.querySelector('.mobile-categories')?.addEventListener('change', (e) => {
+        const category = e.target.value;
+        if(category) {
+            const categoryPosts = posts.filter(p => p.category === category);
+            showCategoryPosts(categoryPosts);
+        }
+    });
+}
     
     // Eventos de colapso categoría
     document.querySelectorAll('.category-toggle').forEach(toggle => {
@@ -154,6 +167,34 @@ document.querySelectorAll('.index-items, .sub-items').forEach(items => {
         });
     });
 }
+// Nueva función para mostrar posts de categoría
+function showCategoryPosts(posts) {
+    const html = `
+        <div class="category-posts">
+            <h3>${posts[0]?.category || 'Categoría'}</h3>
+            <ul>
+                ${posts.map(post => `
+                    <li>
+                        <a href="#${post.id}" class="mobile-post-item" data-post="${post.id}">
+                            ${post.title}
+                        </a>
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `;
+    
+    document.querySelector('.post-content').innerHTML = html;
+    
+    document.querySelectorAll('.mobile-post-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const postId = item.dataset.post;
+            loadPostContent(postId);
+            window.location.hash = postId;
+        });
+    });
+}
 
 
 async function loadPostContent(postId) {
@@ -161,8 +202,8 @@ async function loadPostContent(postId) {
         const response = await fetch(`posts/${postId}.html`);
         const content = await response.text();
         
-        document.querySelector('.content-area').innerHTML = `
-            <article class="blog-post" id="${postId}">
+        document.querySelector('.post-content').innerHTML = `
+            <article class="blog-post">
                 ${content}
             </article>
         `;

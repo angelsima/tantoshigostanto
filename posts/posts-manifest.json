@@ -2,33 +2,38 @@
   {
     "id": "lipograma-a",
     "title": "Lipograma en A",
-    "category": "Juegos lingüísticos"
+    "category": "Juegos lingüísticos",
     "date": "2025-04-15T10:00:00Z"
   },
   {
     "id": "lipograma-e",
     "title": "Lipograma en E",
-    "category": "Juegos lingüísticos"
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-16T10:00:00Z"
   },
   {
     "id": "lipograma-i",
     "title": "Lipograma en I",
-    "category": "Juegos lingüísticos"
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-17T10:00:00Z"
   },
   {
     "id": "lipograma-o",
     "title": "Lipograma en O",
-    "category": "Juegos lingüísticos"
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-15T10:00:00Z"
   },
   {
     "id": "lipograma-u",
     "title": "Lipograma en U",
-    "category": "Juegos lingüísticos"
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-15T10:00:00Z"
   },
   {
     "id": "soneto",
     "title": "Soneto",
     "category": "Formatos",
-    "sub-category": "Poesía"
+    "sub-category": "Poesía",
+    "date": "2025-04-15T10:00:00Z"
   }
 ]

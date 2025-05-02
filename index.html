@@ -49,15 +49,6 @@
     });
 });
     
-    // Cerrar menú al hacer click fuera
-    document.addEventListener('click', (e) => {
-        if(!e.target.closest('.custom-dropdown')) {
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                menu.style.display = 'none';
-            });
-        }
-    });
-});
       </script>
 </body>
 </html>

@@ -575,15 +575,7 @@ button:hover {
     }
     
     .side-index {
-        height: auto; /* Ya está bien */
-        position: relative; /* Quitar sticky */
-        top: auto;
-        z-index: 1;
-        padding-bottom: 15px;
-        border-bottom: 2px solid #eee;
-      margin-bottom: 15px;
-      background: #f8f9fa; /* Añadir o asegurar que está presente */
-      border-radius: 8px; /* Opcional */
+         display: none;
     }
    .index-category {
         margin-bottom: 10px;
@@ -644,4 +636,16 @@ button:hover {
         scroll-behavior: smooth;
         scroll-padding-top: 120px;
     }
+   .mobile-side-index .index-controls {
+    display: none;
+  }
+   /* Aseguramos que las categorías se puedan expandir en el móvil */
+  .mobile-side-index .index-items,
+  .mobile-side-index .sub-items {
+    display: none;  /* arrancan plegadas */
+  }
+  .mobile-side-index .category-toggle,
+  .mobile-side-index .sub-toggle {
+    cursor: pointer;
+  }
 }

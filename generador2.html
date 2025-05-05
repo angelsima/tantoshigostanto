@@ -189,6 +189,47 @@
     </div>
 
     <script>
+        // Función para ordenar los elementos de un select
+function sortSelect(select) {
+    const options = Array.from(select.options);
+    const placeholder = options.find(opt => opt.value === "");
+    const optgroups = Array.from(select.querySelectorAll('optgroup'));
+    
+    // Ordenar optgroups por etiqueta
+    const sortedOptgroups = optgroups.sort((a, b) => {
+        return a.label.localeCompare(b.label);
+    });
+    
+    // Ordenar opciones dentro de cada optgroup
+    sortedOptgroups.forEach(optgroup => {
+        const options = Array.from(optgroup.children);
+        const sortedOptions = options.sort((a, b) => {
+            return a.text.localeCompare(b.text);
+        });
+        optgroup.innerHTML = '';
+        sortedOptions.forEach(option => optgroup.appendChild(option));
+    });
+    
+    // Ordenar opciones sueltas (sin optgroup)
+    const looseOptions = options.filter(opt => 
+        !opt.parentElement.tagName === 'OPTGROUP' && opt.value !== ""
+    ).sort((a, b) => a.text.localeCompare(b.text));
+    
+    // Reconstruir el select
+    select.innerHTML = '';
+    if (placeholder) select.add(placeholder);
+    
+    // Agregar optgroups ordenados
+    sortedOptgroups.forEach(optgroup => select.appendChild(optgroup));
+    
+    // Agregar opciones sueltas ordenadas al final
+    looseOptions.forEach(option => select.add(option));
+}
+
+// Aplicar a todos los selects al cargar
+document.querySelectorAll('select').forEach(select => {
+    sortSelect(select);
+});
         // Función actualizada para mostrar selecciones
         function updateSelectedTraits() {
             const selections = {};
@@ -238,7 +279,10 @@
             select.selectedIndex = 0;
             updateSelectedTraits();
         }
-
+// Al final de tu script actual, antes de los event listeners
+document.querySelectorAll('select').forEach(select => {
+    sortSelect(select);
+});
         // Event listeners
         document.querySelectorAll('.random-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {

@@ -14,6 +14,7 @@ body {
         padding: 10px; /* Reducir padding general */
      background-color: #f0f0f0;
     }
+  }
 .header {
   background-color: #FFFFFF;
    padding: 20px;
@@ -27,8 +28,8 @@ body {
   color: #000000;
   }
 .header h4 {
-  color: ##202020;
-  text-style: italic;
+  color: #202020;
+  font-style: italic;
   }
 @media (max-width: 768px) {
   .header {

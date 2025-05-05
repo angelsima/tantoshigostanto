@@ -418,6 +418,23 @@ button:hover {
         padding: 10px; /* Reducir padding general */
      background-color: #f0f0f0;
     }
+
+  /* Que los botones ocupen todo el ancho o se repartan */
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .buttons button {
+    flex: 1 1 auto;
+    margin: 0 2px;
+  }
+  /* Poner controles en columna para que el select y los botones bajen */
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
    .header {
         flex-direction: column;
         padding: 15px;
@@ -498,6 +515,27 @@ button:hover {
     .index-item {
         padding: 8px;
     }
+/* Aseguramos que el select rellene todo el contenedor */
+  select {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+/* Ajustar el header de selección para que sus items también vayan en columna */
+  #selection-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Cada item seleccionado ocupa 100% */
+  #selected-traits {
+    flex-direction: column;
+  }
+  .selected-item {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
  /* Forzar visibilidad al hacer scroll */
     html {
         scroll-behavior: smooth;

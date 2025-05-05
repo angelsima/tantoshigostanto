@@ -211,9 +211,9 @@ function sortSelect(select) {
     });
     
     // Ordenar opciones sueltas (sin optgroup)
-    const looseOptions = options.filter(opt => 
-        !opt.parentElement.tagName !== 'OPTGROUP' && opt.value !== ""
-    ).sort((a, b) => a.text.localeCompare(b.text));
+    const looseOptions = options
+  .filter(opt => opt.parentElement.tagName !== 'OPTGROUP' && opt.value !== "")
+  .sort((a,b) => a.text.localeCompare(b.text));
     
     // Reconstruir el select
     select.innerHTML = '';

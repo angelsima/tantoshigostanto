@@ -20,6 +20,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     ?.addEventListener('click', () => {
       document.querySelector('.mobile-categories-menu').style.display = 'block';
     });
+  // Cerrar overlay al hacer click fuera del índice
+  document.querySelector('.mobile-categories-menu')
+    ?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        e.currentTarget.style.display = 'none';
+      }
+    });
+});
 });
 
 // Carga el manifest del glosario

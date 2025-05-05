@@ -308,11 +308,10 @@ body {
     background: #f5f3ff;
     padding: 1.5rem;
     border-radius: 8px;
-    margin-bottom: 2rem;
-    border-left: 4px solid #7c3aed;
+       border-left: 4px solid #7c3aed;
 }
 
-.latest-post-header h2 {
+.latest-post-header h4 {
     color: #2c3e50;
     margin: 0 0 0.5rem 0;
 }

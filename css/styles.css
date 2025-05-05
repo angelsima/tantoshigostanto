@@ -9,7 +9,11 @@ body {
   padding: 20px;
   background-color: #FFFFFF;
 }
-
+@media (max-width: 768px) {
+   body {
+        padding: 10px; /* Reducir padding general */
+     background-color: #f0f0f0;
+    }
 .header {
   background-color: #FFFFFF;
    padding: 20px;
@@ -26,13 +30,88 @@ body {
   color: ##202020;
   text-style: italic;
   }
-
+@media (max-width: 768px) {
+  .header {
+        flex-direction: column;
+        padding: 15px;
+    }
+    }
 .nav-divider {
     height: 24px;
     width: 1px;
     background: #ddd;
     margin: 0 15px;
 }
+  .nav-button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 0;
+}
+.nav-container {
+  left: 0;
+  right: 0;
+  background: white;
+  z-index: 1000;
+  border-bottom: 1px solid #6E0C1B;
+}
+.nav-menu {
+  margin: 0 auto; /* Corregimos el valor (20 auto estaba mal escrito) */
+  display: flex;
+  justify-content: center; /* Cambiamos de space-around a center */
+  padding: 15px 20px;
+  max-width: 900px; /* Opcional: para contener el ancho del menú */
+  flex-wrap: wrap; /* Para responsive si hay muchos elementos */
+  gap: 15px; /* Espacio entre elementos */
+}
+.nav-link {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: all 0.3s;
+  font-size: 1.1em;
+}
+.nav-link:hover {
+  background: #f8f9fa;
+  transform: translateY(-2px);
+}
+.nav-link.activo {
+  background: #2c3e50;
+  color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+  .nav-button {
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+    }
+   .nav-container {
+    width: 100%;
+  }
+   .nav-divider {
+        display: none;
+    }
+   /* Cada enlace se ajusta al contenido y no fuerza salto */
+  .nav-link {
+    flex: 0 0 auto;     /* no crecer ni encoger, sólo el ancho de su contenido */
+    white-space: nowrap; /* el texto no se partirá en varias líneas */
+  }
+   /* Forzar que los enlaces queden en una sola fila */
+  .nav-menu {
+    flex-wrap: nowrap !important;  /* evita el salto a varias líneas */
+    white-space: nowrap;           /* evita quiebres de palabra */
+  }
+  .nav-select-group {
+        flex-wrap: wrap;
+        gap: 15px;
+    }  
+    }
 .page-subtitle {
     border-bottom: 1px solid #eee;
     padding: 15px 20px;
@@ -45,6 +124,13 @@ body {
     border-radius: 8px; /* Coherencia con otros elementos */
     box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sutil sombra */
 }
+  @media (max-width: 768px) {
+  .page-subtitle {
+        margin: 0 10px 15px 10px;
+        padding: 12px 15px;
+        border-radius: 0;
+    }
+    }
 .poem {
   font-family: serif;
   white-space: pre-wrap;
@@ -63,55 +149,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.nav-button {
-  background-color: #28a745;
-  color: white;
-  padding: 12px 25px;
-  border-radius: 25px;
-  text-decoration: none;
-  display: inline-block;
-  margin: 10px 0;
-}
 
-
-.nav-container {
-  left: 0;
-  right: 0;
-  background: white;
-  z-index: 1000;
-  border-bottom: 1px solid #6E0C1B;
-}
-
-.nav-menu {
-  margin: 0 auto; /* Corregimos el valor (20 auto estaba mal escrito) */
-  display: flex;
-  justify-content: center; /* Cambiamos de space-around a center */
-  padding: 15px 20px;
-  max-width: 900px; /* Opcional: para contener el ancho del menú */
-  flex-wrap: wrap; /* Para responsive si hay muchos elementos */
-  gap: 15px; /* Espacio entre elementos */
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  padding: 10px 15px;
-  border-radius: 20px;
-  transition: all 0.3s;
-  font-size: 1.1em;
-}
-
-.nav-link:hover {
-  background: #f8f9fa;
-  transform: translateY(-2px);
-}
-
-.nav-link.activo {
-  background: #2c3e50;
-  color: white;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
 
 /* Header móvil */
 .mobile-index-header {
@@ -480,9 +518,32 @@ button:hover {
 
 /* Mobile */
 @media (max-width: 768px) {
-   body {
-        padding: 10px; /* Reducir padding general */
-     background-color: #f0f0f0;
+  .nav-button {
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+    }
+   .nav-container {
+    width: 100%;
+  }
+   /* Cada enlace se ajusta al contenido y no fuerza salto */
+  .nav-link {
+    flex: 0 0 auto;     /* no crecer ni encoger, sólo el ancho de su contenido */
+    white-space: nowrap; /* el texto no se partirá en varias líneas */
+  }
+   /* Forzar que los enlaces queden en una sola fila */
+  .nav-menu {
+    flex-wrap: nowrap !important;  /* evita el salto a varias líneas */
+    white-space: nowrap;           /* evita quiebres de palabra */
+  }
+  .nav-select-group {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .nav-divider {
+        display: none;
+    }
     }
 
   /* Que los botones ocupen todo el ancho o se repartan */
@@ -501,44 +562,7 @@ button:hover {
     align-items: stretch;
   }
 
-   .header {
-        flex-direction: column;
-        padding: 15px;
-    }
-    .page-subtitle {
-        margin: 0 10px 15px 10px;
-        padding: 12px 15px;
-        border-radius: 0;
-    }
-    .nav-button {
-        width: 100%;
-        text-align: center;
-        margin-top: 15px;
-    }
-    .nav-container {
-    width: 100%;
-    overflow-x: auto;       /* permite scroll horizontal si es necesario */
-  }
-  /* Cada enlace se ajusta al contenido y no fuerza salto */
-  .nav-link {
-    flex: 0 0 auto;     /* no crecer ni encoger, sólo el ancho de su contenido */
-    white-space: nowrap; /* el texto no se partirá en varias líneas */
-  }
-   /* Forzar que los enlaces queden en una sola fila */
-  .nav-menu {
-    flex-wrap: nowrap !important;  /* evita el salto a varias líneas */
-    white-space: nowrap;           /* evita quiebres de palabra */
-  }
-
-    .nav-select-group {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    
-    .nav-divider {
-        display: none;
-    }
-
+   
   .grid-container {
     grid-template-columns: 1fr;
    }

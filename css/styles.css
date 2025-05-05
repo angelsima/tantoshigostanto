@@ -113,7 +113,74 @@ body {
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
+/* Header móvil */
+.mobile-index-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 100;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
 
+.mobile-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 15px;
+}
+
+.mobile-latest, 
+.mobile-random {
+    font-size: 1.2em;
+    padding: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.mobile-categories-toggle {
+    margin-left: auto;
+    cursor: pointer;
+    color: #2c3e50;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.mobile-categories-toggle:hover {
+    background: #f8f9fa;
+}
+
+/* Menú flotante */
+.mobile-categories-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none;
+    padding: 20px;
+}
+
+.mobile-side-index {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+    .mobile-index-header,
+    .mobile-categories-menu {
+        display: none !important;
+    }
+}
 /* Estilos específicos del generador */
 #generator-container {
     background: #fff;

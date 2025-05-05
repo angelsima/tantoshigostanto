@@ -448,6 +448,21 @@ button:hover {
         text-align: center;
         margin-top: 15px;
     }
+    .nav-container {
+    width: 100%;
+    overflow-x: auto;       /* permite scroll horizontal si es necesario */
+  }
+  /* Cada enlace se ajusta al contenido y no fuerza salto */
+  .nav-link {
+    flex: 0 0 auto;     /* no crecer ni encoger, sólo el ancho de su contenido */
+    white-space: nowrap; /* el texto no se partirá en varias líneas */
+  }
+   /* Forzar que los enlaces queden en una sola fila */
+  .nav-menu {
+    flex-wrap: nowrap !important;  /* evita el salto a varias líneas */
+    white-space: nowrap;           /* evita quiebres de palabra */
+  }
+
     .nav-select-group {
         flex-wrap: wrap;
         gap: 15px;
@@ -482,7 +497,9 @@ button:hover {
    .index-category {
         margin-bottom: 10px;
     }
-    
+       .index-item {
+        padding: 8px;
+    }
     .content-area {
        padding: 20px 15px; /* Añadir padding lateral */
         order: 2; /* Forzar orden debajo del índice */
@@ -511,9 +528,7 @@ button:hover {
         font-size: 0.95em;
     }
     
-    .index-item {
-        padding: 8px;
-    }
+ 
 /* Aseguramos que el select rellene todo el contenedor */
   select {
     width: 100% !important;

@@ -20,6 +20,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.latest-posts-trigger')?.addEventListener('click', () => {
         showLatestPosts(sortedPosts);
     });
+    // Nuevos event listeners
+document.querySelector('.mobile-categories-toggle')?.addEventListener('click', () => {
+    document.querySelector('.mobile-categories-menu').style.display = 'block';
+});
+
+document.querySelector('.mobile-categories-menu').addEventListener('click', (e) => {
+    if(e.target === e.currentTarget) {
+        e.currentTarget.style.display = 'none';
+    }
+});
+// Eventos para botones móviles
+document.querySelector('.mobile-latest')?.addEventListener('click', () => {
+    showLatestPosts(posts);
+});
+
+document.querySelector('.mobile-random')?.addEventListener('click', () => {
+    loadRandomPost(posts);
+});
 });
 async function loadPosts() {
     try {
@@ -123,11 +141,18 @@ document.querySelectorAll('.index-items, .sub-items').forEach(items => {
             window.location.hash = postId;
         });
     });
-// En la función renderIndex, después de generar el HTML:
-const mobileSideIndex = document.querySelector('.mobile-side-index');
-if(mobileSideIndex) {
-    mobileSideIndex.innerHTML = indexContainer.innerHTML;
-}
+    // Clonar índice para móvil
+    const mobileSideIndex = document.querySelector('.mobile-side-index');
+    if(mobileSideIndex) {
+        mobileSideIndex.innerHTML = indexContainer.innerHTML;
+        
+        // Añadir event listeners a los items del menú móvil
+        mobileSideIndex.querySelectorAll('.index-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelector('.mobile-categories-menu').style.display = 'none';
+            });
+        });
+    }
 }
 
 
@@ -221,16 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-// Nuevos event listeners
-document.querySelector('.mobile-categories-toggle')?.addEventListener('click', () => {
-    document.querySelector('.mobile-categories-menu').style.display = 'block';
-});
 
-document.querySelector('.mobile-categories-menu').addEventListener('click', (e) => {
-    if(e.target === e.currentTarget) {
-        e.currentTarget.style.display = 'none';
-    }
-});
 // Cerrar menú al seleccionar item
 document.querySelectorAll('.mobile-side-index .index-item').forEach(item => {
     item.addEventListener('click', () => {
@@ -238,11 +254,4 @@ document.querySelectorAll('.mobile-side-index .index-item').forEach(item => {
     });
 });
 
-// Eventos para botones móviles
-document.querySelector('.mobile-latest')?.addEventListener('click', () => {
-    showLatestPosts(posts);
-});
 
-document.querySelector('.mobile-random')?.addEventListener('click', () => {
-    loadRandomPost(posts);
-});

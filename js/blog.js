@@ -160,7 +160,7 @@ function showLatestPosts(posts) {
     const latest = posts.slice(0, 10);
     const html = `
         <div class="latest-posts">
-            <h2>Últimos 10 textos</h2>
+            <h4>Últimos 10 textos</h4>
             <ul>
                 ${latest.map(post => `
                     <li>

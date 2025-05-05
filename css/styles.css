@@ -185,8 +185,8 @@ body {
 .mobile-categories-toggle {
     margin-left: auto;
     cursor: pointer;
-    color: #2c3e50;
-   background: #7c3aed;
+       background: #7c3aed;
+  color: white
     font-weight: 500;
     padding: 5px 10px;
     border-radius: 5px;

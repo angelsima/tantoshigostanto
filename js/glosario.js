@@ -22,7 +22,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.querySelector('.mobile-categories-menu').style.display = 'block';
     });
 });
-
+// Cerrar overlay al hacer clic fuera del índice
+document.querySelector('.mobile-categories-menu')
+  ?.addEventListener('click', e => {
+    // e.target será el fondo semitransparente solo si clicas fuera del nav
+    if (e.target === e.currentTarget) {
+      e.currentTarget.style.display = 'none';
+    }
+  });
 // Carga el manifest del glosario
 async function loadTerms() {
   try {

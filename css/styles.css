@@ -545,7 +545,6 @@ button:hover {
     .nav-divider {
         display: none;
     }
-    }
 
   /* Que los botones ocupen todo el ancho o se repartan */
   .buttons {
@@ -614,14 +613,13 @@ button:hover {
         border-radius: 0;
         padding: 15px;
     }
-    }
+    
   .category-toggle {
         padding: 10px;
         font-size: 0.95em;
     }
     
- 
-/* Aseguramos que el select rellene todo el contenedor */
+ /* Aseguramos que el select rellene todo el contenedor */
   select {
     width: 100% !important;
     box-sizing: border-box;
@@ -640,7 +638,6 @@ button:hover {
     width: 100%;
     box-sizing: border-box;
   }
-
 
  /* Forzar visibilidad al hacer scroll */
     html {

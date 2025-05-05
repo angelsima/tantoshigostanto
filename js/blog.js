@@ -161,14 +161,14 @@ async function loadPostContent(postId) {
         const response = await fetch(`posts/${postId}.html`);
         const content = await response.text();
         
-        document.querySelector('.content-area').innerHTML = `
+        document.querySelector('.post.content').innerHTML = `
             <article class="blog-post" id="${postId}">
                 ${content}
             </article>
         `;
     } catch (error) {
         console.error("Error cargando post:", error);
-        document.querySelector('.content-area').innerHTML = `
+        document.querySelector('.post-content').innerHTML = `
             <div class="error-message">
                 No se pudo cargar el post solicitado
             </div>
@@ -204,7 +204,7 @@ function showLatestPosts(posts) {
         </div>
     `;
     
-    document.querySelector('.content-area').innerHTML = html;
+    document.querySelector('.post-content').innerHTML = html;
     
     // Añadir eventos a los enlaces
     document.querySelectorAll('.latest-post-item').forEach(item => {
@@ -223,14 +223,14 @@ async function loadLatestPost(posts) {
         await loadPostContent(latestPost.id);
         
         // Añadir título especial
-        document.querySelector('.content-area').innerHTML = `
+        document.querySelector('.post-content').innerHTML = `
             <div class="latest-post-header">
                 <h2>Último texto publicado</h2>
                 <div class="post-meta">
                     <time datetime="${latestPost.date}">${new Date(latestPost.date).toLocaleDateString()}</time>
                 </div>
             </div>
-            ${document.querySelector('.content-area').innerHTML}
+            ${document.querySelector('.post-content').innerHTML}
         `;
       
     }

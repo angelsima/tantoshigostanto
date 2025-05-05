@@ -161,7 +161,7 @@ async function loadPostContent(postId) {
         const response = await fetch(`posts/${postId}.html`);
         const content = await response.text();
         
-        document.querySelector('.post.content').innerHTML = `
+        document.querySelector('.post-content').innerHTML = `
             <article class="blog-post" id="${postId}">
                 ${content}
             </article>

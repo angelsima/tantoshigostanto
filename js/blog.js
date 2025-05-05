@@ -66,7 +66,7 @@ function renderIndex(posts) {
     const indexContainer = document.querySelector('.side-index');
     if (!indexContainer) return;
 
-    // Agrupar por categoría y subcategoría
+    // — construir la estructura igual que antes —
     const categories = {};
     posts.forEach(post => {
         const cat = post.category;
@@ -78,91 +78,111 @@ function renderIndex(posts) {
             categories[cat].withoutSub.push(post);
         }
     });
-
-    // Ordenar categorías
     const sortedCategories = Object.entries(categories)
         .sort(([a], [b]) => a.localeCompare(b));
 
-    // Construir HTML
     let html = `
-        <div class="index-controls">
-            <button class="latest-posts-trigger">📅 Últimos textos</button>
-            <button class="random-post-trigger">🎲 Texto aleatorio</button>
-        </div>
-        <h3 class="categories-title">Categorías</h3>
+      <div class="index-controls">
+        <button class="latest-posts-trigger">📅 Últimos textos</button>
+        <button class="random-post-trigger">🎲 Texto aleatorio</button>
+      </div>
+      <h3 class="categories-title">Categorías</h3>
     `;
     for (const [cat, group] of sortedCategories) {
-        html += `<div class="index-category collapsed">
-                     <button class="category-toggle">${cat} ▼</button>
-                     <div class="index-items">`;
-        // sin subcategoría
-        group.withoutSub
-            .sort((a,b)=>a.title.localeCompare(b.title))
-            .forEach(p => {
-                html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
-            });
-        // con subcategorías
-        Object.entries(group.withSub)
+      html += `<div class="index-category collapsed">
+                 <button class="category-toggle">${cat} ▼</button>
+                 <div class="index-items">`;
+      group.withoutSub
+           .sort((a,b)=>a.title.localeCompare(b.title))
+           .forEach(p => {
+             html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
+           });
+      Object.entries(group.withSub)
             .sort(([a],[b])=>a.localeCompare(b))
             .forEach(([sub, arr]) => {
-                html += `<div class="sub-category collapsed">
-                             <button class="sub-toggle">${sub} ▼</button>
-                             <div class="sub-items">`;
-                arr.sort((a,b)=>a.title.localeCompare(b.title))
-                   .forEach(p => {
-                       html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
-                   });
-                html += `</div></div>`;
+              html += `<div class="sub-category collapsed">
+                         <button class="sub-toggle">${sub} ▼</button>
+                         <div class="sub-items">`;
+              arr.sort((a,b)=>a.title.localeCompare(b.title))
+                 .forEach(p => {
+                   html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
+                 });
+              html += `</div></div>`;
             });
-        html += `</div></div>`;
+      html += `</div></div>`;
     }
 
+    // vuelca en el sidebar de escritorio
     indexContainer.innerHTML = html;
 
-    // Inicializar colapsables
-    document.querySelectorAll('.index-items, .sub-items').forEach(el => el.style.display = 'none');
-    document.querySelectorAll('.category-toggle').forEach(btn => {
-        btn.addEventListener('click', e => {
-            const items = e.target.closest('.index-category').querySelector('.index-items');
-            const open = items.style.display === 'block';
-            items.style.display = open ? 'none' : 'block';
-            btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
-        });
+    // colapsables escritorio
+    indexContainer.querySelectorAll('.index-items, .sub-items').forEach(el => el.style.display = 'none');
+    indexContainer.querySelectorAll('.category-toggle').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const items = btn.nextElementSibling;
+        const open = items.style.display === 'block';
+        items.style.display = open ? 'none' : 'block';
+        btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
+      });
     });
-    document.querySelectorAll('.sub-toggle').forEach(btn => {
-        btn.addEventListener('click', e => {
-            const items = e.target.closest('.sub-category').querySelector('.sub-items');
-            const open = items.style.display === 'block';
-            items.style.display = open ? 'none' : 'block';
-            btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
-        });
-    });
-
-    // Eventos de carga en el índice de escritorio
-    document.querySelectorAll('.side-index .index-item').forEach(item => {
-        item.addEventListener('click', e => {
-            e.preventDefault();
-            const id = item.dataset.post;
-            loadPostContent(id);
-            window.location.hash = id;
-        });
+    indexContainer.querySelectorAll('.sub-toggle').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const items = btn.nextElementSibling;
+        const open = items.style.display === 'block';
+        items.style.display = open ? 'none' : 'block';
+        btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
+      });
     });
 
-    // Clonar y enlazar índice móvil
+    // clic en escritorio
+    indexContainer.querySelectorAll('.index-item').forEach(item => {
+      item.addEventListener('click', e => {
+        e.preventDefault();
+        loadPostContent(item.dataset.post);
+        window.location.hash = item.dataset.post;
+      });
+    });
+
+    // — clonar para móvil —
     const mobileSideIndex = document.querySelector('.mobile-side-index');
     if (mobileSideIndex) {
-        mobileSideIndex.innerHTML = indexContainer.innerHTML;
-        mobileSideIndex.querySelectorAll('.index-item').forEach(item => {
-            item.addEventListener('click', e => {
-                e.preventDefault();
-                const id = item.dataset.post;
-                loadPostContent(id);
-                window.location.hash = id;
-                document.querySelector('.mobile-categories-menu').style.display = 'none';
-            });
+      mobileSideIndex.innerHTML = html;
+
+      // ocultar controles que no queremos en el overlay
+      mobileSideIndex.querySelector('.index-controls')?.remove();
+
+      // re‑bind colapsables en móvil
+      mobileSideIndex.querySelectorAll('.index-items, .sub-items')
+                     .forEach(el => el.style.display = 'none');
+      mobileSideIndex.querySelectorAll('.category-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const items = btn.nextElementSibling;
+          const open = items.style.display === 'block';
+          items.style.display = open ? 'none' : 'block';
+          btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
         });
+      });
+      mobileSideIndex.querySelectorAll('.sub-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const items = btn.nextElementSibling;
+          const open = items.style.display === 'block';
+          items.style.display = open ? 'none' : 'block';
+          btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
+        });
+      });
+
+      // clic en móvil: carga y cierra menú
+      mobileSideIndex.querySelectorAll('.index-item').forEach(item => {
+        item.addEventListener('click', e => {
+          e.preventDefault();
+          loadPostContent(item.dataset.post);
+          window.location.hash = item.dataset.post;
+          document.querySelector('.mobile-categories-menu').style.display = 'none';
+        });
+      });
     }
 }
+
 
 // Carga un post dentro de .post-content
 async function loadPostContent(postId) {

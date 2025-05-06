@@ -71,9 +71,9 @@ function renderIndex(posts) {
     posts.forEach(post => {
         const cat = post.category;
         categories[cat] ??= { withoutSub: [], withSub: {} };
-        if (post['sub-category']) {
-            categories[cat].withSub[post['sub-category']] ??= [];
-            categories[cat].withSub[post['sub-category']].push(post);
+        if (post['subcategory']) {
+            categories[cat].withSub[post['subcategory']] ??= [];
+            categories[cat].withSub[post['subcategory']].push(post);
         } else {
             categories[cat].withoutSub.push(post);
         }
@@ -100,7 +100,7 @@ function renderIndex(posts) {
       Object.entries(group.withSub)
             .sort(([a],[b])=>a.localeCompare(b))
             .forEach(([sub, arr]) => {
-              html += `<div class="sub-category collapsed">
+              html += `<div class="subcategory collapsed">
                          <button class="sub-toggle">${sub} ▼</button>
                          <div class="sub-items">`;
               arr.sort((a,b)=>a.title.localeCompare(b.title))

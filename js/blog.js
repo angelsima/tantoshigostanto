@@ -246,9 +246,6 @@ async function loadLatestPost(posts) {
     document.querySelector('.post-content').innerHTML = `
         <div class="latest-post-header">
             <h2>Último texto publicado</h2>
-            <div class="post-meta">
-                <time datetime="${first.date}">${new Date(first.date).toLocaleDateString()}</time>
-            </div>
         </div>
         ${document.querySelector('.post-content').innerHTML}
     `;

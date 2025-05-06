@@ -214,10 +214,10 @@ function loadRandomPost(posts) {
 
 // Mostrar últimos 10 textos
 function showLatestPosts(posts) {
-    const latest = posts.slice(0, 10);
+    const latest = posts.slice(0, 100);
     document.querySelector('.post-content').innerHTML = `
         <div class="latest-posts">
-            <h4>Últimos 10 textos</h4>
+            <h4>Últimos textos</h4>
             <ul>
                 ${latest.map(p => `
                     <li>

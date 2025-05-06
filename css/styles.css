@@ -507,7 +507,7 @@ select {
 }
 
 #selection-header {
-    padding: 20px;
+    padding: 5px;
     background: #fff;
     border-bottom: 2px solid #eee;
     display: flex;

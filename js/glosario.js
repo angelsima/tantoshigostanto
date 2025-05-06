@@ -1,4 +1,3 @@
-
 // js/glosario.js
 
 // Cuando el DOM esté listo
@@ -22,14 +21,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.querySelector('.mobile-categories-menu').style.display = 'block';
     });
 });
+
 // Cerrar overlay al hacer clic fuera del índice
 document.querySelector('.mobile-categories-menu')
   ?.addEventListener('click', e => {
-    // e.target será el fondo semitransparente solo si clicas fuera del nav
     if (e.target === e.currentTarget) {
       e.currentTarget.style.display = 'none';
     }
   });
+
 // Carga el manifest del glosario
 async function loadTerms() {
   try {
@@ -41,19 +41,37 @@ async function loadTerms() {
   }
 }
 
-// Renderiza el índice de términos (sin controles de latest/random)
+// Renderiza el índice de términos con categorías, subcategorías y "sin sub"
 function renderIndex(terms) {
   const idx = document.querySelector('.side-index');
   if (!idx) return;
 
- // 2) Construir HTML: por cada categoría
+  // ——> 1) AGRUPAR términos por categoría y subcategoría
+  const byCat = {};
+  terms.forEach(t => {
+    const cat = t.category || 'Sin categoría';
+    const sub = t.subcategory?.trim() || '__SIN_SUBCAT__';
+
+    if (!byCat[cat]) {
+      byCat[cat] = { __SIN_SUBCAT__: [] };
+    }
+
+    if (sub === '__SIN_SUBCAT__') {
+      byCat[cat].__SIN_SUBCAT__.push(t);
+    } else {
+      if (!byCat[cat][sub]) byCat[cat][sub] = [];
+      byCat[cat][sub].push(t);
+    }
+  });
+
+  // ——> 2) GENERAR HTML
   let html = '';
   Object.keys(byCat).sort((a,b) => a.localeCompare(b)).forEach(cat => {
     html += `<div class="index-category">
                <button type="button" class="category-toggle">${cat} ▼</button>
                <div class="index-subcats">`;
 
-    // 2.a) primero las sub‑categorías ordenadas
+    // 2.a) sub‑categorías ordenadas
     Object.keys(byCat[cat])
       .filter(sub => sub !== '__SIN_SUBCAT__')
       .sort((a,b) => a.localeCompare(b))
@@ -63,18 +81,20 @@ function renderIndex(terms) {
         <div class="index-subcategory">
           <button type="button" class="subcategory-toggle">${sub} ▶</button>
           <div class="index-items">
-            ${ arr.map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('') }
+            ${arr.map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('')}
           </div>
         </div>`;
       });
 
-    // 2.b) luego los términos "sin subcategoría"
+    // 2.b) términos sin subcategoría
     const noSub = byCat[cat].__SIN_SUBCAT__;
     if (noSub.length) {
       html += `<div class="index-subcategory no-sub">
-                 <div class="index-items">`
-                 + noSub.sort((x,y)=> x.term.localeCompare(y.term))
-                        .map(t=> `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('') +
+                 <div class="index-items">` +
+                   noSub
+                     .sort((x,y) => x.term.localeCompare(y.term))
+                     .map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`)
+                     .join('') +
                `</div>
                </div>`;
     }
@@ -85,10 +105,10 @@ function renderIndex(terms) {
 
   idx.innerHTML = html;
 
-   // 3) Ocultar todo al inicio
+  // ——> 3) OCULTAR todo inicialmente
   idx.querySelectorAll('.index-subcats, .index-items').forEach(el => el.style.display = 'none');
 
-  // 4) Toggle categorías
+  // ——> 4) Toggle categorías
   idx.querySelectorAll('.category-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const subcats = btn.nextElementSibling;
@@ -98,7 +118,7 @@ function renderIndex(terms) {
     });
   });
 
-  // 5) Toggle sub‑categorías
+  // ——> 5) Toggle sub‑categorías
   idx.querySelectorAll('.subcategory-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const items = btn.nextElementSibling;
@@ -108,7 +128,7 @@ function renderIndex(terms) {
     });
   });
 
- // 6) Click en término
+  // ——> 6) Click en término
   idx.querySelectorAll('.index-item').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -117,32 +137,32 @@ function renderIndex(terms) {
     });
   });
 
- // 7) Clonar a móvil con misma lógica
+  // ——> 7) Clonar a móvil (igual lógica)
   const mobIdx = document.querySelector('.mobile-side-index');
   if (mobIdx) {
     mobIdx.innerHTML = html;
     mobIdx.querySelectorAll('.index-subcats, .index-items').forEach(el => el.style.display = 'none');
-    // repite los mismos listeners de toggle y click…
-    mobIdx.querySelectorAll('.category-toggle').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const s=btn.nextElementSibling, o=s.style.display==='block';
-        s.style.display=o?'none':'block';
-        btn.textContent=btn.textContent.replace(o?'▲':'▼',o?'▼':'▲');
+
+    mobIdx.querySelectorAll('.category-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const s = btn.nextElementSibling, o = s.style.display === 'block';
+        s.style.display = o ? 'none' : 'block';
+        btn.textContent = btn.textContent.replace(o ? '▲' : '▼', o ? '▼' : '▲');
       });
     });
-    mobIdx.querySelectorAll('.subcategory-toggle').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const it=btn.nextElementSibling, o=it.style.display==='block';
-        it.style.display=o?'none':'block';
-        btn.textContent=btn.textContent.replace(o?'▼':'▶',o?'▶':'▼');
+    mobIdx.querySelectorAll('.subcategory-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const it = btn.nextElementSibling, o = it.style.display === 'block';
+        it.style.display = o ? 'none' : 'block';
+        btn.textContent = btn.textContent.replace(o ? '▼' : '▶', o ? '▶' : '▼');
       });
     });
-    mobIdx.querySelectorAll('.index-item').forEach(a=>{
-      a.addEventListener('click', e=>{
+    mobIdx.querySelectorAll('.index-item').forEach(a => {
+      a.addEventListener('click', e => {
         e.preventDefault();
         loadTerm(a.dataset.id);
-        window.location.hash=a.dataset.id;
-        document.querySelector('.mobile-categories-menu').style.display='none';
+        window.location.hash = a.dataset.id;
+        document.querySelector('.mobile-categories-menu').style.display = 'none';
       });
     });
   }

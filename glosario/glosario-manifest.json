@@ -43,5 +43,55 @@
     "id": "llados",
     "term": "Llados",
     "category": "Personaje-Narrador"
-     }
+     },
+  {
+    "id": "descomp",
+    "term": "Descompuesto",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "impreciso",
+    "term": "Impreciso",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "manifiesto",
+    "term": "Manifiesto",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "numerofilo",
+    "term": "Numerófilo",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "pasiv-agres",
+    "term": "Pasivo-agresivo",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "prefec",
+    "term": "Perfeccionista",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "trendy",
+    "term": "Trendy",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "verborrea",
+    "term": "Verborrea",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "wasap-sim",
+    "term": "Telegrafista en whatsapp",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "descomp",
+    "term": "Descompuesto",
+    "category": "Personaje-Narrador"
+     },
 ]

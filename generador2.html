@@ -189,7 +189,12 @@
             </div>
         </div>
     </div>
-
+<div class="popup-overlay" id="glossary-overlay"></div>
+<div class="glossary-popup" id="glossary-popup">
+    <span class="popup-close" onclick="closeGlossaryPopup()">×</span>
+    <h2 id="popup-title"></h2>
+    <div id="popup-content"></div>
+</div>
     <script>
         // Función para ordenar los elementos de un select
 function sortSelect(select) {
@@ -255,7 +260,7 @@ document.querySelectorAll('select').forEach(select => {
                     proportion: 'CADENCIAS/PROPORCIONES',
                     retoric: 'FIGURAS RETÓRICAS'
                 };
-               displayHTML += `<div class="selected-item">
+               displayHTML += `<div class="selected-item" data-term="${value}">
                     <span class="category">${categoryNames[cat]}:</span>
                     <span class="value">${value}</span>
                 </div>`;
@@ -281,6 +286,44 @@ document.querySelectorAll('select').forEach(select => {
             select.selectedIndex = 0;
             updateSelectedTraits();
         }
+        let glossaryData = [];
+
+// Cargar datos del glosario
+async function loadGlossaryData() {
+    try {
+        const response = await fetch('./glosario/glosario-manifest.json');
+        glossaryData = await response.json();
+    } catch (error) {
+        console.error('Error cargando el glosario:', error);
+    }
+}
+
+// Mostrar popup
+function showGlossaryPopup(termName) {
+    const term = glossaryData.find(t => t.term === termName);
+    if (!term) return;
+
+    const popup = document.getElementById('glossary-popup');
+    const overlay = document.getElementById('glossary-overlay');
+    const title = document.getElementById('popup-title');
+    const content = document.getElementById('popup-content');
+
+    title.textContent = term.term;
+    content.innerHTML = `
+        <p><strong>Definición:</strong> ${term.shortDef}</p>
+        ${term.longDef ? `<p>${term.longDef}</p>` : ''}
+        ${term.examples ? `<p><strong>Ejemplos:</strong> ${term.examples.join(', ')}</p>` : ''}
+    `;
+
+    popup.classList.add('active');
+    overlay.classList.add('active');
+}
+
+// Cerrar popup
+function closeGlossaryPopup() {
+    document.getElementById('glossary-popup').classList.remove('active');
+    document.getElementById('glossary-overlay').classList.remove('active');
+}
 // Al final de tu script actual, antes de los event listeners
 document.querySelectorAll('select').forEach(select => {
     sortSelect(select);
@@ -306,6 +349,13 @@ document.querySelectorAll('select').forEach(select => {
             });
             updateSelectedTraits();
         });
+        document.querySelectorAll('.selected-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            const term = item.dataset.term;
+            showGlossaryPopup(term);
+        });
+    });
+}
 
         // Inicialización
         document.querySelectorAll('select').forEach(select => {
@@ -322,6 +372,13 @@ document.querySelectorAll('select').forEach(select => {
             link.classList.add('activo');
         }
     });
+});
+        // Inicializar carga del glosario
+document.addEventListener('DOMContentLoaded', () => {
+    loadGlossaryData();
+    
+    // Cerrar popup al hacer clic fuera
+    document.getElementById('glossary-overlay').addEventListener('click', closeGlossaryPopup);
 });
     </script>
 </body>

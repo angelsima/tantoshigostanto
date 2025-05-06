@@ -268,7 +268,7 @@ body {
     top: 120px;
     height: calc(100vh - 140px);
     overflow-y: auto;
-  background: #EEFCFA; /* Añadir o asegurar que está presente */
+  background: #f5f3ff; /* Añadir o asegurar que está presente */
   border-radius: 8px; /* Opcional */
 }
 .index-items, .sub-items {

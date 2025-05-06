@@ -90,11 +90,6 @@
     "category": "Personaje-Narrador"
      },
   {
-    "id": "descomp",
-    "term": "Descompuesto",
-    "category": "Personaje-Narrador"
-     },
-  {
     "id": "anime",
     "term": "Anime",
     "category": "Estilos"

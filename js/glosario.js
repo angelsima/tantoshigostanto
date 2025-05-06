@@ -55,7 +55,9 @@ function renderIndex(terms) {
   });
 
   // Generar HTML
-  let html = '';
+  let html = `
+     <h3 class="categories-title">Categorías</h3>
+    `;
   Object.keys(byCat).sort((a,b) => a.localeCompare(b)).forEach(cat => {
     const subcats = Object.keys(byCat[cat])
       .filter(sub => sub !== '__SIN_SUBCAT__')

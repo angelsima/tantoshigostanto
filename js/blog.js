@@ -212,7 +212,7 @@ function loadRandomPost(posts) {
     window.location.hash = rnd.id;
 }
 
-// Mostrar últimos 10 textos
+// Mostrar últimos textos
 function showLatestPosts(posts) {
     const latest = posts.slice(0, 100);
     document.querySelector('.post-content').innerHTML = `
@@ -245,7 +245,7 @@ async function loadLatestPost(posts) {
     await loadPostContent(first.id);
     document.querySelector('.post-content').innerHTML = `
         <div class="latest-post-header">
-            <h4>Último texto publicado</h4>
+            <h4>Último texto publicado:</h4>
         </div>
         ${document.querySelector('.post-content').innerHTML}
     `;

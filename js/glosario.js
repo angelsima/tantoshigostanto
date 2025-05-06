@@ -70,19 +70,17 @@ function renderIndex(terms) {
                <div class="category-content">`;
 
     // Subcategorías
-    if (subcats.length > 0) {
-      html += `<div class="index-subcats">`;
+     if (subcats.length > 0) {
       subcats.forEach(sub => {
-        const items = byCat[cat][sub].sort((a,b) => a.term.localeCompare(b.term));
+        const items = byCat[cat][sub].sort((a, b) => a.term.localeCompare(b.term));
         html += `
           <div class="index-subcategory">
-            <button type="button" class="subcategory-toggle">${sub} ▶</button>
+            <button type="button" class="subcategory-toggle">${sub} ▼</button>
             <div class="index-items">
               ${items.map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('')}
             </div>
           </div>`;
       });
-      html += `</div>`;
     }
 
     // Términos sin subcategoría
@@ -111,15 +109,14 @@ function renderIndex(terms) {
   });
 
   // Toggle subcategorías
-  idx.querySelectorAll('.subcategory-toggle').forEach(btn => {
+ idx.querySelectorAll('.subcategory-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const items = btn.nextElementSibling;
       const isOpen = items.style.display === 'block';
       items.style.display = isOpen ? 'none' : 'block';
-      btn.innerHTML = btn.innerHTML.replace(isOpen ? '▼' : '▶', isOpen ? '▶' : '▼');
+      btn.innerHTML = btn.innerHTML.replace(isOpen ? '▲' : '▼', isOpen ? '▼' : '▲');
     });
   });
-
   // Clicks en términos
   idx.querySelectorAll('.index-item').forEach(a => {
     a.addEventListener('click', e => {

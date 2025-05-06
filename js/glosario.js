@@ -46,39 +46,69 @@ function renderIndex(terms) {
   const idx = document.querySelector('.side-index');
   if (!idx) return;
 
-  // Agrupar por categoría
-  const byCat = {};
-  terms.forEach(t => (byCat[t.category] ||= []).push(t));
-
-  // Construir HTML de categorías y términos
+ // 2) Construir HTML: por cada categoría
   let html = '';
-  Object.keys(byCat).sort((a, b) => a.localeCompare(b)).forEach(cat => {
-    const arr = byCat[cat].sort((a, b) => a.term.localeCompare(b.term));
+  Object.keys(byCat).sort((a,b) => a.localeCompare(b)).forEach(cat => {
     html += `<div class="index-category">
                <button type="button" class="category-toggle">${cat} ▼</button>
-               <div class="index-items">
-                 ${arr.map(t =>
-                   `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`
-                 ).join('')}
-               </div>
+               <div class="index-subcats">`;
+
+    // 2.a) primero las sub‑categorías ordenadas
+    Object.keys(byCat[cat])
+      .filter(sub => sub !== '__SIN_SUBCAT__')
+      .sort((a,b) => a.localeCompare(b))
+      .forEach(sub => {
+        const arr = byCat[cat][sub].sort((x,y) => x.term.localeCompare(y.term));
+        html += `
+        <div class="index-subcategory">
+          <button type="button" class="subcategory-toggle">${sub} ▶</button>
+          <div class="index-items">
+            ${ arr.map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('') }
+          </div>
+        </div>`;
+      });
+
+    // 2.b) luego los términos "sin subcategoría"
+    const noSub = byCat[cat].__SIN_SUBCAT__;
+    if (noSub.length) {
+      html += `<div class="index-subcategory no-sub">
+                 <div class="index-items">`
+                 + noSub.sort((x,y)=> x.term.localeCompare(y.term))
+                        .map(t=> `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('') +
+               `</div>
+               </div>`;
+    }
+
+    html += `  </div>
              </div>`;
   });
+
   idx.innerHTML = html;
 
-  // Plegar todo inicialmente
-  idx.querySelectorAll('.index-items').forEach(el => el.style.display = 'none');
+   // 3) Ocultar todo al inicio
+  idx.querySelectorAll('.index-subcats, .index-items').forEach(el => el.style.display = 'none');
 
-  // Attach toggles de categoría
+  // 4) Toggle categorías
   idx.querySelectorAll('.category-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
-      const items = btn.nextElementSibling;
-      const open = items.style.display === 'block';
-      items.style.display = open ? 'none' : 'block';
+      const subcats = btn.nextElementSibling;
+      const open = subcats.style.display === 'block';
+      subcats.style.display = open ? 'none' : 'block';
       btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
     });
   });
 
-  // Clic en escritorio: cargar término
+  // 5) Toggle sub‑categorías
+  idx.querySelectorAll('.subcategory-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const items = btn.nextElementSibling;
+      const open = items.style.display === 'block';
+      items.style.display = open ? 'none' : 'block';
+      btn.textContent = btn.textContent.replace(open ? '▼' : '▶', open ? '▶' : '▼');
+    });
+  });
+
+ // 6) Click en término
   idx.querySelectorAll('.index-item').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -87,31 +117,32 @@ function renderIndex(terms) {
     });
   });
 
-  // Clonar al overlay móvil
+ // 7) Clonar a móvil con misma lógica
   const mobIdx = document.querySelector('.mobile-side-index');
   if (mobIdx) {
     mobIdx.innerHTML = html;
-
-    // Plegar en móvil
-    mobIdx.querySelectorAll('.index-items').forEach(el => el.style.display = 'none');
-
-    // Attach toggles en móvil
-    mobIdx.querySelectorAll('.category-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const items = btn.nextElementSibling;
-        const open = items.style.display === 'block';
-        items.style.display = open ? 'none' : 'block';
-        btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
+    mobIdx.querySelectorAll('.index-subcats, .index-items').forEach(el => el.style.display = 'none');
+    // repite los mismos listeners de toggle y click…
+    mobIdx.querySelectorAll('.category-toggle').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const s=btn.nextElementSibling, o=s.style.display==='block';
+        s.style.display=o?'none':'block';
+        btn.textContent=btn.textContent.replace(o?'▲':'▼',o?'▼':'▲');
       });
     });
-
-    // Clic en móvil: carga y cierra overlay
-    mobIdx.querySelectorAll('.index-item').forEach(a => {
-      a.addEventListener('click', e => {
+    mobIdx.querySelectorAll('.subcategory-toggle').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const it=btn.nextElementSibling, o=it.style.display==='block';
+        it.style.display=o?'none':'block';
+        btn.textContent=btn.textContent.replace(o?'▼':'▶',o?'▶':'▼');
+      });
+    });
+    mobIdx.querySelectorAll('.index-item').forEach(a=>{
+      a.addEventListener('click', e=>{
         e.preventDefault();
         loadTerm(a.dataset.id);
-        window.location.hash = a.dataset.id;
-        document.querySelector('.mobile-categories-menu').style.display = 'none';
+        window.location.hash=a.dataset.id;
+        document.querySelector('.mobile-categories-menu').style.display='none';
       });
     });
   }

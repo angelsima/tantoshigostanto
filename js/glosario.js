@@ -86,18 +86,14 @@ function renderIndex(terms) {
         </div>`;
       });
 
-    // 2.b) términos sin subcategoría
-    const noSub = byCat[cat].__SIN_SUBCAT__;
-    if (noSub.length) {
-      html += `<div class="index-subcategory no-sub">
-                 <div class="index-items">` +
-                   noSub
-                     .sort((x,y) => x.term.localeCompare(y.term))
-                     .map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`)
-                     .join('') +
-               `</div>
-               </div>`;
-    }
+  +   // 2.b) términos sin subcategoría: los ponemos directamente dentro de .index-subcats
++   const noSub = byCat[cat].__SIN_SUBCAT__;
++   if (noSub.length) {
++     html += noSub
++       .sort((x,y) => x.term.localeCompare(y.term))
++       .map(t => `<a href="#${t.id}" class="index-item no-sub-item" data-id="${t.id}">${t.term}</a>`)
++       .join('');
++   }
 
     html += `  </div>
              </div>`;

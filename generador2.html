@@ -267,6 +267,12 @@ document.querySelectorAll('select').forEach(select => {
             });
 
             document.getElementById('selected-traits').innerHTML = displayHTML || 'Ninguna selección';
+       document.querySelectorAll('.selected-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            const term = item.dataset.term;
+            showGlossaryPopup(term);
+        });
+    });
         }
 
         // Función para selección aleatoria
@@ -349,12 +355,7 @@ document.querySelectorAll('select').forEach(select => {
             });
             updateSelectedTraits();
         });
-        document.querySelectorAll('.selected-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            const term = item.dataset.term;
-            showGlossaryPopup(term);
-        });
-    });
+        
 
 
         // Inicialización

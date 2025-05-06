@@ -94,4 +94,118 @@
     "term": "Descompuesto",
     "category": "Personaje-Narrador"
      },
+  {
+    "id": "anime",
+    "term": "Anime",
+    "category": "Estilos"
+     },
+  {
+    "id": "belico",
+    "term": "Bélico",
+    "category": "Estilos"
+     },
+  {
+    "id": "bricomania",
+    "term": "Bricomanía",
+    "category": "Estilos"
+     },
+  {
+    "id": "catequ",
+    "term": "Catequesis",
+    "category": "Estilos"
+     },
+  {
+    "id": "cine-negro",
+    "term": "Cine Negro",
+    "category": "Estilos"
+     },
+  {
+    "id": "comedia-romant",
+    "term": "Comedia Romántica",
+    "category": "Estilos"
+     },
+  {
+    "id": "docu-animal",
+    "term": "Documental de animales",
+    "category": "Estilos"
+     },
+  {
+    "id": "fantasy",
+    "term": "Fantasía",
+    "category": "Estilos"
+     },
+  {
+    "id": "infantil",
+    "term": "Infantil",
+    "category": "Estilos"
+     },
+  {
+    "id": "medieval",
+    "term": "Medieval",
+    "category": "Estilos"
+     },
+  {
+    "id": "quinqui",
+    "term": "Cine Quinqui",
+    "category": "Estilos"
+     },
+  {
+    "id": "serie-b",
+    "term": "Serie B",
+    "category": "Estilos"
+     },
+  {
+    "id": "telenovela",
+    "term": "Telenovela",
+    "category": "Estilos"
+     },
+  {
+    "id": "terror",
+    "term": "Terror",
+    "category": "Estilos"
+     },
+  {
+    "id": "thriller-pol",
+    "term": "Thriller policíaco",
+    "category": "Estilos"
+     },
+  {
+    "id": "western",
+    "term": "Western",
+    "category": "Estilos"
+     },
+  {
+    "id": "rebobinado",
+    "term": "Rebobinado",
+    "category": "Formato",
+    "sub-category": "Estructura Narrativa"
+     },
+  {
+    "id": "aforismo",
+    "term": "Aforismo",
+    "category": "Formato"
+     },
+  {
+    "id": "microrrel",
+    "term": "Microrrelato",
+    "category": "Formato"
+     },
+  {
+    "id": "haiku",
+    "term": "Haiku",
+    "category": "Formato",
+    "sub-category": "Poesía"
+     },
+   {
+    "id": "soneto",
+    "term": "Soneto",
+    "category": "Formato",
+    "sub-category": "Poesía"
+     },
+   {
+    "id": "verso-libre",
+    "term": "Verso Libre",
+    "category": "Formato",
+    "sub-category": "Poesía"
+     }
 ]

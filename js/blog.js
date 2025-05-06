@@ -175,7 +175,7 @@ function renderIndex(posts) {
       mobileSideIndex.querySelectorAll('.index-item').forEach(item => {
         item.addEventListener('click', e => {
           e.preventDefault();
-          loadPostContent(item.dataset.post);
+          loadPostContent(item.dataset.post, sortedPosts);
           window.location.hash = item.dataset.post;
           document.querySelector('.mobile-categories-menu').style.display = 'none';
         });
@@ -249,7 +249,7 @@ function showLatestPosts(posts) {
 async function loadLatestPost(posts) {
     if (!posts.length) return;
     const first = posts[0];
-    await loadPostContent(first.id);
+    await loadPostContent(first.id, posts);
     document.querySelector('.post-content').innerHTML = `
         <div class="latest-post-header">
             <h4>Último texto publicado:</h4>

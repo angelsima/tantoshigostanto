@@ -192,7 +192,7 @@ async function loadPostContent(postId, sortedPosts) {
         // Calcular posición y total
         const postIndex = sortedPosts.findIndex(p => p.id === postId);
         const totalPosts = sortedPosts.length;
-        const position = postIndex !== -1 ? postIndex + 1 : '?'; // +1 porque los arrays empiezan en 0
+        const position = postIndex !== -1 ? (totalPosts - postIndex) : '?'; // 
         
         document.querySelector('.post-content').innerHTML = `
             <article class="blog-post" id="${postId}">

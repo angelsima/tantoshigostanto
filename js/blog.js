@@ -101,8 +101,8 @@ function renderIndex(posts) {
             .sort(([a],[b])=>a.localeCompare(b))
             .forEach(([sub, arr]) => {
               html += `<div class="subcategory collapsed">
-                         <button class="sub-toggle">${sub} ▼</button>
-                         <div class="sub-items">`;
+                         <button class="subcategory-toggle">${sub} ▼</button>
+                         <div class="index-items">`;
               arr.sort((a,b)=>a.title.localeCompare(b.title))
                  .forEach(p => {
                    html += `<a href="#${p.id}" class="index-item" data-post="${p.id}">${p.title}</a>`;
@@ -116,7 +116,7 @@ function renderIndex(posts) {
     indexContainer.innerHTML = html;
 
     // colapsables escritorio
-    indexContainer.querySelectorAll('.index-items, .sub-items').forEach(el => el.style.display = 'none');
+    indexContainer.querySelectorAll('.category-content, .index-items').forEach(el => el.style.display = 'none');
     indexContainer.querySelectorAll('.category-toggle').forEach(btn => {
       btn.addEventListener('click', e => {
         const items = btn.nextElementSibling;
@@ -125,7 +125,7 @@ function renderIndex(posts) {
         btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
       });
     });
-    indexContainer.querySelectorAll('.sub-toggle').forEach(btn => {
+    indexContainer.querySelectorAll('.subcategory-toggle').forEach(btn => {
       btn.addEventListener('click', e => {
         const items = btn.nextElementSibling;
         const open = items.style.display === 'block';
@@ -152,7 +152,7 @@ function renderIndex(posts) {
       mobileSideIndex.querySelector('.index-controls')?.remove();
 
       // re‑bind colapsables en móvil
-      mobileSideIndex.querySelectorAll('.index-items, .sub-items')
+      mobileSideIndex.querySelectorAll('.category-content, .index-items')
                      .forEach(el => el.style.display = 'none');
       mobileSideIndex.querySelectorAll('.category-toggle').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -162,7 +162,7 @@ function renderIndex(posts) {
           btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
         });
       });
-      mobileSideIndex.querySelectorAll('.sub-toggle').forEach(btn => {
+      mobileSideIndex.querySelectorAll('.subcategory-toggle').forEach(btn => {
         btn.addEventListener('click', () => {
           const items = btn.nextElementSibling;
           const open = items.style.display === 'block';

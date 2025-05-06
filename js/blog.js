@@ -219,7 +219,7 @@ function showLatestPosts(posts) {
         <div class="latest-posts">
             <h4>Últimos textos</h4>
             <ul>
-                ${latest.map(p => `
+               ${latest.map((p, i) => `
                     <li>
                       <a href="#${p.id}" class="latest-post-item" data-post="${p.id}">
                         ${latest.length - i}. ${p.title} 

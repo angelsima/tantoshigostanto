@@ -33,7 +33,7 @@ document.querySelector('.mobile-categories-menu')
 // Carga el manifest del glosario
 async function loadTerms() {
   try {
-    const resp = await fetch('glosario/glosario-manifest.json');
+    const resp = await fetch('./glosario/glosario-manifest.json');
     return await resp.json();
   } catch (e) {
     console.error('Error cargando términos:', e);

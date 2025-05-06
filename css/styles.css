@@ -31,11 +31,24 @@ body {
   color: #202020;
   font-style: italic;
   }
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 40px; /* Ajusta según tu preferencia */
+  width: auto;
+}
 @media (max-width: 768px) {
   .header {
         flex-direction: column;
         padding: 15px;
     }
+  .logo-img {
+    height: 30px;
+  }
     }
 .nav-divider {
     height: 24px;

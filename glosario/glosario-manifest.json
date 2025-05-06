@@ -173,7 +173,7 @@
     "id": "rebobinado",
     "term": "Rebobinado",
     "category": "Formato",
-    "sub-category": "Estructura Narrativa"
+    "subcategory": "Estructura Narrativa"
      },
   {
     "id": "aforismo",
@@ -189,18 +189,18 @@
     "id": "haiku",
     "term": "Haiku",
     "category": "Formato",
-    "sub-category": "Poesía"
+    "subcategory": "Poesía"
      },
    {
     "id": "soneto",
     "term": "Soneto",
     "category": "Formato",
-    "sub-category": "Poesía"
+    "subcategory": "Poesía"
      },
    {
     "id": "verso-libre",
     "term": "Verso Libre",
     "category": "Formato",
-    "sub-category": "Poesía"
+    "subcategory": "Poesía"
      }
 ]

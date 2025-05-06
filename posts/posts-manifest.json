@@ -3,7 +3,8 @@
     "id": "lipograma-a",
     "title": "Lipograma en A",
     "category": "Juegos lingüísticos",
-    "date": "2025-04-15T10:00:00Z"},
+    "date": "2025-04-15T10:00:00Z"
+  },
   {
     "id": "lipograma-e",
     "title": "Lipograma en E",
@@ -29,10 +30,83 @@
     "date": "2025-04-15T10:00:00Z"
   },
   {
+    "id": "solo-sintg-nom",
+    "title": "Solo sintagmas nominales",
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "onomato",
+    "title": "Onomatopeyas",
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "silaba-encadenada",
+    "title": "Sílaba encadenada",
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "infinitivos",
+    "title": "Solo infinitivos",
+    "category": "Juegos lingüísticos",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
     "id": "soneto",
     "title": "Soneto",
     "category": "Formatos",
     "subcategory": "Poesía",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "rebobinado",
+    "title": "Rebobinado",
+    "category": "Formato",
+     "subcategory": "Estructura Narrativa",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "descompuesto",
+    "title": "Descompuesto",
+    "category": "Personaje-Narrador",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "impreciso",
+    "title": "Impreciso",
+    "category": "Personaje-Narrador",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "manifiesto",
+    "title": "Manifiesto del higo rÚstico",
+    "category": "Personaje-Narrador",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "numerofilo",
+    "title": "Numerófilo",
+    "category": "Personaje-Narrador",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "pasivo-agresivo",
+    "title": "Pasivo-agresivo",
+    "category": "Personaje-Narrador",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "trendy",
+    "title": "Trendy",
+    "category": "Personaje-Narrador",
+    "date": "2025-04-15T10:00:00Z"
+  },
+  {
+    "id": "wasap-sim",
+    "title": "Telegrafista en wasap",
+    "category": "Personaje-Narrador",
     "date": "2025-04-15T10:00:00Z"
   }
 ]

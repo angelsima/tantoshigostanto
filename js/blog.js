@@ -222,7 +222,8 @@ function showLatestPosts(posts) {
                 ${latest.map(p => `
                     <li>
                       <a href="#${p.id}" class="latest-post-item" data-post="${p.id}">
-                        ${p.title} <span class="post-date">(${new Date(p.date).toLocaleDateString()})</span>
+                        ${latest.length - i}. ${p.title} 
+                        <span class="post-date">(${new Date(p.date).toLocaleDateString()})</span>
                       </a>
                     </li>
                 `).join('')}

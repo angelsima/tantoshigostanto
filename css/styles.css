@@ -241,10 +241,10 @@ body {
 /* Estilos específicos del generador */
 #generator-container {
     background: #fff;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .generator-category {

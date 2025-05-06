@@ -330,6 +330,29 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+/* --- overrides para que las sub‑categorías sean texto en negrita sin recuadro --- */
+.index-subcategory,
+.index-subcategory .subcategory-toggle {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* que el botón actúe como un simple texto bold */
+.subcategory-toggle {
+  display: inline !important;
+  font-weight: bold !important;
+  color: inherit;        /* hereda color de texto normal */
+  cursor: pointer;       /* mantiene el puntero para indicar que es clicable */
+}
+
+/* opcional: un pequeño spacing antes de cada sub‑categoría */
+.index-subcategory + .index-subcategory .subcategory-toggle,
+.index-subcategory .subcategory-toggle + .index-items {
+  margin-top: 0.5em;
+}
 
 .index-items {
     padding-left: 15px;

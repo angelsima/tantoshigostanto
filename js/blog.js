@@ -138,7 +138,7 @@ function renderIndex(posts) {
     indexContainer.querySelectorAll('.index-item').forEach(item => {
       item.addEventListener('click', e => {
         e.preventDefault();
-        loadPostContent(item.dataset.post);
+        loadPostContent(item.dataset.post, sortedPosts);
         window.location.hash = item.dataset.post;
       });
     });
@@ -185,12 +185,18 @@ function renderIndex(posts) {
 
 
 // Carga un post dentro de .post-content
-async function loadPostContent(postId) {
+async function loadPostContent(postId, sortedPosts) {
     try {
         const resp = await fetch(`posts/${postId}.html`);
         const html  = await resp.text();
+        // Calcular posición y total
+        const postIndex = sortedPosts.findIndex(p => p.id === postId);
+        const totalPosts = sortedPosts.length;
+        const position = postIndex !== -1 ? postIndex + 1 : '?'; // +1 porque los arrays empiezan en 0
+        
         document.querySelector('.post-content').innerHTML = `
             <article class="blog-post" id="${postId}">
+            <div class="post-number">${position}/${totalPosts}</div>
                 ${html}
             </article>
         `;
@@ -208,7 +214,7 @@ async function loadPostContent(postId) {
 function loadRandomPost(posts) {
     if (!posts.length) return;
     const rnd = posts[Math.floor(Math.random() * posts.length)];
-    loadPostContent(rnd.id);
+    loadPostContent(rnd.id, posts);
     window.location.hash = rnd.id;
 }
 
@@ -233,7 +239,7 @@ function showLatestPosts(posts) {
     document.querySelectorAll('.latest-post-item').forEach(item => {
         item.addEventListener('click', e => {
             e.preventDefault();
-            loadPostContent(item.dataset.post);
+            loadPostContent(item.dataset.post, posts);
             window.location.hash = item.dataset.post;
         });
     });

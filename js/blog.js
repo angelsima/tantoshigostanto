@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 3) Cargar contenido inicial según hash o último post
     const hash = window.location.hash.replace('#', '');
     if (hash && sortedPosts.find(p => p.id === hash)) {
-        loadPostContent(hash);
+        loadPostContent(hash, sortedPosts);
     } else {
         loadLatestPost(sortedPosts);
     }
@@ -138,7 +138,7 @@ function renderIndex(posts) {
     indexContainer.querySelectorAll('.index-item').forEach(item => {
       item.addEventListener('click', e => {
         e.preventDefault();
-        loadPostContent(item.dataset.post, sortedPosts);
+        loadPostContent(item.dataset.post, posts);
         window.location.hash = item.dataset.post;
       });
     });
@@ -175,7 +175,7 @@ function renderIndex(posts) {
       mobileSideIndex.querySelectorAll('.index-item').forEach(item => {
         item.addEventListener('click', e => {
           e.preventDefault();
-          loadPostContent(item.dataset.post, sortedPosts);
+          loadPostContent(item.dataset.post, posts);
           window.location.hash = item.dataset.post;
           document.querySelector('.mobile-categories-menu').style.display = 'none';
         });

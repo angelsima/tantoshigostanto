@@ -440,8 +440,7 @@ body {
 }
 .latest-post-header {
             border-radius: 8px;
-       border-left: 4px solid #7c3aed;
-}
+       }
 
 .latest-post-header h4 {
     color: #2c3e50;

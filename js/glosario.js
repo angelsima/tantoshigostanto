@@ -1,28 +1,23 @@
 // js/glosario.js
 
-// Cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', async () => {
   const terms = await loadTerms();
   renderIndex(terms);
 
-  // Mensaje inicial
   const main = document.querySelector('.glossary-content');
   main.innerHTML = '<article><p>Selecciona un término del índice para ver su contenido.</p></article>';
 
-  // Si hay hash, carga ese término
   const hash = window.location.hash.replace('#','');
   if (hash && terms.find(t => t.id === hash)) {
     loadTerm(hash);
   }
 
-  // Botón móvil para abrir el overlay
   document.querySelector('.mobile-index-header')
     ?.addEventListener('click', () => {
       document.querySelector('.mobile-categories-menu').style.display = 'block';
     });
 });
 
-// Cerrar overlay al hacer clic fuera del índice
 document.querySelector('.mobile-categories-menu')
   ?.addEventListener('click', e => {
     if (e.target === e.currentTarget) {
@@ -30,7 +25,6 @@ document.querySelector('.mobile-categories-menu')
     }
   });
 
-// Carga el manifest del glosario
 async function loadTerms() {
   try {
     const resp = await fetch('./glosario/glosario-manifest.json');
@@ -41,90 +35,90 @@ async function loadTerms() {
   }
 }
 
-// Renderiza el índice de términos con categorías, subcategorías y "sin sub"
 function renderIndex(terms) {
   const idx = document.querySelector('.side-index');
   if (!idx) return;
 
-  // ——> 1) AGRUPAR términos por categoría y subcategoría
+  // Agrupar términos
   const byCat = {};
   terms.forEach(t => {
     const cat = t.category || 'Sin categoría';
     const sub = t.subcategory?.trim() || '__SIN_SUBCAT__';
-
+    
     if (!byCat[cat]) {
       byCat[cat] = { __SIN_SUBCAT__: [] };
     }
 
-    if (sub === '__SIN_SUBCAT__') {
-      byCat[cat].__SIN_SUBCAT__.push(t);
-    } else {
-      if (!byCat[cat][sub]) byCat[cat][sub] = [];
-      byCat[cat][sub].push(t);
-    }
+    sub === '__SIN_SUBCAT__' 
+      ? byCat[cat].__SIN_SUBCAT__.push(t)
+      : (byCat[cat][sub] = byCat[cat][sub] || []).push(t);
   });
 
-  // ——> 2) GENERAR HTML
+  // Generar HTML
   let html = '';
   Object.keys(byCat).sort((a,b) => a.localeCompare(b)).forEach(cat => {
+    const subcats = Object.keys(byCat[cat])
+      .filter(sub => sub !== '__SIN_SUBCAT__')
+      .sort((a,b) => a.localeCompare(b));
+    
+    const noSub = byCat[cat].__SIN_SUBCAT__.sort((a,b) => a.term.localeCompare(b.term));
+
     html += `<div class="index-category">
                <button type="button" class="category-toggle">${cat} ▼</button>
-               <div class="index-subcats">`;
+               <div class="category-content">`;
 
-    // 2.a) sub‑categorías ordenadas
-    Object.keys(byCat[cat])
-      .filter(sub => sub !== '__SIN_SUBCAT__')
-      .sort((a,b) => a.localeCompare(b))
-      .forEach(sub => {
-        const arr = byCat[cat][sub].sort((x,y) => x.term.localeCompare(y.term));
+    // Subcategorías
+    if (subcats.length > 0) {
+      html += `<div class="index-subcats">`;
+      subcats.forEach(sub => {
+        const items = byCat[cat][sub].sort((a,b) => a.term.localeCompare(b.term));
         html += `
-        <div class="index-subcategory">
-          <button type="button" class="subcategory-toggle">${sub} ▶</button>
-          <div class="index-items">
-            ${arr.map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('')}
-          </div>
-        </div>`;
+          <div class="index-subcategory">
+            <button type="button" class="subcategory-toggle">${sub} ▶</button>
+            <div class="index-items">
+              ${items.map(t => `<a href="#${t.id}" class="index-item" data-id="${t.id}">${t.term}</a>`).join('')}
+            </div>
+          </div>`;
       });
+      html += `</div>`;
+    }
 
-  +   // 2.b) términos sin subcategoría: los ponemos directamente dentro de .index-subcats
-+   const noSub = byCat[cat].__SIN_SUBCAT__;
-+   if (noSub.length) {
-+     html += noSub
-+       .sort((x,y) => x.term.localeCompare(y.term))
-+       .map(t => `<a href="#${t.id}" class="index-item no-sub-item" data-id="${t.id}">${t.term}</a>`)
-+       .join('');
-+   }
+    // Términos sin subcategoría
+    if (noSub.length > 0) {
+      html += `<div class="index-no-sub">
+                ${noSub.map(t => `<a href="#${t.id}" class="index-item no-sub-item" data-id="${t.id}">${t.term}</a>`).join('')}
+              </div>`;
+    }
 
-    html += `  </div>
-             </div>`;
+    html += `</div></div>`;
   });
 
   idx.innerHTML = html;
 
-  // ——> 3) OCULTAR todo inicialmente
-  idx.querySelectorAll('.index-subcats, .index-items').forEach(el => el.style.display = 'none');
+  // Configurar interactividad
+  idx.querySelectorAll('.category-content, .index-items').forEach(el => el.style.display = 'none');
 
-  // ——> 4) Toggle categorías
+  // Toggle categorías
   idx.querySelectorAll('.category-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
-      const subcats = btn.nextElementSibling;
-      const open = subcats.style.display === 'block';
-      subcats.style.display = open ? 'none' : 'block';
-      btn.textContent = btn.textContent.replace(open ? '▲' : '▼', open ? '▼' : '▲');
+      const content = btn.nextElementSibling;
+      const isOpen = content.style.display === 'block';
+      content.style.display = isOpen ? 'none' : 'block';
+      btn.innerHTML = btn.innerHTML.replace(isOpen ? '▲' : '▼', isOpen ? '▼' : '▲');
     });
   });
 
-  // ——> 5) Toggle sub‑categorías
+  // Toggle subcategorías
   idx.querySelectorAll('.subcategory-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const items = btn.nextElementSibling;
-      const open = items.style.display === 'block';
-      items.style.display = open ? 'none' : 'block';
-      btn.textContent = btn.textContent.replace(open ? '▼' : '▶', open ? '▶' : '▼');
+      const isOpen = items.style.display === 'block';
+      items.style.display = isOpen ? 'none' : 'block';
+      btn.innerHTML = btn.innerHTML.replace(isOpen ? '▼' : '▶', isOpen ? '▶' : '▼');
     });
   });
 
-  // ——> 6) Click en término
+  // Clicks en términos
   idx.querySelectorAll('.index-item').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
@@ -133,26 +127,30 @@ function renderIndex(terms) {
     });
   });
 
-  // ——> 7) Clonar a móvil (igual lógica)
+  // Clonar para móvil
   const mobIdx = document.querySelector('.mobile-side-index');
   if (mobIdx) {
-    mobIdx.innerHTML = html;
-    mobIdx.querySelectorAll('.index-subcats, .index-items').forEach(el => el.style.display = 'none');
+    mobIdx.innerHTML = idx.innerHTML;
+    mobIdx.querySelectorAll('.category-content, .index-items').forEach(el => el.style.display = 'none');
 
     mobIdx.querySelectorAll('.category-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
-        const s = btn.nextElementSibling, o = s.style.display === 'block';
-        s.style.display = o ? 'none' : 'block';
-        btn.textContent = btn.textContent.replace(o ? '▲' : '▼', o ? '▼' : '▲');
+        const content = btn.nextElementSibling;
+        const isOpen = content.style.display === 'block';
+        content.style.display = isOpen ? 'none' : 'block';
+        btn.innerHTML = btn.innerHTML.replace(isOpen ? '▲' : '▼', isOpen ? '▼' : '▲');
       });
     });
+
     mobIdx.querySelectorAll('.subcategory-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
-        const it = btn.nextElementSibling, o = it.style.display === 'block';
-        it.style.display = o ? 'none' : 'block';
-        btn.textContent = btn.textContent.replace(o ? '▼' : '▶', o ? '▶' : '▼');
+        const items = btn.nextElementSibling;
+        const isOpen = items.style.display === 'block';
+        items.style.display = isOpen ? 'none' : 'block';
+        btn.innerHTML = btn.innerHTML.replace(isOpen ? '▼' : '▶', isOpen ? '▶' : '▼');
       });
     });
+
     mobIdx.querySelectorAll('.index-item').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
@@ -164,14 +162,12 @@ function renderIndex(terms) {
   }
 }
 
-// Carga y muestra un término
 async function loadTerm(id) {
   const term = (await loadTerms()).find(t => t.id === id);
   const main = document.querySelector('.glossary-content');
   try {
     const resp = await fetch(`glosario/${id}.html`);
-    const txt  = await resp.text();
-    main.innerHTML = `<article>${txt}</article>`;
+    main.innerHTML = `<article>${await resp.text()}</article>`;
   } catch {
     main.innerHTML = `<article>
                         <h2>${term.term}</h2>

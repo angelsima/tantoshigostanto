@@ -198,7 +198,7 @@ async function loadPostContent(postId, sortedPosts) {
         const postIndex = sortedPosts.findIndex(p => p.id === postId);
         const totalPosts = sortedPosts.length;
         const position = postIndex !== -1 ? (totalPosts - postIndex) : '?'; // 
-       const isInitialLoad = !document.querySelector('.blog-post'); 
+      
         let contentHTML = `
             <article class="blog-post" id="${postId}">
                 <div class="post-navigation">
@@ -210,20 +210,15 @@ async function loadPostContent(postId, sortedPosts) {
             </article>
         `;
 
-        if (isInitialLoad) {
-            contentHTML = `
-                <div class="latest-post-header">
-                    <h4>Último texto publicado:</h4>
-                </div>
-                ${contentHTML}
-            `;
-        }
+       
        document.querySelector('.post-content').innerHTML = contentHTML;
+        if (postId) {
          // Añadir event listeners a las flechas
         document.querySelector('.arrow-left')?.addEventListener('click', () => navigatePost('prev'));
         document.querySelector('.arrow-right')?.addEventListener('click', () => navigatePost('next'));
         setupSwipeNavigation(document.querySelector('.post-content'));
     } 
+            }
     catch (err) {
         console.error("Error cargando post:", err);
         document.querySelector('.post-content').innerHTML = `
@@ -279,6 +274,7 @@ function showLatestPosts(posts) {
             </ul>
         </div>
     `;
+    setupSwipeNavigation(document.querySelector('.post-content'));
     document.querySelectorAll('.latest-post-item').forEach(item => {
         item.addEventListener('click', e => {
             e.preventDefault();
@@ -348,10 +344,4 @@ async function loadLatestPost(posts) {
     if (!posts.length) return;
     const first = posts[0];
     await loadPostContent(first.id, posts);
-    document.querySelector('.post-content').innerHTML = `
-        <div class="latest-post-header">
-            <h4>Último texto publicado:</h4>
-        </div>
-        ${document.querySelector('.post-content').innerHTML}
-    `;
 }

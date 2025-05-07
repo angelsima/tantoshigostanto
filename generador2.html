@@ -191,7 +191,6 @@
 <div class="popup-overlay" id="glossary-overlay"></div>
 <div class="glossary-popup" id="glossary-popup">
     <span class="popup-close" onclick="closeGlossaryPopup()">×</span>
-    <h2 id="popup-title"></h2>
     <div id="popup-content"></div>
 </div>
     <script>
@@ -313,7 +312,6 @@ async function showGlossaryPopup(termName) {
     const title = document.getElementById('popup-title');
     const content = document.getElementById('popup-content');
 
-    title.textContent = term.term;
    try {
         // Cargar el HTML específico del término
         const response = await fetch(`./glosario/${term.id}.html`);

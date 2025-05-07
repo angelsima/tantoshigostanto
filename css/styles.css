@@ -619,8 +619,8 @@ select {
 }
 
 .selected-item {
-    background: #7c3aed;
-  color: white;
+    background: #efe6ff;
+  color: #7c3aed;
      padding: 5px 10px;
     border-radius: 15px;
     display: flex;

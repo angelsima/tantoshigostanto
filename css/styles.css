@@ -620,7 +620,7 @@ select {
 
 .selected-item {
     background: #7c3aed;
-  opacity: 0.1;
+  background-opacity: 0.1;
     padding: 5px 10px;
     border-radius: 15px;
     display: flex;

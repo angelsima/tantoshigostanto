@@ -305,7 +305,7 @@ async function loadGlossaryData() {
 }
 
 // Mostrar popup
-function showGlossaryPopup(termName) {
+async function showGlossaryPopup(termName) {
     const term = glossaryData.find(t => t.term === termName);
     if (!term) return;
 

@@ -192,6 +192,7 @@ body {
     border: none;
     font-size: 1.3em;
     cursor: pointer;
+      color: #6E0C1B;
     opacity: 0.3;
     transition: opacity 0.3s;
     padding: 0 15px;

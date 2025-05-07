@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     globalPosts = sortedPosts;
 const postContent = document.querySelector('.post-content');
-if (postContent) {
-    setupSwipeNavigation(postContent);
-}
+
     // 2) Renderizar índice (escritorio y móvil)
     renderIndex(sortedPosts);
 
@@ -18,8 +16,10 @@ if (postContent) {
     const hash = window.location.hash.replace('#', '');
     if (hash && sortedPosts.find(p => p.id === hash)) {
         loadPostContent(hash, sortedPosts);
+        setupSwipeNavigation(postContent);
     } else {
         loadLatestPost(sortedPosts);
+        setupSwipeNavigation(postContent);
     }
 
     // 4) Botones de escritorio
@@ -198,8 +198,8 @@ async function loadPostContent(postId, sortedPosts) {
         const postIndex = sortedPosts.findIndex(p => p.id === postId);
         const totalPosts = sortedPosts.length;
         const position = postIndex !== -1 ? (totalPosts - postIndex) : '?'; // 
-        
-       document.querySelector('.post-content').innerHTML = `
+       const isInitialLoad = !document.querySelector('.blog-post'); 
+        let contentHTML = `
             <article class="blog-post" id="${postId}">
                 <div class="post-navigation">
                     <button class="nav-arrow arrow-left">←</button>
@@ -209,10 +209,22 @@ async function loadPostContent(postId, sortedPosts) {
                 ${html}
             </article>
         `;
+
+        if (isInitialLoad) {
+            contentHTML = `
+                <div class="latest-post-header">
+                    <h4>Último texto publicado:</h4>
+                </div>
+                ${contentHTML}
+            `;
+        }
+       document.querySelector('.post-content').innerHTML = contentHTML;
          // Añadir event listeners a las flechas
         document.querySelector('.arrow-left')?.addEventListener('click', () => navigatePost('prev'));
         document.querySelector('.arrow-right')?.addEventListener('click', () => navigatePost('next'));
-    } catch (err) {
+        setupSwipeNavigation(document.querySelector('.post-content'));
+    } 
+    catch (err) {
         console.error("Error cargando post:", err);
         document.querySelector('.post-content').innerHTML = `
             <div class="error-message">
@@ -302,17 +314,11 @@ function setupSwipeNavigation(element) {
 
     element.addEventListener('touchend', (e) => {
         if (!startX || !startY) return;
- let newIndex;
-    if (deltaX > 0) { // Swipe izquierda
-        newIndex = currentIndex - 1; // Mismo comportamiento que flecha izquierda
-    } else { // Swipe derecha
-        newIndex = currentIndex + 1; // Mismo que flecha derecha
-    }
         const endX = e.changedTouches[0].clientX;
         const endY = e.changedTouches[0].clientY;
         const deltaX = startX - endX;
         const deltaY = startY - endY;
-
+ 
         // Detectar dirección principal del swipe
         if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
             const currentArticle = element.querySelector('article');
@@ -324,7 +330,7 @@ function setupSwipeNavigation(element) {
             if (currentIndex === -1) return;
             
             // Calcular nueva posición
-            let newIndex = deltaX > 0 ? currentIndex + 1 : currentIndex - 1;
+            let newIndex = deltaX > 0 ? currentIndex - 1 : currentIndex + 1;
             
             if (newIndex >= 0 && newIndex < globalPosts.length) {
                 const newPost = globalPosts[newIndex];

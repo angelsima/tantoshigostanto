@@ -630,8 +630,7 @@ select {
 
 .selected-item .category {
     font-weight: bold;
-    color: white;
-}
+  }
 
 button {
     cursor: pointer;

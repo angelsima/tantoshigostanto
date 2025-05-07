@@ -21,11 +21,7 @@ const postContent = document.querySelector('.post-content');
         loadLatestPost(sortedPosts);
         setupSwipeNavigation(postContent);
     }
-document.querySelector('.post-content').insertAdjacentHTML('afterbegin', `
-    <div class="latest-post-header">
-        <h4>Último texto publicado:</h4>
-    </div>
-`);
+
     // 4) Botones de escritorio
     document.querySelector('.random-post-trigger')?.addEventListener('click', () => {
         loadRandomPost(sortedPosts);

@@ -4,29 +4,25 @@ let globalPosts = [];
 document.addEventListener('DOMContentLoaded', async () => {
     // 1) Cargar y ordenar posts
     const posts = await loadPosts();
-    const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-    globalPosts = sortedPosts;
-const postContent = document.querySelector('.post-content');
-if (postContent) {
-    setupSwipeNavigation(postContent);
-}
+    globalPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+   
     // 2) Renderizar índice (escritorio y móvil)
-    renderIndex(sortedPosts);
-
-    // 3) Cargar contenido inicial según hash o último post
+   renderIndex(globalPosts);
+    
     const hash = window.location.hash.replace('#', '');
-    if (hash && sortedPosts.find(p => p.id === hash)) {
-        loadPostContent(hash, sortedPosts);
+    if (hash && globalPosts.some(p => p.id === hash)) {
+        await loadPostContent(hash, globalPosts);
     } else {
-        loadLatestPost(sortedPosts);
+        await loadLatestPost(globalPosts);
     }
-
+// Configurar swipe después de contenido inicial
+    setupSwipeNavigation(document.querySelector('.post-content'));
     // 4) Botones de escritorio
     document.querySelector('.random-post-trigger')?.addEventListener('click', () => {
-        loadRandomPost(sortedPosts);
+        loadRandomPost(globalPosts);
     });
     document.querySelector('.latest-posts-trigger')?.addEventListener('click', () => {
-        showLatestPosts(sortedPosts);
+        showLatestPosts(globalPosts);
     });
 
     // 5) Controles móviles
@@ -39,7 +35,7 @@ if (postContent) {
         }
     });
     document.querySelector('.mobile-latest')?.addEventListener('click', () => {
-        showLatestPosts(sortedPosts);
+        showLatestPosts(globalPosts);
     });
     document.querySelector('.mobile-random')?.addEventListener('click', () => {
         loadRandomPost(sortedPosts);

@@ -179,20 +179,21 @@ body {
 }
 @media (min-width: 768px) {
     .post-navigation {
-        position: relative;
-        margin-bottom: 20px;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
     }
     
     .nav-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        font-size: 1.5em;
-        cursor: pointer;
-        opacity: 0.3;
-        transition: opacity 0.3s;
+       background: none;
+    border: none;
+    font-size: 1.3em;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    padding: 5px;
     }
     
     .nav-arrow:hover {

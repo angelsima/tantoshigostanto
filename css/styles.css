@@ -193,7 +193,7 @@ body {
     font-size: 1.3em;
     cursor: pointer;
       color: #6E0C1B;
-    opacity: 0.3;
+    opacity: 0.8;
     transition: opacity 0.3s;
     padding: 0 15px;
     }

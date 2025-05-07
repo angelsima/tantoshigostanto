@@ -136,7 +136,8 @@ body {
   padding: 5px 10px;
   border-radius: 15px;
   font-family: monospace;
-  order: -1;                    /* opcional: asegurar que queda antes del título */
+  order: 2;                    /* opcional: asegurar que queda antes del título */
+  margin: 0 10px;
 }
 .page-subtitle {
     border-bottom: 1px solid #eee;
@@ -179,21 +180,22 @@ body {
 }
 @media (min-width: 768px) {
     .post-navigation {
-        display: flex;
-    align-items: center;
+      display: flex;
     justify-content: center;
-    gap: 15px;
+    align-items: center;
+    gap: 10px;
     margin: 20px 0;
     }
     
     .nav-arrow {
-       background: none;
+     order: 1; /* Posición relativa para flex */
+    background: none;
     border: none;
     font-size: 1.3em;
     cursor: pointer;
     opacity: 0.3;
     transition: opacity 0.3s;
-    padding: 5px;
+    padding: 0 15px;
     }
     
     .nav-arrow:hover {
@@ -201,10 +203,12 @@ body {
     }
     
     .arrow-left {
+      order: 1;
         left: -40px;
     }
     
     .arrow-right {
+         order: 3;
         right: -40px;
     }
     

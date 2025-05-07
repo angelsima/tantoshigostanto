@@ -315,11 +315,20 @@ function showGlossaryPopup(termName) {
     const content = document.getElementById('popup-content');
 
     title.textContent = term.term;
-    content.innerHTML = `
-        <p><strong>Definición:</strong> ${term.shortDef}</p>
-        ${term.longDef ? `<p>${term.longDef}</p>` : ''}
-        ${term.examples ? `<p><strong>Ejemplos:</strong> ${term.examples.join(', ')}</p>` : ''}
-    `;
+   try {
+        // Cargar el HTML específico del término
+        const response = await fetch(`./glosario/${term.id}.html`);
+        const htmlContent = await response.text();
+        content.innerHTML = htmlContent;
+    } catch (error) {
+        // Fallback a datos del manifest si hay error
+        console.error('Error cargando el término:', error);
+        content.innerHTML = `
+            <p><strong>Definición:</strong> ${term.shortDef}</p>
+            ${term.longDef ? `<p>${term.longDef}</p>` : ''}
+            ${term.examples ? `<p><strong>Ejemplos:</strong> ${term.examples.join(', ')}</p>` : ''}
+        `;
+    }
 
     popup.classList.add('active');
     overlay.classList.add('active');

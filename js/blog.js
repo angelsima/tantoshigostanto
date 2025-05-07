@@ -326,7 +326,7 @@ function setupSwipeNavigation(element) {
             if (currentIndex === -1) return;
             
             // Calcular nueva posición
-            let newIndex = deltaX > 0 ? currentIndex + 1 : currentIndex - 1;
+            let newIndex = deltaX > 0 ? currentIndex - 1 : currentIndex + 1;
             
             if (newIndex >= 0 && newIndex < globalPosts.length) {
                 const newPost = globalPosts[newIndex];

@@ -1,11 +1,15 @@
 // js/blog.js
-
+let globalPosts = [];
 // Carga y renderiza todo cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', async () => {
     // 1) Cargar y ordenar posts
     const posts = await loadPosts();
     const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
+    globalPosts = sortedPosts;
+const postContent = document.querySelector('.post-content');
+if (postContent) {
+    setupSwipeNavigation(postContent);
+}
     // 2) Renderizar índice (escritorio y móvil)
     renderIndex(sortedPosts);
 
@@ -244,7 +248,63 @@ function showLatestPosts(posts) {
         });
     });
 }
+// 3. Función para manejar el swipe
+function setupSwipeNavigation(element) {
+    let startX = null;
+    let startY = null;
+    const swipeThreshold = 50; // Mínimo de píxeles para considerar swipe
 
+    element.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    element.addEventListener('touchmove', (e) => {
+        if (!startX || !startY) return;
+        
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const deltaX = Math.abs(startX - currentX);
+        const deltaY = Math.abs(startY - currentY);
+
+        // Solo prevenir scroll en swipes horizontales
+        if (deltaX > deltaY) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    element.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const deltaX = startX - endX;
+        const deltaY = startY - endY;
+
+        // Detectar dirección principal del swipe
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+            const currentArticle = element.querySelector('article');
+            if (!currentArticle) return;
+            
+            const currentPostId = currentArticle.id;
+            const currentIndex = globalPosts.findIndex(p => p.id === currentPostId);
+            
+            if (currentIndex === -1) return;
+            
+            // Calcular nueva posición
+            let newIndex = deltaX > 0 ? currentIndex + 1 : currentIndex - 1;
+            
+            if (newIndex >= 0 && newIndex < globalPosts.length) {
+                const newPost = globalPosts[newIndex];
+                loadPostContent(newPost.id, globalPosts);
+                window.location.hash = newPost.id;
+            }
+        }
+
+        startX = null;
+        startY = null;
+    });
+}
 // Cargar el último post al inicio
 async function loadLatestPost(posts) {
     if (!posts.length) return;

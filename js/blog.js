@@ -199,12 +199,19 @@ async function loadPostContent(postId, sortedPosts) {
         const totalPosts = sortedPosts.length;
         const position = postIndex !== -1 ? (totalPosts - postIndex) : '?'; // 
         
-        document.querySelector('.post-content').innerHTML = `
+       document.querySelector('.post-content').innerHTML = `
             <article class="blog-post" id="${postId}">
-            <div class="post-number">${position}/${totalPosts}</div>
+                <div class="post-navigation">
+                    <button class="nav-arrow arrow-left">←</button>
+                    <div class="post-number">${position}/${totalPosts}</div>
+                    <button class="nav-arrow arrow-right">→</button>
+                </div>
                 ${html}
             </article>
         `;
+         // Añadir event listeners a las flechas
+        document.querySelector('.arrow-left')?.addEventListener('click', () => navigatePost('prev'));
+        document.querySelector('.arrow-right')?.addEventListener('click', () => navigatePost('next'));
     } catch (err) {
         console.error("Error cargando post:", err);
         document.querySelector('.post-content').innerHTML = `
@@ -214,7 +221,26 @@ async function loadPostContent(postId, sortedPosts) {
         `;
     }
 }
+function navigatePost(direction) {
+    const currentPostId = document.querySelector('.blog-post')?.id;
+    if (!currentPostId) return;
 
+    const currentIndex = globalPosts.findIndex(p => p.id === currentPostId);
+    if (currentIndex === -1) return;
+
+    let newIndex;
+    if (direction === 'prev') {
+        newIndex = currentIndex - 1; // Post más reciente
+    } else {
+        newIndex = currentIndex + 1; // Post más antiguo
+    }
+
+    if (newIndex >= 0 && newIndex < globalPosts.length) {
+        const newPost = globalPosts[newIndex];
+        loadPostContent(newPost.id, globalPosts);
+        window.location.hash = newPost.id;
+    }
+}
 // Texto aleatorio
 function loadRandomPost(posts) {
     if (!posts.length) return;
@@ -276,7 +302,12 @@ function setupSwipeNavigation(element) {
 
     element.addEventListener('touchend', (e) => {
         if (!startX || !startY) return;
-
+ let newIndex;
+    if (deltaX > 0) { // Swipe izquierda
+        newIndex = currentIndex - 1; // Mismo comportamiento que flecha izquierda
+    } else { // Swipe derecha
+        newIndex = currentIndex + 1; // Mismo que flecha derecha
+    }
         const endX = e.changedTouches[0].clientX;
         const endY = e.changedTouches[0].clientY;
         const deltaX = startX - endX;

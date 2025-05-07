@@ -178,7 +178,6 @@ body {
 .blog-post {
     transition: transform 0.3s ease;
 }
-@media (min-width: 768px) {
     .post-navigation {
       display: flex;
     justify-content: center;
@@ -215,7 +214,7 @@ body {
     .post-header {
         position: relative;
     }
-}
+
  /* Estilos para el popup del glosario */
     .glossary-popup {
         position: fixed;

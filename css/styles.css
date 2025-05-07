@@ -177,6 +177,40 @@ body {
 .blog-post {
     transition: transform 0.3s ease;
 }
+@media (min-width: 768px) {
+    .post-navigation {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    
+    .nav-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        cursor: pointer;
+        opacity: 0.3;
+        transition: opacity 0.3s;
+    }
+    
+    .nav-arrow:hover {
+        opacity: 1;
+    }
+    
+    .arrow-left {
+        left: -40px;
+    }
+    
+    .arrow-right {
+        right: -40px;
+    }
+    
+    .post-header {
+        position: relative;
+    }
+}
  /* Estilos para el popup del glosario */
     .glossary-popup {
         position: fixed;

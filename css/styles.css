@@ -619,7 +619,8 @@ select {
 }
 
 .selected-item {
-    background: #e2d4f9;
+    background: #7c3aed;
+  color: white;
      padding: 5px 10px;
     border-radius: 15px;
     display: flex;
@@ -629,7 +630,7 @@ select {
 
 .selected-item .category {
     font-weight: bold;
-    color: #7c3aed;
+    color: white;
 }
 
 button {

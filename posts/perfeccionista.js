@@ -22,9 +22,7 @@ export function initTextoAnimado() {
             fijo: "Amanece. Una anciana sale de", 
             variable: "",
             borrarVariable: false,
-            modificarPosicion: 10-11,
-        caracterCorreccion: "L"
-        },
+                    },
                 {
             fijo: "Amanece. La anciana sale",
             variable: " de su casa",

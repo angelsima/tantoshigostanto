@@ -2,7 +2,7 @@
 export function initTextoAnimado() {
     const textos = [
         { fijo: "Amanece.", variable: " La", borrarVariable: true },
-        { fijo: "Amanece.", variable: "Una viej", borrarVariable: false },
+        { fijo: "Amanece.", variable: " Una viej", borrarVariable: false },
         { fijo: "Amanece. Una", variable: " viej", borrarVariable: true },
         { fijo: "Amanece. Una", variable: " anciana sale de", borrarVariable: false }, 
         { fijo: "Amanece. Una anciana sale de",  variable: "su casa", borrarVariable: true },

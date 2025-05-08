@@ -1,11 +1,12 @@
 // js/posts/perfeccionista.js
 export function initTextoAnimado() {
     const textos = [
-        { fijo: "Amanece.", variable: " La", borrarVariable: true  },
+        { fijo: "Amanece.", variable: " La", borrarVariable: true },
+        { fijo: "Amanece.", variable: "Una viej", borrarVariable: false },
         { fijo: "Amanece. Una", variable: " viej", borrarVariable: true },
         { fijo: "Amanece. Una", variable: " anciana sale de", borrarVariable: false }, 
         { fijo: "Amanece.",  variable: "Una anciana sale de su casa", borrarVariable: true },
-        { fijo: "Amanece. La anciana sale", variable: "  al huerto", borrarVariable: false },
+        { fijo: "Amanece. La anciana sale", variable: " al huerto", borrarVariable: false },
         { fijo: "", variable: "Amanece. La anciana sale al huerto, donde", borrarVariable: true },
         { fijo: "", variable: "Cuando amanece,", borrarVariable: true },    
         { fijo: "", variable: "...", borrarVariable: true },
@@ -25,8 +26,8 @@ export function initTextoAnimado() {
   let indexChar = 0;
   const elementoTexto = document.getElementById('texto');
   const velocidadEscritura = 100;
-  const velocidadBorrado = 50;
-  const pausaEntreTextos = 1500;
+  const velocidadBorrado = 100;
+  const pausaEntreTextos = 1000;
 
   let fase = 'escribiendo';
   let textoActual = '';

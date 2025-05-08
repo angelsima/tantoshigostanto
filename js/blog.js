@@ -218,7 +218,7 @@ async function loadPostContent(postId, sortedPosts) {
 
         // Cargar script específico del post si existe
         if (postId === 'perfeccionista') {
-            const { initTextoAnimado } = await import('./posts/perfeccionista.js');
+            const { initTextoAnimado } = await import('../posts/perfeccionista.js');
             initTextoAnimado();
         }
         if (postId) {

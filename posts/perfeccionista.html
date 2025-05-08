@@ -10,30 +10,31 @@
 </div>
 
 <style>
-    .post-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 50vh;
-        padding: 2rem;
-        margin: 2rem 0;
-        border-radius: 8px;
+     .post-content {
+        padding: 1rem;
+        margin: 1rem 0;
+        align-items: flex-start; /* Alineación superior */
+        justify-content: flex-start; /* Alineación izquierda */
+        display: block; /* Quitamos flex para alinear normal */
     }
 
     #texto {
-        color: #00ff00;
-        font-size: 2em;
-        border-right: 2px solid #00ff00;
-        padding-right: 5px;
-        display: inline-block;
-        min-width: 300px;
-        text-align: left;
+        color: #000000; /* Texto negro */
+        font-size: 1em; /* Tamaño normal */
         font-family: 'Courier New', monospace;
-        height: 1.2em;
+        padding-right: 0;
+        border-right: none; /* Quitamos línea verde */
+        min-width: auto;
+        height: auto;
+        display: block;
+        white-space: pre-wrap; /* Mantiene formato pero permite wraps */
     }
 
     .cursor-parpadeo {
         animation: parpadeo 0.7s infinite;
+        color: #000000; /* Cursor negro */
+        border-right: 2px solid #000000; /* Nueva línea del cursor */
+        padding-right: 2px;
     }
 
     @keyframes parpadeo {

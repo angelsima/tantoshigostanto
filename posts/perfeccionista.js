@@ -5,9 +5,9 @@ export function initTextoAnimado() {
         { fijo: "Amanece.", variable: " La", borrarVariable: true },
         { fijo: "Amanece.", variable: " Una viej", borrarVariable: false },
         { fijo: "Amanece. Una", variable: " anciana sale", borrarVariable: false },
-        { fijo: "Amanece. Una anciana sale",  variable: " de su casa", borrarVariable: true },
-        { fijo: "Amanece. Una anciana sale", variable: " al huerto", borrarVariable: true },
-        { fijo: "Amanece.", variable: " Una anciana sale", borrarVariable: true },
+        { fijo: "Amanece. La anciana sale",  variable: " de su casa", borrarVariable: true },
+        { fijo: "Amanece. La anciana sale", variable: " al huerto", borrarVariable: true },
+        { fijo: "Amanece.", variable: " La anciana sale", borrarVariable: true },
         { fijo: "", variable: "Cuando amanece,", borrarVariable: true },    
         { fijo: "", variable: "...", borrarVariable: true },
         { fijo: "", variable: "#@!!!!", borrarVariable: true },
@@ -17,8 +17,8 @@ export function initTextoAnimado() {
         { fijo: "", variable: "Amanecía", borrarVariable: true },
         { fijo: "", variable: "...", borrarVariable: true },
         { fijo: "", variable: "😭", borrarVariable: true},
-        { fijo: "      ", variable: "", borrarVariable: false },
-        { fijo: "      ", variable: "", borrarVariable: false }, 
+        { fijo: "", variable: "...", borrarVariable: true },
+        { fijo: "", variable: "    ", borrarVariable: true }, 
     ];
 
     // Variables de estado

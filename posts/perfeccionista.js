@@ -7,29 +7,30 @@ export function initTextoAnimado() {
             borrarVariable: true
         },
         {
-            fijo: "Amanece.", 
-            variable: " Una anciana sale de",
+            fijo: "Amanece. Una", 
+            variable: " anciana sale de",
             borrarVariable: true
         }, 
         {
-            fijo: "Amanece. La anciana", 
-            variable: "  sale de",
+            fijo: "Amanece. Una anciana", 
+            variable: " sale de",
             borrarVariable: true
+            modificarPosicion: 10-11,
+        caracterCorreccion: "L"
         },
-        // Resto de textos como objetos válidos
-        {
-            fijo: "Amanece. Una viej",
-            variable: "",
-            borrarVariable: false
-        },
-        {
-            fijo: "Amanece. Una anciana sale de su casa",
+                {
+            fijo: "Amanece. La anciana sale de su casa",
             variable: "",
             borrarVariable: false
         },
            {
-        fijo: "Amanece. La anciana", // Mismo inicio
-        variable: "  sale de", // Nueva variación
+        fijo: "Amanece. La anciana sale de su casa", // Mismo inicio
+        variable: "  y va al", // Nueva variación
+        borrarVariable: true
+    },
+ {
+        fijo: "Amanece. La anciana sale de su casa pero", // Mismo inicio
+        variable: "  pero", // Nueva variación
         borrarVariable: true
     }    
     ];

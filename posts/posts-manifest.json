@@ -101,7 +101,8 @@
     "id": "perfeccionista",
     "title": "Perfeccionista",
     "category": "Personaje-Narrador",
-    "date": "2025-05-08T10:00:00Z"
+    "date": "2025-05-08T10:00:00Z",
+     "requires_script": true
   },
   {
     "id": "trendy",

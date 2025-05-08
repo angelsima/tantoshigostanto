@@ -1,38 +1,72 @@
 // js/posts/perfeccionista.js
 export function initTextoAnimado() {
     const textos = [
-        {
+          {
+            fijo: "Amanece.", 
+            variable: "La",
+            borrarVariable: true
+        },
+{
             fijo: "Amanece. Una", 
             variable: " viej",
             borrarVariable: true
         },
+
         {
             fijo: "Amanece. Una", 
             variable: " anciana sale de",
-            borrarVariable: true
+            borrarVariable: false
         }, 
+
         {
-            fijo: "Amanece. Una anciana", 
-            variable: " sale de",
-            borrarVariable: true
+            fijo: "Amanece. Una anciana sale de", 
+            variable: "",
+            borrarVariable: false,
             modificarPosicion: 10-11,
         caracterCorreccion: "L"
         },
                 {
-            fijo: "Amanece. La anciana sale de su casa",
-            variable: "",
-            borrarVariable: false
+            fijo: "Amanece. La anciana sale",
+            variable: " de su casa",
+            borrarVariable: true
         },
+
            {
-        fijo: "Amanece. La anciana sale de su casa", // Mismo inicio
-        variable: "  y va al", // Nueva variación
+        fijo: "Amanece. La anciana sale", // Mismo inicio
+        variable: " al huerto", // Nueva variación
+        borrarVariable: false
+    },
+           {
+        fijo: "Amanece. La anciana sale al huerto", // Mismo inicio
+        variable: ", donde", // Nueva variación
+        borrarVariable: false
+    },
+
+           {
+        fijo: "", // Mismo inicio
+        variable: "Amanece. La anciana sale al huerto, donde", // Nueva variación
         borrarVariable: true
     },
  {
-        fijo: "Amanece. La anciana sale de su casa pero", // Mismo inicio
-        variable: "  pero", // Nueva variación
+        fijo: "", // Mismo inicio
+        variable: "  Cuando, amanece,", // Nueva variación
         borrarVariable: true
-    }    
+    },    
+ {
+        fijo: "", // Mismo inicio
+        variable: "...", // Nueva variación
+        borrarVariable: true
+    },
+ {
+        fijo: " ", // Mismo inicio
+        variable: "", // Nueva variación
+        borrarVariable: true
+    },
+ {
+        fijo: " ", // Mismo inicio
+        variable: "", // Nueva variación
+        borrarVariable: true
+    } 
     ];
 
     let indexTexto = 0;

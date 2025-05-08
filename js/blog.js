@@ -212,7 +212,15 @@ async function loadPostContent(postId, sortedPosts) {
         `;
 
        
-       document.querySelector('.post-content').innerHTML = contentHTML;
+      // Insertar el contenido
+        const postContent = document.querySelector('.post-content');
+        postContent.innerHTML = contentHTML;
+
+        // Cargar script específico del post si existe
+        if (postId === 'perfeccionista') {
+            const { initTextoAnimado } = await import('./posts/perfeccionista.js');
+            initTextoAnimado();
+        }
         if (postId) {
          // Añadir event listeners a las flechas
         document.querySelector('.arrow-left')?.addEventListener('click', () => navigatePost('prev'));

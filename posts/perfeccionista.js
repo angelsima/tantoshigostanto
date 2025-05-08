@@ -9,7 +9,9 @@ export function initTextoAnimado() {
 {
             fijo: "Amanece. Una", 
             variable: " viej",
-            borrarVariable: true
+            borrarVariable: true,
+     modificarPosicion: 3, // Posición en el texto completo (fijo + variable)
+    caracterCorreccion: "X"
         },
 
         {
@@ -67,6 +69,7 @@ export function initTextoAnimado() {
     } 
     ];
 
+    // Variables de estado
     let indexTexto = 0;
     let indexChar = 0;
     let borrando = false;
@@ -74,11 +77,11 @@ export function initTextoAnimado() {
     const velocidadEscritura = 100;
     const velocidadBorrado = 50;
     const pausaEntreTextos = 1500;
-
-    // Variables para el nuevo sistema de fases
+    
+    // Variables para modificación específica
     let fase = 'escribiendo';
-    let posicionOriginal = 0;
     let textoActual = '';
+    let modificacionRealizada = false;
 
     function escribirTexto() {
         const item = textos[indexTexto];
@@ -86,39 +89,66 @@ export function initTextoAnimado() {
 
         switch(fase) {
             case 'escribiendo':
-                elementoTexto.innerHTML = textoActual.substring(0, indexChar + 1) + '<span class="cursor-parpadeo">|</span>';
+                // Escribir normalmente
+                let textoMostrar = textoActual.substring(0, indexChar + 1);
+                
+                // Aplicar modificación si corresponde
+                if (item.modificarPosicion !== undefined && 
+                    indexChar >= item.modificarPosicion && 
+                    !modificacionRealizada) {
+                    
+                    textoMostrar = 
+                        textoActual.substring(0, item.modificarPosicion) +
+                        item.caracterCorreccion +
+                        textoActual.substring(item.modificarPosicion + 1, indexChar + 1);
+                    
+                    modificacionRealizada = true;
+                }
+                
+                elementoTexto.innerHTML = textoMostrar + '<span class="cursor-parpadeo">|</span>';
                 indexChar++;
                 
                 if (indexChar === textoActual.length) {
                     if (item.borrarVariable) {
                         fase = 'retrocediendo';
-                        posicionOriginal = textoActual.length;
+                        setTimeout(escribirTexto, pausaEntreTextos);
                     } else {
-                        indexTexto = (indexTexto + 1) % textos.length;
-                        indexChar = 0;
+                        siguienteTexto();
                     }
-                    setTimeout(escribirTexto, pausaEntreTextos);
                 } else {
                     setTimeout(escribirTexto, velocidadEscritura);
                 }
                 break;
 
             case 'retrocediendo':
-                elementoTexto.innerHTML = textoActual.substring(0, indexChar - 1) + '<span class="cursor-parpadeo">|</span>';
+                // Borrar solo la parte variable
+                const posicionBorrado = item.fijo.length;
+                const textoMostrar = textoActual.substring(0, indexChar - 1);
+                elementoTexto.innerHTML = textoMostrar + '<span class="cursor-parpadeo">|</span>';
                 indexChar--;
                 
-                if (indexChar === item.fijo.length) {
-                    fase = 'escribiendo';
-                    indexTexto = (indexTexto + 1) % textos.length;
-                    indexChar = textos[indexTexto].fijo.length;
+                if (indexChar === posicionBorrado) {
+                    siguienteTexto();
+                } else {
+                    setTimeout(escribirTexto, velocidadBorrado);
                 }
-                setTimeout(escribirTexto, velocidadBorrado);
                 break;
         }
+    }
+
+    function siguienteTexto() {
+        modificacionRealizada = false;
+        indexTexto = (indexTexto + 1) % textos.length;
+        
+        // Iniciar después de la parte fija si existe
+        const nextItem = textos[indexTexto];
+        indexChar = nextItem.fijo ? nextItem.fijo.length : 0;
+        
+        fase = 'escribiendo';
+        setTimeout(escribirTexto, pausaEntreTextos);
     }
 
     // Iniciar animación
     escribirTexto();
 }
-
        

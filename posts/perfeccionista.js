@@ -11,7 +11,9 @@ export function initTextoAnimado() {
     "#@!!!!",
     "es un dom",
     "Es un domingo por la mañana y Asun sale al huerto. Tiene hambre y",
-    "Había amanecido"
+    "Había amanecido",
+    "Voy a empezar a cargme en todo como el descompuesto",
+    "Amanece y una anciana va al huerto. A su higuera y"
     ];
     
     let indexTexto = 0;

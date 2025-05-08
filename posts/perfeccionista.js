@@ -60,12 +60,12 @@ export function initTextoAnimado() {
     },
         {
         fijo: "", // Mismo inicio
-        variable: "A", // Nueva variación
+        variable: "am", // Nueva variación
         borrarVariable: true
     },
          {
         fijo: "", // Mismo inicio
-        variable: "Amane", // Nueva variación
+        variable: "Amanecía", // Nueva variación
         borrarVariable: true
     },
         {

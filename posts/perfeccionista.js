@@ -18,8 +18,8 @@ export function initTextoAnimado() {
         { fijo: "", variable: "Amanecía", borrarVariable: true },
         { fijo: "", variable: "...", borrarVariable: true },
         { fijo: "", variable: "😭", borrarVariable: true},
-        { fijo: "", variable: "        ", borrarVariable: false },
-        { fijo: "", variable: "        ", borrarVariable: false } 
+        { fijo: "      ", variable: "", borrarVariable: false },
+        { fijo: "      ", variable: "", borrarVariable: false }, 
     ];
 
     // Variables de estado

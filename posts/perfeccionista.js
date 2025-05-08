@@ -1,93 +1,23 @@
 // js/posts/perfeccionista.js
 export function initTextoAnimado() {
     const textos = [
-          {
-            fijo: "Amanece.", 
-            variable: " La",
-            borrarVariable: true
-        },
-{
-            fijo: "Amanece. Una", 
-            variable: " viej",
-            borrarVariable: true
-           },
-
-        {
-            fijo: "Amanece. Una", 
-            variable: " anciana sale de",
-            borrarVariable: false
-        }, 
-
-        {
-            fijo: "Amanece.", 
-            variable: "Una anciana sale de su casa",
-            borrarVariable: true
-                    },
-                {
-            fijo: "Amanece. La anciana sale",
-            variable: "  al huerto",
-            borrarVariable: false
-        },
-                      {
-        fijo: "", 
-        variable: "Amanece. La anciana sale al huerto, donde", // Nueva variación
-        borrarVariable: true
-    },
- {
-        fijo: "", // Mismo inicio
-        variable: "  Cuando amanece,", // Nueva variación
-        borrarVariable: true
-    },    
- {
-        fijo: "", // Mismo inicio
-        variable: "...", // Nueva variación
-        borrarVariable: true
-    },
- {
-        fijo: "", // Mismo inicio
-        variable: "#@!!!!", // Nueva variación
-        borrarVariable: true
-    },
- {
-        fijo: "", // Mismo inicio
-        variable: "Al amanec", // Nueva variación
-        borrarVariable: true
-    },
-         {
-        fijo: "", // Mismo inicio
-        variable: "...", // Nueva variación
-        borrarVariable: true
-    },
-        {
-        fijo: "", // Mismo inicio
-        variable: "am", // Nueva variación
-        borrarVariable: true
-    },
-         {
-        fijo: "", // Mismo inicio
-        variable: "Amanecía", // Nueva variación
-        borrarVariable: true
-    },
-        {
-        fijo: "", // Mismo inicio
-        variable: "...", // Nueva variación
-        borrarVariable: true
-    },
-        {
-        fijo: " ", // Mismo inicio
-        variable: "😭", // Nueva variación
-        borrarVariable: true
-    },
-         {
-        fijo: "", // Mismo inicio
-        variable: "        ", // Nueva variación
-        borrarVariable: false
-    },
-        {
-        fijo: "", // Mismo inicio
-        variable: "        ", // Nueva variación
-        borrarVariable: false
-    } 
+        { fijo: "Amanece.", variable: " La", borrarVariable: true  },
+        { fijo: "Amanece. Una", variable: " viej", borrarVariable: true },
+        { fijo: "Amanece. Una", variable: " anciana sale de", borrarVariable: false }, 
+        { fijo: "Amanece.",  variable: "Una anciana sale de su casa", borrarVariable: true },
+        { fijo: "Amanece. La anciana sale", variable: "  al huerto", borrarVariable: false },
+        { fijo: "", variable: "Amanece. La anciana sale al huerto, donde", borrarVariable: true },
+        { fijo: "", variable: "Cuando amanece,", borrarVariable: true },    
+        { fijo: "", variable: "...", borrarVariable: true },
+        { fijo: "", variable: "#@!!!!", borrarVariable: true },
+        { fijo: "", variable: "Al amanec", borrarVariable: true },
+        { fijo: "", variable: "...", borrarVariable: true },
+        { fijo: "", variable: "am", borrarVariable: true },
+        { fijo: "", variable: "Amanecía", borrarVariable: true },
+        { fijo: "", variable: "...", borrarVariable: true },
+        { fijo: "", variable: "😭", borrarVariable: true},
+        { fijo: "", variable: "        ", borrarVariable: false },
+        { fijo: "", variable: "        ", borrarVariable: false } 
     ];
 
     // Variables de estado

@@ -15,7 +15,6 @@ export function initTextoAnimado() {
         { fijo: "", variable: "...", borrarVariable: true },
         { fijo: "", variable: "am", borrarVariable: true },
         { fijo: "", variable: "¿Amanece?", borrarVariable: true },
-        { fijo: "", variable: "   ", borrarVariable: true },
         { fijo: "", variable: "😭", borrarVariable: true},
         { fijo: "", variable: "Cuand", borrarVariable: true },
         { fijo: "", variable: "Amanece y", borrarVariable: false }, 

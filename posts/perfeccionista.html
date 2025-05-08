@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tantoshigostanto</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #texto {
+            color: #00ff00;
+            font-size: 2em;
+            border-right: 2px solid #00ff00;
+            padding-right: 5px;
+            display: inline-block;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .cursor-parpadeo {
+            animation: parpadeo 0.7s infinite;
+        }
+
+        @keyframes parpadeo {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="texto"></div>
+    </div>
+
+    <script>
+        const textos = [
+            "Tantos higos, tanto sol",
+            "Tantos siglos, tanta voz",
+            "Tantos libros, tanto amor",
+            "Tantos mitos, tanta razón"
+        ];
+        
+        let indexTexto = 0;
+        let indexChar = 0;
+        let borrando = false;
+        const elementoTexto = document.getElementById('texto');
+        const velocidadEscritura = 100; // ms por carácter
+        const velocidadBorrado = 50; // ms por carácter
+        const pausaEntreTextos = 2000; // ms
+
+        function escribirTexto() {
+            const textoActual = textos[indexTexto];
+            
+            if (!borrando) {
+                elementoTexto.innerHTML = textoActual.substring(0, indexChar + 1) + '<span class="cursor-parpadeo">|</span>';
+                indexChar++;
+                
+                if (indexChar === textoActual.length) {
+                    borrando = true;
+                    setTimeout(escribirTexto, pausaEntreTextos);
+                } else {
+                    setTimeout(escribirTexto, velocidadEscritura);
+                }
+            } else {
+                elementoTexto.innerHTML = textoActual.substring(0, indexChar - 1) + '<span class="cursor-parpadeo">|</span>';
+                indexChar--;
+                
+                if (indexChar === 0) {
+                    borrando = false;
+                    indexTexto = (indexTexto + 1) % textos.length;
+                    setTimeout(escribirTexto, velocidadEscritura);
+                } else {
+                    setTimeout(escribirTexto, velocidadBorrado);
+                }
+            }
+        }
+
+        // Iniciar la animación
+        escribirTexto();
+    </script>
+</body>
+</html>

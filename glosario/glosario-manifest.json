@@ -75,6 +75,11 @@
     "category": "Personaje-Narrador"
      },
   {
+    "id": "transicionario",
+    "term": "Transicionario",
+    "category": "Personaje-Narrador"
+     },
+  {
     "id": "trendy",
     "term": "Trendy",
     "category": "Personaje-Narrador"

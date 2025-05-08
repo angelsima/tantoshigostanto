@@ -4,13 +4,13 @@ export function initTextoAnimado() {
         "Una viej",
         "Una anciana sale de su casa al",
         "Amanece. Mi abuela Juana",
-        "Amanece. Asunción sale de su"
-        ".."
-    "Los pájaros cantan y hay una higuera que"
-    "A una anciana le vapicar una avipa"
-    "#@!!!!"
-    "es un dom"
-    "Es un domingo por la mañana y Asun sale al huerto. Tiene hambre y"
+        "Amanece. Asunción sale de su",
+        "..",
+    "Los pájaros cantan y hay una higuera que",
+    "A una anciana le vapicar una avipa",
+    "#@!!!!",
+    "es un dom",
+    "Es un domingo por la mañana y Asun sale al huerto. Tiene hambre y",
     "Había amanecido"
     ];
     

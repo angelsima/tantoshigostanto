@@ -3,16 +3,14 @@ export function initTextoAnimado() {
     const textos = [
           {
             fijo: "Amanece.", 
-            variable: "La",
+            variable: " La",
             borrarVariable: true
         },
 {
             fijo: "Amanece. Una", 
             variable: " viej",
-            borrarVariable: true,
-     modificarPosicion: 3, // Posición en el texto completo (fijo + variable)
-    caracterCorreccion: "X"
-        },
+            borrarVariable: true
+           },
 
         {
             fijo: "Amanece. Una", 
@@ -21,35 +19,23 @@ export function initTextoAnimado() {
         }, 
 
         {
-            fijo: "Amanece. Una anciana sale de", 
-            variable: "",
-            borrarVariable: false,
+            fijo: "Amanece.", 
+            variable: "Una anciana sale de su casa",
+            borrarVariable: true
                     },
                 {
             fijo: "Amanece. La anciana sale",
-            variable: " de su casa",
-            borrarVariable: true
+            variable: "  al huerto",
+            borrarVariable: false
         },
-
-           {
-        fijo: "Amanece. La anciana sale", // Mismo inicio
-        variable: " al huerto", // Nueva variación
-        borrarVariable: false
-    },
-           {
-        fijo: "Amanece. La anciana sale al huerto", // Mismo inicio
-        variable: ", donde", // Nueva variación
-        borrarVariable: false
-    },
-
-           {
-        fijo: "", // Mismo inicio
+                      {
+        fijo: "", 
         variable: "Amanece. La anciana sale al huerto, donde", // Nueva variación
         borrarVariable: true
     },
  {
         fijo: "", // Mismo inicio
-        variable: "  Cuando, amanece,", // Nueva variación
+        variable: "  Cuando amanece,", // Nueva variación
         borrarVariable: true
     },    
  {
@@ -58,14 +44,49 @@ export function initTextoAnimado() {
         borrarVariable: true
     },
  {
-        fijo: " ", // Mismo inicio
-        variable: "", // Nueva variación
+        fijo: "", // Mismo inicio
+        variable: "#@!!!!", // Nueva variación
         borrarVariable: true
     },
  {
-        fijo: " ", // Mismo inicio
-        variable: "", // Nueva variación
+        fijo: "", // Mismo inicio
+        variable: "Al amanec", // Nueva variación
         borrarVariable: true
+    },
+         {
+        fijo: "", // Mismo inicio
+        variable: "...", // Nueva variación
+        borrarVariable: true
+    },
+        {
+        fijo: "", // Mismo inicio
+        variable: "A", // Nueva variación
+        borrarVariable: true
+    },
+         {
+        fijo: "", // Mismo inicio
+        variable: "Amane", // Nueva variación
+        borrarVariable: true
+    },
+        {
+        fijo: "", // Mismo inicio
+        variable: "...", // Nueva variación
+        borrarVariable: true
+    },
+        {
+        fijo: " ", // Mismo inicio
+        variable: "😭", // Nueva variación
+        borrarVariable: true
+    },
+         {
+        fijo: "", // Mismo inicio
+        variable: "        ", // Nueva variación
+        borrarVariable: false
+    },
+        {
+        fijo: "", // Mismo inicio
+        variable: "        ", // Nueva variación
+        borrarVariable: false
     } 
     ];
 

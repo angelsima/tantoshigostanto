@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tantoshigostanto</title>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        #texto {
+<style>
+               #texto {
             color: #00ff00;
             font-size: 2em;
             border-right: 2px solid #00ff00;
@@ -28,22 +8,19 @@
             min-width: 300px;
             text-align: left;
         }
-
         .cursor-parpadeo {
             animation: parpadeo 0.7s infinite;
         }
-
         @keyframes parpadeo {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
     </style>
-</head>
-<body>
-    <div class="container">
+<div class="post-header">
+    <h2>Perfeccionista</h2>
+</div>
+<div class="post-content">  
         <div id="texto"></div>
-    </div>
-
     <script>
         const textos = [
             "Tantos higos, tanto sol",
@@ -58,7 +35,7 @@
         const elementoTexto = document.getElementById('texto');
         const velocidadEscritura = 100; // ms por carácter
         const velocidadBorrado = 50; // ms por carácter
-        const pausaEntreTextos = 2000; // ms
+        const pausaEntreTextos = 1500; // ms
 
         function escribirTexto() {
             const textoActual = textos[indexTexto];
@@ -90,5 +67,8 @@
         // Iniciar la animación
         escribirTexto();
     </script>
-</body>
-</html>
+</div>
+<div class="post-footer">
+    <a href="../tantoshigostanto/glosario.html#perfeccionista" class="read-more">Explicación del recurso →</a>
+</div>
+    

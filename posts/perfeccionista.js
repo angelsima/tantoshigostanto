@@ -7,7 +7,7 @@ export function initTextoAnimado() {
         { fijo: "Amanece. Una", variable: " anciana sale de", borrarVariable: false }, 
         { fijo: "Amanece. Una anciana sale de",  variable: "su casa", borrarVariable: true },
         { fijo: "Amanece. Una anciana sale", variable: " al huerto", borrarVariable: false },
-        { fijo: "", variable: "Amanece. Una anciana sale", borrarVariable: ture },
+        { fijo: "", variable: "Amanece. Una anciana sale", borrarVariable: true },
         { fijo: "", variable: "Cuando amanece,", borrarVariable: true },    
         { fijo: "", variable: "...", borrarVariable: true },
         { fijo: "", variable: "#@!!!!", borrarVariable: true },

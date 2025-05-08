@@ -77,7 +77,65 @@ export function initTextoAnimado() {
             setTimeout(escribirTexto, velocidadBorrado);
         }
     }
-}
+ const textoObj = textos[indexTexto];
+    let texto = textoObj.contenido;
+    const posicionModificar = textoObj.modificarPosicion;
+    
+    switch(fase) {
+        case 'escribiendo':
+            elementoTexto.innerHTML = texto.substring(0, indexChar + 1) + '<span class="cursor-parpadeo">|</span>';
+            indexChar++;
+            
+            if (indexChar === texto.length) {
+                fase = 'retrocediendo';
+                posicionOriginal = texto.length;
+                setTimeout(escribirTexto, pausaEntreTextos);
+            } else {
+                setTimeout(escribirTexto, velocidadEscritura);
+            }
+            break;
+            
+        case 'retrocediendo':
+            elementoTexto.innerHTML = texto.substring(0, indexChar - 1) + '<span class="cursor-parpadeo">|</span>';
+            indexChar--;
+            
+            if (indexChar === posicionModificar) {
+                fase = 'modificando';
+                texto = texto.substring(0, posicionModificar) + 
+                        textoObj.caracterCorreccion + 
+                        texto.substring(posicionModificar + 1);
+                setTimeout(escribirTexto, velocidadBorrado);
+            } else {
+                setTimeout(escribirTexto, velocidadBorrado);
+            }
+            break;
+            
+        case 'modificando':
+            elementoTexto.innerHTML = texto.substring(0, posicionModificar + 1) + 
+                                    '<span class="cursor-parpadeo">|</span>' + 
+                                    texto.substring(posicionModificar + 1);
+            fase = 'avanzando';
+            indexChar = posicionModificar + 1;
+            setTimeout(escribirTexto, velocidadEscritura);
+            break;
+            
+        case 'avanzando':
+            elementoTexto.innerHTML = texto.substring(0, indexChar + 1) + 
+                                    '<span class="cursor-parpadeo">|</span>' + 
+                                    texto.substring(indexChar + 1);
+            indexChar++;
+            
+            if (indexChar === posicionOriginal) {
+                fase = 'escribiendo';
+                indexTexto = (indexTexto + 1) % textos.length;
+                indexChar = 0;
+                setTimeout(escribirTexto, pausaEntreTextos);
+            } else {
+                setTimeout(escribirTexto, velocidadEscritura);
+            }
+            break;
+    }
+    }
 
     // Iniciar animación
     escribirTexto();

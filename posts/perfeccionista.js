@@ -1,6 +1,7 @@
 // js/posts/perfeccionista.js
 export function initTextoAnimado() {
     const textos = [
+        { fijo: "Amanece.", variable: "", borrarVariable: false },
         { fijo: "Amanece.", variable: " La", borrarVariable: true },
         { fijo: "Amanece.", variable: " Una viej", borrarVariable: false },
         { fijo: "Amanece. Una", variable: " viej", borrarVariable: true },

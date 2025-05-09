@@ -23,7 +23,7 @@ export function initTextoAnimado() {
     let indexChar = 0;
     const elementoTexto = document.getElementById('texto');
     const velocidadEscritura = 120;
-    const velocidadBorrado = 120;
+    const velocidadBorrado = 200;
     const pausaEntreTextos = 500;
     let fase = 'escribiendo';
     let textoActual = '';

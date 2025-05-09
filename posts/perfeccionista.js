@@ -29,7 +29,7 @@ export function initTextoAnimado() {
     let textoActual = '';
 
     function mostrarConCursor(texto) {
-        elementoTexto.innerHTML = texto + '<span class="cursor-parpadeo">|</span>';
+       elementoTexto.innerHTML = texto.replace('|', '') + '<span class="cursor-parpadeo">|</span>';
     }
 
     function escribirTexto() {

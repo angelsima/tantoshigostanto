@@ -158,6 +158,16 @@ body {
         border-radius: 0;
     }
     }
+.cursor-parpadeo {
+  display: inline-block;
+  width: 1ch;
+  animation: parpadeo 1s infinite;
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 .poem {
   font-family: serif;
   white-space: pre-wrap;

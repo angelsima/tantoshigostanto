@@ -23,13 +23,16 @@ export function initTextoAnimado() {
     let indexTexto = 0;
     let indexChar = 0;
     const elementoTexto = document.getElementById('texto');
-    const velocidadEscritura = 100;
-    const velocidadBorrado = 100;
+    const velocidadEscritura = 120;
+    const velocidadBorrado = 120;
     const pausaEntreTextos = 500;
 
-    let fase = 'escribiendo';
+   let fase = 'escribiendo';
     let textoActual = '';
-    let modificacionRealizada = false;
+
+    function mostrarConCursor(texto) {
+        elementoTexto.innerHTML = texto + '<span class="cursor-parpadeo">|</span>';
+    }
 
     function escribirTexto() {
         // Verificar si hemos llegado al último texto
@@ -44,8 +47,8 @@ export function initTextoAnimado() {
         textoActual = item.fijo + item.variable;
 
         if (fase === 'escribiendo') {
-            let textoMostrar = textoActual.substring(0, indexChar + 1);
-            elementoTexto.innerHTML = textoMostrar + '<span class="cursor-parpadeo">|</span>';
+             const textoMostrar = textoActual.substring(0, indexChar + 1);
+            mostrarConCursor(textoMostrar);
             indexChar++;
 
             if (indexChar === textoActual.length) {
@@ -58,7 +61,7 @@ export function initTextoAnimado() {
         else if (fase === 'retrocediendo') {
             const posicionBorrado = item.fijo.length;
             const textoMostrar = textoActual.substring(0, indexChar - 1);
-            elementoTexto.innerHTML = textoMostrar + '<span class="cursor-parpadeo">|</span>';
+           mostrarConCursor(textoMostrar);
             indexChar--;
 
             if (indexChar === posicionBorrado) {
@@ -72,8 +75,7 @@ export function initTextoAnimado() {
         }
     }
 
-   function siguienteTexto() {
-        modificacionRealizada = false;
+  function siguienteTexto() {
         indexTexto++;
         
         if (indexTexto < textos.length) {

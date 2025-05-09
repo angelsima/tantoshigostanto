@@ -417,13 +417,7 @@ body {
     line-height: 1.6;
     margin-bottom: 1rem;
 }
-.post-content {
-  overflow-wrap: break-word;
-  word-break: break-word;
-  hyphens: auto;
-  padding: 10px;
-  max-width: 100%; /* Asegura que no sobrepase el ancho del contenedor padre */
-}
+
 .welcome-message {
     text-align: center;
     padding: 2rem;

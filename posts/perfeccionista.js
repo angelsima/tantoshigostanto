@@ -11,13 +11,12 @@ export function initTextoAnimado() {
         { fijo: "", variable: "...", borrarVariable: true },
         { fijo: "", variable: "#@!!!!", borrarVariable: true },
         { fijo: "", variable: "Al amanec", borrarVariable: true },
-        { fijo: "", variable: "am", borrarVariable: true },
         { fijo: "", variable: "¿Amanece?", borrarVariable: true },
         { fijo: "", variable: "😭", borrarVariable: true},
         { fijo: "", variable: "Cuand", borrarVariable: true },
         { fijo: "", variable: "Tras", borrarVariable: true },  
-        { fijo: "", variable: "[Tengo que pensarlo. Mañana sigo]", borrarVariable: true },
-        { fijo: "", variable: "   ", borrarVariable: false },
+        { fijo: "", variable: "[Tengo que pensar]", borrarVariable: true },
+        { fijo: "", variable: "[Mañana sigo]", borrarVariable: false }
     ];
 
     // Variables de estado

@@ -73,5 +73,21 @@ export function initTextoAnimado() {
         }
     }
 
-    function siguienteTexto() {
-        modificacionRealizada =
+   function siguienteTexto() {
+        modificacionRealizada = false;
+        indexTexto++;
+        
+        if (indexTexto < textos.length) {
+            const next = textos[indexTexto];
+            indexChar = next.fijo.length;
+            fase = 'escribiendo';
+            setTimeout(escribirTexto, pausaEntreTextos);
+        } else {
+            // Al final, mostrar el último texto sin cursor
+            const ultimoTexto = textos[textos.length - 1];
+            elementoTexto.innerHTML = ultimoTexto.fijo + ultimoTexto.variable;
+        }
+    }
+
+    escribirTexto();
+}

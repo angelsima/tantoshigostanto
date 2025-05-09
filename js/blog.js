@@ -2,6 +2,7 @@
 
 // js/blog.js
 let globalPosts = [];
+let viewedPostIds = new Set();
 // Carga y renderiza todo cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', async () => {
     // 1) Cargar y ordenar posts
@@ -24,9 +25,7 @@ const postContent = document.querySelector('.post-content');
     }
 
     // 4) Botones de escritorio
-    document.querySelector('.random-post-trigger')?.addEventListener('click', () => {
-        loadRandomPost(sortedPosts);
-    });
+   document.querySelector('.random-post-trigger')?.addEventListener('click', loadRandomPost);
     document.querySelector('.latest-posts-trigger')?.addEventListener('click', () => {
         showLatestPosts(sortedPosts);
     });
@@ -43,9 +42,7 @@ const postContent = document.querySelector('.post-content');
     document.querySelector('.mobile-latest')?.addEventListener('click', () => {
         showLatestPosts(sortedPosts);
     });
-    document.querySelector('.mobile-random')?.addEventListener('click', () => {
-        loadRandomPost(sortedPosts);
-    });
+    document.querySelector('.mobile-random')?.addEventListener('click', loadRandomPost);
 
     // 6) Destacar enlace activo del nav
     const currentPage = window.location.pathname.split('/').pop();
@@ -258,11 +255,24 @@ function navigatePost(direction) {
     }
 }
 // Texto aleatorio
-function loadRandomPost(posts) {
-    if (!posts.length) return;
-    const rnd = posts[Math.floor(Math.random() * posts.length)];
-    loadPostContent(rnd.id, posts);
-    window.location.hash = rnd.id;
+function loadRandomPost() {
+    if (!globalPosts.length) return;
+    // Resetear si ya se vieron todos los posts
+    if (viewedPostIds.size === globalPosts.length) {
+        viewedPostIds.clear();
+    }
+
+    // Filtrar posts no vistos
+    const availablePosts = globalPosts.filter(post => !viewedPostIds.has(post.id));
+    
+    // Seleccionar aleatoriamente de los disponibles
+    const rndIndex = Math.floor(Math.random() * availablePosts.length);
+    const rndPost = availablePosts[rndIndex];
+    
+    // Marcar como visto y cargar
+    viewedPostIds.add(rndPost.id);
+    loadPostContent(rndPost.id, globalPosts);
+    window.location.hash = rndPost.id;
 }
 
 // Mostrar últimos textos

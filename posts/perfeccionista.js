@@ -16,7 +16,7 @@ export function initTextoAnimado() {
         { fijo: "", variable: "Cuand", borrarVariable: true },
         { fijo: "", variable: "Tras", borrarVariable: true },  
         { fijo: "", variable: "[Tengo que pensar]", borrarVariable: true },
-        { fijo: "", variable: "[Mañana sigo]", borrarVariable: false }
+        { fijo: "", variable: "[Mañana sigo]", borrarVariable: true }
     ];
 
     // Variables de estado

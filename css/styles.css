@@ -159,15 +159,17 @@ body {
     }
     }
 
-.cursor-parpadeo {
-  display: inline-block;
-  width: 1ch;
-  animation: parpadeo 1s infinite;
+/* Nueva regla para ocultar el cursor nativo en el elemento raíz */
+#texto {
+    caret-color: transparent !important;
 }
-/* Oculta el cursor nativo (inserción/caret) */
-#texto,
-#texto * {
-  caret-color: transparent;    /* :contentReference[oaicite:0]{index=0} */
+
+/* Mantén el cursor parpadeante */
+.cursor-parpadeo {
+    display: inline-block;
+    width: 1ch;
+    animation: parpadeo 1s infinite;
+    color: #000; /* Asegura color visible */
 }
 
 @keyframes parpadeo {

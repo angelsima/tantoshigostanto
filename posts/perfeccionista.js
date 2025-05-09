@@ -4,7 +4,7 @@ export function initTextoAnimado() {
         { fijo: "Amanece.", variable: " La", borrarVariable: true },
         { fijo: "Amanece.", variable: " Una viej", borrarVariable: false },
         { fijo: "Amanece. Una", variable: " anciana sale", borrarVariable: false },
-        { fijo: "Amanece. Una anciana sale",  variable: " de su casa", borrarVariable: true },
+        { fijo: "Amanece. Una anciana sale", variable: " de su casa", borrarVariable: true },
         { fijo: "Amanece. Una anciana sale", variable: " al huerto", borrarVariable: true },
         { fijo: "Amanece.", variable: " La anciana sale", borrarVariable: true },
         { fijo: "", variable: "Cuando amanece,", borrarVariable: true },    
@@ -12,22 +12,20 @@ export function initTextoAnimado() {
         { fijo: "", variable: "#@!!!!", borrarVariable: true },
         { fijo: "", variable: "Al amanec", borrarVariable: true },
         { fijo: "", variable: "¿Amanece?", borrarVariable: true },
-        { fijo: "", variable: "😭", borrarVariable: true},
+        { fijo: "", variable: "😭", borrarVariable: true },
         { fijo: "", variable: "Cuand", borrarVariable: true },
         { fijo: "", variable: "Tras", borrarVariable: true },
         { fijo: "", variable: "[Mira... mañana sigo]", borrarVariable: true },
         { fijo: "", variable: "[Tengo que pensar]", borrarVariable: false },
     ];
 
-    // Variables de estado
     let indexTexto = 0;
     let indexChar = 0;
     const elementoTexto = document.getElementById('texto');
     const velocidadEscritura = 120;
     const velocidadBorrado = 120;
     const pausaEntreTextos = 500;
-
-   let fase = 'escribiendo';
+    let fase = 'escribiendo';
     let textoActual = '';
 
     function mostrarConCursor(texto) {
@@ -35,19 +33,17 @@ export function initTextoAnimado() {
     }
 
     function escribirTexto() {
-        // Verificar si hemos llegado al último texto
         if (indexTexto >= textos.length) {
-            // Mostrar el último texto permanentemente
             const ultimoTexto = textos[textos.length - 1];
             elementoTexto.innerHTML = ultimoTexto.fijo + ultimoTexto.variable;
-            return; // Salir de la función para detener la animación
+            return;
         }
 
         const item = textos[indexTexto];
         textoActual = item.fijo + item.variable;
 
         if (fase === 'escribiendo') {
-             const textoMostrar = textoActual.substring(0, indexChar + 1);
+            const textoMostrar = textoActual.substring(0, indexChar + 1);
             mostrarConCursor(textoMostrar);
             indexChar++;
 
@@ -61,7 +57,7 @@ export function initTextoAnimado() {
         else if (fase === 'retrocediendo') {
             const posicionBorrado = item.fijo.length;
             const textoMostrar = textoActual.substring(0, indexChar - 1);
-           mostrarConCursor(textoMostrar);
+            mostrarConCursor(textoMostrar);
             indexChar--;
 
             if (indexChar === posicionBorrado) {
@@ -75,16 +71,14 @@ export function initTextoAnimado() {
         }
     }
 
-  function siguienteTexto() {
+    function siguienteTexto() {
         indexTexto++;
-        
         if (indexTexto < textos.length) {
             const next = textos[indexTexto];
             indexChar = next.fijo.length;
             fase = 'escribiendo';
             setTimeout(escribirTexto, pausaEntreTextos);
         } else {
-            // Al final, mostrar el último texto sin cursor
             const ultimoTexto = textos[textos.length - 1];
             elementoTexto.innerHTML = ultimoTexto.fijo + ultimoTexto.variable;
         }

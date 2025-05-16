@@ -1,0 +1,118 @@
+<div class="post-header">
+    <h2>Escape Room</h2>
+
+</div>
+
+<div class="post-content">
+    <p>amanece y la anciana quiere ir al huerTo a por un Higo, va a abrir la puerTa pero no recuerda el código.</p>
+</div>
+<div class="slot-machine">
+  <div class="slot-container">
+    <div class="slot" id="slot1">
+      <div class="slot-letters"></div>
+    </div>
+    <div class="slot" id="slot2">
+      <div class="slot-letters"></div>
+    </div>
+    <div class="slot" id="slot3">
+      <div class="slot-letters"></div>
+    </div>
+  </div>
+  <button id="checkButton">Abrir puerta</button>
+</div>
+<script>class SlotMachine {
+  constructor(container, letters) {
+    this.container = container;
+    this.letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
+                   'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    this.selectedIndex = 0;
+    this.init();
+  }
+
+  init() {
+    // Llenar con letras
+    this.letters.forEach(letter => {
+      const div = document.createElement('div');
+      div.className = 'slot-letter';
+      div.textContent = letter;
+      this.container.querySelector('.slot-letters').appendChild(div);
+    });
+
+    // Eventos táctiles
+    let startY = 0;
+    
+    this.container.addEventListener('touchstart', e => {
+      startY = e.touches[0].clientY;
+    });
+    
+    this.container.addEventListener('touchmove', e => {
+      e.preventDefault();
+      const deltaY = e.touches[0].clientY - startY;
+      this.scrollLetters(deltaY);
+    });
+
+    // Eventos de ratón para desktop
+    this.container.addEventListener('mousedown', e => {
+      startY = e.clientY;
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+
+    const onMouseMove = (e) => {
+      const deltaY = e.clientY - startY;
+      this.scrollLetters(deltaY);
+    };
+
+    const onMouseUp = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      this.snapToLetter();
+    };
+  }
+
+  scrollLetters(delta) {
+    const lettersContainer = this.container.querySelector('.slot-letters');
+    lettersContainer.style.transform = `translateY(${delta}px)`;
+  }
+
+  snapToLetter() {
+    const letters = this.container.querySelectorAll('.slot-letter');
+    const containerHeight = this.container.offsetHeight;
+    const scrollPosition = -parseInt(lettersContainer.style.transform.split('translateY(')[1]) || 0;
+    this.selectedIndex = Math.round(scrollPosition / containerHeight);
+    
+    // Ajustar índice dentro de los límites
+    this.selectedIndex = Math.max(0, Math.min(this.selectedIndex, this.letters.length - 1));
+    
+    // Aplicar posición final
+    lettersContainer.style.transform = `translateY(-${this.selectedIndex * 80}px)`;
+  }
+
+  getSelectedLetter() {
+    return this.letters[this.selectedIndex];
+  }
+}
+
+// Inicializar las tres slots
+const slot1 = new SlotMachine(document.getElementById('slot1'));
+const slot2 = new SlotMachine(document.getElementById('slot2'));
+const slot3 = new SlotMachine(document.getElementById('slot3'));
+
+// Verificar combinación
+document.getElementById('checkButton').addEventListener('click', () => {
+  const combination = [
+    slot1.getSelectedLetter(),
+    slot2.getSelectedLetter(),
+    slot3.getSelectedLetter()
+  ].join('');
+
+  if (combination === 'THT') {
+    alert('¡Correcto! La puerta se abre...');
+    // Aquí tu lógica para avanzar al siguiente puzzle
+  } else {
+    alert('Código incorrecto. Sigue intentándolo.');
+  }
+});</script>
+<div class="post-footer">
+    <a href="../tantoshigostanto/glosario.html#trendy" class="read-more">Explicación del recurso →</a>
+</div>

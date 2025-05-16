@@ -1,6 +1,6 @@
 <div class="post-header">
     <h2>Escape Room</h2>
-    <h4>🚧En construcción🚧</h4>
+    <h4>🚧Sí, sí, probando, sí🚧</h4>
 </div>
 
 <style>
@@ -31,33 +31,20 @@
 #checkButton {
   padding: 12px 40px;
   font-size: 20px;
-  background-color: #ff4444;
+  background-color: #00C851;
   color: white;
   border: none;
   border-radius: 8px;
-  cursor: not-allowed;
+  cursor: pointer;
   transition: all 0.3s;
-  opacity: 0.7;
 }
 
-#checkButton.valid {
-  background-color: #00C851 !important;
-  cursor: pointer !important;
-  opacity: 1 !important;
-}
-
-.success-message {
-  color: #00C851;
-  font-weight: bold;
-  margin: 20px 0;
-  font-size: 1.2em;
-  display: none;
-}
+.error { border-color: #ff4444 !important; }
+.success { border-color: #00C851 !important; }
 </style>
 
 <div class="post-content">
     <p id="storyText">amanece y la anciana quiere ir al huerTo a por un Higo. intenta abrir la puerta, pero en vez de llave Tiene un código, y no lo recuerda.</p>
-    <p class="success-message" id="successMessage">¡Correcto! La puerta se abre...</p>
 </div>
 
 <div class="code-container">
@@ -71,127 +58,71 @@
 
 <script>
 // Configuración del juego
-const CONFIG = {
-  puzzles: [
-    {
-      id: 1,
-      text: "amanece y la anciana quiere ir al huerTo a por un Higo. intenta abrir la puerta, pero en vez de llave Tiene un código, y no lo recuerda.",
-      solution: "THT",
-      next: 2
-    },
-    {
-      id: 2,
-      text: "¡Éxito! La puerta se abre revelando un cofre con símbolos: ⯁♣☢. Busca una relación con las iniciales...",
-      solution: "",
-      next: null
-    }
-  ]
-};
-
-class Juego {
-  constructor() {
-    this.inputs = Array.from(document.querySelectorAll('.code-input'));
-    this.boton = document.getElementById('checkButton');
-    this.mensajeExito = document.getElementById('successMessage');
-    this.textoHistoria = document.getElementById('storyText');
-    this.puzzleActual = 0;
+const JUEGO = {
+  solucion: 'THT',
+  inputs: [],
+  init() {
+    this.inputs = [...document.querySelectorAll('.code-input')];
     
-    this.iniciar();
-  }
-
-  iniciar() {
-    this.cargarPuzzle(0);
-    this.configurarEventos();
-  }
-
-  cargarPuzzle(numeroPuzzle) {
-    const puzzle = CONFIG.puzzles[numeroPuzzle];
-    this.textoHistoria.textContent = puzzle.text;
-    
-    if (numeroPuzzle === 0) {
-      this.mostrarInputsCodigo(puzzle.solution);
-    } else {
-      this.mostrarSiguientePuzzle();
-    }
-  }
-
-  mostrarInputsCodigo(solucion) {
-    this.solucion = solucion;
-    this.inputs.forEach(input => {
-      input.value = '';
-      input.style.borderColor = '#666';
-      input.disabled = false;
-    });
-    this.boton.classList.remove('valid');
-    this.boton.disabled = true;
-    this.mensajeExito.style.display = 'none';
-  }
-
-  configurarEventos() {
-    this.inputs.forEach((input, indice) => {
-      input.addEventListener('input', (e) => {
-        this.procesarInput(e.target, indice);
-        this.verificarCodigo();
-      });
+    // Configurar eventos
+    this.inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => this.procesarInput(e, index));
     });
 
-    this.boton.addEventListener('click', () => {
-      if (this.boton.classList.contains('valid')) {
-        this.mostrarExito();
-        setTimeout(() => this.siguientePuzzle(), 1500);
-      }
-    });
-  }
+    document.getElementById('checkButton').addEventListener('click', () => this.verificarCodigo());
+  },
 
-  procesarInput(input, indice) {
-    // Filtrado y formato
-    input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
+  procesarInput(e, index) {
+    const input = e.target;
+    // Formatear texto y limitar a 1 carácter
+    input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '').substr(0,1);
     
     // Navegación automática
-    if (input.value.length === 1 && indice < 2) {
-      this.inputs[indice + 1].focus();
+    if(input.value && index < 2) {
+      this.inputs[index + 1].focus();
     }
     
     // Borrado inteligente
-    if (input.value === '' && indice > 0) {
-      this.inputs[indice - 1].focus();
+    if(!input.value && index > 0) {
+      this.inputs[index - 1].focus();
     }
-  }
+  },
 
   verificarCodigo() {
-    const codigoIngresado = this.inputs.map(input => input.value).join('');
-    const esValido = codigoIngresado === this.solucion;
+    const combinacion = this.inputs.map(i => i.value).join('');
     
-    this.boton.disabled = !esValido;
-    this.boton.classList.toggle('valid', esValido);
-    
-    // Resaltar inputs
-    this.inputs.forEach(input => {
-      input.style.borderColor = esValido ? '#00C851' : (input.value ? '#ff4444' : '#666');
-    });
-    
-    return esValido;
-  }
+    if(combinacion === this.solucion) {
+      this.mostrarExito();
+      setTimeout(() => this.siguienteNivel(), 1500);
+    } else {
+      this.mostrarError();
+    }
+  },
 
   mostrarExito() {
-    this.mensajeExito.style.display = 'block';
-    this.inputs.forEach(input => input.disabled = true);
-    this.boton.disabled = true;
-  }
+    this.inputs.forEach(input => input.classList.add('success'));
+    document.getElementById('checkButton').style.backgroundColor = '#007E33';
+    document.getElementById('storyText').innerHTML = "¡Correcto! La puerta se abre...";
+  },
 
-  siguientePuzzle() {
-    this.puzzleActual++;
-    if (CONFIG.puzzles[this.puzzleActual]) {
-      this.cargarPuzzle(this.puzzleActual);
-    } else {
-      this.textoHistoria.innerHTML = "¡Has completado todos los puzzles! 🎉";
-      document.querySelector('.code-container').remove();
-    }
-  }
-}
+  mostrarError() {
+    this.inputs.forEach(input => input.classList.add('error'));
+    setTimeout(() => this.inputs.forEach(i => i.classList.remove('error')), 1000);
+  },
 
-// Iniciar juego cuando se cargue la página
-window.addEventListener('DOMContentLoaded', () => new Juego());
+  siguienteNivel() {
+    document.getElementById('storyText').innerHTML = "¡Éxito! La puerta revela un cofre con símbolos: ⯁♣☢. Busca el siguiente código...";
+    document.querySelector('.code-container').innerHTML = `
+      <div style="margin-top:30px">
+        <p>${document.getElementById('storyText').innerHTML}</p>
+        <button onclick="location.reload()" style="margin-top:20px">Jugar de nuevo</button>
+      </div>
+    `;
+  }
+};
+
+// Iniciar juego cuando cargue la página
+window.addEventListener('DOMContentLoaded', () => JUEGO.init());
 </script>
 
 <div class="post-footer">

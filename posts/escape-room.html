@@ -80,17 +80,88 @@
   <button id="checkButton">Abrir puerta</button>
 </div>
 <script>
+// Estado del juego
+const gameState = {
+  currentPuzzle: 1,
+  puzzles: {
+    1: {
+      text: "amanece y la anciana quiere ir al huerTo a por un Higo. intenta abrir la puerta, pero en vez de llave Tiene un código, y no lo recuerda.",
+      solution: "THT",
+      nextPuzzle: 2
+    },
+    2: {
+      text: "Ahora la anciana encuentra un cofre con un candado numérico... (texto puzzle 2)",
+      solution: "1234", // Ejemplo
+      nextPuzzle: 3 // o 'end' si es el último
+    }
+  }
+};
+
+// Clase para gestionar los puzzles
+class EscapeRoom {
+  constructor() {
+    this.slots = [];
+    this.initPuzzle(gameState.currentPuzzle);
+  }
+
+  initPuzzle(puzzleId) {
+    // Limpiar slots anteriores
+    this.slots = [];
+    
+    const puzzle = gameState.puzzles[puzzleId];
+    document.querySelector('.post-content p').textContent = puzzle.text;
+
+    if(puzzleId === 1) {
+      this.setupSlotMachine(puzzle.solution);
+    }
+  }
+       setupSlotMachine(solution) {
+    // Crear nuevas instancias de slots
+    this.slots.push(
+      new SlotMachine(document.getElementById('slot1')),
+      new SlotMachine(document.getElementById('slot2')),
+      new SlotMachine(document.getElementById('slot3'))
+    );
+
+    document.getElementById('checkButton').onclick = () => {
+      if(this.checkCombination(solution)) {
+        this.nextPuzzle();
+      }
+    };
+  }
+
+  checkCombination(solution) {
+    const combination = this.slots.map(slot => 
+      slot.getSelectedLetter()
+    ).join('');
+    
+    return combination === solution;
+  }
+
+  nextPuzzle() {
+    const nextId = gameState.puzzles[gameState.currentPuzzle].nextPuzzle;
+    
+    if(nextId) {
+      gameState.currentPuzzle = nextId;
+      this.initPuzzle(nextId);
+      alert('¡Puzzle completado! Avanzando al siguiente desafío...');
+    } else {
+      alert('¡Has completado todos los puzzles!');
+    }
+  }
+}
 class SlotMachine {
   constructor(container) {
     this.container = container;
-    this.letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
-                   'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    this.letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
+                   'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
     this.selectedIndex = 0;
     this.init();
   }
 
   init() {
     const lettersContainer = this.container.querySelector('.slot-letters');
+    lettersContainer.innerHTML = '';
     
     // Llenar con letras
     this.letters.forEach(letter => {
@@ -99,7 +170,6 @@ class SlotMachine {
       div.textContent = letter;
       lettersContainer.appendChild(div);
     });
-
     // Establecer posición inicial
     lettersContainer.style.transform = `translateY(-${this.selectedIndex * 80}px)`;
 
@@ -161,26 +231,52 @@ class SlotMachine {
   }
 }
 
-// Inicialización corregida
-document.addEventListener('DOMContentLoaded', () => {
-  const slot1 = new SlotMachine(document.getElementById('slot1'));
-  const slot2 = new SlotMachine(document.getElementById('slot2'));
-  const slot3 = new SlotMachine(document.getElementById('slot3'));
-
-  document.getElementById('checkButton').addEventListener('click', () => {
+          document.getElementById('checkButton').onclick = () => {
+      if(this.checkCombination(solution)) {
+        this.nextPuzzle();
+      }
+    };
+  }
+    checkCombination(solution) {
     const combination = [
       slot1.getSelectedLetter(),
       slot2.getSelectedLetter(),
       slot3.getSelectedLetter()
     ].join('');
-
-    if (combination === 'THT') {
-      alert('¡Correcto! La puerta se abre...');
+    
+    if(combination === solution) {
+      return true;
     } else {
       alert('Código incorrecto. Sigue intentándolo.');
+      return false;
     }
-  });
+  }
+
+  nextPuzzle() {
+    const nextId = gameState.puzzles[gameState.currentPuzzle].nextPuzzle;
+    
+    if(nextId) {
+      gameState.currentPuzzle = nextId;
+      this.initPuzzle(nextId);
+      alert('¡Puzzle completado! Avanzando al siguiente desafío...');
+    } else {
+      alert('¡Has completado todos los puzzles!');
+    }
+  }
+}
+
+
+  
+  // Inicializar componentes específicos (slots para puzzle 1)
+  if(gameState.currentPuzzle === 1) {
+    window.slot1 = new SlotMachine(document.getElementById('slot1'));
+    window.slot2 = new SlotMachine(document.getElementById('slot2'));
+    window.slot3 = new SlotMachine(document.getElementById('slot3'));
+  }
 });
+    // Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+  window.escapeRoom = new EscapeRoom();
 </script>
 <div class="post-footer">
     <a href="../tantoshigostanto/glosario.html#trendy" class="read-more">Explicación del recurso →</a>

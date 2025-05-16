@@ -207,5 +207,11 @@
     "term": "Verso Libre",
     "category": "Formato",
     "subcategory": "Poesía"
+     },
+    {
+    "id": "escape-room",
+    "term": "Escape Room",
+    "category": "Formato",
+    "subcategory": "Interactivo"
      }
 ]

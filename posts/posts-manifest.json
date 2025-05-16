@@ -120,6 +120,7 @@
     "id": "escape-room",
     "title": "Escape Room",
     "category": "Formato",
+      "subcategory": "Interactivo",
     "date": "2025-04-15T10:00:00Z"
   }  
 ]

@@ -4,60 +4,42 @@
 </div>
 
 <style>
-.slot-machine {
+.code-container {
   text-align: center;
   padding: 20px;
 }
 
-.slot-container {
+.code-inputs {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin: 20px 0;
 }
 
-.slot {
+.code-input {
   width: 60px;
   height: 80px;
   border: 2px solid #333;
   border-radius: 8px;
-  background: white;
-  overflow: hidden;
-  position: relative;
-}
-
-.slot-letters {
-  position: absolute;
-  width: 100%;
-  height: calc(80px * 26);
-  transition: transform 0.3s ease;
-}
-
-.slot-letter {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
+  text-align: center;
+  font-size: 40px;
   font-weight: bold;
-  color: #333;
-  user-select: none;
+  text-transform: uppercase;
 }
 
-.slot::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, 
-    rgba(255,255,255,1) 0%,
-    rgba(255,255,255,0) 30%,
-    rgba(255,255,255,0) 70%,
-    rgba(255,255,255,1) 100%
-  );
-  pointer-events: none;
+#checkButton {
+  padding: 10px 30px;
+  font-size: 18px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  cursor: not-allowed;
+  transition: background-color 0.3s;
+}
+
+#checkButton.valid {
+  background-color: #4CAF50;
+  cursor: pointer;
 }
 </style>
 
@@ -65,17 +47,11 @@
     <p>amanece y la anciana quiere ir al huerTo a por un Higo. intenta abrir la puerta, pero en vez de llave Tiene un código, y no lo recuerda.</p>
 </div>
 
-<div class="slot-machine">
-  <div class="slot-container">
-    <div class="slot" id="slot1">
-      <div class="slot-letters"></div>
-    </div>
-    <div class="slot" id="slot2">
-      <div class="slot-letters"></div>
-    </div>
-    <div class="slot" id="slot3">
-      <div class="slot-letters"></div>
-    </div>
+<div class="code-container">
+  <div class="code-inputs">
+    <input type="text" class="code-input" id="input1" maxlength="1">
+    <input type="text" class="code-input" id="input2" maxlength="1">
+    <input type="text" class="code-input" id="input3" maxlength="1">
   </div>
   <button id="checkButton">Abrir puerta</button>
 </div>
@@ -90,120 +66,74 @@ const gameState = {
       nextPuzzle: 2
     },
     2: {
-      text: "Ahora la anciana encuentra un cofre con un candado numérico... (texto puzzle 2)",
-      solution: "1234",
-      nextPuzzle: 3
+      text: "¡Puerta abierta! (Aquí iría el texto del puzzle 2)",
+      solution: "",
+      nextPuzzle: null
     }
   }
 };
 
-class SlotMachine {
-  constructor(container) {
-    this.container = container;
-    this.letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
-                   'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    this.selectedIndex = 0;
-    this.init();
-  }
-
-  init() {
-    const lettersContainer = this.container.querySelector('.slot-letters');
-    lettersContainer.innerHTML = '';
-    
-    this.letters.forEach(letter => {
-      const div = document.createElement('div');
-      div.className = 'slot-letter';
-      div.textContent = letter;
-      lettersContainer.appendChild(div);
-    });
-
-    lettersContainer.style.transform = `translateY(-${this.selectedIndex * 80}px)`;
-
-    let startY = 0;
-    let isDragging = false;
-    let currentYPosition = 0;
-
-    // Eventos táctiles
-    this.container.addEventListener('touchstart', e => {
-      startY = e.touches[0].clientY;
-      currentYPosition = parseInt(lettersContainer.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
-      isDragging = true;
-    });
-
-    this.container.addEventListener('touchmove', e => {
-      if (!isDragging) return;
-      const deltaY = e.touches[0].clientY - startY;
-      lettersContainer.style.transform = `translateY(${currentYPosition + deltaY}px)`;
-    });
-
-    this.container.addEventListener('touchend', () => {
-      isDragging = false;
-      this.snapToLetter(lettersContainer);
-    });
-
-    // Eventos de ratón
-    this.container.addEventListener('mousedown', e => {
-      startY = e.clientY;
-      currentYPosition = parseInt(lettersContainer.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
-      isDragging = true;
-    });
-
-    document.addEventListener('mousemove', e => {
-      if (!isDragging) return;
-      const deltaY = e.clientY - startY;
-      lettersContainer.style.transform = `translateY(${currentYPosition + deltaY}px)`;
-    });
-
-    document.addEventListener('mouseup', () => {  
-      if (!isDragging) return;
-      isDragging = false;
-      this.snapToLetter(lettersContainer);
-    });
-  }
-
-  snapToLetter(lettersContainer) {
-    const currentPosition = parseInt(lettersContainer.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
-    this.selectedIndex = Math.round(-currentPosition / 80);
-    this.selectedIndex = Math.max(0, Math.min(this.selectedIndex, this.letters.length - 1));
-    lettersContainer.style.transform = `translateY(-${this.selectedIndex * 80}px)`;
-  }
-
-  getSelectedLetter() {
-    return this.letters[this.selectedIndex];
-  }
-}
-
 class EscapeRoom {
   constructor() {
-    this.slots = [];
+    this.inputs = [];
     this.initPuzzle(gameState.currentPuzzle);
   }
 
   initPuzzle(puzzleId) {
-    this.slots = [];
     const puzzle = gameState.puzzles[puzzleId];
     document.querySelector('.post-content p').textContent = puzzle.text;
-
+    
     if(puzzleId === 1) {
-      this.setupSlotMachine(puzzle.solution);
+      this.setupCodeInputs(puzzle.solution);
     }
   }
 
-  setupSlotMachine(solution) {
-    this.slots.push(
-      new SlotMachine(document.getElementById('slot1')),
-      new SlotMachine(document.getElementById('slot2')),
-      new SlotMachine(document.getElementById('slot3'))
-    );
+  setupCodeInputs(solution) {
+    this.solution = solution;
+    this.inputs = [
+      document.getElementById('input1'),
+      document.getElementById('input2'),
+      document.getElementById('input3')
+    ];
 
-    document.getElementById('checkButton').onclick = () => {
-      const combination = this.slots.map(slot => slot.getSelectedLetter()).join('');
-      if(combination === solution) {
+    // Configurar eventos de entrada
+    this.inputs.forEach(input => {
+      input.value = ''; // Limpiar valores anteriores
+      input.addEventListener('input', (e) => {
+        this.handleInput(e);
+        this.checkCode();
+      });
+    });
+
+    document.getElementById('checkButton').addEventListener('click', () => {
+      if(this.checkCode()) {
         this.nextPuzzle();
-      } else {
-        alert('Código incorrecto. Sigue intentándolo.');
       }
-    };
+    });
+  }
+
+  handleInput(e) {
+    const input = e.target;
+    input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
+    
+    // Moverse automáticamente al siguiente campo
+    if(input.value.length === 1) {
+      const nextIndex = this.inputs.indexOf(input) + 1;
+      if(nextIndex < this.inputs.length) {
+        this.inputs[nextIndex].focus();
+      }
+    }
+  }
+
+  checkCode() {
+    const enteredCode = this.inputs.map(input => input.value).join('');
+    const isValid = enteredCode === this.solution;
+    const button = document.getElementById('checkButton');
+    
+    button.classList.toggle('valid', isValid);
+    button.disabled = !isValid;
+    
+    return isValid;
   }
 
   nextPuzzle() {
@@ -211,9 +141,6 @@ class EscapeRoom {
     if(nextId) {
       gameState.currentPuzzle = nextId;
       this.initPuzzle(nextId);
-      alert('¡Puzzle completado! Avanzando al siguiente desafío...');
-    } else {
-      alert('¡Has completado todos los puzzles!');
     }
   }
 }

@@ -233,62 +233,7 @@ body {
     .post-header {
         position: relative;
     }
-.slot-machine {
-  text-align: center;
-  padding: 20px;
-}
 
-.slot-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.slot {
-  width: 60px;
-  height: 80px;
-  border: 2px solid #333;
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-}
-
-.slot-letters {
-  position: absolute;
-  width: 100%;
-  transition: transform 0.3s ease;
-}
-
-.slot-letter {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  user-select: none;
-}
-
-/* Mostrar 3 letras visibles (anterior, actual, siguiente) */
-.slot {
-  mask-image: linear-gradient(to bottom, 
-    transparent 0%, 
-    black 20%, 
-    black 80%, 
-    transparent 100%
-  );
-}
-
-/* Scroll snapping */
-.slot-letters {
-  scroll-snap-type: y mandatory;
-}
-
-.slot-letter {
-  scroll-snap-align: center;
-}
  /* Estilos para el popup del glosario */
     .glossary-popup {
         position: fixed;

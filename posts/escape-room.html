@@ -102,6 +102,11 @@ class EscapeRoom {
       input.addEventListener('input', (e) => {
         this.handleInput(e);
         this.checkCode();
+          // Si ya hay un carácter, pasar al siguiente input
+    if (e.target.value.length === 1) {
+      const next = inputs[idx + 1];
+      if (next) next.focus();
+    }
       });
     });
 

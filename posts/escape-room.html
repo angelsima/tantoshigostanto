@@ -2,7 +2,6 @@
     <h2>Escape Room</h2>
     <h4>🚧En construcción🚧</h4>
 </div>
-
 <style>
 .code-container {
   text-align: center;
@@ -34,17 +33,27 @@
   border: none;
   border-radius: 5px;
   cursor: not-allowed;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  opacity: 0.5;
 }
 
 #checkButton.valid {
   background-color: #4CAF50;
   cursor: pointer;
+  opacity: 1;
+}
+
+.success-message {
+  color: #4CAF50;
+  font-weight: bold;
+  margin-top: 15px;
+  display: none;
 }
 </style>
 
 <div class="post-content">
-    <p>amanece y la anciana quiere ir al huerTo a por un Higo. intenta abrir la puerta, pero en vez de llave Tiene un código, que no recuerda.</p>
+    <p id="storyText">amanece y la anciana quiere ir al huerTo a por un Higo. intenta abrir la puerta, pero en vez de llave Tiene un código, y no lo recuerda.</p>
+    <p class="success-message" id="successMessage">¡Correcto! La puerta se abre...</p>
 </div>
 
 <div class="code-container">
@@ -66,8 +75,8 @@ const gameState = {
       nextPuzzle: 2
     },
     2: {
-      text: "¡Puerta abierta! (Aquí iría el texto del puzzle 2)",
-      solution: "",
+      text: "¡La puerta se abre con un chirrido! Dentro del huerto encuentras un cofre antiguo con un candado de 4 dígitos... (Puzzle 2)",
+      solution: "1987", // Ejemplo para siguiente puzzle
       nextPuzzle: null
     }
   }
@@ -76,15 +85,26 @@ const gameState = {
 class EscapeRoom {
   constructor() {
     this.inputs = [];
+    this.successMessage = document.getElementById('successMessage');
+    this.storyText = document.getElementById('storyText');
     this.initPuzzle(gameState.currentPuzzle);
   }
 
   initPuzzle(puzzleId) {
     const puzzle = gameState.puzzles[puzzleId];
-    document.querySelector('.post-content p').textContent = puzzle.text;
+    
+    // Resetear interfaz
+    this.successMessage.style.display = 'none';
+    this.storyText.textContent = puzzle.text;
     
     if(puzzleId === 1) {
       this.setupCodeInputs(puzzle.solution);
+    } else {
+      // Configurar nuevo puzzle aquí
+      this.storyText.textContent = puzzle.text;
+      document.querySelector('.code-container').innerHTML = `
+        <p style="color: #666; margin-top: 20px;">[Aquí iría la interfaz del Puzzle 2]</p>
+      `;
     }
   }
 
@@ -96,37 +116,35 @@ class EscapeRoom {
       document.getElementById('input3')
     ];
 
-    // Configurar eventos de entrada
+    // Resetear inputs
     this.inputs.forEach(input => {
-      input.value = ''; // Limpiar valores anteriores
+      input.value = '';
+      input.style.borderColor = '#333';
+    });
+
+    // Configurar eventos
+    this.inputs.forEach((input, index) => {
       input.addEventListener('input', (e) => {
-        this.handleInput(e);
+        this.handleInput(e, index);
         this.checkCode();
-          // Si ya hay un carácter, pasar al siguiente input
-    if (e.target.value.length === 1) {
-      const next = inputs[idx + 1];
-      if (next) next.focus();
-    }
       });
     });
 
     document.getElementById('checkButton').addEventListener('click', () => {
       if(this.checkCode()) {
-        this.nextPuzzle();
+        this.successMessage.style.display = 'block';
+        setTimeout(() => this.nextPuzzle(), 1500);
       }
     });
   }
 
-  handleInput(e) {
+  handleInput(e, index) {
     const input = e.target;
     input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
     
-    // Moverse automáticamente al siguiente campo
+    // Navegación entre inputs
     if(input.value.length === 1) {
-      const nextIndex = this.inputs.indexOf(input) + 1;
-      if(nextIndex < this.inputs.length) {
-        this.inputs[nextIndex].focus();
-      }
+      if(index < 2) this.inputs[index + 1].focus();
     }
   }
 
@@ -136,8 +154,12 @@ class EscapeRoom {
     const button = document.getElementById('checkButton');
     
     button.classList.toggle('valid', isValid);
-    button.disabled = !isValid;
     
+    // Resaltar inputs correctos
+    this.inputs.forEach(input => {
+      input.style.borderColor = enteredCode === this.solution ? '#4CAF50' : '#333';
+    });
+
     return isValid;
   }
 

@@ -39,8 +39,8 @@
   transition: all 0.3s;
 }
 
-.error { border-color: #ff4444 !important; }
-.success { border-color: #00C851 !important; }
+.code-input.success { border-color: #00C851 !important; }
+.code-input.error { border-color: #ff4444 !important; }
 </style>
 
 <div class="post-content">
@@ -57,84 +57,73 @@
 </div>
 
 <script>
-// Configuración del Juego (Modo Depuración)
-const JUEGO = {
-  solucion: 'THT',  // ¡SOLUCIÓN CORRECTA DEFINIDA AQUÍ!
-  inputs: [],
-  
+// ========== CÓDIGO VERIFICADO ==========
+const escapeRoom = {
+  solution: 'THT',
   init() {
     this.inputs = [...document.querySelectorAll('.code-input')];
-    console.log('Iniciando juego... Solución correcta:', this.solucion);
+    this.btn = document.getElementById('checkButton');
     
+    // Configurar eventos de entrada
     this.inputs.forEach((input, index) => {
-      input.addEventListener('input', (e) => {
-        this.procesarInput(e, index);
-        console.log(`Input ${index + 1}:`, e.target.value);
-      });
+      input.value = ''; // Reset inicial
+      input.addEventListener('input', (e) => this.handleInput(e, index));
     });
-
-    document.getElementById('checkButton').addEventListener('click', () => {
-      console.log('Botón pulsado. Código ingresado:', this.getCodigoActual());
-      this.verificarCodigo();
-    });
+    
+    // Evento del botón
+    this.btn.addEventListener('click', () => this.checkCode());
   },
 
-  procesarInput(e, index) {
+  handleInput(e, index) {
     const input = e.target;
-    input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '').substr(0,1);
+    // Filtrado y formato
+    input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '');
     
-    // Navegación automática mejorada
-    if(input.value) {
-      if(index < 2) this.inputs[index + 1].focus();
-    } else {
-      if(index > 0) this.inputs[index - 1].focus();
+    // Navegación automática garantizada
+    if(input.value.length === 1 && index < 2) {
+      this.inputs[index + 1].focus();
+    }
+    if(input.value === '' && index > 0) {
+      this.inputs[index - 1].focus();
     }
   },
 
-  getCodigoActual() {
-    return this.inputs.map(i => i.value).join('');
-  },
-
-  verificarCodigo() {
-    const combinacion = this.getCodigoActual();
-    console.log('Verificando:', combinacion);
+  checkCode() {
+    const code = this.inputs.map(i => i.value).join('');
     
-    if(combinacion === this.solucion) {
-      console.log('¡Código correcto!');
-      this.mostrarExito();
-      setTimeout(() => {
-        console.log('Avanzando al Puzzle 2...');
-        this.siguienteNivel();
-      }, 1500);
-    } else {
-      console.log('Código incorrecto');
-      this.mostrarError();
+    if(code === this.solution) {
+      this.showSuccess();
+      setTimeout(() => this.nextLevel(), 1500);
+      return true;
     }
+    
+    this.showError();
+    return false;
   },
 
-  mostrarExito() {
-    this.inputs.forEach(input => input.classList.add('success'));
-    document.getElementById('checkButton').style.backgroundColor = '#007E33';
-    document.getElementById('storyText').textContent = "¡Correcto! La puerta se abre...";
+  showSuccess() {
+    this.inputs.forEach(i => i.classList.add('success'));
+    this.btn.textContent = '¡Éxito!';
+    this.btn.style.backgroundColor = '#007E33';
   },
 
-  mostrarError() {
-    this.inputs.forEach(input => {
-      input.classList.add('error');
-      setTimeout(() => input.classList.remove('error'), 1000);
+  showError() {
+    this.inputs.forEach(i => {
+      i.classList.add('error');
+      setTimeout(() => i.classList.remove('error'), 1000);
     });
   },
 
-  siguienteNivel() {
+  nextLevel() {
     document.getElementById('storyText').innerHTML = `
-      ¡Éxito! La puerta revela un cofre con símbolos: ⯁♣☢.<br>
-      <strong>Nuevo código requerido:</strong> "Las iniciales de Tres Hijos del Tendero"
+      ¡Puerta abierta! <br>
+      <em>Segundo puzzle:</em> Encuentras un cofre con símbolos: ⯁♣☢<br>
+      <strong>Pista:</strong> "Las iniciales de Tres Hijos del Tendero"
     `;
     document.querySelector('.code-container').innerHTML = `
-      <div style="margin-top:30px; font-size:1.2em">
-        <p>${document.getElementById('storyText').innerHTML}</p>
+      <div style="margin-top: 30px; font-size: 1.2em">
         <button onclick="location.reload()" 
-                style="margin-top:20px; padding:10px 20px; font-size:16px">
+                style="padding: 10px 20px; font-size: 16px; margin-top: 20px">
           Reiniciar Juego
         </button>
       </div>
@@ -142,13 +131,10 @@ const JUEGO = {
   }
 };
 
-// Iniciar con logs de diagnóstico
-window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM completamente cargado');
-  JUEGO.init();
-});
+// Iniciar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => escapeRoom.init());
 </script>
 
 <div class="post-footer">
-    <a href="../tantoshigostanto/glosario.html#escape-room" class="read-more">Explicación del recurso →</a>
+    <a href="../tantoshigostanto/glosario.html#trendy" class="read-more">Explicación del recurso →</a>
 </div>

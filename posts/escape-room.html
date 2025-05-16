@@ -1,6 +1,6 @@
 <div class="post-header">
     <h2>Escape Room</h2>
-    <h4>🚧Sí, sí, probando, sí🚧</h4>
+    <h4>🚧En construcción🚧</h4>
 </div>
 
 <style>
@@ -57,44 +57,57 @@
 </div>
 
 <script>
-// Configuración del juego
+// Configuración del Juego (Modo Depuración)
 const JUEGO = {
-  solucion: 'THT',
+  solucion: 'THT',  // ¡SOLUCIÓN CORRECTA DEFINIDA AQUÍ!
   inputs: [],
+  
   init() {
     this.inputs = [...document.querySelectorAll('.code-input')];
+    console.log('Iniciando juego... Solución correcta:', this.solucion);
     
-    // Configurar eventos
     this.inputs.forEach((input, index) => {
-      input.addEventListener('input', (e) => this.procesarInput(e, index));
+      input.addEventListener('input', (e) => {
+        this.procesarInput(e, index);
+        console.log(`Input ${index + 1}:`, e.target.value);
+      });
     });
 
-    document.getElementById('checkButton').addEventListener('click', () => this.verificarCodigo());
+    document.getElementById('checkButton').addEventListener('click', () => {
+      console.log('Botón pulsado. Código ingresado:', this.getCodigoActual());
+      this.verificarCodigo();
+    });
   },
 
   procesarInput(e, index) {
     const input = e.target;
-    // Formatear texto y limitar a 1 carácter
     input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '').substr(0,1);
     
-    // Navegación automática
-    if(input.value && index < 2) {
-      this.inputs[index + 1].focus();
-    }
-    
-    // Borrado inteligente
-    if(!input.value && index > 0) {
-      this.inputs[index - 1].focus();
+    // Navegación automática mejorada
+    if(input.value) {
+      if(index < 2) this.inputs[index + 1].focus();
+    } else {
+      if(index > 0) this.inputs[index - 1].focus();
     }
   },
 
+  getCodigoActual() {
+    return this.inputs.map(i => i.value).join('');
+  },
+
   verificarCodigo() {
-    const combinacion = this.inputs.map(i => i.value).join('');
+    const combinacion = this.getCodigoActual();
+    console.log('Verificando:', combinacion);
     
     if(combinacion === this.solucion) {
+      console.log('¡Código correcto!');
       this.mostrarExito();
-      setTimeout(() => this.siguienteNivel(), 1500);
+      setTimeout(() => {
+        console.log('Avanzando al Puzzle 2...');
+        this.siguienteNivel();
+      }, 1500);
     } else {
+      console.log('Código incorrecto');
       this.mostrarError();
     }
   },
@@ -102,27 +115,38 @@ const JUEGO = {
   mostrarExito() {
     this.inputs.forEach(input => input.classList.add('success'));
     document.getElementById('checkButton').style.backgroundColor = '#007E33';
-    document.getElementById('storyText').innerHTML = "¡Correcto! La puerta se abre...";
+    document.getElementById('storyText').textContent = "¡Correcto! La puerta se abre...";
   },
 
   mostrarError() {
-    this.inputs.forEach(input => input.classList.add('error'));
-    setTimeout(() => this.inputs.forEach(i => i.classList.remove('error')), 1000);
+    this.inputs.forEach(input => {
+      input.classList.add('error');
+      setTimeout(() => input.classList.remove('error'), 1000);
+    });
   },
 
   siguienteNivel() {
-    document.getElementById('storyText').innerHTML = "¡Éxito! La puerta revela un cofre con símbolos: ⯁♣☢. Busca el siguiente código...";
+    document.getElementById('storyText').innerHTML = `
+      ¡Éxito! La puerta revela un cofre con símbolos: ⯁♣☢.<br>
+      <strong>Nuevo código requerido:</strong> "Las iniciales de Tres Hijos del Tendero"
+    `;
     document.querySelector('.code-container').innerHTML = `
-      <div style="margin-top:30px">
+      <div style="margin-top:30px; font-size:1.2em">
         <p>${document.getElementById('storyText').innerHTML}</p>
-        <button onclick="location.reload()" style="margin-top:20px">Jugar de nuevo</button>
+        <button onclick="location.reload()" 
+                style="margin-top:20px; padding:10px 20px; font-size:16px">
+          Reiniciar Juego
+        </button>
       </div>
     `;
   }
 };
 
-// Iniciar juego cuando cargue la página
-window.addEventListener('DOMContentLoaded', () => JUEGO.init());
+// Iniciar con logs de diagnóstico
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM completamente cargado');
+  JUEGO.init();
+});
 </script>
 
 <div class="post-footer">

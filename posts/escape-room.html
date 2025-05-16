@@ -21,6 +21,7 @@
   height: 80px;
   border: 2px solid #333;
   border-radius: 8px;
+     background: white;
   overflow: hidden;
   position: relative;
 }
@@ -28,6 +29,7 @@
 .slot-letters {
   position: absolute;
   width: 100%;
+     height: calc(80px * 26);
   transition: transform 0.3s ease;
 }
 
@@ -50,11 +52,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, 
-    rgba(255,255,255,1) 20%,
+    background: linear-gradient(to bottom, 
+    rgba(255,255,255,1) 0%,
     rgba(255,255,255,0) 30%,
     rgba(255,255,255,0) 70%,
-    rgba(255,255,255,1) 80%
+    rgba(255,255,255,1) 100%
   );
   pointer-events: none;
 }
@@ -137,11 +139,11 @@ class SlotMachine {
       lettersContainer.style.transform = `translateY(${currentYPosition + deltaY}px)`;
     });
 
-    document.addEventListener('mouseup', () => {
-      if (!isDragging) return;
-      isDragging = false;
-      this.snapToLetter(lettersContainer);
-    });
+   document.addEventListener('mouseup', (e) => {  
+  if (!isDragging) return;
+  isDragging = false;
+  this.snapToLetter(lettersContainer);
+});
   }
 
   snapToLetter(lettersContainer) {

@@ -1,9 +1,8 @@
 <div class="post-header">
     <h2>Escape Room</h2>
-
 </div>
+
 <style>
-/* Añade estos estilos CSS corregidos */
 .slot-machine {
   text-align: center;
   padding: 20px;
@@ -21,7 +20,7 @@
   height: 80px;
   border: 2px solid #333;
   border-radius: 8px;
-     background: white;
+  background: white;
   overflow: hidden;
   position: relative;
 }
@@ -29,7 +28,7 @@
 .slot-letters {
   position: absolute;
   width: 100%;
-     height: calc(80px * 26);
+  height: calc(80px * 26);
   transition: transform 0.3s ease;
 }
 
@@ -44,7 +43,6 @@
   user-select: none;
 }
 
-/* Efecto de máscara para mostrar 3 letras */
 .slot::after {
   content: '';
   position: absolute;
@@ -52,7 +50,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-    background: linear-gradient(to bottom, 
+  background: linear-gradient(to bottom, 
     rgba(255,255,255,1) 0%,
     rgba(255,255,255,0) 30%,
     rgba(255,255,255,0) 70%,
@@ -65,6 +63,7 @@
 <div class="post-content">
     <p>amanece y la anciana quiere ir al huerTo a por un Higo. intenta abrir la puerta, pero en vez de llave Tiene un código, y no lo recuerda.</p>
 </div>
+
 <div class="slot-machine">
   <div class="slot-container">
     <div class="slot" id="slot1">
@@ -79,8 +78,8 @@
   </div>
   <button id="checkButton">Abrir puerta</button>
 </div>
+
 <script>
-// Estado del juego
 const gameState = {
   currentPuzzle: 1,
   puzzles: {
@@ -91,65 +90,12 @@ const gameState = {
     },
     2: {
       text: "Ahora la anciana encuentra un cofre con un candado numérico... (texto puzzle 2)",
-      solution: "1234", // Ejemplo
-      nextPuzzle: 3 // o 'end' si es el último
+      solution: "1234",
+      nextPuzzle: 3
     }
   }
 };
 
-// Clase para gestionar los puzzles
-class EscapeRoom {
-  constructor() {
-    this.slots = [];
-    this.initPuzzle(gameState.currentPuzzle);
-  }
-
-  initPuzzle(puzzleId) {
-    // Limpiar slots anteriores
-    this.slots = [];
-    
-    const puzzle = gameState.puzzles[puzzleId];
-    document.querySelector('.post-content p').textContent = puzzle.text;
-
-    if(puzzleId === 1) {
-      this.setupSlotMachine(puzzle.solution);
-    }
-  }
-       setupSlotMachine(solution) {
-    // Crear nuevas instancias de slots
-    this.slots.push(
-      new SlotMachine(document.getElementById('slot1')),
-      new SlotMachine(document.getElementById('slot2')),
-      new SlotMachine(document.getElementById('slot3'))
-    );
-
-    document.getElementById('checkButton').onclick = () => {
-      if(this.checkCombination(solution)) {
-        this.nextPuzzle();
-      }
-    };
-  }
-
-  checkCombination(solution) {
-    const combination = this.slots.map(slot => 
-      slot.getSelectedLetter()
-    ).join('');
-    
-    return combination === solution;
-  }
-
-  nextPuzzle() {
-    const nextId = gameState.puzzles[gameState.currentPuzzle].nextPuzzle;
-    
-    if(nextId) {
-      gameState.currentPuzzle = nextId;
-      this.initPuzzle(nextId);
-      alert('¡Puzzle completado! Avanzando al siguiente desafío...');
-    } else {
-      alert('¡Has completado todos los puzzles!');
-    }
-  }
-}
 class SlotMachine {
   constructor(container) {
     this.container = container;
@@ -163,17 +109,15 @@ class SlotMachine {
     const lettersContainer = this.container.querySelector('.slot-letters');
     lettersContainer.innerHTML = '';
     
-    // Llenar con letras
     this.letters.forEach(letter => {
       const div = document.createElement('div');
       div.className = 'slot-letter';
       div.textContent = letter;
       lettersContainer.appendChild(div);
     });
-    // Establecer posición inicial
+
     lettersContainer.style.transform = `translateY(-${this.selectedIndex * 80}px)`;
 
-    // Variables para el control táctil
     let startY = 0;
     let isDragging = false;
     let currentYPosition = 0;
@@ -209,20 +153,17 @@ class SlotMachine {
       lettersContainer.style.transform = `translateY(${currentYPosition + deltaY}px)`;
     });
 
-   document.addEventListener('mouseup', (e) => {  
-  if (!isDragging) return;
-  isDragging = false;
-  this.snapToLetter(lettersContainer);
-});
+    document.addEventListener('mouseup', () => {  
+      if (!isDragging) return;
+      isDragging = false;
+      this.snapToLetter(lettersContainer);
+    });
   }
 
   snapToLetter(lettersContainer) {
-    const containerHeight = this.container.offsetHeight;
     const currentPosition = parseInt(lettersContainer.style.transform.replace('translateY(', '').replace('px)', '')) || 0;
-    
     this.selectedIndex = Math.round(-currentPosition / 80);
     this.selectedIndex = Math.max(0, Math.min(this.selectedIndex, this.letters.length - 1));
-    
     lettersContainer.style.transform = `translateY(-${this.selectedIndex * 80}px)`;
   }
 
@@ -231,30 +172,41 @@ class SlotMachine {
   }
 }
 
-          document.getElementById('checkButton').onclick = () => {
-      if(this.checkCombination(solution)) {
+class EscapeRoom {
+  constructor() {
+    this.slots = [];
+    this.initPuzzle(gameState.currentPuzzle);
+  }
+
+  initPuzzle(puzzleId) {
+    this.slots = [];
+    const puzzle = gameState.puzzles[puzzleId];
+    document.querySelector('.post-content p').textContent = puzzle.text;
+
+    if(puzzleId === 1) {
+      this.setupSlotMachine(puzzle.solution);
+    }
+  }
+
+  setupSlotMachine(solution) {
+    this.slots.push(
+      new SlotMachine(document.getElementById('slot1')),
+      new SlotMachine(document.getElementById('slot2')),
+      new SlotMachine(document.getElementById('slot3'))
+    );
+
+    document.getElementById('checkButton').onclick = () => {
+      const combination = this.slots.map(slot => slot.getSelectedLetter()).join('');
+      if(combination === solution) {
         this.nextPuzzle();
+      } else {
+        alert('Código incorrecto. Sigue intentándolo.');
       }
     };
-  }
-    checkCombination(solution) {
-    const combination = [
-      slot1.getSelectedLetter(),
-      slot2.getSelectedLetter(),
-      slot3.getSelectedLetter()
-    ].join('');
-    
-    if(combination === solution) {
-      return true;
-    } else {
-      alert('Código incorrecto. Sigue intentándolo.');
-      return false;
-    }
   }
 
   nextPuzzle() {
     const nextId = gameState.puzzles[gameState.currentPuzzle].nextPuzzle;
-    
     if(nextId) {
       gameState.currentPuzzle = nextId;
       this.initPuzzle(nextId);
@@ -265,19 +217,11 @@ class SlotMachine {
   }
 }
 
-
-  
-  // Inicializar componentes específicos (slots para puzzle 1)
-  if(gameState.currentPuzzle === 1) {
-    window.slot1 = new SlotMachine(document.getElementById('slot1'));
-    window.slot2 = new SlotMachine(document.getElementById('slot2'));
-    window.slot3 = new SlotMachine(document.getElementById('slot3'));
-  }
-});
-    // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-  window.escapeRoom = new EscapeRoom();
+  new EscapeRoom();
+});
 </script>
+
 <div class="post-footer">
     <a href="../tantoshigostanto/glosario.html#trendy" class="read-more">Explicación del recurso →</a>
 </div>

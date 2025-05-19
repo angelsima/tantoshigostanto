@@ -218,6 +218,14 @@ async function loadPostContent(postId, sortedPosts) {
             const { initTextoAnimado } = await import('../posts/perfeccionista.js');
             initTextoAnimado();
         }
+         if (postId === 'escape-room') {
+            const { initEscapeRoom } = await import('../posts/escape-room.js');
+            initEscapeRoom();
+        }
+        if (postId === 'propia-aventura') {
+            const { initAventura } = await import('../posts/propia-aventura.js');
+            initAventura();
+        }
         if (postId) {
          // Añadir event listeners a las flechas
         document.querySelector('.arrow-left')?.addEventListener('click', () => navigatePost('prev'));

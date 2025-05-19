@@ -122,5 +122,12 @@
     "category": "Formato",
       "subcategory": "Interactivo",
     "date": "2025-04-15T10:00:00Z"
-  }  
+  },
+  {
+    "id": "propia-aventura",
+    "title": "Elige tu propia aventura",
+    "category": "Formato",
+      "subcategory": "Interactivo",
+    "date": "2025-04-15T10:00:00Z"
+  } 
 ]

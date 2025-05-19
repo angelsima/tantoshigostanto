@@ -1,4 +1,8 @@
 export function initAventura() {
+    if (!document.getElementById('aventuraStoryText') || !document.getElementById('optionsContainer')) {
+        console.error('Elementos del DOM no encontrados');
+        return;
+    }
     const storyData = {
     inicio: {
         texto: "Estás frente a un viejo castillo abandonado. ¿Qué haces?",

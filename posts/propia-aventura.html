@@ -4,54 +4,64 @@
     <meta charset="UTF-8">
     <title>Elige tu aventura</title>
         <h4>🚧En construcción🚧</h4>
-  </head>
-   <style>.story-container {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
 
-.story-text {
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    color: #333;
-}
+        .story-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
 
-.options-container {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
+        .story-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #333;
+        }
 
-.option-btn {
-    flex: 1;
-    min-width: 200px;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    background: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-    font-size: 1.1em;
-}
+        .options-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-.option-btn:hover {
-    background: #45a049;
-    transform: translateY(-2px);
-}
+        .option-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            font-size: 1.1em;
+        }
 
-.restart-btn {
-    background: #2196F3;
-    margin-top: 20px;
-}</style>
+        .option-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .restart-btn {
+            background: #2196F3;
+            margin-top: 20px;
+        }
+    </style>
+</head>
 <body>
     <div class="story-container">
         <div class="story-text" id="storyText"></div>
         <div class="options-container" id="optionsContainer"></div>
     </div>
-    <script src="propia-aventura.js" defer></script>
+    <script src="propia-aventura.js"></script>
 </body>
 </html>

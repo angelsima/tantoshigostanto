@@ -33,7 +33,6 @@ const storyData = {
     }
 };
 
-class Aventura {
     constructor() {
         this.nodoActual = "inicio";
         this.storyText = document.getElementById('storyText');
@@ -86,8 +85,7 @@ class Aventura {
     }
 }
 
-// Iniciar la aventura cuando el documento esté listo
-document.addEventListener('DOMContentLoaded', () => new Aventura());
-    
-    new Aventura();
+// Inicializar directamente sin esperar otro DOMContentLoaded
+    const aventura = new Aventura();
+    aventura.cargarNodo("inicio");
 }

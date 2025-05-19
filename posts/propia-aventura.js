@@ -1,4 +1,6 @@
-// Datos de la historia (versión mejorada)
+export function initAventura() {
+    class Aventura {
+        // Datos de la historia (versión mejorada)
 const storyData = {
     inicio: {
         texto: "Estás frente a un viejo castillo abandonado. ¿Qué haces?",
@@ -86,3 +88,6 @@ class Aventura {
 
 // Iniciar la aventura cuando el documento esté listo
 document.addEventListener('DOMContentLoaded', () => new Aventura());
+    
+    new Aventura();
+}

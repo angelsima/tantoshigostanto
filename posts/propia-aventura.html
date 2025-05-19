@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Elige tu aventura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .story-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .story-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .options-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            font-size: 1.1em;
+        }
+
+        .option-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .restart-btn {
+            background: #2196F3;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="story-container">
+        <div class="story-text" id="storyText"></div>
+        <div class="options-container" id="optionsContainer"></div>
+    </div>
+
+    <script>
+        // Datos de la historia
+        const storyData = {
+            1: {
+                text: "Estás frente a un viejo castillo abandonado. ¿Qué haces?",
+                options: [
+                    { text: "Entrar por la puerta principal", nextId: 2 },
+                    { text: "Buscar una entrada secreta", nextId: 3 }
+                ]
+            },
+            2: {
+                text: "La puerta principal está atrancada. Escuchas ruidos dentro...",
+                options: [
+                    { text: "Forzar la puerta", nextId: 4 },
+                    { text: "Retroceder y buscar otra entrada", nextId: 3 }
+                ]
+            },
+            3: {
+                text: "Encuentras una ventana abierta en la parte trasera",
+                options: [
+                    { text: "Saltar por la ventana", nextId: 5 },
+                    { text: "Regresar al frente del castillo", nextId: 1 }
+                ]
+            },
+            4: {
+                text: "Logras abrir la puerta pero haces mucho ruido. ¡Una criatura te ataca!",
+                options: [] // Final de este camino
+            },
+            5: {
+                text: "Caes en una habitación llena de tesoros. ¡Has ganado!",
+                options: []
+            }
+        };
+
+        class Aventura {
+            constructor() {
+                this.storyText = document.getElementById('storyText');
+                this.optionsContainer = document.getElementById('optionsContainer');
+                this.loadNode(1);
+            }
+
+            loadNode(nodeId) {
+                const node = storyData[nodeId];
+                this.storyText.textContent = node.text;
+                this.optionsContainer.innerHTML = '';
+
+                if(node.options.length === 0) {
+                    this.showRestart();
+                    return;
+                }
+
+                node.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-btn';
+                    button.textContent = option.text;
+                    button.addEventListener('click', () => this.loadNode(option.nextId));
+                    this.optionsContainer.appendChild(button);
+                });
+            }
+
+            showRestart() {
+                const restartButton = document.createElement('button');
+                restartButton.className = 'option-btn restart-btn';
+                restartButton.textContent = 'Volver a empezar';
+                restartButton.addEventListener('click', () => this.loadNode(1));
+                this.optionsContainer.appendChild(restartButton);
+            }
+        }
+
+        // Iniciar la aventura cuando se carga la página
+        window.onload = () => new Aventura();
+    </script>
+</body>
+</html>

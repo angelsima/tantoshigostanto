@@ -213,15 +213,7 @@ async function loadPostContent(postId, sortedPosts) {
       // Insertar el contenido
         const postContent = document.querySelector('.post-content');
         postContent.innerHTML = contentHTML;
-// Ejecutar scripts manualmente
-Array.from(postContent.querySelectorAll('script')).forEach(oldScript => {
-    const newScript = document.createElement('script');
-    newScript.type = 'module';
-    if(oldScript.src) newScript.src = oldScript.src;
-    else newScript.textContent = oldScript.textContent;
-    postContent.appendChild(newScript);
-    oldScript.remove();
-});
+
         // Cargar script específico del post si existe
         if (postId === 'perfeccionista') {
             const { initTextoAnimado } = await import('../posts/perfeccionista.js');
@@ -232,7 +224,7 @@ Array.from(postContent.querySelectorAll('script')).forEach(oldScript => {
             initEscapeRoom();
         }
         if (postId === 'propia-aventura') {
-            const { initAventura } = await import('../posts/propia-aventura.js');
+            const { initAventura } = await import('/tantoshigostanto/posts/propia-aventura.js');
             initAventura();
         }
         if (postId) {
@@ -250,6 +242,15 @@ Array.from(postContent.querySelectorAll('script')).forEach(oldScript => {
             </div>
         `;
     }
+    // Ejecutar scripts manualmente
+Array.from(postContent.querySelectorAll('script')).forEach(oldScript => {
+    const newScript = document.createElement('script');
+    newScript.type = 'module';
+    if(oldScript.src) newScript.src = oldScript.src;
+    else newScript.textContent = oldScript.textContent;
+    postContent.appendChild(newScript);
+    oldScript.remove();
+});
 }
 function navigatePost(direction) {
     const currentPostId = document.querySelector('.blog-post')?.id;

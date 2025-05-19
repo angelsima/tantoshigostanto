@@ -73,5 +73,7 @@ export function initEscapeRoom() {
 };
 
 // Iniciar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => escapeRoom.init());
+export function initEscapeRoom() {
+    // Inicializar directamente
+    escapeRoom.init();
    }

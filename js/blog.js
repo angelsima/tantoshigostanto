@@ -216,11 +216,11 @@ async function loadPostContent(postId, sortedPosts) {
 
         // Cargar script específico del post si existe
         if (postId === 'perfeccionista') {
-            const { initTextoAnimado } = await import('../posts/perfeccionista.js');
+            const { initTextoAnimado } = await import('/tantoshigostanto/posts/perfeccionista.js');
             initTextoAnimado();
         }
          if (postId === 'escape-room') {
-            const { initEscapeRoom } = await import('../posts/escape-room.js');
+            const { initEscapeRoom } = await import('/tantoshigostanto/posts/escape-room.js');
             initEscapeRoom();
         }
         if (postId === 'propia-aventura') {
@@ -233,6 +233,15 @@ async function loadPostContent(postId, sortedPosts) {
         document.querySelector('.arrow-right')?.addEventListener('click', () => navigatePost('next'));
         setupSwipeNavigation(document.querySelector('.post-content'));
     } 
+         // Ejecutar scripts manualmente
+Array.from(postContent.querySelectorAll('script')).forEach(oldScript => {
+    const newScript = document.createElement('script');
+    newScript.type = 'module';
+    if(oldScript.src) newScript.src = oldScript.src;
+    else newScript.textContent = oldScript.textContent;
+    postContent.appendChild(newScript);
+    oldScript.remove();
+});
             }
     catch (err) {
         console.error("Error cargando post:", err);
@@ -242,15 +251,6 @@ async function loadPostContent(postId, sortedPosts) {
             </div>
         `;
     }
-    // Ejecutar scripts manualmente
-Array.from(postContent.querySelectorAll('script')).forEach(oldScript => {
-    const newScript = document.createElement('script');
-    newScript.type = 'module';
-    if(oldScript.src) newScript.src = oldScript.src;
-    else newScript.textContent = oldScript.textContent;
-    postContent.appendChild(newScript);
-    oldScript.remove();
-});
 }
 function navigatePost(direction) {
     const currentPostId = document.querySelector('.blog-post')?.id;

@@ -1,7 +1,5 @@
 export function initAventura() {
-    class Aventura {
-        // Datos de la historia (versión mejorada)
-const storyData = {
+    const storyData = {
     inicio: {
         texto: "Estás frente a un viejo castillo abandonado. ¿Qué haces?",
         opciones: [
@@ -32,6 +30,8 @@ const storyData = {
         opciones: []
     }
 };
+    class Aventura {
+        // Datos de la historia (versión mejorada)
 
     constructor() {
         this.nodoActual = "inicio";

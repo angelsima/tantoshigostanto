@@ -2,8 +2,8 @@ export function initEscapeRoom() {
     const escapeRoom = {
   solution: 'THT',
   init() {
-    this.inputs = [...document.querySelectorAll('.code-input')];
-    this.btn = document.getElementById('checkButton');
+    this.inputs = [...document.querySelectorAll('.escape-code-input')];
+    this.btn = document.getElementById('escapeCheckButton');
     
     // Configurar eventos de entrada
     this.inputs.forEach((input, index) => {
@@ -56,7 +56,7 @@ export function initEscapeRoom() {
   },
 
   nextLevel() {
-    document.getElementById('storyText').innerHTML = `
+    document.getElementById('escapeStoryText').innerHTML = `
       ¡Puerta abierta! <br>
       <em>Segundo puzzle:</em> Encuentras un cofre con símbolos: ⯁♣☢<br>
       <strong>Pista:</strong> "Las iniciales de Tres Hijos del Tendero"

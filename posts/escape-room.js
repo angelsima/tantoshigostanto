@@ -70,10 +70,7 @@ export function initEscapeRoom() {
       </div>
     `;
   }
+   
 };
-
-// Iniciar cuando el DOM esté listo
-export function initEscapeRoom() {
-    // Inicializar directamente
-    escapeRoom.init();
-   }
+escapeRoom.init();   
+}  

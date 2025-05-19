@@ -35,7 +35,7 @@ export function initAventura() {
 
     constructor() {
         this.nodoActual = "inicio";
-        this.storyText = document.getElementById('storyText');
+        this.storyText = document.getElementById('aventuraStoryText');
         this.optionsContainer = document.getElementById('optionsContainer');
         this.cargarNodo(this.nodoActual);
     }
@@ -87,5 +87,4 @@ export function initAventura() {
 
 // Inicializar directamente sin esperar otro DOMContentLoaded
     const aventura = new Aventura();
-    aventura.cargarNodo("inicio");
 }

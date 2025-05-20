@@ -5,10 +5,10 @@ export function initAventura() {
     }
     const storyData = {
     inicio: {
-        texto: "Estás frente a un viejo castillo abandonado. ¿Qué haces?",
+        texto: "Sale el sol, pían los pájaros. La anciana ya está despierta, así que",
         opciones: [
-            { texto: "Entrar por la puerta principal", siguiente: "puertaPrincipal" },
-            { texto: "Buscar una entrada secreta", siguiente: "entradaSecreta" }
+            { texto: "se mira al espejo para comprobar el paso del tiempo en sus arrugas kársticas", siguiente: "puertaPrincipal" },
+            { texto: "sale de casa", siguiente: "entradaSecreta" }
         ]
     },
     puertaPrincipal: {

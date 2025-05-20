@@ -29,14 +29,14 @@ ejexport function initAventura() {
         texto: "Siente que no puede respirar. La arena le entra por nariz y boca. Le raspa los ojos. Se asfixia. Está a punto de morir y, entonces,",
         opciones: [
             { texto: "se despierta", siguiente: "sale" },
-            { texto: "🚧En construcción🚧", siguiente: "" }
+            { texto: "🚧En construcción🚧", siguiente: "inicio" }
         ]
     },
         sale: {
         texto: "Al fin, sale de casa. Va al huerto, a su higuera.",
         opciones: [
-            { texto: "🚧En construcción🚧 ", siguiente: "" },
-            { texto: " 🚧En construcción🚧", siguiente: "" }
+            { texto: "🚧En construcción🚧 ", siguiente: "inicio" },
+            { texto: " 🚧En construcción🚧", siguiente: "inicio" }
         ]
     },
     finalBueno: {
@@ -47,7 +47,7 @@ ejexport function initAventura() {
         texto: "<h4>🚧En construcción🚧</h4>",
         opciones: [
             { texto: "volver a inicio", siguiente: "inicio" },
-            { texto: "", siguiente: "" }
+            { texto: "", siguiente: "inicio" }
         ]
         }
 };

@@ -1,4 +1,4 @@
-export function initAventura() {
+ejexport function initAventura() {
     if (!document.getElementById('aventuraStoryText') || !document.getElementById('optionsContainer')) {
         console.error('Elementos del DOM no encontrados');
         return;
@@ -7,32 +7,49 @@ export function initAventura() {
     inicio: {
         texto: "Sale el sol, pían los pájaros. La anciana ya está despierta, así que",
         opciones: [
-            { texto: "se mira al espejo para comprobar el paso del tiempo en sus arrugas kársticas", siguiente: "puertaPrincipal" },
-            { texto: "sale de casa", siguiente: "entradaSecreta" }
+            { texto: "se mira al espejo para comprobar el paso del tiempo en sus arrugas kársticas", siguiente: "espejo" },
+            { texto: "va hacia la puerta y sale de casa", siguiente: "sale" }
         ]
     },
-    puertaPrincipal: {
-        texto: "La puerta principal está atrancada. Escuchas ruidos dentro...",
+    espejo: {
+        texto: "El tiempo no se detiene y a la vez se repite, día tras día, texto a texto. Ya ni recuerda que se llama Asun, de tan acostumbrada que está a mirarse al espejo y pensar que el tiempo se repite, día tras día, texto a texto. Suspira.",
         opciones: [
-            { texto: "Forzar la puerta", siguiente: "finalMal" },
-            { texto: "Retroceder y buscar otra entrada", siguiente: "entradaSecreta" }
+            { texto: "Le escupe al espejo.", siguiente: "rebelde" },
+            { texto: "Se aleja del espejo y va hacia la puerta del patio.", siguiente: "sale" }
         ]
     },
-    entradaSecreta: {
-        texto: "Encuentras una ventana abierta en la parte trasera",
+    sueno: {
+        texto: "¡¿CÓMO?! ¡¿Dónde está su huerto?! Al abrir la puerta ha salido a un pasillo de un bloque de edificios y hay un payaso que le lanza estrellas de mar que a su vez lanzan púas de erizo. El suelo del pasillo es de arena y el mar le moja los pies. Su padre le grita —¿papá?, no te veo desde que te ahogaste en— desde dentro del agua. Las púas de erizo se le clavan en los tobillos y de pronto",
         opciones: [
-            { texto: "Saltar por la ventana", siguiente: "finalBueno" },
-            { texto: "Regresar al frente del castillo", siguiente: "inicio" }
+            { texto: "abre los ojos. Puta pesadilla recurrente.", siguiente: "sale" },
+            { texto: "el payaso echa a volar bajo la arena y la lleva con ella. ", siguiente: "suenoMal" }
         ]
     },
-    finalMal: {
-        texto: "¡Una criatura te ataca! GAME OVER",
-        opciones: []
+    suenoMal: {
+        texto: "Siente que no puede respirar. La arena le entra por nariz y boca. Le raspa los ojos. Se asfixia. Está a punto de morir y, entonces,",
+        opciones: [
+            { texto: "se despierta", siguiente: "sale" },
+            { texto: "🚧En construcción🚧", siguiente: "" }
+        ]
+    },
+        sale: {
+        texto: "Al fin, sale de casa. Va al huerto, a su higuera.",
+        opciones: [
+            { texto: "🚧En construcción🚧 ", siguiente: "" },
+            { texto: " 🚧En construcción🚧", siguiente: "" }
+        ]
     },
     finalBueno: {
         texto: "¡Encuentras un tesoro escondido! VICTORIA",
         opciones: []
-    }
+    },
+        rebelde: {
+        texto: "<h4>🚧En construcción🚧</h4>",
+        opciones: [
+            { texto: "volver a inicio", siguiente: "inicio" },
+            { texto: "", siguiente: "" }
+        ]
+        }
 };
     class Aventura {
         // Datos de la historia (versión mejorada)

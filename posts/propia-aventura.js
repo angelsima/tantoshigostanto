@@ -1,4 +1,4 @@
-ejexport function initAventura() {
+export function initAventura() {
     if (!document.getElementById('aventuraStoryText') || !document.getElementById('optionsContainer')) {
         console.error('Elementos del DOM no encontrados');
         return;

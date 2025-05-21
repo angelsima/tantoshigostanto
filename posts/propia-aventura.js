@@ -8,7 +8,7 @@ export function initAventura() {
         texto: "Sale el sol, pían los pájaros. La anciana ya está despierta, así que",
         opciones: [
             { texto: "se mira al espejo para comprobar el paso del tiempo en sus arrugas kársticas", siguiente: "espejo" },
-            { texto: "va hacia la puerta y sale de casa", siguiente: "sale" }
+            { texto: "va hacia la puerta y sale de casa", siguiente: "sueno" }
         ]
     },
     espejo: {
@@ -26,10 +26,10 @@ export function initAventura() {
         ]
     },
     suenoMal: {
-        texto: "Siente que no puede respirar. La arena le entra por nariz y boca. Le raspa los ojos. Se asfixia. Está a punto de morir y, entonces,",
+        texto: "Siente que no puede respirar. La arena le entra por nariz y boca. Le raspa los ojos. Se asfixia. Está a punto de morir pero, justo entonces,",
         opciones: [
             { texto: "se despierta", siguiente: "sale" },
-            { texto: "🚧En construcción🚧", siguiente: "inicio" }
+            { texto: "una ola se lleva la arena y la saca de la cama, empapada. Se ve frente a la puerta de su patio ", siguiente: "sale" }
         ]
     },
         sale: {

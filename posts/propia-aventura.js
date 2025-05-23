@@ -12,7 +12,7 @@ export function initAventura() {
         ]
     },
     espejo: {
-        texto: "El tiempo no se detiene, y a la vez se repite, día tras día, texto a texto. Ya ni recuerda que se llama Asun, de tan acostumbrada que está a que la llamen "la anciana", a mirarse al espejo y pensar en que el tiempo se repite, día tras día, texto a texto. Suspira.",
+        texto: "El tiempo no se detiene, y a la vez se repite, día tras día, texto a texto. Ya ni recuerda que se llama Asun, de tan acostumbrada que está a que la llamen &quot;la anciana&quot;, a mirarse al espejo y pensar en que el tiempo se repite, día tras día, texto a texto. Suspira.",
         opciones: [
             { texto: "Le escupe al espejo.", siguiente: "rebelde" },
             { texto: "Se aleja del espejo y va hacia la puerta del patio.", siguiente: "sale" }

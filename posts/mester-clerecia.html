@@ -3,8 +3,7 @@
 .mester-clerecia {
   font-family: Georgia, serif;
     color: #111;
-  padding: 0px;
-  }
+    }
 
 .mester-section {
   margin-bottom: 2em;
@@ -14,6 +13,8 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 0.2em;
+   width: 100%; /* ✅ Esto asegura que ocupe todo el ancho del contenedor */
+  box-sizing: border-box; /* Asegura que padding o border no afecte el ancho */
 }
 
 .mester-hemistiquio {

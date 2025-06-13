@@ -205,44 +205,50 @@
 </div>
 <script>
     // Versiones disponibles (puedes agregar más IDs aquí)
-        const poemVersions = [
-            'version1', 
-            'version2'
-        ];
-        
-        // Función para obtener una versión aleatoria
-        function getRandomVersion() {
+    const poemVersions = ['version1', 'version2'];
+    
+    // Variable para llevar registro de la versión actual
+    let currentVersion = null;
+    
+    // Función para obtener una versión aleatoria diferente a la actual
+    function getRandomVersion() {
+        let newVersion;
+        do {
             const randomIndex = Math.floor(Math.random() * poemVersions.length);
-            return poemVersions[randomIndex];
-        }
+            newVersion = poemVersions[randomIndex];
+        } while (newVersion === currentVersion && poemVersions.length > 1);
         
-        // Mostrar una versión específica
-        function showPoemVersion(versionId) {
-            // Ocultar todas las versiones
-            document.querySelectorAll('.poem-version').forEach(version => {
-                version.style.display = 'none';
-            });
-            
-            // Mostrar la versión seleccionada
-            document.getElementById(versionId).style.display = 'block';
-        }
+        currentVersion = newVersion;
+        return newVersion;
+    }
+    
+    // Mostrar una versión específica
+    function showPoemVersion(versionId) {
+        // Ocultar todas las versiones
+        document.querySelectorAll('.poem-version').forEach(version => {
+            version.style.display = 'none';
+        });
         
-        // Cargar una versión aleatoria
-        function loadRandomVersion() {
-            const randomVersion = getRandomVersion();
-            showPoemVersion(randomVersion);
-            
-            // Animación del botón
-            const btn = document.getElementById('reloadBtn');
-            btn.classList.add('rotating');
-            setTimeout(() => {
-                btn.classList.remove('rotating');
-            }, 600);
-        }
+        // Mostrar la versión seleccionada
+        document.getElementById(versionId).style.display = 'block';
+    }
+    
+    // Cargar una versión aleatoria
+    function loadRandomVersion() {
+        const randomVersion = getRandomVersion();
+        showPoemVersion(randomVersion);
         
-        // Evento: Botón de recarga
-        document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
-        
-        // Cargar versión aleatoria al inicio
-        window.addEventListener('load', loadRandomVersion);
+        // Animación del botón
+        const btn = document.getElementById('reloadBtn');
+        btn.classList.add('rotating');
+        setTimeout(() => {
+            btn.classList.remove('rotating');
+        }, 600);
+    }
+    
+    // Evento: Botón de recarga
+    document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
+    
+    // Cargar versión aleatoria al inicio
+    window.addEventListener('load', loadRandomVersion);
 </script>

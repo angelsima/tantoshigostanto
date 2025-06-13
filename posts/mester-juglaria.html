@@ -92,7 +92,9 @@
             margin-top: 10px;
             font-size: 0.9em;
         }
-        
+       #version1, #version2 {
+    display: none;
+} 
        /* Ajustes específicos para PC (pantallas > 768px) */
 @media (min-width: 769px) {
   .mester-juglaria {
@@ -193,25 +195,33 @@
     <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
 </div>
 <script>
-  function getRandomVersion() {
-    return Math.random() < 0.5 ? 1 : 2; // 50% de probabilidad para cada versión
-}
+      // Función para elegir una versión aleatoria (1 o 2)
+        function getRandomVersion() {
+            return Math.floor(Math.random() * 2) + 1; // 1 o 2
+        }
 
-// Muestra la versión especificada (1 o 2)
-function showPoemVersion(version) {
-    document.getElementById('version1').style.display = version === 1 ? 'block' : 'none';
-    document.getElementById('version2').style.display = version === 2 ? 'block' : 'none';
-}
+        // Muestra la versión especificada (1 o 2)
+        function showPoemVersion(version) {
+            document.getElementById('version1').style.display = version === 1 ? 'block' : 'none';
+            document.getElementById('version2').style.display = version === 2 ? 'block' : 'none';
+        }
 
-// Carga una versión aleatoria (usada al inicio y al hacer clic)
-function loadRandomVersion() {
-    const randomVersion = getRandomVersion();
-    showPoemVersion(randomVersion);
-}
+        // Carga una versión aleatoria
+        function loadRandomVersion() {
+            const randomVersion = getRandomVersion();
+            showPoemVersion(randomVersion);
+            
+            // Animación del botón
+            const btn = document.getElementById('reloadBtn');
+            btn.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                btn.style.transform = 'rotate(0deg)';
+            }, 300);
+        }
 
-// Evento: Botón de recarga
-document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
+        // Evento: Botón de recarga
+        document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
 
-// Evento: Carga inicial al abrir/refrescar la página
-document.addEventListener('DOMContentLoaded', loadRandomVersion);
+        // Cargar versión aleatoria al inicio
+        window.addEventListener('DOMContentLoaded', loadRandomVersion);
 </script>

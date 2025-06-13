@@ -1,79 +1,202 @@
 <style>
-/* Estilos específicos para Mester de Clerecía */
-.mester-clerecia {
-  font-family: Georgia, serif;
-    color: #111;
-  max-width: 500px;
-    }
-
-.mester-section {
-  margin-bottom: 2em;
-}
-
-.mester-verso {
- display: flex;
-  align-items: flex-start; /* Alinea los hemistiquios en la parte superior */
-  justify-content: space-between; 
-  margin-bottom: 0.2em;
-   width: 100%; /* ✅ Esto asegura que ocupe todo el ancho del contenedor */
-  box-sizing: border-box; /* Asegura que padding o border no afecte el ancho */
-}
-
-.mester-hemistiquio {
-  align-self: flex-start; /* Fuerza alineación superior */
-  white-space: pre-wrap;
-    font-size: 0.9em;
-}
-
-.mester-clerecia .nota {
-  font-size: 0.8em;
-}
-
-.mester-clerecia sup a {
-  text-decoration: none;
-}
-
-.mester-clerecia aside {
-  margin-top: 3em;
-  font-size: 0.9em;
-}
-
-.mester-clerecia aside ol {
-  padding-left: 1.2em;
-}
-
-.mester-clerecia hr {
-  margin-top: 3em;
-}
-  /* Ajustes específicos para PC (pantallas > 768px) */
-@media (min-width: 769px) {
-  .mester-clerecia {
-    max-width: 600px; /* Puedes ajustar este valor según prefieras */
-    margin: 0 auto; /* Centra el contenido */
-  }
-
-  .mester-verso {
-    gap: 25px; /* Reduce el espacio entre hemistiquios */
-    justify-content: center; /* Opcional: centra los hemistiquios */
-  }
-
-  .mester-hemistiquio {
-    flex: 0 1 auto; /* Evita que los hemistiquios se estiren demasiado */
-    min-width: 0; /* Permite que el texto se ajuste */
-  }
-}
-  </style>
+        /* Estilos generales */
+        body {
+            font-family: 'Georgia', serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f4e9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .post-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #6E0C1B;
+        }
+        
+        .post-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .post-footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .read-more {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #6E0C1B;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            background-color: #8a0f23;
+            transform: translateY(-2px);
+        }
+        
+        /* Estilos específicos para Mester de Juglaría */
+        .mester-juglaria {
+            font-family: Georgia, serif;
+            color: #111;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .reload-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6E0C1B;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .reload-button:hover {
+            background: #8a0f23;
+            transform: rotate(90deg);
+        }
+        
+        .mester-section {
+            margin-bottom: 2.5em;
+            position: relative;
+            padding-top: 40px;
+        }
+        
+        .section-number {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #6E0C1B;
+            background: #f8f4e9;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .mester-verso {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 0.8em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .mester-hemistiquio {
+            align-self: flex-start;
+            white-space: pre-wrap;
+            font-size: 1.05em;
+            line-height: 1.5;
+            width: 48%;
+            text-align: justify;
+        }
+        
+        .mester-juglaria sup a {
+            text-decoration: none;
+            color: #6E0C1B;
+            font-weight: bold;
+        }
+        
+        .mester-juglaria aside {
+            margin-top: 3em;
+            font-size: 0.9em;
+            background: #f8f4e9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #6E0C1B;
+        }
+        
+        .mester-juglaria aside ol {
+            padding-left: 1.2em;
+        }
+        
+        .mester-juglaria hr {
+            margin-top: 3em;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+        
+        .version-info {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .post-content {
+                padding: 20px;
+            }
+            
+            .mester-hemistiquio {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .mester-verso {
+                flex-direction: column;
+            }
+            
+            .reload-button {
+                top: 5px;
+                right: 5px;
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
 <div class="post-header">
 <h2>Mester de Juglaría</h2>
 </div>
-<div class="post-content mester-clerecia">
+ <div class="post-content">
+        <div class="mester-juglaria">
+            <button class="reload-button" title="Nueva versión">↻</button>
+
+           <div class="poem-version" data-version="1">
 <section class="mester-section">
+  <div class="section-number">1</div>
   <div class="mester-verso"><span class="mester-hemistiquio">De la so tripa</span><span class="mester-hemistiquio">tan fuertemientre rugiendo</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">tornávase en l’alcoba</span><span class="mester-hemistiquio">e estava maneçiendo.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">Oyó piar falcones</span><span class="mester-hemistiquio">e gorriones en el cielo,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">Oyó piar falcones</span><span class="mester-hemistiquio">e gorriones del çielo,</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">trotavan cient cavallos</span><span class="mester-hemistiquio">que fazién tronar el suelo,</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">e se les sumávan</span><span class="mester-hemistiquio">los solloços de los vientos.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">Sospiró mia Sión,</span><span class="mester-hemistiquio">la más güertana de tod tiempos,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">Sospiró mia Sión,</span><span class="mester-hemistiquio">la más ortelana de tod tiempos,</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">separó muy presta</span><span class="mester-hemistiquio">de la alcoba el su cuerpo</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">e fablós’ a sí mia Sión,</span><span class="mester-hemistiquio">ca sempre fállase en lo çierto:</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">—Si por gradar a Dios</span><span class="mester-hemistiquio">aliviar mi fambre quiero</span></div>
@@ -82,7 +205,36 @@
 </section>
 
 <section class="mester-section">
-  <div class="mester-verso"><span class="mester-hemistiquio">,</span><span class="mester-hemistiquio">/span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">La de canos cavellos</span><span class="mester-hemistiquio">exida es de la posada,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">e quand’ travessó el unbral</span><span class="mester-hemistiquio">ovo de prestar batalla:</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">diez y dos canes rabiados</span><span class="mester-hemistiquio">menaçantes le ladraban,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">mas sabe mia Sión,</span><span class="mester-hemistiquio">ca en buen hora es despiertada,</span></div>
+   <div class="mester-verso"><span class="mester-hemistiquio">doblegar mil huestes</span><span class="mester-hemistiquio">sin aiuda de mesnadas.</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">Arrancó co’l puño</span><span class="mester-hemistiquio">de la su puerta la aldaba,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">era est’ de fierro</span><span class="mester-hemistiquio">e en su mano muy pesada,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">lançóla con tal fuerça</span><span class="mester-hemistiquio">contra aqueias dentelladas</span></div>
+   <div class="mester-verso"><span class="mester-hemistiquio">ca si non diera en sus bocas</span><span class="mester-hemistiquio">mill leguas travessara.</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">Los nemigos de Sión</span><span class="mester-hemistiquio">al sofrir tal aldabada</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">admiraron su certeça</span><span class="mester-hemistiquio">e pensaron la escapada,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">la más güertana de los tiempos,</span><span class="mester-hemistiquio">mia Sión, la de El Lugar,</span></div>
+   <div class="mester-verso"><span class="mester-hemistiquio">con la su misericordia</span><span class="mester-hemistiquio">permitióles que s’andaran;</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">non es eia vengante</span><span class="mester-hemistiquio">ni ha ningún humana falla,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">a Sión sól la vençe el fame,</span><span class="mester-hemistiquio">mas tamén el fame l’aguijaba.</span></div>
+  </section>
+  <section class="mester-section">
+  <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
+   <div class="mester-verso"><span class="mester-hemistiquio">fincó los hinojos</span><span class="mester-hemistiquio">e las manos en la tierra,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">gradó al Señor su suerte</span><span class="mester-hemistiquio">por lavralla aún podella</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">e cuidar de las sus plantas,</span><span class="mester-hemistiquio">ca non permite que l’mueran.</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">En compensa el Señor</span><span class="mester-hemistiquio">a Sión, la grande verdulera,</span></div>
+<div class="mester-verso"><span class="mester-hemistiquio">da frutos e comeres</span><span class="mester-hemistiquio">tantos como ella quiera,</span></div>
+   <div class="mester-verso"><span class="mester-hemistiquio">pues non hay en vida</span><span class="mester-hemistiquio">vasalla qual es ella,</span></div>
+  <div class="mester-verso"><span class="mester-hemistiquio">ca en sus manos los mançanos</span><span class="mester-hemistiquio">son capaçes de dar peras.</span></div>
+    </section>
+
+   <section class="mester-section">
+  <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
+   <div class="mester-verso"><span class="mester-hemistiquio">,</span><span class="mester-hemistiquio"></span></div>
   <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
   <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
   <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
@@ -91,7 +243,38 @@
 
 
 
+
 </div>
 <div class="post-footer">
     <a href="../tantoshigostanto/glosario.html#mester-clerecia" class="read-more">Explicación del recurso →</a>
 </div>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reloadButton = document.querySelector('.reload-button');
+            const poemVersions = document.querySelectorAll('.poem-version');
+            
+            // Función para mostrar una versión aleatoria
+            function showRandomVersion() {
+                // Ocultar todas las versiones
+                poemVersions.forEach(version => {
+                    version.style.display = 'none';
+                });
+                
+                // Seleccionar una versión aleatoria
+                const randomIndex = Math.floor(Math.random() * poemVersions.length);
+                poemVersions[randomIndex].style.display = 'block';
+                
+                // Animación de recarga
+                reloadButton.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    reloadButton.style.transform = 'rotate(0deg)';
+                }, 300);
+            }
+            
+            // Mostrar una versión aleatoria al cargar la página
+            showRandomVersion();
+            
+            // Evento para el botón de recargar
+            reloadButton.addEventListener('click', showRandomVersion);
+        });
+    </script>

@@ -92,9 +92,10 @@
             margin-top: 10px;
             font-size: 0.9em;
         }
-       #version1, #version2 {
-    display: none;
-} 
+      /* Ocultar todas las versiones inicialmente */
+        .poem-version {
+            display: none;
+        }
         #reloadBtn.rotating {
         animation: rotate 0.6s ease;
     }
@@ -129,7 +130,7 @@
         
             <button id="reloadBtn">↻</button>
 
-           <div id="version1">
+              <div class="poem-version" id="version1">
 <section class="mester-section">
   <h2>1</h2>
   <div class="mester-verso"><span class="mester-hemistiquio">De la so tripa</span><span class="mester-hemistiquio">tan fuertemientre rugiendo</span></div>
@@ -184,7 +185,7 @@
 </section>
 </div>
 
-   <div id="version2">
+     <div class="poem-version" id="version2">
 <section class="mester-section">
   <h2>1</h2>
         <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
@@ -203,33 +204,45 @@
     <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
 </div>
 <script>
-      // Función para elegir una versión aleatoria (1 o 2)
-    function getRandomVersion() {
-        return Math.random() < 0.5 ? 1 : 2;
-    }
-
-    // Muestra la versión especificada (1 o 2)
-    function showPoemVersion(version) {
-        document.getElementById('version1').style.display = version === 1 ? 'block' : 'none';
-        document.getElementById('version2').style.display = version === 2 ? 'block' : 'none';
-    }
-
-    // Carga una versión aleatoria con animación
-    function loadRandomVersion() {
-        const randomVersion = getRandomVersion();
-        showPoemVersion(randomVersion);
+    // Versiones disponibles (puedes agregar más IDs aquí)
+        const poemVersions = [
+            'version1', 
+            'version2'
+        ];
         
-        // Animación del botón
-        const btn = document.getElementById('reloadBtn');
-        btn.classList.add('rotating');
-        setTimeout(() => {
-            btn.classList.remove('rotating');
-        }, 600);
-    }
-
-    // Evento: Botón de recarga
-    document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
-
-    // Cargar versión aleatoria al inicio (sin usar DOMContentLoaded)
-    window.onload = loadRandomVersion;
+        // Función para obtener una versión aleatoria
+        function getRandomVersion() {
+            const randomIndex = Math.floor(Math.random() * poemVersions.length);
+            return poemVersions[randomIndex];
+        }
+        
+        // Mostrar una versión específica
+        function showPoemVersion(versionId) {
+            // Ocultar todas las versiones
+            document.querySelectorAll('.poem-version').forEach(version => {
+                version.style.display = 'none';
+            });
+            
+            // Mostrar la versión seleccionada
+            document.getElementById(versionId).style.display = 'block';
+        }
+        
+        // Cargar una versión aleatoria
+        function loadRandomVersion() {
+            const randomVersion = getRandomVersion();
+            showPoemVersion(randomVersion);
+            
+            // Animación del botón
+            const btn = document.getElementById('reloadBtn');
+            btn.classList.add('rotating');
+            setTimeout(() => {
+                btn.classList.remove('rotating');
+            }, 600);
+        }
+        
+        // Evento: Botón de recarga
+        document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
+        
+        // Cargar versión aleatoria al inicio
+        window.addEventListener('load', loadRandomVersion);
 </script>

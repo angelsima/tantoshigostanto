@@ -1,14 +1,30 @@
 <style>
-    
         /* Estilos específicos para Mester de Juglaría */
         .mester-juglaria {
             font-family: Georgia, serif;
-            color: #111;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
+           color: #111;
+  max-width: 500px;
         }
-        
+         .mester-section {
+            margin-bottom: 2em;
+            position: relative;
+                   }
+
+    .mester-verso {
+ display: flex;
+  align-items: flex-start; /* Alinea los hemistiquios en la parte superior */
+  justify-content: space-between; 
+  margin-bottom: 0.2em;
+   width: 100%; /* ✅ Esto asegura que ocupe todo el ancho del contenedor */
+  box-sizing: border-box; /* Asegura que padding o border no afecte el ancho */
+}
+
+.mester-hemistiquio {
+  align-self: flex-start; /* Fuerza alineación superior */
+  white-space: pre-wrap;
+    font-size: 0.9em;
+}
+    
         .reload-button {
             position: absolute;
             top: 10px;
@@ -30,10 +46,7 @@
              transform: rotate(90deg);
         }
         
-        .mester-section {
-            margin-bottom: 2em;
-            position: relative;
-                   }
+       
         
         .section-number {
             position: absolute;
@@ -48,35 +61,23 @@
               padding: 0 0.3em;
                 }
         
-       .mester-verso {
- display: flex;
-  align-items: flex-start; /* Alinea los hemistiquios en la parte superior */
-  justify-content: space-between; 
-  margin-bottom: 0.2em;
-   width: 100%; /* ✅ Esto asegura que ocupe todo el ancho del contenedor */
-  box-sizing: border-box; /* Asegura que padding o border no afecte el ancho */
-}
+      
         
-       .mester-hemistiquio {
-  align-self: flex-start; /* Fuerza alineación superior */
-  white-space: pre-wrap;
-    font-size: 0.9em;
-}
-        
-       .mester-clerecia sup a {
+      
+       .mester-juglaria sup a {
   text-decoration: none;
 }
 
-.mester-clerecia aside {
+.mester-juglaria aside {
   margin-top: 3em;
   font-size: 0.9em;
 }
 
-.mester-clerecia aside ol {
+.mester-juglaria aside ol {
   padding-left: 1.2em;
 }
 
-.mester-clerecia hr {
+.mester-juglaria hr {
   margin-top: 3em;
 }
         
@@ -111,9 +112,9 @@
 </div>
  <div class="post-content mester-juglaria">
         
-            <button class="reload-button" title="Nueva versión">↻</button>
+            <button id="reloadBtn">↻</button>
 
-           <div class="poem-version" data-version="1">
+           <div id="version1" style="display: none;">
 <section class="mester-section">
   <div class="section-number">1</div>
   <div class="mester-verso"><span class="mester-hemistiquio">De la so tripa</span><span class="mester-hemistiquio">tan fuertemientre rugiendo</span></div>
@@ -168,7 +169,7 @@
 </section>
 </div>
 
-   <div class="poem-version" data-version="2">
+   <div id="version2" style="display: none;">
 <section class="mester-section">
   <div class="section-number">1</div>  
         <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
@@ -184,35 +185,21 @@
 
          
 <div class="post-footer">
-    <a href="../tantoshigostanto/glosario.html#mester-clerecia" class="read-more">Explicación del recurso →</a>
+    <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
 </div>
- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const reloadButton = document.querySelector('.reload-button');
-            const poemVersions = document.querySelectorAll('.poem-version');
-            
-            // Función para mostrar una versión aleatoria
-            function showRandomVersion() {
-                // Ocultar todas las versiones
-                poemVersions.forEach(version => {
-                    version.style.display = 'none';
-                });
-                
-                // Seleccionar una versión aleatoria
-                const randomIndex = Math.floor(Math.random() * poemVersions.length);
-                poemVersions[randomIndex].style.display = 'block';
-                
-                // Animación de recarga
-                reloadButton.style.transform = 'rotate(360deg)';
-                setTimeout(() => {
-                    reloadButton.style.transform = 'rotate(0deg)';
-                }, 300);
-            }
-            
-            // Mostrar una versión aleatoria al cargar la página
-            showRandomVersion();
-            
-            // Evento para el botón de recargar
-            reloadButton.addEventListener('click', showRandomVersion);
-        });
-    </script>
+<script>
+  let currentVersion = 1;
+
+  function showPoemVersion(version) {
+    document.getElementById('version1').style.display = version === 1 ? 'block' : 'none';
+    document.getElementById('version2').style.display = version === 2 ? 'block' : 'none';
+  }
+
+  document.getElementById('reloadBtn').addEventListener('click', () => {
+    currentVersion = currentVersion === 1 ? 2 : 1;
+    showPoemVersion(currentVersion);
+  });
+
+  // Mostrar la versión 1 al cargar la página
+  showPoemVersion(1);
+</script>

@@ -12,6 +12,7 @@
 
 .mester-verso {
  display: flex;
+  align-items: flex-start; /* Alinea los hemistiquios en la parte superior */
   justify-content: space-between; 
   margin-bottom: 0.2em;
    width: 100%; /* ✅ Esto asegura que ocupe todo el ancho del contenedor */
@@ -19,6 +20,7 @@
 }
 
 .mester-hemistiquio {
+  align-self: flex-start; /* Fuerza alineación superior */
   white-space: pre-wrap;
     font-size: 0.9em;
 }
@@ -52,7 +54,7 @@
 
   .mester-verso {
     gap: 25px; /* Reduce el espacio entre hemistiquios */
-    
+    justify-content: center; /* Opcional: centra los hemistiquios */
   }
 
   .mester-hemistiquio {

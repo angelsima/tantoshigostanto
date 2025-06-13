@@ -43,6 +43,23 @@
 .mester-clerecia hr {
   margin-top: 3em;
 }
+  /* Ajustes específicos para PC (pantallas > 768px) */
+@media (min-width: 769px) {
+  .mester-clerecia {
+    max-width: 600px; /* Puedes ajustar este valor según prefieras */
+    margin: 0 auto; /* Centra el contenido */
+  }
+
+  .mester-verso {
+    gap: 10px; /* Reduce el espacio entre hemistiquios */
+    justify-content: center; /* Opcional: centra los hemistiquios */
+  }
+
+  .mester-hemistiquio {
+    flex: 0 1 auto; /* Evita que los hemistiquios se estiren demasiado */
+    min-width: 0; /* Permite que el texto se ajuste */
+  }
+}
   </style>
 <div class="post-header">
 <h2>Mester de Clerecía</h2>

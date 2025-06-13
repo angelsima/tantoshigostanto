@@ -95,6 +95,14 @@
        #version1, #version2 {
     display: none;
 } 
+        #reloadBtn.rotating {
+        animation: rotate 0.6s ease;
+    }
+    
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
        /* Ajustes específicos para PC (pantallas > 768px) */
 @media (min-width: 769px) {
   .mester-juglaria {
@@ -196,32 +204,32 @@
 </div>
 <script>
       // Función para elegir una versión aleatoria (1 o 2)
-        function getRandomVersion() {
-            return Math.floor(Math.random() * 2) + 1; // 1 o 2
-        }
+    function getRandomVersion() {
+        return Math.random() < 0.5 ? 1 : 2;
+    }
 
-        // Muestra la versión especificada (1 o 2)
-        function showPoemVersion(version) {
-            document.getElementById('version1').style.display = version === 1 ? 'block' : 'none';
-            document.getElementById('version2').style.display = version === 2 ? 'block' : 'none';
-        }
+    // Muestra la versión especificada (1 o 2)
+    function showPoemVersion(version) {
+        document.getElementById('version1').style.display = version === 1 ? 'block' : 'none';
+        document.getElementById('version2').style.display = version === 2 ? 'block' : 'none';
+    }
 
-        // Carga una versión aleatoria
-        function loadRandomVersion() {
-            const randomVersion = getRandomVersion();
-            showPoemVersion(randomVersion);
-            
-            // Animación del botón
-            const btn = document.getElementById('reloadBtn');
-            btn.style.transform = 'rotate(360deg)';
-            setTimeout(() => {
-                btn.style.transform = 'rotate(0deg)';
-            }, 300);
-        }
+    // Carga una versión aleatoria con animación
+    function loadRandomVersion() {
+        const randomVersion = getRandomVersion();
+        showPoemVersion(randomVersion);
+        
+        // Animación del botón
+        const btn = document.getElementById('reloadBtn');
+        btn.classList.add('rotating');
+        setTimeout(() => {
+            btn.classList.remove('rotating');
+        }, 600);
+    }
 
-        // Evento: Botón de recarga
-        document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
+    // Evento: Botón de recarga
+    document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
 
-        // Cargar versión aleatoria al inicio
-        window.addEventListener('DOMContentLoaded', loadRandomVersion);
+    // Cargar versión aleatoria al inicio (sin usar DOMContentLoaded)
+    window.onload = loadRandomVersion;
 </script>

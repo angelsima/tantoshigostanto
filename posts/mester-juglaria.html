@@ -2,50 +2,11 @@
         /* Estilos generales */
         body {
             font-family: 'Georgia', serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f4e9;
-            color: #333;
-            line-height: 1.6;
+            color: #111;
+  max-width: 500px;
         }
         
-        .post-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #6E0C1B;
-        }
-        
-        .post-content {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .post-footer {
-            margin-top: 40px;
-            text-align: center;
-        }
-        
-        .read-more {
-            display: inline-block;
-            padding: 10px 25px;
-            background-color: #6E0C1B;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .read-more:hover {
-            background-color: #8a0f23;
-            transform: translateY(-2px);
-        }
-        
+              
         /* Estilos específicos para Mester de Juglaría */
         .mester-juglaria {
             font-family: Georgia, serif;
@@ -59,8 +20,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: #6E0C1B;
-            color: white;
+           color: white;
             border: none;
             border-radius: 50%;
             width: 40px;
@@ -70,20 +30,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+           
             transition: all 0.3s ease;
         }
         
         .reload-button:hover {
-            background: #8a0f23;
-            transform: rotate(90deg);
+             transform: rotate(90deg);
         }
         
         .mester-section {
-            margin-bottom: 2.5em;
-            position: relative;
-            padding-top: 40px;
-        }
+            margin-bottom: 2em;
+                   }
         
         .section-number {
             position: absolute;
@@ -92,59 +49,42 @@
             transform: translateX(-50%);
             font-size: 1.8em;
             font-weight: bold;
-            color: #6E0C1B;
-            background: #f8f4e9;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+                }
         
-        .mester-verso {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 0.8em;
-            width: 100%;
-            box-sizing: border-box;
-        }
+       .mester-verso {
+ display: flex;
+  align-items: flex-start; /* Alinea los hemistiquios en la parte superior */
+  justify-content: space-between; 
+  margin-bottom: 0.2em;
+   width: 100%; /* ✅ Esto asegura que ocupe todo el ancho del contenedor */
+  box-sizing: border-box; /* Asegura que padding o border no afecte el ancho */
+}
         
-        .mester-hemistiquio {
-            align-self: flex-start;
-            white-space: pre-wrap;
-            font-size: 1.05em;
-            line-height: 1.5;
-            width: 48%;
-            text-align: justify;
-        }
+       .mester-hemistiquio {
+  align-self: flex-start; /* Fuerza alineación superior */
+  white-space: pre-wrap;
+    font-size: 0.9em;
+}
         
-        .mester-juglaria sup a {
-            text-decoration: none;
-            color: #6E0C1B;
-            font-weight: bold;
-        }
-        
-        .mester-juglaria aside {
-            margin-top: 3em;
-            font-size: 0.9em;
-            background: #f8f4e9;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 3px solid #6E0C1B;
-        }
-        
-        .mester-juglaria aside ol {
-            padding-left: 1.2em;
-        }
-        
-        .mester-juglaria hr {
-            margin-top: 3em;
-            border: none;
-            border-top: 1px solid #ddd;
-        }
+       .mester-clerecia sup a {
+  text-decoration: none;
+}
+
+.mester-clerecia aside {
+  margin-top: 3em;
+  font-size: 0.9em;
+}
+
+.mester-clerecia aside ol {
+  padding-left: 1.2em;
+}
+
+.mester-clerecia hr {
+  margin-top: 3em;
+}
         
         .version-info {
             text-align: center;
@@ -154,32 +94,23 @@
             font-size: 0.9em;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .post-content {
-                padding: 20px;
-            }
-            
-            .mester-hemistiquio {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            
-            .mester-verso {
-                flex-direction: column;
-            }
-            
-            .reload-button {
-                top: 5px;
-                right: 5px;
-                width: 35px;
-                height: 35px;
-            }
-        }
+       /* Ajustes específicos para PC (pantallas > 768px) */
+@media (min-width: 769px) {
+  .mester-juglaria {
+    max-width: 600px; /* Puedes ajustar este valor según prefieras */
+    margin: 0 auto; /* Centra el contenido */
+  }
+
+  .mester-verso {
+    gap: 25px; /* Reduce el espacio entre hemistiquios */
+    justify-content: center; /* Opcional: centra los hemistiquios */
+  }
+
+  .mester-hemistiquio {
+    flex: 0 1 auto; /* Evita que los hemistiquios se estiren demasiado */
+    min-width: 0; /* Permite que el texto se ajuste */
+  }
+}
     </style>
 <div class="post-header">
 <h2>Mester de Juglaría</h2>
@@ -205,6 +136,7 @@
 </section>
 
 <section class="mester-section">
+        <div class="section-number">2</div>
   <div class="mester-verso"><span class="mester-hemistiquio">La de canos cavellos</span><span class="mester-hemistiquio">exida es de la posada,</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">e quand’ travessó el unbral</span><span class="mester-hemistiquio">ovo de prestar batalla:</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">diez y dos canes rabiados</span><span class="mester-hemistiquio">menaçantes le ladraban,</span></div>
@@ -222,6 +154,7 @@
   <div class="mester-verso"><span class="mester-hemistiquio">a Sión sól la vençe el fame,</span><span class="mester-hemistiquio">mas tamén el fame l’aguijaba.</span></div>
   </section>
   <section class="mester-section">
+          <div class="section-number">3</div>
   <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
    <div class="mester-verso"><span class="mester-hemistiquio">fincó los hinojos</span><span class="mester-hemistiquio">e las manos en la tierra,</span></div>
   <div class="mester-verso"><span class="mester-hemistiquio">gradó al Señor su suerte</span><span class="mester-hemistiquio">por lavralla aún podella</span></div>

@@ -119,7 +119,7 @@
         
             <button id="reloadBtn">↻</button>
 
-           <div id="version1" style="display: none;">
+           <div id="version1">
 <section class="mester-section">
   <h2>1</h2>
   <div class="mester-verso"><span class="mester-hemistiquio">De la so tripa</span><span class="mester-hemistiquio">tan fuertemientre rugiendo</span></div>
@@ -174,7 +174,7 @@
 </section>
 </div>
 
-   <div id="version2" style="display: none;">
+   <div id="version2">
 <section class="mester-section">
   <h2>1</h2>
         <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
@@ -193,18 +193,25 @@
     <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
 </div>
 <script>
-  let currentVersion = 1;
+  function getRandomVersion() {
+    return Math.random() < 0.5 ? 1 : 2; // 50% de probabilidad para cada versión
+}
 
-  function showPoemVersion(version) {
+// Muestra la versión especificada (1 o 2)
+function showPoemVersion(version) {
     document.getElementById('version1').style.display = version === 1 ? 'block' : 'none';
     document.getElementById('version2').style.display = version === 2 ? 'block' : 'none';
-  }
+}
 
-  document.getElementById('reloadBtn').addEventListener('click', () => {
-    currentVersion = currentVersion === 1 ? 2 : 1;
-    showPoemVersion(currentVersion);
-  });
+// Carga una versión aleatoria (usada al inicio y al hacer clic)
+function loadRandomVersion() {
+    const randomVersion = getRandomVersion();
+    showPoemVersion(randomVersion);
+}
 
-  // Mostrar la versión 1 al cargar la página
-  showPoemVersion(1);
+// Evento: Botón de recarga
+document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
+
+// Evento: Carga inicial al abrir/refrescar la página
+document.addEventListener('DOMContentLoaded', loadRandomVersion);
 </script>

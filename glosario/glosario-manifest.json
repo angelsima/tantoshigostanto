@@ -10,6 +10,16 @@
     "category": "Juegos Lingüísticos"
     },
   {
+    "id": "español-griego",
+    "term": "Español en alfabeto griego",
+    "category": "Juegos Lingüísticos"
+    },
+  {
+    "id": "español-sintxing",
+    "term": "Español con sintaxis inglesa",
+    "category": "Juegos Lingüísticos"
+    },
+  {
     "id": "jadeo-can",
     "term": "Jadeo canario",
     "category": "Juegos Lingüísticos"
@@ -45,13 +55,33 @@
     "category": "Personaje-Narrador"
      },
   {
+    "id": "cale",
+    "term": "Calé",
+    "category": "Personaje-Narrador"
+     },
+  {
     "id": "descomp",
     "term": "Descompuesto",
     "category": "Personaje-Narrador"
      },
   {
+    "id": "dislexico",
+    "term": "Disléxico",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "espanglish",
+    "term": "Espanglish",
+    "category": "Personaje-Narrador"
+     },
+  {
     "id": "impreciso",
     "term": "Impreciso",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "llanito",
+    "term": "Llanito",
     "category": "Personaje-Narrador"
      },
   {
@@ -62,6 +92,11 @@
   {
     "id": "numerofilo",
     "term": "Numerófilo",
+    "category": "Personaje-Narrador"
+     },
+  {
+    "id": "panocho",
+    "term": "Panocho",
     "category": "Personaje-Narrador"
      },
   {
@@ -140,13 +175,28 @@
     "category": "Estilos"
      },
   {
+    "id": "inventario-cient",
+    "term": "Inventario Científico",
+    "category": "Estilos"
+     },
+  {
     "id": "medieval",
     "term": "Medieval",
     "category": "Estilos"
      },
   {
+    "id": "proc-admin",
+    "term": "Procedimiento administrativo",
+    "category": "Estilos"
+     },
+  {
     "id": "quinqui",
     "term": "Cine Quinqui",
+    "category": "Estilos"
+     },
+  {
+    "id": "sampleo",
+    "term": "Sampleo",
     "category": "Estilos"
      },
   {
@@ -193,6 +243,18 @@
   {
     "id": "haiku",
     "term": "Haiku",
+    "category": "Formato",
+    "subcategory": "Poesía"
+     },
+  {
+    "id": "mester-clerecia",
+    "term": "Mester de Clerecía",
+    "category": "Formato",
+    "subcategory": "Poesía"
+     },
+  {
+    "id": "mester-juglaria",
+    "term": "Mester de Juglaría",
     "category": "Formato",
     "subcategory": "Poesía"
      },

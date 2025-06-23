@@ -1,5 +1,4 @@
-// js/mester-juglaria.js
-
+export function initJuglaria() {
 // Array con las distintas “versiones” del poema Mester de Juglaría.
 // Cada objeto puede tener una propiedad content (HTML interno) y opcionalmente info extra.
 const poemVersions = [
@@ -219,3 +218,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
     container.innerHTML = html;
 });
+}

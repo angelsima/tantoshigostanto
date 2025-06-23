@@ -192,30 +192,20 @@ const poemVersions = [
     // Si en el futuro añades más versiones, simplemente añade otro objeto { versionLabel, content } aquí.
 ];
 
-// Al cargar el DOM, elegimos una versión al azar e inyectamos en el contenedor.
-document.addEventListener("DOMContentLoaded", function() {
+ // Inyectar inmediatamente en el contenedor existente:
     const container = document.getElementById("mester-container");
     if (!container) {
-        console.error("No se encontró el contenedor #mester-container");
+        // Si no se encuentra, nada que hacer
+        console.error("initJuglaria: no se encontró el contenedor #mester-container");
         return;
     }
-
     if (poemVersions.length === 0) {
         container.innerHTML = "<p>No hay versiones disponibles.</p>";
         return;
     }
-
-    // Selección aleatoria
     const idx = Math.floor(Math.random() * poemVersions.length);
     const selected = poemVersions[idx];
-
-    // Construimos el HTML. Podemos incluir un título de versión si se desea.
-    let html = "";
-    // Mostrar etiqueta de versión (opcional). Si no quieres mostrar, comenta la siguiente línea.
-    html += `<div class="version-info">Mostrando: ${selected.versionLabel}</div>`;
-    // Insertar el contenido HTML de la versión
-    html += selected.content;
-
-    container.innerHTML = html;
-});
+    // Opcional: mostrar etiqueta de versión
+    const htmlToInject = `<div class="version-info">Mostrando: ${selected.versionLabel}</div>` + selected.content;
+    container.innerHTML = htmlToInject;
 }

@@ -1,5 +1,3 @@
-// posts/mester-juglaria.js
-
 export function initJuglaria() {
     // Array con las distintas versiones
     const poemVersions = [

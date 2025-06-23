@@ -261,3 +261,26 @@
   });
 })();
 </script>
+<script>
+  const versions = document.querySelectorAll('.poem-version');
+  const reloadBtn = document.getElementById('reloadBtn');
+
+  function mostrarVersionAleatoria() {
+    // Oculta todas las versiones
+    versions.forEach(v => v.style.display = 'none');
+    
+    // Selecciona una aleatoria
+    const randomIndex = Math.floor(Math.random() * versions.length);
+    versions[randomIndex].style.display = 'block';
+    
+    // Animación del botón
+    reloadBtn.classList.add('rotating');
+    setTimeout(() => reloadBtn.classList.remove('rotating'), 600);
+  }
+
+  // Mostrar una al cargar
+  window.addEventListener('DOMContentLoaded', mostrarVersionAleatoria);
+
+  // Mostrar otra al hacer click
+  reloadBtn.addEventListener('click', mostrarVersionAleatoria);
+</script>

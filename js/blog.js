@@ -227,6 +227,10 @@ async function loadPostContent(postId, sortedPosts) {
             const { initAventura } = await import('/tantoshigostanto/posts/propia-aventura.js');
             initAventura();
         }
+        if (postId === 'mester-juglaria') {
+            const { initJuglaria } = await import('/tantoshigostanto/posts/mester-juglaria.js');
+            initJuglaria();
+        }
         if (postId) {
          // Añadir event listeners a las flechas
         document.querySelector('.arrow-left')?.addEventListener('click', () => navigatePost('prev'));

@@ -1,39 +1,43 @@
-<style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mester de Juglaría</title>
+    <style>
         /* Estilos específicos para Mester de Juglaría */
-
         .post-content {
-    position: relative; /* Contenedor relativo para el botón */
-}
+            position: relative; /* Contenedor relativo para el botón */
+        }
         .mester-juglaria {
             font-family: Georgia, serif;
-           color: #111;
-  max-width: 500px;
+            color: #111;
+            max-width: 500px;
+            margin: 0 auto; /* centrado horizontal */
+            padding: 1em;
         }
-         .mester-section {
-           margin-bottom: 3em;
+        .mester-section {
+            margin-bottom: 3em;
             position: relative;
-                   }
-
-    .mester-verso {
- display: flex;
-  align-items: flex-start; /* Alinea los hemistiquios en la parte superior */
-  justify-content: space-between; 
-  margin-bottom: 0.3em;
-   width: 100%; /* ✅ Esto asegura que ocupe todo el ancho del contenedor */
-  box-sizing: border-box; /* Asegura que padding o border no afecte el ancho */
-}
-
-.mester-hemistiquio {
-  align-self: flex-start; /* Fuerza alineación superior */
-  white-space: pre-wrap;
-    font-size: 0.8em;
-}
-    
+        }
+        .mester-verso {
+            display: flex;
+            align-items: flex-start; /* Alinea los hemistiquios en la parte superior */
+            justify-content: space-between;
+            margin-bottom: 0.3em;
+            width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+            box-sizing: border-box; /* padding/border no afecta el ancho */
+        }
+        .mester-hemistiquio {
+            align-self: flex-start; /* Fuerza alineación superior */
+            white-space: pre-wrap;
+            font-size: 0.8em;
+        }
         #reloadBtn {
             position: absolute;
             top: 10px;
             right: 10px;
-                      border: none;
+            border: none;
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -42,49 +46,43 @@
             display: flex;
             align-items: center;
             justify-content: center;
-           
             transition: all 0.3s ease;
+            background-color: #f0f0f0;
         }
-        
         #reloadBtn:hover {
-             transform: rotate(90deg);
+            transform: rotate(90deg);
         }
-        
-  
-
-        
+        #reloadBtn.rotating {
+            animation: rotate 0.6s ease;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
         .section-number {
             position: absolute;
-                     left: 50%;
+            left: 50%;
             transform: translateX(-50%);
             font-size: 1.8em;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-              padding: 0 1em;
-                }
-        
-      
-        
-      
-       .mester-juglaria sup a {
-  text-decoration: none;
-}
-
-.mester-juglaria aside {
-  margin-top: 3em;
-  font-size: 0.9em;
-}
-
-.mester-juglaria aside ol {
-  padding-left: 1.2em;
-}
-
-.mester-juglaria hr {
-  margin-top: 3em;
-}
-        
+            padding: 0 1em;
+        }
+        .mester-juglaria sup a {
+            text-decoration: none;
+        }
+        .mester-juglaria aside {
+            margin-top: 3em;
+            font-size: 0.9em;
+        }
+        .mester-juglaria aside ol {
+            padding-left: 1.2em;
+        }
+        .mester-juglaria hr {
+            margin-top: 3em;
+        }
         .version-info {
             text-align: center;
             font-style: italic;
@@ -92,195 +90,137 @@
             margin-top: 10px;
             font-size: 0.9em;
         }
-      /* Ocultar todas las versiones inicialmente */
+        /* Ocultar todas las versiones inicialmente */
         .poem-version {
             display: none;
         }
-        #reloadBtn.rotating {
-        animation: rotate 0.6s ease;
-    }
-    
-    @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-       /* Ajustes específicos para PC (pantallas > 768px) */
-@media (min-width: 769px) {
-  .mester-juglaria {
-    max-width: 600px; /* Puedes ajustar este valor según prefieras */
-    margin: 0 auto; /* Centra el contenido */
-  }
-
-  .mester-verso {
-    gap: 25px; /* Reduce el espacio entre hemistiquios */
-    justify-content: center; /* Opcional: centra los hemistiquios */
-  }
-
-  .mester-hemistiquio {
-    flex: 0 1 auto; /* Evita que los hemistiquios se estiren demasiado */
-    min-width: 0; /* Permite que el texto se ajuste */
-  }
-}
-
+        /* Ajustes específicos para PC (pantallas > 768px) */
+        @media (min-width: 769px) {
+            .mester-juglaria {
+                max-width: 600px; /* Ajustable */
+            }
+            .mester-verso {
+                gap: 25px; /* Reduce el espacio entre hemistiquios */
+                justify-content: center; /* Centra opcional */
+            }
+            .mester-hemistiquio {
+                flex: 0 1 auto; /* Evita estirado excesivo */
+                min-width: 0; /* Permite ajuste de texto */
+            }
+        }
     </style>
-<div class="post-header">
-<h2>Mester de Juglaría</h2>
-</div>
- <div class="post-content mester-juglaria">
-        
-            <button id="reloadBtn">↻</button>
+</head>
+<body>
+    <div class="post-header">
+        <h2>Mester de Juglaría</h2>
+    </div>
+    <div class="post-content mester-juglaria">
+        <button id="reloadBtn" aria-label="Recargar versión">↻</button>
 
-              <div class="poem-version" id="version1">
-<section class="mester-section">
-  <h2>1</h2>
-  <div class="mester-verso"><span class="mester-hemistiquio">De la so tripa</span><span class="mester-hemistiquio">tan fuertemientre rugiendo</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">tornávase en l’alcoba</span><span class="mester-hemistiquio">e estava maneçiendo.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">Oyó piar falcones</span><span class="mester-hemistiquio">e gorriones del çielo,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">trotavan cient cavallos</span><span class="mester-hemistiquio">que fazién tronar el suelo,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">e se les sumávan</span><span class="mester-hemistiquio">los solloços de los vientos.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">Sospiró mia Sión,</span><span class="mester-hemistiquio">la más ortelana de tod tiempos,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">separó muy presta</span><span class="mester-hemistiquio">de la alcoba el su cuerpo</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">e fablós’ a sí mia Sión,</span><span class="mester-hemistiquio">ca sempre fállase en lo çierto:</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">—Si por gradar a Dios</span><span class="mester-hemistiquio">aliviar mi fambre quiero</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">duda ý non hay,</span><span class="mester-hemistiquio">debo exir al huerto—.</span></div>
+        <!-- Versión 1 -->
+        <div class="poem-version" id="version1">
+            <section class="mester-section">
+                <h2>1</h2>
+                <div class="mester-verso"><span class="mester-hemistiquio">De la so tripa</span><span class="mester-hemistiquio">tan fuertemientre rugiendo</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">tornávase en l’alcoba</span><span class="mester-hemistiquio">e estava maneçiendo.</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">Oyó piar falcones</span><span class="mester-hemistiquio">e gorriones del çielo,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">trotavan cient cavallos</span><span class="mester-hemistiquio">que fazién tronar el suelo,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">e se les sumávan</span><span class="mester-hemistiquio">los solloços de los vientos.</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">Sospiró mia Sión,</span><span class="mester-hemistiquio">la más ortelana de tod tiempos,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">separó muy presta</span><span class="mester-hemistiquio">de la alcoba el su cuerpo</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">e fablós’ a sí mia Sión,</span><span class="mester-hemistiquio">ca sempre fállase en lo çierto:</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">—Si por gradar a Dios</span><span class="mester-hemistiquio">aliviar mi fambre quiero</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">duda ý non hay,</span><span class="mester-hemistiquio">debo exir al huerto—.</span></div>
+            </section>
 
-</section>
+            <section class="mester-section">
+                <h2>2</h2>
+                <div class="mester-verso"><span class="mester-hemistiquio">La de canos cavellos</span><span class="mester-hemistiquio">exida es de la posada,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">e quand’ travessó el unbral</span><span class="mester-hemistiquio">ovo de prestar batalla:</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">diez y dos canes rabiados</span><span class="mester-hemistiquio">menaçantes le ladraban,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">mas sabe mia Sión,</span><span class="mester-hemistiquio">ca en buen hora es despiertada,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">doblegar mil huestes</span><span class="mester-hemistiquio">sin aiuda de mesnadas.</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">Arrancó co’l puño</span><span class="mester-hemistiquio">de la su puerta la aldaba,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">era est’ de fierro</span><span class="mester-hemistiquio">e en su mano muy pesada,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">lançóla con tal fuerça</span><span class="mester-hemistiquio">contra aqueias dentelladas</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">ca si non diera en sus bocas</span><span class="mester-hemistiquio">mill leguas travessara.</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">Los nemigos de Sión</span><span class="mester-hemistiquio">al sofrir tal aldabada</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">admiraron su certeça</span><span class="mester-hemistiquio">e pensaron la escapada,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">la más güertana de los tiempos,</span><span class="mester-hemistiquio">mia Sión, la de El Lugar,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">con la su misericordia</span><span class="mester-hemistiquio">permitióles que s’andaran;</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">non es eia vengante</span><span class="mester-hemistiquio">ni ha ningún humana falla,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">a Sión sól la vençe el fame,</span><span class="mester-hemistiquio">mas tamén el fame l’aguijaba.</span></div>
+            </section>
 
-<section class="mester-section">
-        <h2>2</h2>
-  <div class="mester-verso"><span class="mester-hemistiquio">La de canos cavellos</span><span class="mester-hemistiquio">exida es de la posada,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">e quand’ travessó el unbral</span><span class="mester-hemistiquio">ovo de prestar batalla:</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">diez y dos canes rabiados</span><span class="mester-hemistiquio">menaçantes le ladraban,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">mas sabe mia Sión,</span><span class="mester-hemistiquio">ca en buen hora es despiertada,</span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">doblegar mil huestes</span><span class="mester-hemistiquio">sin aiuda de mesnadas.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">Arrancó co’l puño</span><span class="mester-hemistiquio">de la su puerta la aldaba,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">era est’ de fierro</span><span class="mester-hemistiquio">e en su mano muy pesada,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">lançóla con tal fuerça</span><span class="mester-hemistiquio">contra aqueias dentelladas</span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">ca si non diera en sus bocas</span><span class="mester-hemistiquio">mill leguas travessara.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">Los nemigos de Sión</span><span class="mester-hemistiquio">al sofrir tal aldabada</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">admiraron su certeça</span><span class="mester-hemistiquio">e pensaron la escapada,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">la más güertana de los tiempos,</span><span class="mester-hemistiquio">mia Sión, la de El Lugar,</span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">con la su misericordia</span><span class="mester-hemistiquio">permitióles que s’andaran;</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">non es eia vengante</span><span class="mester-hemistiquio">ni ha ningún humana falla,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">a Sión sól la vençe el fame,</span><span class="mester-hemistiquio">mas tamén el fame l’aguijaba.</span></div>
-  </section>
-  <section class="mester-section">
-          <h2>3</h2>
-  <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">fincó los hinojos</span><span class="mester-hemistiquio">e las manos en la tierra,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">gradó al Señor su suerte</span><span class="mester-hemistiquio">por lavralla aún podella</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">e cuidar de las sus plantas,</span><span class="mester-hemistiquio">ca non permite que l’mueran.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">En compensa el Señor</span><span class="mester-hemistiquio">a Sión, la grande verdulera,</span></div>
-<div class="mester-verso"><span class="mester-hemistiquio">da frutos e comeres</span><span class="mester-hemistiquio">tantos como ella quiera,</span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">pues non hay en vida</span><span class="mester-hemistiquio">vasalla qual es ella,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">ca en sus manos los mançanos</span><span class="mester-hemistiquio">son capaçes de dar peras.</span></div>
-    </section>
+            <section class="mester-section">
+                <h2>3</h2>
+                <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">fincó los hinojos</span><span class="mester-hemistiquio">e las manos en la tierra,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">gradó al Señor su suerte</span><span class="mester-hemistiquio">por lavralla aún podella</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">e cuidar de las sus plantas,</span><span class="mester-hemistiquio">ca non permite que l’mueran.</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">En compensa el Señor</span><span class="mester-hemistiquio">a Sión, la grande verdulera,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">da frutos e comeres</span><span class="mester-hemistiquio">tantos como ella quiera,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">pues non hay en vida</span><span class="mester-hemistiquio">vasalla qual es ella,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">ca en sus manos los mançanos</span><span class="mester-hemistiquio">son capaçes de dar peras.</span></div>
+            </section>
+        </div>
 
-</div>
+        <!-- Versión 2 -->
+        <div class="poem-version" id="version2">
+            <section class="mester-section">
+                <h2>1</h2>
+                <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">fincó los hinojos</span><span class="mester-hemistiquio">e las manos en la tierra,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">gradó al Señor su suerte</span><span class="mester-hemistiquio">por lavralla aún podella</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">e cuidar de las sus plantas,</span><span class="mester-hemistiquio">ca non permite que l’mueran.</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">En compensa el Señor</span><span class="mester-hemistiquio">a Sión, la grande verdulera,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">da frutos e comeres</span><span class="mester-hemistiquio">tantos como ella quiera,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">pues non hay en vida</span><span class="mester-hemistiquio">vasalla qual es ella,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">ca en sus manos los mançanos</span><span class="mester-hemistiquio">son capaçes de dar peras.</span></div>
+            </section>
+        </div>
 
-     <div class="poem-version" id="version2">
-<section class="mester-section">
-  <h2>1</h2>
-        <div class="mester-verso"><span class="mester-hemistiquio">Alcançó la huerta,</span><span class="mester-hemistiquio">la mejor de las aüelas,</span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">fincó los hinojos</span><span class="mester-hemistiquio">e las manos en la tierra,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">gradó al Señor su suerte</span><span class="mester-hemistiquio">por lavralla aún podella</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">e cuidar de las sus plantas,</span><span class="mester-hemistiquio">ca non permite que l’mueran.</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">En compensa el Señor</span><span class="mester-hemistiquio">a Sión, la grande verdulera,</span></div>
-<div class="mester-verso"><span class="mester-hemistiquio">da frutos e comeres</span><span class="mester-hemistiquio">tantos como ella quiera,</span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">pues non hay en vida</span><span class="mester-hemistiquio">vasalla qual es ella,</span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio">ca en sus manos los mançanos</span><span class="mester-hemistiquio">son capaçes de dar peras.</span></div>
-    </section>
-</div>
+    </div>
 
-         
-<div class="post-footer">
-    <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
-</div>
-<script>
-(function() {
-  const poemVersions = ['version1', 'version2'];
-  let currentVersion = null;
+    <div class="post-footer">
+        <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
+    </div>
 
-  function getRandomVersion() {
-    if (poemVersions.length === 0) {
-      console.warn('No hay versiones disponibles');
-      return null;
-    }
-    if (poemVersions.length === 1) {
-      // Sólo una versión: devolvemos siempre esa
-      currentVersion = poemVersions[0];
-      return currentVersion;
-    }
-    let newVersion;
-    do {
-      const randomIndex = Math.floor(Math.random() * poemVersions.length);
-      newVersion = poemVersions[randomIndex];
-    } while (newVersion === currentVersion);
-    currentVersion = newVersion;
-    return newVersion;
-  }
+    <!-- JavaScript para mostrar versión aleatoria y animar el botón -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const versions = document.querySelectorAll('.poem-version');
+        const reloadBtn = document.getElementById('reloadBtn');
+        let currentIndex = -1;
 
-  function showPoemVersion(versionId) {
-    document.querySelectorAll('.poem-version').forEach(v => {
-      v.style.display = 'none';
+        function mostrarVersionAleatoria() {
+            if (versions.length === 0) return;
+            // Oculta todas
+            versions.forEach(v => v.style.display = 'none');
+
+            // Elegir índice distinto al actual (si solo hay 1, se queda en 0)
+            let randomIndex;
+            if (versions.length === 1) {
+                randomIndex = 0;
+            } else {
+                do {
+                    randomIndex = Math.floor(Math.random() * versions.length);
+                } while (randomIndex === currentIndex);
+            }
+            currentIndex = randomIndex;
+            versions[currentIndex].style.display = 'block';
+
+            // Animar botón
+            reloadBtn.classList.add('rotating');
+            setTimeout(() => reloadBtn.classList.remove('rotating'), 600);
+        }
+
+        // Evento de clic
+        reloadBtn.addEventListener('click', mostrarVersionAleatoria);
+
+        // Mostrar una al cargar
+        mostrarVersionAleatoria();
     });
-    if (!versionId) return;
-    const el = document.getElementById(versionId);
-    if (el) {
-      el.style.display = 'block';
-    } else {
-      console.error(`showPoemVersion: no existe #${versionId}`);
-    }
-  }
-
-  function loadRandomVersion() {
-    const randomVersion = getRandomVersion();
-    if (randomVersion) {
-      showPoemVersion(randomVersion);
-    }
-    // Animación botón
-    const btn = document.getElementById('reloadBtn');
-    if (btn) {
-      btn.classList.add('rotating');
-      setTimeout(() => {
-        btn.classList.remove('rotating');
-      }, 600);
-    }
-  }
-
-  // Esperar a que el DOM esté listo
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('reloadBtn');
-    if (btn) {
-      btn.addEventListener('click', loadRandomVersion);
-    } else {
-      console.error('Botón #reloadBtn no encontrado');
-    }
-    // Mostrar una versión al cargar
-    loadRandomVersion();
-  });
-})();
-</script>
-<script>
-  const versions = document.querySelectorAll('.poem-version');
-  const reloadBtn = document.getElementById('reloadBtn');
-
-  function mostrarVersionAleatoria() {
-    // Oculta todas las versiones
-    versions.forEach(v => v.style.display = 'none');
-    
-    // Selecciona una aleatoria
-    const randomIndex = Math.floor(Math.random() * versions.length);
-    versions[randomIndex].style.display = 'block';
-    
-    // Animación del botón
-    reloadBtn.classList.add('rotating');
-    setTimeout(() => reloadBtn.classList.remove('rotating'), 600);
-  }
-
-  // Mostrar una al cargar
-  window.addEventListener('DOMContentLoaded', mostrarVersionAleatoria);
-
-  // Mostrar otra al hacer click
-  reloadBtn.addEventListener('click', mostrarVersionAleatoria);
-</script>
+    </script>
+</body>
+</html>

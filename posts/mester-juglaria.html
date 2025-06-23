@@ -186,42 +186,7 @@
         <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
     </div>
 
-    <!-- JavaScript para mostrar versión aleatoria y animar el botón -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const versions = document.querySelectorAll('.poem-version');
-        const reloadBtn = document.getElementById('reloadBtn');
-        let currentIndex = -1;
-
-        function mostrarVersionAleatoria() {
-            if (versions.length === 0) return;
-            // Oculta todas
-            versions.forEach(v => v.style.display = 'none');
-
-            // Elegir índice distinto al actual (si solo hay 1, se queda en 0)
-            let randomIndex;
-            if (versions.length === 1) {
-                randomIndex = 0;
-            } else {
-                do {
-                    randomIndex = Math.floor(Math.random() * versions.length);
-                } while (randomIndex === currentIndex);
-            }
-            currentIndex = randomIndex;
-            versions[currentIndex].style.display = 'block';
-
-            // Animar botón
-            reloadBtn.classList.add('rotating');
-            setTimeout(() => reloadBtn.classList.remove('rotating'), 600);
-        }
-
-        // Evento de clic
-        reloadBtn.addEventListener('click', mostrarVersionAleatoria);
-
-        // Mostrar una al cargar
-        mostrarVersionAleatoria();
-    });
-    </script>
+  
     <script src="mester-juglaria.js"></script>
 </body>
 </html>

@@ -176,13 +176,6 @@
   <div class="mester-verso"><span class="mester-hemistiquio">ca en sus manos los mançanos</span><span class="mester-hemistiquio">son capaçes de dar peras.</span></div>
     </section>
 
-   <section class="mester-section">
-  <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
-   <div class="mester-verso"><span class="mester-hemistiquio">,</span><span class="mester-hemistiquio"></span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
-  <div class="mester-verso"><span class="mester-hemistiquio"></span><span class="mester-hemistiquio"></span></div>
-</section>
 </div>
 
      <div class="poem-version" id="version2">
@@ -204,51 +197,67 @@
     <a href="../tantoshigostanto/glosario.html#mester-juglaria" class="read-more">Explicación del recurso →</a>
 </div>
 <script>
-    // Versiones disponibles (puedes agregar más IDs aquí)
-    const poemVersions = ['version1', 'version2'];
-    
-    // Variable para llevar registro de la versión actual
-    let currentVersion = null;
-    
-    // Función para obtener una versión aleatoria diferente a la actual
-    function getRandomVersion() {
-        let newVersion;
-        do {
-            const randomIndex = Math.floor(Math.random() * poemVersions.length);
-            newVersion = poemVersions[randomIndex];
-        } while (newVersion === currentVersion && poemVersions.length > 1);
-        
-        currentVersion = newVersion;
-        return newVersion;
+(function() {
+  const poemVersions = ['version1', 'version2'];
+  let currentVersion = null;
+
+  function getRandomVersion() {
+    if (poemVersions.length === 0) {
+      console.warn('No hay versiones disponibles');
+      return null;
     }
-    
-    // Mostrar una versión específica
-    function showPoemVersion(versionId) {
-        // Ocultar todas las versiones
-        document.querySelectorAll('.poem-version').forEach(version => {
-            version.style.display = 'none';
-        });
-        
-        // Mostrar la versión seleccionada
-        document.getElementById(versionId).style.display = 'block';
+    if (poemVersions.length === 1) {
+      // Sólo una versión: devolvemos siempre esa
+      currentVersion = poemVersions[0];
+      return currentVersion;
     }
-    
-    // Cargar una versión aleatoria
-    function loadRandomVersion() {
-        const randomVersion = getRandomVersion();
-        showPoemVersion(randomVersion);
-        
-        // Animación del botón
-        const btn = document.getElementById('reloadBtn');
-        btn.classList.add('rotating');
-        setTimeout(() => {
-            btn.classList.remove('rotating');
-        }, 600);
+    let newVersion;
+    do {
+      const randomIndex = Math.floor(Math.random() * poemVersions.length);
+      newVersion = poemVersions[randomIndex];
+    } while (newVersion === currentVersion);
+    currentVersion = newVersion;
+    return newVersion;
+  }
+
+  function showPoemVersion(versionId) {
+    document.querySelectorAll('.poem-version').forEach(v => {
+      v.style.display = 'none';
+    });
+    if (!versionId) return;
+    const el = document.getElementById(versionId);
+    if (el) {
+      el.style.display = 'block';
+    } else {
+      console.error(`showPoemVersion: no existe #${versionId}`);
     }
-    
-    // Evento: Botón de recarga
-    document.getElementById('reloadBtn').addEventListener('click', loadRandomVersion);
-    
-    // Cargar versión aleatoria al inicio
-    window.addEventListener('load', loadRandomVersion);
+  }
+
+  function loadRandomVersion() {
+    const randomVersion = getRandomVersion();
+    if (randomVersion) {
+      showPoemVersion(randomVersion);
+    }
+    // Animación botón
+    const btn = document.getElementById('reloadBtn');
+    if (btn) {
+      btn.classList.add('rotating');
+      setTimeout(() => {
+        btn.classList.remove('rotating');
+      }, 600);
+    }
+  }
+
+  // Esperar a que el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('reloadBtn');
+    if (btn) {
+      btn.addEventListener('click', loadRandomVersion);
+    } else {
+      console.error('Botón #reloadBtn no encontrado');
+    }
+    // Mostrar una versión al cargar
+    loadRandomVersion();
+  });
+})();
 </script>

@@ -202,20 +202,18 @@ export function initJuglaria() {
 
     // Creamos estructura base: botón reload + contenedor interno para versión
     container.innerHTML = `
-        <button class="reload-btn" aria-label="Recargar versión">↻</button>
+        <button class="reload-btn" aria-label="Recargar versión">🔁</button>
         <div class="version-info"></div>
         <div class="version-content"></div>
     `;
 
     const btn = container.querySelector(".reload-btn");
-    const infoDiv = container.querySelector(".version-info");
     const contentDiv = container.querySelector(".version-content");
 
     // Función que elige al azar y muestra la versión en version-content
     function renderRandomVersion() {
         const idx = Math.floor(Math.random() * poemVersions.length);
         const selected = poemVersions[idx];
-        infoDiv.innerHTML = `Mostrando: ${selected.versionLabel}`;
         contentDiv.innerHTML = selected.content;
     }
 

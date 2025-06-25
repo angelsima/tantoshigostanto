@@ -207,7 +207,7 @@ export function initJuglaria() {
 
     // Creamos estructura base: botón reload + contenedor interno para versión
     container.innerHTML = `
-        <button class="reload-btn" aria-label="Recargar versión">🔁</button>
+        <button class="reload-btn" aria-label="Recargar versión">🤹🏻‍♂️</button>
         <div class="version-info"></div>
         <div class="version-content"></div>
     `;

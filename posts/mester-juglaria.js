@@ -33,7 +33,7 @@ export function initJuglaria() {
                     <div class="mester-verso"><span class="mester-hemistiquio">la más güertana de los tiempos,</span><span class="mester-hemistiquio">mia Sión, la de El Lugar,</span>                    </div>
                     <div class="mester-verso"><span class="mester-hemistiquio">con la su misericordia</span>  <span class="mester-hemistiquio">permitióles que s’andaran;</span>                    </div>
                     <div class="mester-verso"><span class="mester-hemistiquio">non es eia vengante</span><span class="mester-hemistiquio">ni ha ningún humana falla,</span>                    </div>
-                    <div class="mester-verso"><span class="mester-hemistiquio">a Sión sól la vençe el fame,</span> <span class="mester-hemistiquio">mas također el fame l’aguijaba.</span>                    </div>
+                    <div class="mester-verso"><span class="mester-hemistiquio">a Sión sól la vençe el fame,</span> <span class="mester-hemistiquio">mas tamén el fame l’aguijaba.</span>                    </div>
                 </section>
                 <section class="mester-section">
                     <h2>3</h2>

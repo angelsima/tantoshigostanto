@@ -162,8 +162,8 @@ export function initJuglaria() {
                <h2>1</h2>
                 <div class="mester-verso"><span class="mester-hemistiquio">De las sos entrañas</span><span class="mester-hemistiquio">tan fuertemientre rugiendo</span></div>
                 <div class="mester-verso"><span class="mester-hemistiquio">desvélose mia Sión,</span><span class="mester-hemistiquio">ca estava maneçiendo.</span></div>
-                <div class="mester-verso"><span class="mester-hemistiquio">Sospiró mia Sión,</span><span class="mester-hemistiquio">la más ortetana de tod tiempos,</span></div>
-                <div class="mester-verso"><span class="mester-hemistiquio">e fablós’ a sí mia Sión:</span><span class="mester-hemistiquio">—Debo exir al huerto—.</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">Sospiró la de El Lugar,</span><span class="mester-hemistiquio">la más ortetana de tod tiempos,</span></div>
+                <div class="mester-verso"><span class="mester-hemistiquio">e fablóse para sí:</span><span class="mester-hemistiquio">—Debo exir al huerto—.</span></div>
                 </section>
                 <section class="mester-section">
                     <h2>2</h2>

@@ -3,19 +3,19 @@
     "id": "lipograma-a",
     "title": "Lipograma en A",
     "category": "Juegos lingüísticos",
-    "date": "2025-04-15T10:00:00Z"
+    "date": "2025-05-15T10:00:00Z"
   },
   {
     "id": "lipograma-e",
     "title": "Lipograma en E",
     "category": "Juegos lingüísticos",
-    "date": "2025-04-16T10:00:00Z"
+    "date": "2025-05-16T10:00:00Z"
   },
   {
     "id": "lipograma-i",
     "title": "Lipograma en I",
     "category": "Juegos lingüísticos",
-    "date": "2025-04-17T10:00:00Z"
+    "date": "2025-05-20T10:00:00Z"
   },
   {
     "id": "lipograma-o",
@@ -27,7 +27,7 @@
     "id": "lipograma-u",
     "title": "Lipograma en U",
     "category": "Juegos lingüísticos",
-    "date": "2025-04-15T10:00:00Z"
+    "date": "2025-04-28T10:00:00Z"
   },
   {
     "id": "solo-sintg-nom",
@@ -65,14 +65,14 @@
     "title": "Mester de Clerecía",
     "category": "Formato",
     "subcategory": "Poesía",
-    "date": "2025-06-10T10:00:00Z"
+    "date": "2025-06-19T10:00:00Z"
   },
   {
     "id": "mester-juglaria",
     "title": "Mester de Juglaría",
     "category": "Formato",
     "subcategory": "Poesía",
-    "date": "2025-06-09T10:00:00Z"
+    "date": "2025-06-18T10:00:00Z"
   },
   {
     "id": "rebobinado",
@@ -91,7 +91,7 @@
     "id": "impreciso",
     "title": "Impreciso",
     "category": "Personaje-Narrador",
-    "date": "2025-04-15T10:00:00Z"
+    "date": "2025-06-15T10:00:00Z"
   },
   {
     "id": "manifiesto",
@@ -109,20 +109,26 @@
     "id": "pasivo-agresivo",
     "title": "Pasivo-agresivo",
     "category": "Personaje-Narrador",
-    "date": "2025-04-15T10:00:00Z"
+    "date": "2025-06-14T10:00:00Z"
   },
    {
     "id": "perfeccionista",
     "title": "Perfeccionista",
     "category": "Personaje-Narrador",
-    "date": "2025-05-08T10:00:00Z",
+    "date": "2025-06-16T10:00:00Z",
      "requires_script": true
+  },
+  {
+    "id": "transicionario",
+    "title": "Transicionario",
+    "category": "Personaje-Narrador",
+    "date": "2025-06-15T10:00:00Z"
   },
   {
     "id": "trendy",
     "title": "Trendy",
     "category": "Personaje-Narrador",
-    "date": "2025-04-15T10:00:00Z"
+    "date": "2025-05-15T10:00:00Z"
   },
   {
     "id": "wasap-sim",
